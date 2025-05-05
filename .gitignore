@@ -1,6 +1,5 @@
 .DS_Store
 .env
-notes.txt
 /.srv/*
 !/.srv/custom.ini
 /custom.ini
