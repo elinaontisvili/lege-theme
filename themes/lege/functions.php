@@ -138,10 +138,16 @@ add_action( 'widgets_init', 'lege_widgets_init' );
  * Enqueue scripts and styles.
  */
 function lege_scripts() {
-	wp_enqueue_style( 'lege-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'lege-style', 'rtl', 'replace' );
+	wp_enqueue_style( 'lege-style', get_stylesheet_uri(), array(), '1.0' );
+	wp_enqueue_style( 'lege-main', get_template_directory_uri(). '/assets/css/main.min.css', array(), '1.0' ); 
+	wp_enqueue_style( 'lege-vendor', get_template_directory_uri(). '/assets/css/vendor.min.css', array(), '1.0' );
 
-	wp_enqueue_script( 'lege-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	// wp_enqueue_script( 'jquery');
+	wp_enqueue_script( 'jquery3.1.1', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), '3.1.1', true);
+	wp_enqueue_script( 'goodshare', 'https://cdn.jsdelivr.net/npm/goodshare.js@4/goodshare.min.js', array(), 1.0, true);
+	wp_enqueue_script( 'lege-vendor', get_template_directory_uri(). '/assets/js/vendor.min.js', array(), 1.0, true );
+    wp_enqueue_script( 'lege-common', get_template_directory_uri(). '/assets/js/common.min.js', array(), 1.0, true ); 
+	wp_enqueue_script( 'lege-svg-sprite', get_template_directory_uri(). '/assets/img/svg-sprite/svg-sprite.js', array(), 1.0, false ); 
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
