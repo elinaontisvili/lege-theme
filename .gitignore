@@ -1,0 +1,12 @@
+.DS_Store
+.env
+notes.txt
+/.srv/*
+!/.srv/custom.ini
+/custom.ini
+/plugins/akismet
+/plugins/hello.php
+/themes/twentytwentyfive
+/themes/twentytwentyfour
+/themes/twentytwentythree
+/themes/twentytwentytwo
