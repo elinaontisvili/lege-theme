@@ -46,10 +46,11 @@ function lege_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
+	// Регистрация меню навигации.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'lege' ),
+			'menu-header' => esc_html__( 'Header Navigation', 'lege' ),
+			'menu-footer' => esc_html__( 'Footer Navigation', 'lege' ),
 		)
 	);
 
@@ -135,7 +136,7 @@ function lege_widgets_init() {
 add_action( 'widgets_init', 'lege_widgets_init' );
 
 /**
- * Enqueue scripts and styles.
+ * Подключение скриптов и стилей.
  */
 function lege_scripts() {
 	wp_enqueue_style( 'lege-style', get_stylesheet_uri(), array(), '1.0' );
@@ -182,3 +183,20 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Настройки Redux.
+ */
+require get_template_directory() . '/inc/options-panel-redux.php';
+
+/**
+ * Класс на боди для специфической страницы.
+*/
+function lege_body_class( $classes ) {
+    if ( is_page_template('template-home.php') ) {
+        $classes[] = 'is-home';
+    } else {
+        $classes[] = 'inner-page';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'lege_body_class' );

@@ -4,6 +4,7 @@
 !/.srv/custom.ini
 /custom.ini
 /plugins/akismet
+/plugins/redux-framework
 /plugins/hello.php
 /themes/twentytwentyfive
 /themes/twentytwentyfour

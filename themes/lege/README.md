@@ -14,11 +14,6 @@ The theme features full WooCommerce integration, clean design, and support for c
 - Secure code practices with sanitization and escaping
 - Responsive and minimal layout
 
-## Installation
-
-1. Download or clone this repo into your WordPress `/wp-content/themes/` directory.
-2. Activate the theme from the WordPress admin panel.
-
 ## Screenshot
 
 ![Lege Theme Screenshot](screenshot.png)
