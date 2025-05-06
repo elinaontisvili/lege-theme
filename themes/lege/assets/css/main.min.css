@@ -2171,7 +2171,7 @@ button {
   position: relative;
 }
 
-.footer .guide li.active a {
+.footer .guide li.current-menu-item a {
   font-weight: 600;
   color: #fff;
 }

@@ -310,26 +310,26 @@ Redux::set_help_sidebar( $opt_name, $content );
 // -> START Basic Fields
 
 Redux::set_section( $opt_name, array(
-    'title'            => esc_html__( 'Global Settings', 'lege' ),
+    'title'            => __( 'Global Settings', 'lege' ),
     'id'               => 'globalsettings',
-    'desc'             => esc_html__( 'Options for Global Settings', 'lege' ),
+    'desc'             => __( 'Options for Global Settings', 'lege' ),
     'customizer_width' => '400px',
     'icon'             => 'el el-wrench',
 ));
 
 Redux::set_section($opt_name, array(
-    'title' => esc_html__('Social Profiles', 'lege'),
+    'title' => __('Social Profiles', 'lege'),
     'id' => 'social_profiles',
     'subsection' => true,
     'customizer_width' => '450px',
-    'desc' => esc_html__('Add profile links for Social', 'lege'),
+    'desc' => __('Add profile links for Social', 'lege'),
     'fields' => array(
         array(
             'id'       => 'social_links',
             'type'     => 'sortable',
-            'title'    => esc_html__('Social Links', 'lege'),
-            'subtitle' => esc_html__('Add your social links', 'lege'),
-            'desc'     => esc_html__('Let the field empty if you don\'t have a social profile', 'lege'),
+            'title'    => __('Social Links', 'lege'),
+            'subtitle' => __('Add your social links', 'lege'),
+            'desc'     => __('Let the field empty if you don\'t have a social profile', 'lege'),
             'label'    => true,
             'options'  => array(
                 'Vkontakte Link' => '',
@@ -342,32 +342,32 @@ Redux::set_section($opt_name, array(
 ));
 
 Redux::set_section($opt_name, array(
-    'title' => esc_html__('Contact Data', 'lege'),
+    'title' => __('Contact Data', 'lege'),
     'id' => 'contacts',
     'subsection' => true,
     'customizer_width' => '450px',
-    'desc' => esc_html__('Add Contact Data for Header and Footer', 'lege'),
+    'desc' => __('Add Contact Data for Header and Footer', 'lege'),
     'fields' => array(
 
-		// Header
+		// Header Data
 		array(
             'id'     => 'header_start',
             'type'   => 'section',
-            'title'  => esc_html__('Header Data', 'lege'),
+            'title'  => __('Header Data', 'lege'),
             'indent' => true, 
 		),
         array(
             'id'       => 'header_phone_label',
             'type'     => 'text',
-            'title'    => esc_html__('Header Phone Label', 'lege'),
-            'subtitle' => esc_html__('Insert the Label', 'lege'),
+            'title'    => __('Header Phone Label', 'lege'),
+            'subtitle' => __('Insert the Label', 'lege'),
             'default'  => 'Заказать звонок',
 		),
 		array(
             'id'       => 'header_phone',
             'type'     => 'text',
-            'title'    => esc_html__('Header Phone', 'lege'),
-            'subtitle' => esc_html__('Insert the Phone', 'lege'),
+            'title'    => __('Header Phone', 'lege'),
+            'subtitle' => __('Insert the Phone', 'lege'),
 		),
 		array(
             'id'     => 'header_end',
@@ -375,30 +375,30 @@ Redux::set_section($opt_name, array(
             'indent' => false,
 		),
 
-		// Footer
+		// Footer Data
 		array(
             'id'     => 'footer_start',
             'type'   => 'section',
-            'title'  => esc_html__('Footer Data', 'lege'),
+            'title'  => __('Footer Data', 'lege'),
             'indent' => true,
 		),
 		array(
 			'id'       => 'footer_address',
 			'type'     => 'text',
-			'title'    => esc_html__( 'Your Address', 'lege' ),
+			'title'    => __( 'Your Address', 'lege' ),
 			'default'  => '',
 		),
 		array(
             'id'       => 'footer_phone',
             'type'     => 'multi_text',
-            'title'    => esc_html__('Contact Phone', 'lege'),
-            'subtitle' => esc_html__('Add your Phones', 'lege'),
-            'desc'     => esc_html__('Add or remove items', 'lege'),
+            'title'    => __('Contact Phone', 'lege'),
+            'subtitle' => __('Add your Phones', 'lege'),
+            'desc'     => __('Add or remove items', 'lege'),
 		),
 		array(
 			'id'       => 'footer_email',
 			'type'     => 'text',
-			'title'    => esc_html__( 'Email', 'lege' ),
+			'title'    => __( 'Email', 'lege' ),
 			'validate' => 'email',
 			'msg'      => 'Email Format is not correct',
 			'default'  => '',
@@ -406,14 +406,14 @@ Redux::set_section($opt_name, array(
 		array(
 			'id'      => 'footer_info',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Footer Info', 'lege' ),
-			'subtitle'=> esc_html__( 'Info after social icons', 'lege' ),
+			'title'   => __( 'Footer Info', 'lege' ),
+			'subtitle'=> __( 'Info after social icons', 'lege' ),
 		),
 
 		array(
 			'id'      => 'footer_copyrights',
 			'type'    => 'editor',
-			'title'   => esc_html__( 'Copyrights', 'lege' ),
+			'title'   => __( 'Copyrights', 'lege' ),
 			'default' => '©2007-2018 Все права защищены',
 			'args'    => array(
 				'wpautop'       => false,
@@ -429,36 +429,36 @@ Redux::set_section($opt_name, array(
             'indent' => false,
 		),
 
-		// Menu Navigation
+		// Footer Navigation
 		array(
 			'id'       => 'footer-widget-start',
 			'type'     => 'section',
-			'title'    => esc_html__( 'Footer Section Headers', 'lege' ),
+			'title'    => __( 'Footer Section Headers', 'lege' ),
 			'indent'   => true,
 		),
 		array(
 			'id'      => 'footer_section1',
 			'type'    => 'text',
-			'title'   => esc_html__( 'First Section Title', 'lege' ),
-			'default' =>'Карта сайта'
+			'title'   => __( 'First Section Title', 'lege' ),
+			'default' => 'Карта сайта'
 		),
 		array(
 			'id'      => 'footer_section2',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Second Section Title', 'lege' ),
-			'default' =>'Услуги'
+			'title'   => __( 'Second Section Title', 'lege' ),
+			'default' => 'Услуги'
 		),
 		array(
 			'id'      => 'footer_section3',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Third Section Title', 'lege' ),
-			'default' =>'Контакты'
+			'title'   => __( 'Third Section Title', 'lege' ),
+			'default' => 'Контакты'
 		),
 		array(
 			'id'      => 'footer_section4',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Fourth Section Title', 'lege' ),
-			'default' =>'Подписаться на рассылку новостей'
+			'title'   => __( 'Fourth Section Title', 'lege' ),
+			'default' => 'Подписаться на рассылку новостей'
 		),
 		array(
 			'id'     => 'footer-widget-end',
@@ -466,6 +466,61 @@ Redux::set_section($opt_name, array(
 			'indent' => false,
 		),
     )
+));
+
+// Slider / Home Header
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Home Header', 'lege' ),
+	'id'               => 'home_header',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Add Media files and data for Home Header', 'lege' ),
+	'fields'           => array(
+		array(
+			'id'       => 'header_bg',
+			'type'     => 'media',
+			'url'      => true,
+			'title'    => __( 'Background for Home Header', 'lege' ),
+			'compiler' => 'true',
+			'desc'     => __( 'Recommended size 1920x-998px', 'lege' ),
+			'default'  => array( 'url' => get_template_directory_uri().'/assets/img/bg.jpg' ),
+		),
+		array(
+			'id'      => 'header_time',
+			'type'    => 'text',
+			'title'   => __( 'Specify the Time', 'lege' ),
+			'default' => '',
+		),
+		array(
+			'id'      => 'header_video',
+			'type'    => 'text',
+			'title'   => __( 'Specify the video link', 'lege' ),
+			'default' => '',
+			'text_hint' => array(
+				'title'   => 'Ссылка с YouTube',
+				'content' => 'Используйте простую ссылку из строки браузера на ролик с Ютуб'
+			)
+		),
+		array(
+			'id'      => 'header_video_title',
+			'type'    => 'text',
+			'title'   => __( 'Specify the video title', 'lege' ),
+			'default' => '',
+		),
+
+		array(
+			'id'          => 'home_header_slider',
+			'type'        => 'slides',
+			'title'       => __( 'Slides Options', 'lege' ),
+			'subtitle'    => __( 'Unlimited slides with drag and drop sortings.', 'lege' ),
+			'desc'        => __( 'This field will store all slides values into a multidimensional array to use into a foreach loop.', 'lege' ),
+			'placeholder' => array(
+				'title'       => __( 'This is a title', 'lege' ),
+				'description' => __( 'Description Here', 'lege' ),
+				'url'         => __( 'Give us a link!', 'lege' ),
+			),
+		),
+	)
 ));
 
 // -> END Basic Fields

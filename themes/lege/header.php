@@ -19,21 +19,20 @@
 
 <?php 
 global $lege_options;
-// print_r($lege_options['social_links']);
+// print_r($lege_options['home_header_slider']);
 
 $class_header = '';
 $style_for_header = '';
 
 if(is_page_template('template-home.php')) {
     $class_header = 'header-home';
-    $style_for_header = 'style="background: #fff url('. get_template_directory_uri() .'/assets/img/bg.jpg) no-repeat center top/ cover;"';
+    $style_for_header = 'style="background: #fff url('. $lege_options['header_bg']['url'] .') no-repeat center top/ cover;"';
 } else {
     $class_header = 'header-inner';
     $style_for_header = '';
 }
 ?>
 
-<!-- Header -->
 <header class="header <?php echo esc_attr($class_header); ?>" <?php echo $style_for_header; ?>>
 
 <div class="heading">
@@ -64,8 +63,8 @@ if(is_page_template('template-home.php')) {
 				?>
 				<?php if($link) { ?>
 					<li class="social__item">
-						<?php echo $label; ?>
-						<a class="social__icon <?php echo $class; ?>" target="_blank" href="<?php echo $link; ?>">
+					<?php echo $label; ?>
+						<a class="social__icon <?php echo esc_attr( $class ); ?>" target="_blank" href="<?php echo esc_url( $link ); ?>">
 							<?php echo $svg; ?>
 						</a>
 					</li>
@@ -114,15 +113,15 @@ if(is_page_template('template-home.php')) {
 
 	<div class="navigation__wrap">
 		<?php if($lege_options['header_phone']) { ?>
-		<a href="tel:<?php echo $lege_options['header_phone']; ?>" class="call popup-link-1">
+		<a href="tel:<?php echo esc_attr( $lege_options['header_phone'] ); ?>" class="call popup-link-1">
 			<div class="call__icon btn">
 				<svg width="22" height="22">
 					<use xlink:href="#phone-solid"/>
 				</svg>
 			</div>
 			<div class="call__block">
-				<p class="call__text"><?php echo $lege_options['header_phone_label']; ?></p>
-				<p class="call__number"><?php echo $lege_options['header_phone']; ?></p>
+				<p class="call__text"><?php echo esc_attr( $lege_options['header_phone_label'] ); ?></p>
+				<p class="call__number"><?php echo esc_attr( $lege_options['header_phone'] ); ?></p>
 			</div>
 		</a>
 		<?php } ?>
@@ -155,46 +154,44 @@ if(is_page_template('template-home.php')) {
 <div class="offer">
 	<div class="wrapper">
 		<div class="offer__slider">
-			<div class="offer__slide">
-				<p class="offer__text">Вы хотите изменить мир.</p>
-				<h1 class="offer__title">Мы хотим вам помочь.</h1>
-				<p class="offer__descr">Мы современная Юридическая фирма,<br> помогающая перспективным стартапам, фрилансерам и малому бизнесу.</p>
-				<a href=contacts.html#callback" class="offer__btn btn popup-link">Бесплатная консультация</a>
-			</div>
-			<div class="offer__slide">
-				<p class="offer__text">Вы хотите изменить мир.</p>
-				<h1 class="offer__title">Мы хотим вам помочь.</h1>
-				<p class="offer__descr">Юристы JC проведут вас и вашу компанию через многочисленные юридические проблемы, стоящие перед компаниями Москвы сегодня.</p>
-				<a href="contacts.html#callback" class="offer__btn btn popup-link">Бесплатная консультация</a>
-			</div>
-			<div class="offer__slide">
-				<p class="offer__text">Вы хотите изменить мир.</p>
-				<h1 class="offer__title">Мы хотим вам помочь.</h1>
-				<p class="offer__descr">Мы предпочитаем обсуждать проблемы и решения, а не участвовать в теоретических юридических дебатах, которые никогда не заканчиваются.</p>
-				<a href="contacts.html#callback" class="offer__btn btn">Бесплатная консультация</a>
-			</div>
-		</div>
 
-		<a class="offer__video popup-with-zoom-anim popup-youtube" href="https://www.youtube.com/watch?v=FWxRRbnwRf0" rel="nofollow" >
-			<p class="offer__time">1:30</p>
+		<?php $slider = $lege_options['home_header_slider']; 
+
+		foreach($slider as $slide) { ?>
+			<div class="offer__slide">
+				<p class="offer__text"><?php echo $slide['title']; ?></p>
+				<?php echo $slide['description']; ?>
+				<a href="<?php echo $slide['url'] ; ?>" class="offer__btn btn popup-link"><?php esc_html_e( 'Бесплатная консультация', 'lege' ); ?></a>
+			</div>
+		<?php } ?>
+
+		<?php if( $lege_options['header_video'] ) { ?>
+		<a class="offer__video popup-with-zoom-anim popup-youtube" href="<?php echo esc_url( $lege_options['header_video'] ); ?>" rel="nofollow" >
+			<?php if( $lege_options['header_time'] ) { ?>
+				<p class="offer__time"><?php echo esc_html( $lege_options['header_time']); ?></p>
+			<?php } ?>
 			<div class="offer__play"></div>
-			<p class="offer__watch">Посмотрите короткое видео о нашей компании</p>
+			<?php if( $lege_options['header_video_title'] ) { ?>
+				<p class="offer__watch"><?php echo esc_html( $lege_options['header_video_title'] ); ?></p>
+			<?php } ?>
 		</a>
+		<?php } ?>
 	</div>
 </div>
 <?php } else { ?>
 	<div class="caption">
 		<div class="wrapper">
-			<h1 class="caption__title">Заголовок страницы</h1>
-			<div class="caption__bc">
+			<h1 class="caption__title"><?php echo wp_title(''); ?></h1>
+			<!--<div class="caption__bc">
 				<span>
 					<a href="index.html">Главная</a>
 				</span>
 			<span class="sep">/</span>
 			<span class="current">Контакты</span>
-			</div>
+			</div>-->
+			<?php echo lege_get_breadcrumbs(); ?>
 		</div>
 	</div>
 <?php } ?>
 
-</header><!-- End header -->
+</header>

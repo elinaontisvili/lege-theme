@@ -50,7 +50,8 @@ function lege_setup() {
 	register_nav_menus(
 		array(
 			'menu-header' => esc_html__( 'Header Navigation', 'lege' ),
-			'menu-footer' => esc_html__( 'Footer Navigation', 'lege' ),
+			'menu-footer1' => esc_html__( 'Footer Navigation 1', 'lege' ),
+			'menu-footer2' => esc_html__( 'Footer Navigaion 2', 'lege' ),
 		)
 	);
 
@@ -187,6 +188,11 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * Настройки Redux.
  */
 require get_template_directory() . '/inc/options-panel-redux.php';
+
+/**
+ * Подключение хлебные крошки.
+ */
+require get_template_directory() . '/inc/breadcrumbs.php';
 
 /**
  * Класс на боди для специфической страницы.
