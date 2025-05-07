@@ -433,3 +433,22 @@ $meta_boxes[] = array(
 
 return $meta_boxes;
 }
+
+/*
+ * Pagination. Количество постов на странице архива.
+ * */
+function lege_posts_per_archiepage( $query ) {
+    global $lege_options;
+    $posts_per_page_testy = -1;
+    $posts_per_page_news = -1;
+    if($lege_options['testimonial_posts']){ $posts_per_page_testy =$lege_options['testimonial_posts']; }
+    if($lege_options['newspostsperpage']){ $posts_per_page_news =$lege_options['newspostsperpage']; }
+
+    if (is_post_type_archive('testimonial')) {
+        $query->set( 'posts_per_page', $posts_per_page_testy );
+    }
+    if (is_post_type_archive('news')) {
+        $query->set( 'posts_per_page', $posts_per_page_news );
+    }
+}
+add_action( 'pre_get_posts', 'lege_posts_per_archiepage' );

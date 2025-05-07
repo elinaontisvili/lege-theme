@@ -558,6 +558,14 @@ Redux::set_section( $opt_name, array(
 			'title'   => __( 'Specify the count of testimonials per page', 'lege' ),
 			'default' => '6' 
 		),
+		/*
+		array(
+			'id'      => 'testimonial_form_label',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Form Label', 'lege' ),
+			'default' => 'Оставьте ваш отзыв'
+		),
+		*/
 		array(
 			'id'      => 'testimonial_form_shortcode',
 			'type'    => 'text',
@@ -604,7 +612,7 @@ Redux::set_section( $opt_name, array(
 		array(
 			'id'      => 'servicearchivedesc',
 			'type'    => 'text',
-			'title'   => __( 'Описание Страницы Архив', 'lege' ),
+			'title'   => __( 'Archive Page Description', 'lege' ),
 			'default' => 'Вы хотите реализовать свои бизнес идеи?<br>Начало вашего нового бизнеса требует прочной юридической основы, и мы поможем вам на каждом этапе'
 		),
 	)
@@ -630,7 +638,6 @@ Redux::set_section( $opt_name, array(
 			'title'   => __( 'Heading (second part)', 'lege' ),
 			'default' => 'НОВОСТИ'
 		),
-
 		array(
 			'id'      => 'newspostsperpage',
 			'type'    => 'text',

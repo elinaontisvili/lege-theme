@@ -9,8 +9,16 @@ global $lege_options;
         <h2 class="clients__title secondary-title"><span><?php echo $lege_options['testylabel1']; ?></span><br><?php echo $lege_options['testylabel2']; ?></h2>
         
         <?php
-        if ( have_posts() ) : 
-            while ( have_posts() ) : the_post(); ?>
+        // Pagination
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+        $testimonials = new WP_Query (array(
+            'post_type' => 'testimonial',
+            'paged' => $paged
+        ));
+
+        if ( $testimonials->have_posts() ) : 
+            while ( $testimonials->have_posts() ) : $testimonials->the_post(); ?>
         
                 <div class="clients__box">
                     <div class="clients__photo">
@@ -45,56 +53,51 @@ global $lege_options;
                     <?php } ?>
                 </div>
 
-            <?php endwhile; else :
+            <?php endwhile; 
+            wp_reset_postdata(); 
+else :
 
                 echo "<div>Нет отзывов</div>";
 
-        endif; ?>
+            endif; ?>
 
-        <nav class="pagination">
-            <div class="nav-links">
-                <a href="#" class="prev page-numbers"></a>
-                <a href="#" class=" page-numbers">1</a>
-                <span href="#" class="current page-numbers">2</span>
-                <a href="#" class="page-numbers">3</a>
-                <a href="#" class="page-numbers">4</a>
-                <a href="#" class="page-numbers">5</a>
-                <span class="page-numbers page-break">...</span>
-                <a href="#" class=" page-numbers">7</a>
-                <a href="#" class="next page-numbers"></a>
-            </div>
-        </nav>
-        <div class="clients__form-block">
-            <form action="#" class="log clients__form review-form" id="popupMessage">
-                <p class="log__title">Оставьте ваш отзыв</p>
-                <div class="log__wrap">
-                    <div class="log__group">
-                        <label>Имя</label>
-                        <input type="text" name="name" class="log__input">
-                    </div>
-                    <div class="log__group">
-                        <label>Email</label>
-                        <input type="email" name="email" class="log__input">
-                    </div>
-                    <div class="log__group">
-                        <label>Телефон</label>
-                        <input type="tel" name="tel" class="log__input">
-                    </div>
-                    <div class="log__group log__group_socials">
-                        <label>Ссылка на соцсеть</label>
-                        <input type="text" name="social" class="log__input">
-                    </div>
-                    <div class="log__group log__group_textarea">
-                        <label>Ваш отзыв</label>
-                        <textarea type="text" name="message" class="log__input"></textarea>
-                    </div>
-                    <p class="log__line"><span>*</span>Поля обязательные для заполнения</p>
-                    <div class="log__btn">
-                        <input id="send" type="submit" data-submit value="Отправить" class="btn"/>
-                    </div>
+        <!-- Pagination -->
+        <?php if($testimonials->max_num_pages > 1) { ?> 
+            <nav class="pagination">
+                <div class="nav-links">
+
+                    <?php 
+                    // Выводим левую стрелку для первой страницы.
+                    if( get_query_var('paged') < 2){ ?>
+                        <span class="prev page-numbers"></span>
+                    <?php } ?>
+
+                    <?php
+                    // Вывод стандартной пагинации.
+                    $big = 999999999;
+
+                    echo paginate_links( array(
+                        'base'    => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                        'format'  => '?paged=%#%',
+                        'current' => max( 1, get_query_var('paged') ),
+                        'prev_text'          => '',
+                        'next_text'          => '',
+                        'total'   => $testimonials->max_num_pages
+                    ) ); ?>
+
+                    <?php 
+                    // Выводим правую стрелку для последней страницы.
+                    if( get_query_var('paged') == $testimonials->max_num_pages){ ?>
+                        <span class="next page-numbers"></span>
+                    <?php } ?>
+
                 </div>
-            </form>
-        </div>
+            </nav>
+            <?php } ?>
+        <!-- Pagination end -->
+        
+        <?php echo do_shortcode($lege_options['testimonial_form_shortcode']); ?>
+        
     </div>
 </section>
 
