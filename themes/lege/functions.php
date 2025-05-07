@@ -434,9 +434,9 @@ $meta_boxes[] = array(
 return $meta_boxes;
 }
 
-/*
+/**
  * Pagination. Количество постов на странице архива.
- * */
+ */
 function lege_posts_per_archiepage( $query ) {
     global $lege_options;
     $posts_per_page_testy = -1;
@@ -452,3 +452,19 @@ function lege_posts_per_archiepage( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'lege_posts_per_archiepage' );
+
+/**
+ * Функция возвращает массив с данными вложения по его ID.
+ */
+function lege_get_attachment( $attachment_id ) {
+    $attachment = get_post( $attachment_id );
+
+    return array(
+        'alt' => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
+        'caption' => $attachment->post_excerpt,
+        'description' => $attachment->post_content,
+        'href' => get_permalink( $attachment->ID ),
+        'src' => wp_get_attachment_url( $attachment->ID ), 
+        'title' => $attachment->post_title,
+    );
+}
