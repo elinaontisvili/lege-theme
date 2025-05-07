@@ -27,77 +27,49 @@
             <?php endwhile; ?>
 				
 			<!-- Slider -->
-				<div class="cases">
-					<h4 class="cases__cap">Посмотрите наши последние кейсы</h4>
-					<div class="cases__slider">
-						<div class="cases__slide">
-							<div class="cases__item">
-								<div class="cases__block">
-									<h3 class="cases__heading">Представление интересов компании PPD</h3>
-									<a href="#" class="cases__link link-more">
-										Читать больше
-										<svg width="18" height="20">
-											<use xlink:href="#nav-right"/>
-										</svg>
-									</a>
-								</div>
-								<div class="cases__img">
-									<img src="img/case4.jpg" alt="Изображение">
-								</div>
-							</div>
-						</div>
-						<div class="cases__slide">
-							<div class="cases__item">
-								<div class="cases__block">
-									<h3 class="cases__heading">Вывод денег через текущие платежи</h3>
-									<a href="#" class="cases__link link-more">
-										Читать больше
-										<svg width="18" height="20">
-											<use xlink:href="#nav-right"/>
-										</svg>
-									</a>
-								</div>
-								<div class="cases__img">
-									<img src="img/case2.jpg" alt="Изображение">
-								</div>
-							</div>
-						</div>
-						<div class="cases__slide">
-							<div class="cases__item">
-								<div class="cases__block">
-									<h3 class="cases__heading">Взыскание задолженности с дебитора</h3>
-									<a href="#" class="cases__link link-more">
-										Читать больше
-										<svg width="18" height="20">
-											<use xlink:href="#nav-right"/>
-										</svg>
-									</a>
-								</div>
-								<div class="cases__img">
-									<img src="img/case1.jpg" alt="Изображение">
-								</div>
-							</div>
-						</div>
-						<div class="cases__slide">
-							<div class="cases__item">
-								<div class="cases__block">
-									<h3 class="cases__heading">Урегулирование налогового спора</h3>
-									<a href="#" class="cases__link link-more">
-										Читать больше
-										<svg width="18" height="20">
-											<use xlink:href="#nav-right"/>
-										</svg>
-									</a>
-								</div>
-								<div class="cases__img">
-									<img src="img/case3.jpg" alt="Изображение">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+            <div class="cases">
+                    <?php if( $lege_options['caseslabel'] ) { ?>
+					<h4 class="cases__cap"><?php if($lege_options['caseslabel']){ echo $lege_options['caseslabel']; } else { echo esc_html_e('Последние кейсы','lege'); } ?></h4>
+					<?php } ?>
+                    <div class="cases__slider">
+                    
+                    <?php 
+                    $cases = new WP_Query(array(
+                        'post_type' => 'feature',
+                        'posts_per_page' => 4
+                    ));
 
+                    if ( $cases->have_posts() ) :
+
+                        while ( $cases->have_posts() ) : $cases->the_post(); ?>
+
+                        <div class="cases__slide">
+							<div class="cases__item">
+								<div class="cases__block">
+									<h3 class="cases__heading"><?php the_title(); ?></h3>
+									<a href="<?php the_permalink(); ?>" class="cases__link link-more">
+										<?php esc_html_e('Читать больше', 'lege'); ?> 
+										<svg width="18" height="20">
+											<use xlink:href="#nav-right"/>
+										</svg>
+									</a>
+								</div>
+								<div class="cases__img">
+                                    <?php echo get_the_post_thumbnail(get_the_ID(), 'feature-thumb'); ?> 
+								</div>
+							</div>
+						</div>
+
+                    <?php endwhile;
+
+                    wp_reset_postdata();
+else : echo "<div>Нет кейсов в базе</div>";
+
+                    endif; ?>					
+                    </div>
+				</div>
 			</div>
-		</section><!-- End slider -->
+		</section>
+        <!-- End slider -->
 
 <?php get_footer(); 
