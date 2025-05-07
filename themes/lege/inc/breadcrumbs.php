@@ -99,7 +99,6 @@ function lege_get_breadcrumbs() {
                 echo $before .wp_title(''). $after;
             }
             
-
         } elseif ( is_attachment() ) {
             $parent = get_post($parent_id);
             $cat = get_the_category($parent->ID); $cat = $cat[0];

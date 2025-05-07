@@ -101,6 +101,12 @@ function lege_setup() {
 			'flex-height' => true,
 		)
 	);
+
+	// Размеры для картинок
+	add_image_size( 'testimonial-thumb', 225, 231, true );
+    add_image_size( 'feature-thumb', 438, 455, true );
+    add_image_size( 'news-thumb', 633, 476, true );
+
 }
 add_action( 'after_setup_theme', 'lege_setup' );
 
@@ -158,6 +164,18 @@ function lege_scripts() {
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
 
 /**
+ * Подключение скриптов и стилей в админке.
+ */
+function lege_admin_scripts($hook) {
+
+  	if ( $hook == 'post.php' || $hook == 'post-new.php' || $hook == 'page-new.php' || $hook == 'page.php' ) {
+		wp_enqueue_script( 'lege_metaboxes', get_template_directory_uri() . '/assets/js/libs/metaboxes.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox') );
+		wp_enqueue_style('lege_metabox', get_template_directory_uri() . '/assets/css/libs/metabox.css', array(), '1.0');
+	}
+}
+add_action( 'admin_enqueue_scripts', 'lege_admin_scripts', 10 );
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
@@ -195,6 +213,11 @@ require get_template_directory() . '/inc/options-panel-redux.php';
 require get_template_directory() . '/inc/breadcrumbs.php';
 
 /**
+ * Подключение Metabox.
+ */
+require get_template_directory() . '/inc/metaboxes.php';
+
+/**
  * Класс на боди для специфической страницы.
 */
 function lege_body_class( $classes ) {
@@ -206,3 +229,207 @@ function lege_body_class( $classes ) {
     return $classes;
 }
 add_filter( 'body_class', 'lege_body_class' );
+
+/** 
+ * Регистрируем постайп для Testimonials
+ */
+function lege_register_custom_post_type() {
+
+    register_post_type( 'testimonial', array(
+        'labels'             => array(
+            'name'            => _x( 'Отзывы', 'lege' ),
+            'singular_name'   => _x( 'Отзыв', 'lege' ),
+            'add_new'         => __( 'Добавить новый', 'lege' )
+        ),
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'testimonials' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'menu_icon'          => 'dashicons-format-quote',
+        'supports'           => array( 'title', 'editor', 'thumbnail' ),
+    ) );
+
+    register_post_type( 'service', array(
+        'labels'             => array(
+            'name'                  => __( 'Услуги','lege' ),
+            'singular_name'         => __( 'Услуга','lege' ),
+            'add_new'               => __( 'Добавить новую', 'lege' ),
+        ),
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'services' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'menu_icon'          => 'dashicons-admin-tools',
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+    ) );
+
+    register_post_type( 'news', array(
+        'labels'             => array(
+            'name'                  => __( 'Новости','lege' ),
+            'singular_name'         => __( 'Новость','lege' ),
+            'add_new'               => __( 'Добавить новую', 'lege' ),
+        ),
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'news' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'menu_icon'          => 'dashicons-format-aside',
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+    ) );
+
+    register_post_type( 'feature', array(
+        'labels'             => array(
+            'name'                  => __( 'Кейсы', 'lege' ),
+            'singular_name'         => __( 'Кейс', 'lege' ),
+            'add_new'               => __( 'Добавить новый', 'lege' ),
+        ),
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'feature' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'menu_icon'          => 'dashicons-dashboard',
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+    ) );
+
+	// Регистрируем Taxonomy.
+	register_taxonomy(
+		'service-type',
+		'service',
+		array(
+			'label' => __( 'Категории услуг', '	lege' ),
+			'rewrite' => array( 'slug' => 'service-type' ),
+			'hierarchical' => true,
+		)
+	);
+
+	register_taxonomy(
+		'news-category',
+		'news',
+		array(
+			'label' =>  __( 'Категории новостей', 'lege' ),
+			'rewrite' => array( 'slug' => 'news-category' ),
+			'hierarchical' => true,
+		)
+	);
+
+	register_taxonomy(
+		'feature-type',
+		'feature',
+		array(
+			'label'   => __( 'Case Type', 'lege' ),
+			'rewrite' => array( 'slug' => 'case-type' ),
+			'hierarchical' => true,
+		)
+	);	
+}
+add_action( 'init', 'lege_register_custom_post_type' );
+
+/** 
+ * Регистрируем Metaboxes.
+ */
+function lege_metaboxes($meta_boxes) {
+
+    $meta_boxes = array();
+    $prefix = "lege_";
+
+    // Testimonial Metabox
+    $meta_boxes[] = array(
+        'id'         => 'testimonial_metaboxes',
+        'title'      => esc_html__( 'Данные для отзыва', 'lege' ),
+        'pages'      => array( 'testimonial' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'show_names' => true,
+        'fields' => array(
+            array(
+                'name' => esc_html__( 'Социальная Сеть', 'lege' ),
+                'desc' => esc_html__( 'Введите ссылку на соц сеть', 'lege' ),
+                'id'   => $prefix . 'social_link',
+                'type' => 'text',
+            ),
+            array(
+                'name' => esc_html__( 'Дата отзыва', 'lege' ),
+                'desc' => esc_html__( 'Введите дату отзыва', 'lege' ),
+                'id'   => $prefix . 'testy_date',
+                'type' => 'text_date',
+            ),
+        )
+    );
+
+    // Service Metabox
+    $meta_boxes[] = array(
+        'id'         => 'service_metaboxes',
+        'title'      => esc_html__( 'Данные для сервиса', 'lege' ),
+        'pages'      => array( 'service' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'show_names' => true,
+        'fields' => array(
+            array(
+                'name' => esc_html__( 'Стоимость', 'lege' ),
+                'desc' => esc_html__( 'Введите цену данной услуги', 'lege' ),
+                'id'   => $prefix . 'service_cost',
+                'type' => 'text',
+            ),
+            array(
+                'name' => esc_html__( 'Фоновое изображение', 'lege' ),
+                'desc' => esc_html__( 'Выберите фон для выбора', 'lege' ),
+                'id'   => $prefix . 'service_icon',
+                'type' => 'select',
+                'options' => array(
+                    array('name' => esc_html__( 'Стиль Статистика', 'lege' ), 'value' => 'stat'),
+                    array('name' => esc_html__( 'Стиль Идея', 'lege' ), 'value' => 'idea'),
+                    array('name' => esc_html__( 'Стиль Интернет', 'lege' ), 'value' => 'internet'),
+                    array('name' => esc_html__( 'Стиль Инфо', 'lege' ), 'value' => 'info'),
+                    array('name' => esc_html__( 'Стиль Деловой', 'lege' ), 'value' => 'busy'),
+                    array('name' => esc_html__( 'Стиль Таргет', 'lege' ), 'value' => 'target'),
+                ),
+            ),
+        )
+    );
+
+// Metabox for Template Order, for the form shortcode
+$meta_boxes[] = array(
+    'id'         => 'order_metaboxes',
+    'title'      => esc_html__( 'Данные для страницы заказа', 'lege' ),
+    'pages'      => array( 'page' ),
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true,
+    'show_on'    => array( 'key' => 'page-template', 'value' => array('template-order.php') ),
+    'fields' => array(
+        array(
+            'name' => esc_html__( 'Шорткод формы', 'lege' ),
+            'desc' => esc_html__( 'Установите плагин для формы и вставьте шорткод формы', 'lege' ),
+            'id'   => $prefix . 'shortcode_order',
+            'type' => 'text',
+        ),
+    )
+);
+
+return $meta_boxes;
+}

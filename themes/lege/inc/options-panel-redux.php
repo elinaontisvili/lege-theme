@@ -523,6 +523,124 @@ Redux::set_section( $opt_name, array(
 	)
 ));
 
+// Post Types
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Post Types', 'lege' ),
+	'id'               => 'posttypes',
+	'desc'             => __( 'Options for Custom Post Types', 'lege' ),
+	'customizer_width' => '400px',
+	'icon'             => 'el el-home'
+	) );
+
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Testimonials', 'lege' ),
+	'id'               => 'testimonialsposttype',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Data for Testimonials Page', 'lege' ),
+	'fields'           => array(
+
+		array(
+			'id'      => 'testylabel1',
+			'type'    => 'text',
+			'title'   => __( 'Specify the Label', 'lege' ),
+			'default' =>'За нас говорят'
+		),
+		array(
+			'id'      => 'testylabel2',
+			'type'    => 'text',
+			'title'   => __( 'Specify the Label', 'lege' ),
+			'default' =>'НАШИ КЛИЕНТЫ'
+		),
+		array(
+			'id'      => 'testimonial_posts',
+			'type'    => 'text',
+			'title'   => __( 'Specify the count of testimonials per page', 'lege' ),
+			'default' => '6' 
+		),
+		array(
+			'id'      => 'testimonial_form_shortcode',
+			'type'    => 'text',
+			'title'   => __( 'Form Shortcode', 'lege' ),
+			'desc'    => __( 'Install the plugin and enter the contact form shortcode in this field.', 'lege' ),
+			'default' => ''
+		),
+	)
+) );
+
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Services', 'lege' ),
+	'id'               => 'servicesposttype',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Data for Service Page', 'lege' ),
+	'fields'           => array(
+
+		array(
+			'id'      => 'servicecurrency',
+			'type'    => 'text',
+			'title'   => __( 'Specify the Currency', 'lege' ),
+			'default' =>'$'
+		),
+		array(
+			'id'      => 'caseslabel',
+			'type'    => 'text',
+			'title'   => __( 'Title for the Cases Slider', 'lege' ),
+			'default' => 'Посмотрите наши последние кейсы',
+		),
+
+		array(
+			'id'      => 'servicearchivetitle11',
+			'type'    => 'text',
+			'title'   => __( 'Page Archive Heading 1', 'lege' ),
+			'default' => 'НАШИ'
+		),
+		array(
+			'id'      => 'servicearchivetitle12',
+			'type'    => 'text',
+			'title'   => __( 'Page Archive Heading 2', 'lege' ),
+			'default' => 'УСЛУГИ'
+		),
+		array(
+			'id'      => 'servicearchivedesc',
+			'type'    => 'text',
+			'title'   => __( 'Описание Страницы Архив', 'lege' ),
+			'default' => 'Вы хотите реализовать свои бизнес идеи?<br>Начало вашего нового бизнеса требует прочной юридической основы, и мы поможем вам на каждом этапе'
+		),
+	)
+) );
+
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'News', 'lege' ),
+	'id'               => 'newsposttype',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Options for the News page', 'lege' ),
+	'fields'           => array(
+
+		array(
+			'id'      => 'newstitle1',
+			'type'    => 'text',
+			'title'   => __( 'Heading (first part)', 'lege' ),
+			'default' => 'Актуальные'
+		),
+		array(
+			'id'      => 'newstitle2',
+			'type'    => 'text',
+			'title'   => __( 'Heading (second part)', 'lege' ),
+			'default' => 'НОВОСТИ'
+		),
+
+		array(
+			'id'      => 'newspostsperpage',
+			'type'    => 'text',
+			'title'   => __( 'Number of news items per page', 'lege' ),
+			'default' => '4'
+		),
+
+	)
+) );
+
 // -> END Basic Fields
 
 

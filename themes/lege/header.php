@@ -182,13 +182,6 @@ if(is_page_template('template-home.php')) {
 	<div class="caption">
 		<div class="wrapper">
 			<h1 class="caption__title"><?php echo wp_title(''); ?></h1>
-			<!--<div class="caption__bc">
-				<span>
-					<a href="index.html">Главная</a>
-				</span>
-			<span class="sep">/</span>
-			<span class="current">Контакты</span>
-			</div>-->
 			<?php echo lege_get_breadcrumbs(); ?>
 		</div>
 	</div>
