@@ -12,7 +12,7 @@ if ( have_posts() ) :
 
     else :
 
-        echo "<div>Нет постов</div>";
+        echo "<div>Нет кейсов</div>";
 
 endif;
 
