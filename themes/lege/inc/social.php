@@ -6,16 +6,18 @@ function lege_get_share($type = 'fb', $permalink = false, $title = false) {
     if (!$title) {
         $title = get_the_title();
     }
+
+    // For safe URLs
+    $encoded_permalink = urlencode($permalink);
+    $encoded_title = urlencode($title);
+
     switch ($type) {
         case 'twi':
-            return 'http://twitter.com/home?status=' . $title . '+-+' . $permalink;
-            break;
+            return 'https://twitter.com/intent/tweet?text=' . $encoded_title . '%20' . $encoded_permalink;
         case 'fb':
-            return 'http://www.facebook.com/sharer.php?u=' . $permalink . '&t=' . $title;
-            break;
+            return 'https://www.facebook.com/sharer/sharer.php?u=' . $encoded_permalink;
         case 'vk':
-            return 'http://vk.com/share.php?url=' . $permalink . '&title=' . $title . '&comment=';
-            break;
+            return 'https://vk.com/share.php?url=' . $encoded_permalink . '&title=' . $encoded_title;
         default:
             return '';
     }
