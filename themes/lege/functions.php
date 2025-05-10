@@ -208,6 +208,12 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
+ * Подключение social кнопок.
+ */
+require_once get_template_directory() . '/inc/social.php';
+
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
@@ -368,7 +374,7 @@ function lege_metaboxes($meta_boxes) {
     $meta_boxes = array();
     $prefix = "lege_";
 
-    // Testimonial Metabox
+    // Metabox для Отзывов.
     $meta_boxes[] = array(
         'id'         => 'testimonial_metaboxes',
         'title'      => esc_html__( 'Данные для отзыва', 'lege' ),
@@ -392,7 +398,7 @@ function lege_metaboxes($meta_boxes) {
         )
     );
 
-    // Service Metabox
+    // Metabox для Услуг.
     $meta_boxes[] = array(
         'id'         => 'service_metaboxes',
         'title'      => esc_html__( 'Данные для сервиса', 'lege' ),
@@ -424,7 +430,7 @@ function lege_metaboxes($meta_boxes) {
         )
     );
 
-// Metabox for Template Order, for the form shortcode
+// Добавляет метабокс для страницы с шаблоном "template-order.php", позволяющий указать шорткод формы заказа
 $meta_boxes[] = array(
     'id'         => 'order_metaboxes',
     'title'      => esc_html__( 'Данные для страницы заказа', 'lege' ),
@@ -480,3 +486,5 @@ function lege_get_attachment( $attachment_id ) {
         'title' => $attachment->post_title,
     );
 }
+
+
