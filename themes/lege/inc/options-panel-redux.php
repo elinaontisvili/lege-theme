@@ -644,6 +644,12 @@ Redux::set_section( $opt_name, array(
 			'title'   => __( 'Number of news items per page', 'lege' ),
 			'default' => '4'
 		),
+		array(
+			'id'      => 'categorytitle',
+			'type'    => 'text',
+			'title'   => __( 'Heading for category archive page', 'lege' ),
+			'default' => 'Категории новостей'
+		),
 
 	)
 ) );
