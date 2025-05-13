@@ -16,11 +16,11 @@
                 <?php the_title(); ?>
             </h1>
             <ul class="tags-list">
-                <?php $news_categories = wp_get_post_terms(get_the_ID(),'news-category'); 
-            
-                foreach($news_categories as $category){ ?>
-                    <li><a href="<?php echo esc_url( get_term_link( $category ) ); ?>"><?php esc_html( $category->name ); ?></a></li>
-                <?php } ?>
+                <?php $news_categories = wp_get_post_terms(get_the_ID(),'news-category');
+					
+                    foreach($news_categories as $category){ ?>
+                        <li><a href="<?php echo get_term_link($category); ?>"><?php echo $category->name; ?></a></li> <!-- update permalinks in admin, for the category page to work -->
+                    <?php } ?>
             </ul>
         </div>
     </div>

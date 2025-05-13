@@ -486,5 +486,6 @@ function lege_get_attachment( $attachment_id ) {
         'title' => $attachment->post_title,
     );
 }
+add_filter( 'get_attachment', 'lege_get_attachment' );
 
 

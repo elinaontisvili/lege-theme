@@ -182,7 +182,26 @@ if(is_page_template('template-home.php')) {
 	<div class="caption">
 		<div class="wrapper">
 			<h1 class="caption__title">
+			
 			<?php
+				if ( is_single() ) {
+					$post_type = get_post_type( get_the_ID() );
+					$post_type_object = get_post_type_object( $post_type );
+					if ( $post_type_object ) {
+						echo esc_html( $post_type_object->labels->singular_name );
+					}
+				} elseif ( is_tax() || is_archive() ) {
+					$post_type = get_post_type();
+					$post_type_object = get_post_type_object( $post_type );
+					if ( $post_type_object ) {
+						echo esc_html( $post_type_object->labels->name );
+					} else {
+						echo esc_html( get_the_archive_title() );
+					}
+				} else {
+					echo esc_html( get_the_title() );
+				} 
+				/*
 				if(is_single()){
 					$current_post_type = get_post_type(get_the_ID());
 					$post_type_object = get_post_type_object($current_post_type);
@@ -195,7 +214,8 @@ if(is_page_template('template-home.php')) {
 				} else {
 					echo esc_html(wp_title('', false));
 				}
-			?>
+				*/
+			?> 
 			</h1>
 			<?php echo lege_get_breadcrumbs(); ?>
 		</div>
