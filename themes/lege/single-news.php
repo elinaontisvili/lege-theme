@@ -19,7 +19,7 @@
                 <?php $news_categories = wp_get_post_terms(get_the_ID(),'news-category');
 					
                     foreach($news_categories as $category){ ?>
-                        <li><a href="<?php echo get_term_link($category); ?>"><?php echo $category->name; ?></a></li> <!-- update permalinks in admin, for the category page to work -->
+                        <li><a href="<?php echo get_term_link($category); ?>"><?php echo $category->name; ?></a></li>
                     <?php } ?>
             </ul>
         </div>

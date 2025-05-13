@@ -125,6 +125,7 @@ add_action( 'after_setup_theme', 'lege_content_width', 0 );
 /**
  * Register widget area.
  */
+/*
 function lege_widgets_init() {
 	register_sidebar(
 		array(
@@ -150,6 +151,7 @@ function lege_widgets_init() {
 	);
 }
 add_action( 'widgets_init', 'lege_widgets_init' );
+*/
 
 /**
  * Подключение скриптов и стилей.
@@ -212,6 +214,11 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require_once get_template_directory() . '/inc/social.php';
 
+/**
+ * Подключение widgets.
+ */
+require get_template_directory() . '/inc/widgets/widgets.php';
+require get_template_directory() . '/inc/widgets/widget-about.php';
 
 /**
  * Load Jetpack compatibility file.

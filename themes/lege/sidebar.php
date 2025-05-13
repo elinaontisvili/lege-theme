@@ -46,12 +46,6 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 		</ul>
 	</div>
 
-	<div class="banner" style="background: url(img/banner.jpg) no-repeat center top/ cover;">
-		<h4 class="banner__title">Юридические консультации для малого бизнеса</h4>
-		<p class="banner__text">Не позволяйте юридическим вопросам отвлекать вас от ведения бизнеса</p>
-		<a href="#" class="banner__btn btn">Подробнее</a>
-	</div>
-
 	<div class="subscr">
 		<div class="subscr__title">
 			<svg  width="19" height="19">
