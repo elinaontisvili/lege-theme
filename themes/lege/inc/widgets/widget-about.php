@@ -42,15 +42,11 @@ class Lege_About_Widget extends WP_Widget
 		$text = apply_filters('the_content', $instance['text']);
 		
         $link_more = !empty($instance['link_more']) ? apply_filters('lege_about_widget_link_more', $instance['link_more']) : '';
-        //$link_more = !empty($instance['link_more']) ? esc_url($instance['link_more']) : '';
 
 		/* Our variables from the widget settings. */
 		//$image_id = $instance[$this->image_field];
 		
 		//$image = new Lege_WidgetImageField( $this, $image_id );
-		
-		/* Before widget (defined by themes). */
-		echo $before_widget;
 		
 		// Display Widget
 		?> 
@@ -66,27 +62,7 @@ class Lege_About_Widget extends WP_Widget
                 <?php } ?>
             </div>
 
-            <!-- 
-            <h4 class="banner__title">Юридические консультации для малого бизнеса</h4>
-                <p class="banner__text">Не позволяйте юридическим вопросам отвлекать вас от ведения бизнеса</p>
-                <a href="#" class="banner__btn btn">Подробнее</a>
-            </div>
-            -->
-            <!--
-			<div class="lege-about-widget">
-				<?php /* if( !empty( $image_id ) ) : ?>
-					<figure>
-						<img src="<?php echo $image->get_image_src(); ?>" alt="<?php echo $title ?>" />
-					</figure>
-				<?php endif; */ ?>
-				<div class="text">
-					<?php echo $text; ?>
-				</div>	
-            </div> --> 
-            
 		<?php
-		/* After widget (defined by themes). */
-		echo $after_widget;
 	}
 
 	/**
