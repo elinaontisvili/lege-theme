@@ -147,6 +147,19 @@ function lege_scripts() {
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
 
 /**
+ * ** enqueue media scripts for the WordPress admin
+ */
+/*
+add_action( 'admin_enqueue_scripts', function() {
+	wp_enqueue_media(); // required for wp.media
+} );
+*/
+function lege_enqueue_admin_media() {
+	wp_enqueue_media();
+}
+add_action( 'admin_enqueue_scripts', 'lege_enqueue_admin_media' );
+
+/**
  * Подключение скриптов и стилей в админке.
  */
 function lege_admin_scripts($hook) {
@@ -157,21 +170,6 @@ function lege_admin_scripts($hook) {
 	}
 }
 add_action( 'admin_enqueue_scripts', 'lege_admin_scripts', 10 );
-
-/**
- * Enqueue media scripts for the WordPress admin.
- */
-function lege_enqueue_widget_scripts() {
-	wp_enqueue_media();
-	wp_enqueue_script(
-    'lege-widget-js',
-    get_template_directory_uri() . '/assets/js/libs/lege-widget.js',
-    array('jquery'),
-    filemtime(get_template_directory() . '/assets/js/libs/lege-widget.js'), // version
-    true
-);
-}
-add_action( 'admin_enqueue_scripts', 'lege_enqueue_widget_scripts' );
 
 /**
  * Implement the Custom Header feature.

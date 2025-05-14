@@ -95,35 +95,36 @@ public function widget( $args, $instance ) {
 	 * Widget Settings
 	 * @param array $instance 
 	 */
-public function form( $instance ) {
-    $defaults = array(
-        'title'     => __('Company title', 'lege'),
-        'text'      => __('Company description', 'lege'),
-        'link_more' => "",
-        'image'     => 0, // Default to 0 (integer) for no image
-    );
-    $instance = wp_parse_args( (array) $instance, $defaults ); 
-
-    // $image_id is already correctly handled here:
-    $image_id = isset( $instance[$this->image_field] ) ? (int) $instance[$this->image_field] : 0;
-    $image      = new Lege_WidgetImageField( $this, $image_id );
-    ?>
-    <p>
-        <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e('Title:', 'lege') ?></label>
-        <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-    </p>
-    <p>
-        <label for="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>"><?php esc_html_e('Description:', 'lege') ?></label>
-        <textarea class="widefat" cols="100" rows="5" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" ><?php echo esc_textarea( $instance['text'] ); ?></textarea>
-    </p>
-    <p>
-        <label for="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>"><?php esc_html_e('Url:', 'lege') ?></label>
-        <textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'link_more' ) ); ?>" ><?php echo esc_textarea( $instance['link_more'] ); ?></textarea>
-    </p>
-    <p>
-        <label><?php esc_html_e('Image:', 'lege'); ?> </label>
-        <?php echo $image->get_widget_field(); // This method should be escaping its output appropriately ?>
-    </p>
-<?php
-}
+	public function form( $instance ) 
+	{
+		//default widget settings.
+		$defaults = array(
+			'title'		=> __('Company title', 'lege'),
+			'text'		=> __('Company description', 'lege'),
+            'link_more' => "",
+			'image'		=> "",
+		);
+		$instance = wp_parse_args( (array) $instance, $defaults ); 
+		
+		$image_id = isset( $instance[$this->image_field]) ? (int) $instance[$this->image_field] : 0;
+		$image      = new Lege_WidgetImageField( $this, $image_id );
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'lege') ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
+		</p>
+        <p>
+			<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e('Description:', 'lege') ?></label>
+			<textarea class="widefat" cols="100" rows="5" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>" ><?php echo $instance['text']; ?></textarea>
+		</p>
+        <p>
+			<label for="<?php echo $this->get_field_id( 'link_more' ); ?>"><?php _e('Url:', 'lege') ?></label>
+			<textarea class="widefat" id="<?php echo $this->get_field_id( 'link_more' ); ?>" name="<?php echo $this->get_field_name( 'link_more' ); ?>" ><?php echo $instance['link_more']; ?></textarea>
+		</p>
+		<p>
+			<label>Image: </label>
+			<?php echo $image->get_widget_field(); ?>
+		</p>
+	<?php
+	}
 }
