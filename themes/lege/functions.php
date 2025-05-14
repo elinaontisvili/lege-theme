@@ -159,6 +159,7 @@ function lege_admin_scripts($hook) {
 add_action( 'admin_enqueue_scripts', 'lege_admin_scripts', 10 );
 
 /**
+ * Подключение скриптов медиафайлов для административной панели WordPress.
  * Enqueue media scripts for the WordPress admin.
  */
 function lege_enqueue_widget_scripts() {

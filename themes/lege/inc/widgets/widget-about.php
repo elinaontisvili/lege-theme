@@ -121,8 +121,14 @@ public function form( $instance ) {
         <textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'link_more' ) ); ?>" ><?php echo esc_textarea( $instance['link_more'] ); ?></textarea>
     </p>
     <p>
-        <label><?php esc_html_e('Image:', 'lege'); ?> </label>
-        <?php echo $image->get_widget_field(); // This method should be escaping its output appropriately ?>
+    <label><?php esc_html_e('Image:', 'lege'); ?> </label>
+        <?php
+            $field_html = $image->get_widget_field();
+
+            if (is_string($field_html)) {
+                echo $field_html;
+            }
+        ?>
     </p>
 <?php
 }
