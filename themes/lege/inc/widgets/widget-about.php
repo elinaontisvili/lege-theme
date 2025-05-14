@@ -38,14 +38,8 @@ class Lege_About_Widget extends WP_Widget
 		extract( $args );
 		
 		$title = apply_filters('widget_title', $instance['title'] );
-		
-        //$text = apply_filters('the_content', $instance['text']);
-        //$text = nl2br( esc_html( $instance['text'] ) );
 		$text = apply_filters('widget_content', $instance['text']);
-        //$text = wp_kses_post( $instance['text'] );
-
-        //$link_more = !empty($instance['link_more']) ? apply_filters('link_more', $instance['link_more']) : '';
-        $link_more = apply_filters('widget_link_more', $instance['link_more']);
+        $link_more = !empty($instance['link_more']) ? apply_filters('link_more', $instance['link_more']) : '';
 
 		/* Our variables from the widget settings. */
 		//$image_id = $instance[$this->image_field];
@@ -62,7 +56,6 @@ class Lege_About_Widget extends WP_Widget
 				?>    
                 <p class="banner__text"><?php echo $text; ?></p>
                 <?php if($link_more) { ?>
-                <!--<a href="#" class="banner__btn btn">Подробнее</a>-->
                 <a href="<?php echo esc_url( $link_more ); ?>" class="banner__btn btn"><?php echo __( 'Подробнее', 'lege' ); ?></a>
                 <?php } ?>
             </div>
@@ -80,12 +73,8 @@ class Lege_About_Widget extends WP_Widget
 	{
 		$instance = $old_instance;
 		
-		//$instance['title'] = strip_tags( $new_instance['title'] );
         $instance['title'] = sanitize_text_field( $new_instance['title'] );
-		//$instance['text'] = strip_tags( $new_instance['text'] );
         $instance['text'] = sanitize_textarea_field( $new_instance['text'] );
-        //$instance['text'] = wp_kses_post( $new_instance['text'] );
-        //$instance['link_more'] = strip_tags( $new_instance['link_more'] );
         $instance['link_more'] = esc_url_raw( $new_instance['link_more'] );
 
 		//$instance[$this->image_field] = (int) $new_instance[$this->image_field];
