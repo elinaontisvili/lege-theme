@@ -36,6 +36,7 @@ function lege_init_widgets() {
     register_widget('Lege_About_Widget');
 	register_widget('Lege_Category_Widget');
 	register_widget('Lege_Subscribe_Widget');
+	register_widget('Lege_Customsearch_Widget');
 }
 
 add_action('widgets_init', 'lege_init_widgets');

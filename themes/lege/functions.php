@@ -220,6 +220,8 @@ require get_template_directory() . '/inc/widgets/widgets.php';
 require get_template_directory() . '/inc/widgets/widget-about.php';
 require get_template_directory() . '/inc/widgets/widget-customcategory.php';
 require get_template_directory() . '/inc/widgets/widget-subscribe.php';
+require get_template_directory() . '/inc/widgets/widget-customsearch.php';
+
 
 /**
  * Load Jetpack compatibility file.
@@ -500,5 +502,5 @@ add_filter( 'get_attachment', 'lege_get_attachment' );
  * MC4WP Mailchimp form response for success and error messages
  */
 add_filter('mc4wp_form_response_position', function() {
-    return 'before'; // or 'after'
+    return 'after'; // or before
 });

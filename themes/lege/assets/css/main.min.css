@@ -10071,8 +10071,14 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 /* Extra Styling */
 
-.mc4wp-response {
-  border: 2px solid red;
+/* MC4WP Mailchimp for WordPress styles */
+/*
+.mc4wp-form {
+  margin: 0 auto;
+  max-width: 550px;
+} */
+.mc4wp-response .mc4wp-alert {
+  border: 2px solid red; 
   padding: 1em;
   margin-bottom: 1em;
   color: #b00;
