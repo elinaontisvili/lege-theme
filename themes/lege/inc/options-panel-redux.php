@@ -625,7 +625,6 @@ Redux::set_section( $opt_name, array(
 	'customizer_width' => '450px',
 	'desc'             => __( 'Options for the News page', 'lege' ),
 	'fields'           => array(
-
 		array(
 			'id'      => 'newstitle1',
 			'type'    => 'text',

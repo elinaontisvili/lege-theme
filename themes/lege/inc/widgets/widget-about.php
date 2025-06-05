@@ -36,22 +36,19 @@ class Lege_About_Widget extends WP_Widget
 public function widget( $args, $instance ) {
     extract( $args );
 
-    // It's good practice to ensure all expected keys have defaults here too,
-    // especially if they might not be set (e.g., for older widget instances).
     $instance = wp_parse_args( (array) $instance, array(
-        'title'     => __('Company title', 'lege'), // Default from your form()
-        'text'      => __('Company description', 'lege'), // Default from your form()
-        'link_more' => '', // Default from your form()
-        'image'     => 0,  // Default from your form(), use 0 for no image
+        'title'     => __('Company title', 'lege'),
+        'text'      => __('Company description', 'lege'),
+        'link_more' => '',
+        'image'     => 0,
     ) );
 
     $title = apply_filters('widget_title', $instance['title'] );
-    $text = apply_filters('widget_content', $instance['text']); // Use wp_kses_post in display
+    $text = apply_filters('widget_content', $instance['text']); 
     $link_more = !empty($instance['link_more']) ? apply_filters('link_more', $instance['link_more']) : '';
 
     /* Our variables from the widget settings. */
-    // Now $instance['image'] is guaranteed to exist because of wp_parse_args above
-    $image_id = (int) $instance[$this->image_field]; // $this->image_field is 'image'
+    $image_id = (int) $instance[$this->image_field];
 
     $image      = new Lege_WidgetImageField( $this, $image_id, 'image' );
     $image_src = $image->get_image_src();
@@ -63,7 +60,7 @@ public function widget( $args, $instance ) {
                 <h4 class="banner__title"><?php echo esc_html( $title ); ?></h4>
             <?php endif; ?>
 
-            <p class="banner__text"><?php echo wp_kses_post( $instance['text'] ); // Use $instance['text'] here if you applied filters to a different var ?></p>
+            <p class="banner__text"><?php echo wp_kses_post( $instance['text'] ); ?></p>
 
             <?php if ( $link_more ) : ?>
                 <a href="<?php echo esc_url( $link_more ); ?>" class="banner__btn btn"><?php echo esc_html__( 'Подробнее', 'lege' ); ?></a>
@@ -100,11 +97,10 @@ public function form( $instance ) {
         'title'     => __('Company title', 'lege'),
         'text'      => __('Company description', 'lege'),
         'link_more' => "",
-        'image'     => 0, // Default to 0 (integer) for no image
+        'image'     => 0,
     );
     $instance = wp_parse_args( (array) $instance, $defaults ); 
 
-    // $image_id is already correctly handled here:
     $image_id = isset( $instance[$this->image_field] ) ? (int) $instance[$this->image_field] : 0;
     $image      = new Lege_WidgetImageField( $this, $image_id );
     ?>

@@ -56,9 +56,9 @@ function lege_setup() {
 	);
 
 	/*
-		* Switch default core markup for search form, comment form, and comments
-		* to output valid HTML5.
-		*/
+	* Switch default core markup for search form, comment form, and comments
+	* to output valid HTML5.
+	*/
 	add_theme_support(
 		'html5',
 		array(
@@ -102,10 +102,16 @@ function lege_setup() {
 		)
 	);
 
-	// Размеры для картинок
+	// Размеры для картинок.
 	add_image_size( 'testimonial-thumb', 225, 231, true );
     add_image_size( 'feature-thumb', 438, 455, true );
     add_image_size( 'news-thumb', 633, 476, true );
+
+    // Поддержка WooCommerce.
+    //add_theme_support( 'woocommerce' );
+
+    // Поддержка Gutenberg.
+    //add_editor_style( 'editor-style.css' );
 
 }
 add_action( 'after_setup_theme', 'lege_setup' );
@@ -122,27 +128,35 @@ function lege_content_width() {
 }
 add_action( 'after_setup_theme', 'lege_content_width', 0 );
 
+
+/**
+* Deregister the default jQuery safely with a CDN version, to use a specific jQuery version
+*/
+function lege_replace_jquery() {
+if (!is_admin()) {
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), '3.1.1', true);
+    wp_enqueue_script('jquery');
+    }
+}
+add_action('wp_enqueue_scripts', 'lege_replace_jquery', 0);
+
 /**
  * Подключение скриптов и стилей.
  */
 function lege_scripts() {
-	wp_enqueue_style( 'lege-style', get_stylesheet_uri(), array(), '1.0' );
-	wp_enqueue_style( 'lege-main', get_template_directory_uri(). '/assets/css/main.min.css', array(), '1.0' ); 
-	// wp_enqueue_style('lege-main', get_stylesheet_uri() . '?v=' . time());
+    wp_enqueue_style( 'lege-style', get_stylesheet_uri(), array(), '1.0' );
+    wp_enqueue_style( 'lege-main', get_template_directory_uri(). '/assets/css/main.min.css', array(), '1.0' );
     wp_enqueue_style( 'lege-vendor', get_template_directory_uri(). '/assets/css/vendor.min.css', array(), '1.0' );
+    wp_enqueue_script( 'goodshare', 'https://cdn.jsdelivr.net/npm/goodshare.js@4/goodshare.min.js', array(), 1.0, true);
+    wp_enqueue_script( 'lege-vendor', get_template_directory_uri(). '/assets/js/vendor.min.js', array(), 1.0, true );
+    wp_enqueue_script( 'lege-common', get_template_directory_uri(). '/assets/js/common.min.js', array(), 1.0, true );
+    wp_enqueue_script( 'lege-svg-sprite', get_template_directory_uri(). '/assets/img/svg-sprite/svg-sprite.js', array(), 1.0, false );
 
-   
 
-	// wp_enqueue_script( 'jquery');
-	wp_enqueue_script( 'jquery3.1.1', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), '3.1.1', true);
-	wp_enqueue_script( 'goodshare', 'https://cdn.jsdelivr.net/npm/goodshare.js@4/goodshare.min.js', array(), 1.0, true);
-	wp_enqueue_script( 'lege-vendor', get_template_directory_uri(). '/assets/js/vendor.min.js', array(), 1.0, true );
-    wp_enqueue_script( 'lege-common', get_template_directory_uri(). '/assets/js/common.min.js', array(), 1.0, true ); 
-	wp_enqueue_script( 'lege-svg-sprite', get_template_directory_uri(). '/assets/img/svg-sprite/svg-sprite.js', array(), 1.0, false ); 
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+        wp_enqueue_script( 'comment-reply' );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
 
@@ -204,6 +218,8 @@ require_once get_template_directory() . '/inc/social.php';
  */
 require get_template_directory() . '/inc/widgets/widgets.php';
 require get_template_directory() . '/inc/widgets/widget-about.php';
+require get_template_directory() . '/inc/widgets/widget-customcategory.php';
+require get_template_directory() . '/inc/widgets/widget-subscribe.php';
 
 /**
  * Load Jetpack compatibility file.
@@ -330,7 +346,7 @@ function lege_register_custom_post_type() {
 		'service-type',
 		'service',
 		array(
-			'label' => __( 'Категории услуг', '	lege' ),
+			'label' => __( 'Категории услуг', 'lege' ),
 			'rewrite' => array( 'slug' => 'service-type' ),
 			'hierarchical' => true,
 		)
@@ -480,4 +496,9 @@ function lege_get_attachment( $attachment_id ) {
 }
 add_filter( 'get_attachment', 'lege_get_attachment' );
 
-
+/**
+ * MC4WP Mailchimp form response for success and error messages
+ */
+add_filter('mc4wp_form_response_position', function() {
+    return 'before'; // or 'after'
+});

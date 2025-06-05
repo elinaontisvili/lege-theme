@@ -6,13 +6,13 @@
 function lege_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'lege' ),
+			'name'          => esc_html__( 'Sidebar1', 'lege' ),
 			'id'            => 'sidebar-1',
 			'description'   => esc_html__( 'Add widgets here.', 'lege' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<div class="subscr__title"><svg width="19" height="19"><use xlink:href="#mail"></use></svg>',
+        	'after_title'   => '</div>',
 		)
 	);
     register_sidebar(
@@ -34,9 +34,8 @@ add_action( 'widgets_init', 'lege_widgets_init' );
  */
 function lege_init_widgets() {
     register_widget('Lege_About_Widget');
-	// register_widget('Lege_Blog_Widget');
-	// register_widget('Lege_Gallery_Widget');
-    // register_widget('Lege_Mostcommented_Widget');
+	register_widget('Lege_Category_Widget');
+	register_widget('Lege_Subscribe_Widget');
 }
 
 add_action('widgets_init', 'lege_init_widgets');

@@ -165,13 +165,18 @@ if(is_page_template('template-home.php')) {
 			</div>
 		<?php } ?>
 
-		<?php if( $lege_options['header_video'] ) { ?>
+		<?php 
+		//print_r($lege_options['header_video']);
+		//print_r($lege_options['header_time']);
+		//print_r($lege_options['header_video_title']);
+		
+		if( ! empty( $lege_options['header_video'] ) ) { ?>
 		<a class="offer__video popup-with-zoom-anim popup-youtube" href="<?php echo esc_url( $lege_options['header_video'] ); ?>" rel="nofollow" >
-			<?php if( $lege_options['header_time'] ) { ?>
+			<?php if( ! empty( $lege_options['header_time'] ) ) { ?>
 				<p class="offer__time"><?php echo esc_html( $lege_options['header_time']); ?></p>
 			<?php } ?>
 			<div class="offer__play"></div>
-			<?php if( $lege_options['header_video_title'] ) { ?>
+			<?php if( ! empty( $lege_options['header_video_title'] ) ) { ?>
 				<p class="offer__watch"><?php echo esc_html( $lege_options['header_video_title'] ); ?></p>
 			<?php } ?>
 		</a>
