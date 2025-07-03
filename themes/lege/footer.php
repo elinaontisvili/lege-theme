@@ -115,10 +115,9 @@
 					<?php if( $lege_options['footer_section4'] ) { ?>
 						<p class="subscribe__title"><?php echo esc_html__( $lege_options['footer_section4'] ); ?></p>
 					<?php } ?>
-					<form action="#" class="subscribe__form" id="popupSubscribe">
-						<input type="text" name="email" class="subscribe__input" placeholder="Ваш email">
-						<button class="subscribe__btn btn" data-submit>Подписаться</button>
-					</form>
+
+					<?php echo do_shortcode($lege_options['footer_subscribeshortcode']); ?>
+
 					<div class="control">
 						<div class="language">
 							<ul>

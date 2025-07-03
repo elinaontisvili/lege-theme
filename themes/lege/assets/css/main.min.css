@@ -10084,3 +10084,16 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   color: #b00;
   font-weight: bold;
 }
+
+/* Contact Form 7 and WP Contact Form Mailchimp */
+.wpcf7-response-output {
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .wpcf7-response-output {
+    max-width: 300px;
+  }
+}

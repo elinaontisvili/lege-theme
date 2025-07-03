@@ -463,7 +463,23 @@ Redux::set_section($opt_name, array(
 		array(
 			'id'     => 'footer-widget-end',
 			'type'   => 'section',
-			'indent' => false,
+			'indent' => false, // false -> End indentation. Options below are not nested until the next 'indent' => true section.
+		),
+		array(
+			'id'       => 'footer-subscribe-start',
+			'type'     => 'section',
+			'title'    => esc_html__( 'Footer Subscribe Form', 'wayup' ),
+			'indent'   => true, // Start a new subsection. Options below will be nested under this section.
+		),
+		array(
+			'id'      => 'footer_subscribeshortcode',
+			'type'    => 'text',
+			'title'   => esc_html__( 'Shortcode for Subscribe plugin', 'wayup' ),
+		),
+		array(
+			'id'     => 'footer-subscribe-end',
+			'type'   => 'section',
+			'indent' => false, // false -> End indentation.
 		),
     )
 ));
