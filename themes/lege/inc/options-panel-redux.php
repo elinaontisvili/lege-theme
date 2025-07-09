@@ -35,6 +35,7 @@ if ( is_dir( $sample_patterns_path ) ) {
 				$name              = explode( '.', $sample_patterns_file );
 				$name              = str_replace( '.' . end( $name ), '', $sample_patterns_file );
 				$sample_patterns[] = array(
+					
 					'alt' => $name,
 					'img' => $sample_patterns_url . $sample_patterns_file,
 				);
@@ -468,13 +469,13 @@ Redux::set_section($opt_name, array(
 		array(
 			'id'       => 'footer-subscribe-start',
 			'type'     => 'section',
-			'title'    => esc_html__( 'Footer Subscribe Form', 'wayup' ),
+			'title'    => esc_html__( 'Footer Subscribe Form', 'lege' ),
 			'indent'   => true, // Start a new subsection. Options below will be nested under this section.
 		),
 		array(
 			'id'      => 'footer_subscribeshortcode',
 			'type'    => 'text',
-			'title'   => esc_html__( 'Shortcode for Subscribe plugin', 'wayup' ),
+			'title'   => esc_html__( 'Shortcode for Subscribe plugin', 'lege' ),
 		),
 		array(
 			'id'     => 'footer-subscribe-end',
@@ -666,6 +667,38 @@ Redux::set_section( $opt_name, array(
 			'default' => 'Категории новостей'
 		),
 
+	)
+) );
+
+// Internal Pages
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Settings for Internal Pages', 'lege' ),
+	'id'               => 'internalpages',
+	'desc'             => __( 'Options for Internal Pages', 'lege' ),
+	'customizer_width' => '400px',
+	'icon'             => 'el el-home'
+	) );
+
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Blog', 'lege' ),
+	'id'               => 'blogposts',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Data for Blog Posts Page', 'lege' ),
+	'fields'           => array(
+
+		array(
+			'id'      => 'bloglabel1',
+			'type'    => 'text',
+			'title'   => __( 'Specify the Label', 'lege' ),
+			'default' =>'Наш'
+		),
+		array(
+			'id'      => 'bloglabel2',
+			'type'    => 'text',
+			'title'   => __( 'Specify the Label', 'lege' ),
+			'default' =>'БЛОГ'
+		)
 	)
 ) );
 

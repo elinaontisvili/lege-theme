@@ -10114,3 +10114,31 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 .error__btn {
   margin: 20px 0 20px;
 }
+
+/* Comments */
+.comments-area {
+  margin-top: 100px;
+}
+/* Comments Avatar */
+.comment-author .avatar {
+  width: 32px;
+  height: 32px;
+  max-width: none;
+}
+.avatar.avatar-32 {
+  width: 32px;
+  height: 32px;
+  max-width: none;
+}
+.avatar.avatar-64 {
+  width: 64px;
+  height: 64px;
+  max-width: none;
+}
+/* avatars in multiple places  
+img.avatar {
+  width: auto;
+  height: auto;
+  max-width: none;
+}
+*/
