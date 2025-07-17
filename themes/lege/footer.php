@@ -115,7 +115,7 @@
 			<?php if( $lege_options['footer_section4'] ) { ?>
 				<p class="subscribe__title"><?php echo esc_html__( $lege_options['footer_section4'] ); ?></p>
 			<?php } ?>
-
+			
 			<?php echo do_shortcode($lege_options['footer_subscribeshortcode']); ?>
 
 			<div class="control">
