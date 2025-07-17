@@ -5,7 +5,11 @@
 if (isset($_POST['contact'])) {
     $error = lege_send_contact($_POST['contact']);
 }
-get_header(); ?>
+get_header(); 
+
+global $lege_options;
+
+?>
 
 <?php while ( have_posts() ) : the_post();?>
 <section class="inner contacts">
@@ -84,29 +88,36 @@ get_header(); ?>
             <?php endif; ?>
             
             <div class="log__group">
-                <label>Имя</label>
+                <label><?php _e('Имя', 'lege'); ?></label>
                 <input type="text" name="contact[name]" class="log__input" required>
             </div>
             <div class="log__group">
-                <label>Телефон</label>
+                <label><?php _e('Телефон', 'lege'); ?></label>
                 <input type="tel" name="contact[tel]" class="log__input" required>
             </div>
             <div class="log__group log__group_company">
-                <label>Компания</label>
+                <label><?php _e('Компания', 'lege'); ?></label>
                 <input type="text" name="contact[company]" class="log__input" required>
             </div>
             <div class="log__group log__group_textarea">
-                <label>Сообщение</label>
+                <label><?php _e('Сообщение', 'lege'); ?></label>
                 <textarea type="text" name="contact[message]" class="log__input"></textarea>
             </div>
-            <p class="log__line"><span>*</span>Поля обязательные для заполнения</p>
+            <p class="log__line"><span>*</span><?php _e('Поля обязательные для заполнения', 'lege'); ?></p>
             <div class="log__wrap">
                 <div class="log__group check">
                     <input id="insight" type="checkbox" name="contact[learn]" value="learn">
-                    <label for="insight">Я ознакомился и согласен с <span><a href="#">Правилами пользования</a></span> и <span><a href="#">политикой конфиденциальности</a></span> сайта</label>
+                    <label for="insight">
+                        <?php
+                        if(!empty($lege_options['lege_form_policy_text'])) {
+                        echo wp_kses_post($lege_options['lege_form_policy_text']); 
+                        } else {
+                            echo esc_html__('Я согласен с <a href="/privacy-policy">политикой конфиденциальности</a>', 'lege');
+                        }
+                    ?></label>
                 </div>
                 <div class="log__btn">
-                    <input id="order" data-submit type="submit" value="Отправить" class="btn"/>
+                    <input id="order" data-submit type="submit" value="<?php _e('Отправить', 'lege'); ?>" class="btn"/>
                 </div>
             </div>
             

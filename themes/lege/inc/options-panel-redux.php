@@ -702,6 +702,32 @@ Redux::set_section( $opt_name, array(
 	)
 ) );
 
+// Contact form concent checkbox
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Settings for Contact Form Policy Text', 'lege' ),
+	'id'               => 'contactformconcent',
+	'desc'             => __( 'Option for Contact Form Concent', 'lege' ),
+	'customizer_width' => '400px',
+	'icon'             => 'el el-home'
+	) );
+
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Contact Form Policy Text', 'lege' ),
+	'id'               => 'contactformpolicytext',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Data for Contact Form Concent Checkbox', 'lege' ),
+	'fields'           => array(
+		array(
+			'id'       => 'lege_form_policy_text',
+			'type'     => 'editor',
+			'title'    => __( 'Текст согласия для формы', 'lege' ),
+			'default'  => __( 'Я ознакомился и согласен с <a href="#">Правилами пользования</a> и <a href="#">политикой конфиденциальности</a> сайта', 'lege' ),
+			'subtitle' => __( 'Этот текст будет отображаться рядом с чекбоксом согласия.', 'lege' ),
+		),
+	)
+) );
+
 // -> END Basic Fields
 
 
