@@ -56,9 +56,9 @@ function lege_setup() {
 	);
 
 	/*
-	* Switch default core markup for search form, comment form, and comments
-	* to output valid HTML5.
-	*/
+		* Switch default core markup for search form, comment form, and comments
+		* to output valid HTML5.
+		*/
 	add_theme_support(
 		'html5',
 		array(
@@ -102,16 +102,10 @@ function lege_setup() {
 		)
 	);
 
-	// Размеры для картинок.
+	// Размеры для картинок
 	add_image_size( 'testimonial-thumb', 225, 231, true );
     add_image_size( 'feature-thumb', 438, 455, true );
     add_image_size( 'news-thumb', 633, 476, true );
-
-    // Поддержка WooCommerce.
-    //add_theme_support( 'woocommerce' );
-
-    // Поддержка Gutenberg.
-    //add_editor_style( 'editor-style.css' );
 
 }
 add_action( 'after_setup_theme', 'lege_setup' );
@@ -128,37 +122,42 @@ function lege_content_width() {
 }
 add_action( 'after_setup_theme', 'lege_content_width', 0 );
 
-
-/**
-* Deregister the default jQuery safely with a CDN version, to use a specific jQuery version
-*/
-function lege_replace_jquery() {
-if (!is_admin()) {
-    wp_deregister_script('jquery');
-    wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), '3.1.1', true);
-    wp_enqueue_script('jquery');
-    }
-}
-add_action('wp_enqueue_scripts', 'lege_replace_jquery', 0);
-
 /**
  * Подключение скриптов и стилей.
  */
 function lege_scripts() {
-    wp_enqueue_style( 'lege-style', get_stylesheet_uri(), array(), '1.0' );
-    wp_enqueue_style( 'lege-main', get_template_directory_uri(). '/assets/css/main.min.css', array(), '1.0' );
+	wp_enqueue_style( 'lege-style', get_stylesheet_uri(), array(), '1.0' );
+	wp_enqueue_style( 'lege-main', get_template_directory_uri(). '/assets/css/main.min.css', array(), '1.0' ); 
+	// wp_enqueue_style('lege-main', get_stylesheet_uri() . '?v=' . time());
     wp_enqueue_style( 'lege-vendor', get_template_directory_uri(). '/assets/css/vendor.min.css', array(), '1.0' );
-    wp_enqueue_script( 'goodshare', 'https://cdn.jsdelivr.net/npm/goodshare.js@4/goodshare.min.js', array(), 1.0, true);
-    wp_enqueue_script( 'lege-vendor', get_template_directory_uri(). '/assets/js/vendor.min.js', array(), 1.0, true );
-    wp_enqueue_script( 'lege-common', get_template_directory_uri(). '/assets/js/common.min.js', array(), 1.0, true );
-    wp_enqueue_script( 'lege-svg-sprite', get_template_directory_uri(). '/assets/img/svg-sprite/svg-sprite.js', array(), 1.0, false );
 
+   
 
-    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-        wp_enqueue_script( 'comment-reply' );
-    }
+	// wp_enqueue_script( 'jquery');
+	wp_enqueue_script( 'jquery3.1.1', 'http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), '3.1.1', true);
+	wp_enqueue_script( 'goodshare', 'https://cdn.jsdelivr.net/npm/goodshare.js@4/goodshare.min.js', array(), 1.0, true);
+	wp_enqueue_script( 'lege-vendor', get_template_directory_uri(). '/assets/js/vendor.min.js', array(), 1.0, true );
+    wp_enqueue_script( 'lege-common', get_template_directory_uri(). '/assets/js/common.min.js', array(), 1.0, true ); 
+	wp_enqueue_script( 'lege-svg-sprite', get_template_directory_uri(). '/assets/img/svg-sprite/svg-sprite.js', array(), 1.0, false ); 
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
+
+/**
+ * ** enqueue media scripts for the WordPress admin
+ */
+/*
+add_action( 'admin_enqueue_scripts', function() {
+	wp_enqueue_media(); // required for wp.media
+} );
+*/
+function lege_enqueue_admin_media() {
+	wp_enqueue_media();
+}
+add_action( 'admin_enqueue_scripts', 'lege_enqueue_admin_media' );
 
 /**
  * Подключение скриптов и стилей в админке.
@@ -171,22 +170,6 @@ function lege_admin_scripts($hook) {
 	}
 }
 add_action( 'admin_enqueue_scripts', 'lege_admin_scripts', 10 );
-
-/**
- * Подключение скриптов медиафайлов для административной панели WordPress.
- * Enqueue media scripts for the WordPress admin.
- */
-function lege_enqueue_widget_scripts() {
-	wp_enqueue_media();
-	wp_enqueue_script(
-    'lege-widget-js',
-    get_template_directory_uri() . '/assets/js/libs/lege-widget.js',
-    array('jquery'),
-    filemtime(get_template_directory() . '/assets/js/libs/lege-widget.js'), // version
-    true
-);
-}
-add_action( 'admin_enqueue_scripts', 'lege_enqueue_widget_scripts' );
 
 /**
  * Implement the Custom Header feature.
@@ -212,17 +195,12 @@ require get_template_directory() . '/inc/customizer.php';
  * Подключение social кнопок.
  */
 require_once get_template_directory() . '/inc/social.php';
-require_once get_template_directory() . '/inc/functions/contact.php';
 
 /**
  * Подключение widgets.
  */
 require get_template_directory() . '/inc/widgets/widgets.php';
 require get_template_directory() . '/inc/widgets/widget-about.php';
-require get_template_directory() . '/inc/widgets/widget-customcategory.php';
-require get_template_directory() . '/inc/widgets/widget-subscribe.php';
-require get_template_directory() . '/inc/widgets/widget-customsearch.php';
-
 
 /**
  * Load Jetpack compatibility file.
@@ -244,8 +222,7 @@ require get_template_directory() . '/inc/breadcrumbs.php';
 /**
  * Подключение Metabox.
  */
-require get_template_directory() . '/inc/metaboxes/metaboxes.php';
-require get_template_directory() . '/inc/metaboxes/register_metabox.php';
+require get_template_directory() . '/inc/metaboxes.php';
 
 /**
  * Класс на боди для специфической страницы.
@@ -350,7 +327,7 @@ function lege_register_custom_post_type() {
 		'service-type',
 		'service',
 		array(
-			'label' => __( 'Категории услуг', 'lege' ),
+			'label' => __( 'Категории услуг', '	lege' ),
 			'rewrite' => array( 'slug' => 'service-type' ),
 			'hierarchical' => true,
 		)
@@ -378,6 +355,91 @@ function lege_register_custom_post_type() {
 }
 add_action( 'init', 'lege_register_custom_post_type' );
 
+/** 
+ * Регистрируем Metaboxes.
+ */
+function lege_metaboxes($meta_boxes) {
+
+    $meta_boxes = array();
+    $prefix = "lege_";
+
+    // Metabox для Отзывов.
+    $meta_boxes[] = array(
+        'id'         => 'testimonial_metaboxes',
+        'title'      => esc_html__( 'Данные для отзыва', 'lege' ),
+        'pages'      => array( 'testimonial' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'show_names' => true,
+        'fields' => array(
+            array(
+                'name' => esc_html__( 'Социальная Сеть', 'lege' ),
+                'desc' => esc_html__( 'Введите ссылку на соц сеть', 'lege' ),
+                'id'   => $prefix . 'social_link',
+                'type' => 'text',
+            ),
+            array(
+                'name' => esc_html__( 'Дата отзыва', 'lege' ),
+                'desc' => esc_html__( 'Введите дату отзыва', 'lege' ),
+                'id'   => $prefix . 'testy_date',
+                'type' => 'text_date',
+            ),
+        )
+    );
+
+    // Metabox для Услуг.
+    $meta_boxes[] = array(
+        'id'         => 'service_metaboxes',
+        'title'      => esc_html__( 'Данные для сервиса', 'lege' ),
+        'pages'      => array( 'service' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'show_names' => true,
+        'fields' => array(
+            array(
+                'name' => esc_html__( 'Стоимость', 'lege' ),
+                'desc' => esc_html__( 'Введите цену данной услуги', 'lege' ),
+                'id'   => $prefix . 'service_cost',
+                'type' => 'text',
+            ),
+            array(
+                'name' => esc_html__( 'Фоновое изображение', 'lege' ),
+                'desc' => esc_html__( 'Выберите фон для выбора', 'lege' ),
+                'id'   => $prefix . 'service_icon',
+                'type' => 'select',
+                'options' => array(
+                    array('name' => esc_html__( 'Стиль Статистика', 'lege' ), 'value' => 'stat'),
+                    array('name' => esc_html__( 'Стиль Идея', 'lege' ), 'value' => 'idea'),
+                    array('name' => esc_html__( 'Стиль Интернет', 'lege' ), 'value' => 'internet'),
+                    array('name' => esc_html__( 'Стиль Инфо', 'lege' ), 'value' => 'info'),
+                    array('name' => esc_html__( 'Стиль Деловой', 'lege' ), 'value' => 'busy'),
+                    array('name' => esc_html__( 'Стиль Таргет', 'lege' ), 'value' => 'target'),
+                ),
+            ),
+        )
+    );
+
+// Добавляет метабокс для страницы с шаблоном "template-order.php", позволяющий указать шорткод формы заказа
+$meta_boxes[] = array(
+    'id'         => 'order_metaboxes',
+    'title'      => esc_html__( 'Данные для страницы заказа', 'lege' ),
+    'pages'      => array( 'page' ),
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'show_names' => true,
+    'show_on'    => array( 'key' => 'page-template', 'value' => array('template-order.php') ),
+    'fields' => array(
+        array(
+            'name' => esc_html__( 'Шорткод формы', 'lege' ),
+            'desc' => esc_html__( 'Установите плагин для формы и вставьте шорткод формы', 'lege' ),
+            'id'   => $prefix . 'shortcode_order',
+            'type' => 'text',
+        ),
+    )
+);
+
+return $meta_boxes;
+}
 
 /**
  * Pagination. Количество постов на странице архива.
@@ -415,9 +477,4 @@ function lege_get_attachment( $attachment_id ) {
 }
 add_filter( 'get_attachment', 'lege_get_attachment' );
 
-/**
- * MC4WP Mailchimp form response for success and error messages
- */
-add_filter('mc4wp_form_response_position', function() {
-    return 'after'; // or before
-});
+
