@@ -728,6 +728,52 @@ Redux::set_section( $opt_name, array(
 	)
 ) );
 
+// Settings for woocommerce shop page
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Settings for woocommerce shop page', 'lege' ),
+	'id'               => 'woocommercesett',
+	'desc'             => __( 'Option for woocommerce shop page', 'lege' ),
+	'customizer_width' => '400px',
+	'icon'             => 'el el-home'
+	) );
+	
+Redux::set_section( $opt_name, array(
+	'title'            => 'Магазин',
+	'id'			   => 'woosettings',
+	'subsection'       => true, 
+	'customizer_width' => '450px',
+	'desc'			 => __( 'Опции для страницы Магазина', 'lege' ),
+	'fields'           => array(
+		array(
+			'id'      => 'wootitle1',
+			'type'    => 'text',
+			'title'   => __( 'Заголовок первой части', 'lege' ),
+			'default' => 'НОВАЯ КОЛЛЕКЦИЯ 2018'
+		),
+		array(
+			'id'      => 'wootitle2',
+			'type'    => 'text',
+			'title'   => __( 'Заголовок второй части', 'lege' ),
+			'default' => 'FOR REAL MAN.'
+		),
+		array(
+			'id'      => 'woolink',
+			'type'    => 'text',
+			'title'   => __( 'Ссылка на коллекцию', 'lege' ),
+			'default' => '#'
+		),
+		array(
+			'id'	  => 'woo_bg',
+			'type'    => 'media',
+			'url'     => true,
+			'title'  => __( 'Фон для Шапки', 'lege' ),
+			'compiler' => 'true',
+			'desc'    => __( 'Загрузите картинку', 'lege' ),
+			'default' => array( 'url' => get_template_directory_uri() . '/assets/img/wshop_bg.jpg'),
+		)
+	)
+));
+
 // -> END Basic Fields
 
 

@@ -104,11 +104,13 @@ function lege_setup() {
 
 	// Размеры для картинок.
 	add_image_size( 'testimonial-thumb', 225, 231, true );
+    add_image_size( 'testimonial-vertical', 225, 332, true );
     add_image_size( 'feature-thumb', 438, 455, true );
     add_image_size( 'news-thumb', 633, 476, true );
+    add_image_size( 'news-home', 410, 270, true );
 
     // Поддержка WooCommerce.
-    //add_theme_support( 'woocommerce' );
+    // add_theme_support( 'woocommerce' );
 
     // Поддержка Gutenberg.
     //add_editor_style( 'editor-style.css' );
@@ -189,19 +191,24 @@ function lege_enqueue_widget_scripts() {
 add_action( 'admin_enqueue_scripts', 'lege_enqueue_widget_scripts' );
 
 /**
- * Implement the Custom Header feature.
+ * Подключение функций WooCommerce.
  */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
+require get_template_directory() . '/inc/functions/woocommerce.php';
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+/**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/inc/template-tags.php'; 
+
+/**
+ * Implement the Custom Header feature.
+ */
+require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Customizer additions.
@@ -223,6 +230,9 @@ require get_template_directory() . '/inc/widgets/widget-customcategory.php';
 require get_template_directory() . '/inc/widgets/widget-subscribe.php';
 require get_template_directory() . '/inc/widgets/widget-customsearch.php';
 
+// Debug - Sidebars briefly appear and then disappear on the Widgets admin screen.
+// Disable the block editor for widgets.
+add_filter( 'use_widgets_block_editor', '__return_false' );
 
 /**
  * Load Jetpack compatibility file.
@@ -414,6 +424,22 @@ function lege_get_attachment( $attachment_id ) {
     );
 }
 add_filter( 'get_attachment', 'lege_get_attachment' );
+
+// Функция для обрезки текста в excerpt
+function lege_custom_excerpt($limit) {
+    $excerpt = explode(' ', get_the_excerpt(), $limit);
+
+    if (count($excerpt) >= $limit) {
+        array_pop($excerpt);
+        $excerpt = implode(" ", $excerpt) . '...';
+    } else {
+        $excerpt = implode(" ", $excerpt);
+    }
+
+    $excerpt = preg_replace('`\[[^\]]*\]`', '', $excerpt);
+
+    return $excerpt;
+}
 
 /**
  * MC4WP Mailchimp form response for success and error messages
