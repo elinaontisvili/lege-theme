@@ -6786,7 +6786,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   font-size: 20px;
 }
 
-.market__show {
+.market__show,.woocommerce-result-count {
   color: #858585;
   font-size: 14px;
 }
