@@ -43,6 +43,8 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	do_action( 'woocommerce_before_shop_loop_item_title' );
 
 
+
+
 	/**
 	 * Hook: woocommerce_shop_loop_item_title.
 	 *
@@ -66,5 +68,37 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 */
 	do_action( 'woocommerce_after_shop_loop_item' );
 	?>
+
+
+<!--
+<div class="products__btn">
+	<form method="get" class="products__form">
+		<input type="hidden" name="id">
+		<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
+	</form>
+</div>
+-->
+
+<!--
+<a href="product-single.html" class="products__img">
+		<img src="img/product2.jpg" alt="product">
+	</a>
+	<div class="products__bottom">
+		<div class="products__detail">
+			<a href="product-single.html" class="products__name">Галстук Versace</a>
+			<div class="price">
+				<div class="price__old"><span class="currency">$</span>112</div>
+				<div class="price__now"><span class="currency">$</span>112</div>
+			</div>
+			<div class="rate"></div>
+		</div>
+		<div class="products__btn">
+			<form method="get" class="products__form">
+				<input type="hidden" name="id">
+				<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
+			</form>
+		</div>
+	</div>
+-->
 
 </div>

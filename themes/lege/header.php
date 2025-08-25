@@ -207,18 +207,18 @@ if(is_page_template('template-home.php')) {
 					echo esc_html( get_the_title() );
 				} 
 				/*
-				if(is_single()){
-					$current_post_type = get_post_type(get_the_ID());
-					$post_type_object = get_post_type_object($current_post_type);
+					if(is_single()){
+						$current_post_type = get_post_type(get_the_ID());
+						$post_type_object = get_post_type_object($current_post_type);
 
-				if ($post_type_object) {
-					echo esc_html($post_type_object->labels->singular_name);
-				} else {
-					echo esc_html(get_the_title());
-				}
-				} else {
-					echo esc_html(wp_title('', false));
-				}
+					if ($post_type_object) {
+						echo esc_html($post_type_object->labels->singular_name);
+					} else {
+						echo esc_html(get_the_title());
+					}
+					} else {
+						echo esc_html(wp_title('', false));
+					}
 				*/
 			?> 
 			</h1>

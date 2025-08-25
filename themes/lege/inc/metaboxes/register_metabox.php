@@ -84,6 +84,45 @@ $meta_boxes[] = array(
 );
 
 $meta_boxes[] = array(
+    'id'         => 'woocommerce_metaboxes',
+    'title'      => 'Данные для Товара',
+    'pages'      => array( 'product', ), // Post type
+    'context'    => 'normal',
+    'priority'   => 'low',
+    'show_names' => true, // Show field names on the left
+    //'show_on'    => array( 'key' => 'page-template', 'value' => array('template-contact.php'), ), // Specific post templates to display this metabox
+    'fields' => array(
+        array(
+            'name' => 'Короткий заголовок',
+            'desc' => 'Укажите короткий заголовок',
+            'id'   => $prefix . 'short_title',
+            'std' => '',
+            'type' => 'text',
+        ),
+        array(
+            'name' => 'Текст кнопки',
+            'desc' => 'Укажите какой либо текст для кнопки',
+            'id'   => $prefix . 'sale_button_title',
+            'std' => '',
+            'type' => 'text',
+        ),
+        array(
+            'name' => 'Цвет кнопки',
+            'desc' => 'Укажите цвет для кнопки',
+            'id'   => $prefix . 'sale_button_color',
+            'type' => 'text',
+            'std' => '#fdba4a'
+        ),
+        array(
+            'name' => 'Фото 1',
+            'desc' => 'Загрузите фото',
+            'id'   => $prefix . 'photo_one',
+            'type' => 'file',
+        ),
+    )
+);
+
+$meta_boxes[] = array(
     'id'         => 'contact_metaboxes',
     'title'      => esc_html__( 'Данные для страницы контакта', 'lege' ),
     'pages'      => array( 'page' ),

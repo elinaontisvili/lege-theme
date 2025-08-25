@@ -5978,13 +5978,16 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   padding: 0 5px;
 }
 
-.cart .price__now {
+.cart .price__now, .cart ins, .cart .woocommerce-Price-amount {
   font-size: 18px;
   font-weight: 600;
 }
 
-.cart .price__old {
+.cart .price__old, cart del .woocommerce-Price-amount {
   text-decoration: line-through;
+  font-size: 14px; 
+  font-weight: 400;
+  margin-right: 5px;
 }
 
 .cart .quantity {
@@ -6816,16 +6819,18 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   text-align: center;
   font-weight: 600;
   border-radius: 2px;
-  display: none;
+  /* display: none; */
   color: #fff;
   text-transform: uppercase;
   line-height: 28px;
 }
 
+/*
 .products .price__old,
 .products .rate {
   display: none;
 }
+*/
 
 .products .rate {
   width: 70px;
@@ -6874,20 +6879,20 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   margin-right: 25px;
 }
 
-.products__item.sale .price__old {
+.products__item.sale .price__old, .products__item del {
   text-decoration: line-through;
   font-size: 14px;
   margin-right: 10px;
 }
 
-.products__item.sale .price__now {
+.products__item.sale .price__now, .products__item ins {
   color: #00b8ff;
   font-size: 18px;
   font-weight: 600;
 }
 
 .products__item.sale span.discount,
-.products__item.sale .price__old,
+.products__item.sale .price__old, .products__item del,
 .products__item.sale .rate {
   display: block;
 }
@@ -10177,4 +10182,30 @@ img.avatar {
 
 .cform-acceptance a:hover {
   text-decoration: none;
+}
+
+/* Rating */
+.woocommerce .star-rating {
+    font-size: 0.7em;
+    color: #FFC107;
+    width: 6em;
+}
+.products__detail .star-rating {
+    font-size: 0.6em;
+    color: #FFC107;
+}
+.woocommerce .star-rating::before {
+    letter-spacing: 1px;
+    color: #cfc8d8;       /* unfilled stars */
+}
+.woocommerce .star-rating span::before {
+    letter-spacing: 1px;
+    color: #FFC107;      /* filled stars */
+}
+/* 
+.products__detail {
+  justify-content: space-between;
+} */ 
+.products .price {
+  margin-right: 25px;
 }

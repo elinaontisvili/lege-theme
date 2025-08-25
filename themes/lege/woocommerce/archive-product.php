@@ -65,7 +65,13 @@ global $lege_options;
 					<li><a href="#" data-value="rating">по рейтингу</a></li>
 					<li><a href="#" data-value="date">по новизне</a></li>
 					<li><a href="#" data-value="price">по возрастанию</a></li>
-					<li><a href="#" data-value="price-desc">по убыванию</a></li>
+					<li><a href="#" data-value="price-desc">TEST по убыванию</a></li>
+					<!-- 
+					<li><a href="#">по цене</a></li>
+					<li><a href="#">по популярности</a></li>
+					<li><a href="#">по рейтингу</a></li>
+					<li><a href="#">новинки</a></li>
+					-->
 				</ul>
 			</div>
 		</div>
@@ -89,6 +95,7 @@ global $lege_options;
 			<div class="market__heading">
 				<?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
 					<h3 class="market__title"><?php woocommerce_page_title(); ?></h3>
+					<!--<h3 class="market__title">Аксессуары</h3>-->
 				<?php endif; ?>
 
 				<!--<header class="woocommerce-products-header">-->
@@ -101,23 +108,12 @@ global $lege_options;
 				 */
 				do_action( 'woocommerce_archive_description' );
 				?>
-
+				
+				<!-- Results count 
+				<p class="market__show">Показано 12 из 137</p>-->
+				
 				<!--</header>-->
 			</div>
-
-			<?php 
-			
-			/**
-			 * Hook: woocommerce_before_shop_loop.
-			 *
-			 * @hooked woocommerce_output_all_notices - 10
-			 * @hooked woocommerce_result_count - 20
-			 * @hooked woocommerce_catalog_ordering - 30
-			 */
-			do_action( 'woocommerce_before_shop_loop' ); 
-
-			?>
-
 
 			<?php 
 			/**
@@ -132,7 +128,14 @@ global $lege_options;
 
 			if ( woocommerce_product_loop() ) {
 
-				
+				/**
+				* Hook: woocommerce_before_shop_loop.
+				*
+				* @hooked woocommerce_output_all_notices - 10
+				* @hooked woocommerce_result_count - 20
+				* @hooked woocommerce_catalog_ordering - 30
+				*/
+				do_action( 'woocommerce_before_shop_loop' ); 
 
 				woocommerce_product_loop_start();
 
@@ -161,320 +164,29 @@ global $lege_options;
 				do_action( 'woocommerce_no_products_found' );
 			}
 
-		
-				/**
-				 * Hook: woocommerce_after_main_content.
-				 *
-				 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
-				 */
-				do_action( 'woocommerce_after_main_content' );
-				?>
-			
-			<div class="products" id="products">
+			/**
+			 * Hook: woocommerce_after_main_content.
+			 *
+			 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+			 */
+			do_action( 'woocommerce_after_main_content' );
 
+			?>
 
-				<!-- One product -->
-				<div class="products__item sale">
-					<span class="discount">-25%</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product1.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Галстук Valentino</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>89</div>
-								<div class="price__now"><span class="currency">$</span>67</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div><!-- End one product -->
-
-				<div class="products__item">
-					<span class="discount">-25%</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product2.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Галстук Versace</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>112</div>
-								<div class="price__now"><span class="currency">$</span>112</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
+			<!-- Pagination -->
+			<nav class="pagination">
+				<div class="nav-links">
+					<a href="#" class="prev page-numbers"></a>
+					<a href="#" class=" page-numbers">1</a>
+					<span href="#" class="current page-numbers">2</span>
+					<a href="#" class="page-numbers">3</a>
+					<a href="#" class="page-numbers">4</a>
+					<a href="#" class="page-numbers">5</a>
+					<span class="page-numbers page-break">...</span>
+					<a href="#" class=" page-numbers">7</a>
+					<a href="#" class="next page-numbers"></a>
 				</div>
-
-				<div class="products__item novelty">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product3.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Галстук Calvin Klein</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>112</div>
-								<div class="price__now"><span class="currency">$</span>112</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product4.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Галстук-бабочка Dsquared</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>108</div>
-								<div class="price__now"><span class="currency">$</span>108</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product5.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Часы Marvin</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>1155</div>
-								<div class="price__now"><span class="currency">$</span>1155</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item novelty">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product6.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Часы Rado</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>1760</div>
-								<div class="price__now"><span class="currency">$</span>1760</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product7.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Часы Rado</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>1818</div>
-								<div class="price__now"><span class="currency">$</span>1818</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item novelty">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product8.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Часы Gucci</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>1144</div>
-								<div class="price__now"><span class="currency">$</span>1144</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product9.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Часы Michael Kors</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>880</div>
-								<div class="price__now"><span class="currency">$</span>880</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product10.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Запонки с гравировкой</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>31</div>
-								<div class="price__now"><span class="currency">$</span>31</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item">
-					<span class="discount">-25%</span>
-					<span class="new-item">New</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/product3.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Ремень Levis </a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>109</div>
-								<div class="price__now"><span class="currency">$</span>109</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="products__item sale">
-					<span class="discount">-45%</span>
-					<a href="product-single.html" class="products__img">
-						<img src="img/cart1.jpg" alt="product">
-					</a>
-					<div class="products__bottom">
-						<div class="products__detail">
-							<a href="product-single.html" class="products__name">Apple Watch</a>
-							<div class="price">
-								<div class="price__old"><span class="currency">$</span>303</div>
-								<div class="price__now"><span class="currency">$</span>154</div>
-							</div>
-							<div class="rate"></div>
-						</div>
-						<div class="products__btn">
-							<form method="get" class="products__form">
-								<input type="hidden" name="id">
-								<button type="submit" value="cart/add" title="Положить в корзину" class="products__but"></button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<!-- Pagination -->
-				<nav class="pagination">
-					<div class="nav-links">
-						<a href="#" class="prev page-numbers"></a>
-						<a href="#" class=" page-numbers">1</a>
-						<span href="#" class="current page-numbers">2</span>
-						<a href="#" class="page-numbers">3</a>
-						<a href="#" class="page-numbers">4</a>
-						<a href="#" class="page-numbers">5</a>
-						<span class="page-numbers page-break">...</span>
-						<a href="#" class=" page-numbers">7</a>
-						<a href="#" class="next page-numbers"></a>
-					</div>
-				</nav>
-			</div>
-				
+			</nav>
 		</div>
 	</div>
 </section>
@@ -484,5 +196,4 @@ global $lege_options;
 
 <?php 
 
- 
 get_footer( 'shop' );
