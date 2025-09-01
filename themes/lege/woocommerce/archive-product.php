@@ -154,7 +154,12 @@ global $lege_options;
 
 				woocommerce_product_loop_end();
 
-				
+				/**
+				 * Hook: woocommerce_after_shop_loop.
+				 *
+				 * @hooked woocommerce_pagination - 10
+				 */
+				do_action( 'woocommerce_after_shop_loop' );
 			} else {
 				/**
 				 * Hook: woocommerce_no_products_found.
@@ -172,28 +177,9 @@ global $lege_options;
 			do_action( 'woocommerce_after_main_content' );
 
 			?>
-
-			<!-- Pagination -->
-			<nav class="pagination">
-				<div class="nav-links">
-					<a href="#" class="prev page-numbers"></a>
-					<a href="#" class=" page-numbers">1</a>
-					<span href="#" class="current page-numbers">2</span>
-					<a href="#" class="page-numbers">3</a>
-					<a href="#" class="page-numbers">4</a>
-					<a href="#" class="page-numbers">5</a>
-					<span class="page-numbers page-break">...</span>
-					<a href="#" class=" page-numbers">7</a>
-					<a href="#" class="next page-numbers"></a>
-				</div>
-			</nav>
 		</div>
 	</div>
 </section>
 
-
-
-
 <?php 
-
 get_footer( 'shop' );

@@ -40,6 +40,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         echo '</div>';
     }
 
+
         //wrap <a> tag around product image
     add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_product_link_close', 15);
     remove_action ('woocommerce_after_shop_loop_item','woocommerce_template_loop_product_link_close', 5);
@@ -97,26 +98,179 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         //remove rating and price
     remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_rating',5);
     remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price',10);
-}
+
 
 //Sale 
-function lege_show_status(){
-    if(get_post_meta(get_the_ID(),'lege_sale_button_title',true)){
-        $color = '';
-        if(get_post_meta(get_the_ID(),'lege_sale_button_color',true)){
-            $color = 'style="background:'.get_post_meta(get_the_ID(),'lege_sale_button_color',true).'"';
+    function lege_show_status(){
+        if(get_post_meta(get_the_ID(),'lege_sale_button_title',true)){
+            $color = '';
+            if(get_post_meta(get_the_ID(),'lege_sale_button_color',true)){
+                $color = 'style="background:'.get_post_meta(get_the_ID(),'lege_sale_button_color',true).'"';
+            }
+            echo '<span class="new-item" '.$color.'>'.get_post_meta(get_the_ID(),'lege_sale_button_title',true).'</span>';
         }
-        echo '<span class="new-item" '.$color.'>'.get_post_meta(get_the_ID(),'lege_sale_button_title',true).'</span>';
     }
-}
-add_action('woocommerce_before_shop_loop_item', 'lege_show_status', 9);
+    add_action('woocommerce_before_shop_loop_item', 'lege_show_status', 9);
 
-function my_custom_show_sale_price_at_cart( $old_display, $cart_item, $cart_item_key ) {
-    /** @var WC_Product $product */
-    $product = $cart_item['data'];
-    if ($product) {
-        return $product->get_price_html();
+    function my_custom_show_sale_price_at_cart( $old_display, $cart_item, $cart_item_key ) {
+        /** @var WC_Product $product */
+        $product = $cart_item['data'];
+        if ($product) {
+            return $product->get_price_html();
+        }
+        return $old_display;
     }
-    return $old_display;
+    add_filter('woocommerce_cart_item_price', 'my_custom_show_sale_price_at_cart', 10, 3 );
+
+
+//Открытый товар
+
+    //sku and in stock
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
+    add_action('woocommerce_single_product_summary', 'lege_woo_sku_custom', 4);
+
+    function lege_woo_sku_custom() {
+        global $product;
+        ?>
+        <div class="product__article">
+        Артикул:
+            <span class="product__article-value"><?php echo $product->get_sku(); ?></span>
+        </div>
+
+        <div class="availability <?php echo $product->is_in_stock() ? 'true' : 'false'; ?>"> 
+            <span class="true"> 
+                В наличии
+        </span>
+        <span class="false" style="<?php echo $product->is_in_stock() ? 'display:none;' : ''; ?>"> 
+            Нет в наличии
+    </span> 
+    </div> 
+    <?php
+    }
+
+    //meta 
+    //remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+
+    //remove woo's stock output completetly from single product, <p class="stock in-stock">…</p> which comes from wc_get_stock_html()
+    add_filter('woocommerce_get_stock_html', function($html, $product) {
+        if( is_product() ) {
+            return ''; //don't print stock
+        } else {
+            return $html; //print stock on archive, cart, etc.
+        }
+    }, 10, 2);
+
+    //title 
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+    add_action('woocommerce_single_product_summary', 'lege_template_single_title', 5); 
+
+    //excerpt - remove description cpmletele
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 6);
+
+    function lege_template_single_title() {
+        if(get_post_meta(get_the_ID(), 'lege_short_title', true)) {
+            echo '<h1 class="product__title">' . get_post_meta(get_the_ID(), 'lege_short_title', true) . '</h1>';
+        } else {
+            echo '<h1 class="product__title">' . get_the_title() . '</h1>';
+        }
+        if(get_the_excerpt()) {
+            echo '<p class="product__desc">' . get_the_excerpt() . '</p>';
+        }
+    }
+
+    //price
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+    add_action('woocommerce_before_add_to_cart_button', 'lege_custom_addtocart_price', 5);
+    function lege_custom_addtocart_price() {
+        global $product; ?>
+        <div class="product__price"> 
+            <?php echo $product->get_price_html(); ?> 
+        </div>
+
+        <?php }
+
+
+    //Share Icons 
+
+        //share.php проверка, где отображать 
+        /*
+            add_action('woocommerce_share', function() {
+                echo 'test';
+            });
+        */
+
+        add_action('woocommerce_share', 'lege_custom_share', 5);
+        function lege_custom_share() { ?>
+            <div class="share">
+            <p class="share__title">
+                Поделиться:
+            </p>
+            <ul class="social">
+                <li class="social__item">
+                    <span>Vk</span>
+                    <a data-social="vkontakte" class="social__icon social__icon_vk" href="#">
+                        <svg  width="21" height="18">
+                            <use xlink:href="#vk"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="social__item">
+                    <span>Fb</span>
+                    <a data-social="facebook" class="social__icon social__icon_fb" href="#">
+                        <svg  width="14" height="17">
+                            <use xlink:href="#facebook"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="social__item">
+                    <span>Tw</span>
+                    <a data-social="twitter" class="social__icon social__icon_tw" href="#">
+                        <svg  width="18" height="15">
+                            <use xlink:href="#twitter"/>
+                        </svg>
+                    </a>
+                </li>
+                <li class="social__item">
+                    <a class="social__icon social__icon_inst" href="http://instagram.com/###?ref=badge">
+                        <svg   width="16" height="16">
+                            <use xlink:href="#instagram"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+            </div>
+        
+        <?php }
+
+
+
+
 }
-add_filter('woocommerce_cart_item_price', 'my_custom_show_sale_price_at_cart', 10, 3 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+    
+
+

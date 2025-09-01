@@ -8,7 +8,6 @@ if ( ! is_active_sidebar( 'woocommerce' ) ) {
 
     <?php dynamic_sidebar( 'woocommerce' ); ?>
 
-    
     <div class="widget widget_search">
         <form role="search" method="get" id="searchform1" action="#">
     

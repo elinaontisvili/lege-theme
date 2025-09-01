@@ -2986,6 +2986,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .caption__bc span.current {
   color: #fff;
+  margin-right: 5px;
 }
 
 .caption__bc span.sep {
@@ -4238,7 +4239,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   border-radius: 8px 5px 5px;
   box-shadow: 0 5px 20px rgba(206, 218, 228, 0.41);
   max-width: 1035px;
-  margin-left: 32px;
+  /*margin-left: 32px;*/
 }
 
 .pagination .page-numbers {
@@ -5568,7 +5569,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .product__btn {
-  width: 210px;
+  width: 210px!important;
 }
 
 .product__btn:before {
@@ -10186,26 +10187,65 @@ img.avatar {
 
 /* Rating */
 .woocommerce .star-rating {
-    font-size: 0.7em;
-    color: #FFC107;
-    width: 6em;
+  font-size: 0.8em;
+  color: #FFCC00;
+  width: 6em;
 }
 .products__detail .star-rating {
-    font-size: 0.6em;
-    color: #FFC107;
+  font-size: 0.65em;
+  color: #FFCC00;
 }
 .woocommerce .star-rating::before {
-    letter-spacing: 1px;
-    color: #cfc8d8;       /* unfilled stars */
+  letter-spacing: 2px;
+  color: #cfc8d8;       /* unfilled stars */
 }
 .woocommerce .star-rating span::before {
-    letter-spacing: 1px;
-    color: #FFC107;      /* filled stars */
+  letter-spacing: 2px;
+  color: #FFCC00;      /* filled stars */
 }
+
+/* Single product rating */
+.woocommerce div.product .woocommerce-product-rating {
+  margin-bottom: 0px;
+  margin-top: 13px;
+}
+.woocommerce div.product .woocommerce-product-rating .star-rating {
+  font-size: 0.85em; /* controls star size */
+  width: 7em;
+}
+.woocommerce div.product .woocommerce-product-rating .star-rating::before {
+  letter-spacing: 3px; 
+  color: #cfc8d8;     /* Unfilled stars */
+}
+.woocommerce div.product .woocommerce-product-rating .star-rating span::before {
+  letter-spacing: 3px; 
+  color: #FFCC00;    /* Filled stars */
+}
+
 /* 
 .products__detail {
   justify-content: space-between;
 } */ 
 .products .price {
   margin-right: 25px;
+}
+
+/* Product cart */
+.woocommerce div.product {
+  margin-bottom: 25px;
+}
+
+/* price on single product page */
+.product__price ins {
+  text-decoration: none;
+}
+/* price on product cart */
+.products__item ins {
+  text-decoration: none;
+}
+
+/* quontity */
+.woocommerce .quantity .qty {
+    width: 1.80em;
+    text-align: center;
 }
