@@ -41,9 +41,9 @@ if ( post_password_required() ) {
 	 * @hooked woocommerce_show_product_sale_flash - 10
 	 * @hooked woocommerce_show_product_images - 20
 	 */
-	//do_action( 'woocommerce_before_single_product_summary' );
+	do_action( 'woocommerce_before_single_product_summary' );
 	?>
-
+<!--
 	<div class="product__gallery">
 		<div class="product__main-photo">
 			<img class="product__img" src="img/view1.jpg"
@@ -67,7 +67,7 @@ if ( post_password_required() ) {
 			</div>
 		</div>
 	</div>
-
+-->
 	<div class="product__about">
 
 	<?php /* <div class="summary entry-summary"> */ ?>

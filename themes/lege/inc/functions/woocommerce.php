@@ -123,7 +123,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     add_filter('woocommerce_cart_item_price', 'my_custom_show_sale_price_at_cart', 10, 3 );
 
 
-//Открытый товар
+//Открытый товар - single product page
 
     //sku and in stock
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
@@ -191,7 +191,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         <?php }
 
 
-    //Share Icons 
+    //Share Icons on single product page
 
         //share.php проверка, где отображать 
         /*
@@ -201,7 +201,11 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         */
 
         add_action('woocommerce_share', 'lege_custom_share', 5);
-        function lege_custom_share() { ?>
+        function lege_custom_share() { 
+            //check if gets correct permalink
+            //echo get_permalink();
+            
+            ?>
             <div class="share">
             <p class="share__title">
                 Поделиться:
@@ -209,7 +213,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
             <ul class="social">
                 <li class="social__item">
                     <span>Vk</span>
-                    <a data-social="vkontakte" class="social__icon social__icon_vk" href="#">
+                    <a data-social="vkontakte" onclick="window.open(this.href, 'Share on VK', 'width=600,height=300'); return false" class="social__icon social__icon_vk" href="<?php echo lege_get_share('vk', get_the_permalink(), get_the_title()); ?>">
                         <svg  width="21" height="18">
                             <use xlink:href="#vk"/>
                         </svg>
@@ -217,7 +221,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
                 </li>
                 <li class="social__item">
                     <span>Fb</span>
-                    <a data-social="facebook" class="social__icon social__icon_fb" href="#">
+                    <a data-social="facebook" onclick="window.open(this.href, 'Share on Facebook', 'width=600,height=300'); return false" class="social__icon social__icon_fb" href="<?php echo lege_get_share('fb', get_the_permalink(), get_the_title()); ?>">
                         <svg  width="14" height="17">
                             <use xlink:href="#facebook"/>
                         </svg>
@@ -225,16 +229,9 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
                 </li>
                 <li class="social__item">
                     <span>Tw</span>
-                    <a data-social="twitter" class="social__icon social__icon_tw" href="#">
+                    <a data-social="twitter" onclick="window.open(this.href, 'Share on Twitter', 'width=600,height=300'); return false" class="social__icon social__icon_tw" href="<?php lege_get_share('twi', get_the_permalink(), get_the_title()); ?>">
                         <svg  width="18" height="15">
                             <use xlink:href="#twitter"/>
-                        </svg>
-                    </a>
-                </li>
-                <li class="social__item">
-                    <a class="social__icon social__icon_inst" href="http://instagram.com/###?ref=badge">
-                        <svg   width="16" height="16">
-                            <use xlink:href="#instagram"/>
                         </svg>
                     </a>
                 </li>
@@ -242,6 +239,21 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
             </div>
         
         <?php }
+
+    //Image Slider for Single Product Page 
+    /*
+    add_action( 'after_setup_theme', 'lege_woocommerce_plugin_setup'); 
+            function lege_woocommerce_plugin_setup() {
+                add_theme_support( 'wc-product-gallery-zoom' );
+                add_theme_support( 'wc-product-gallery-lightbox' );
+                add_theme_support( 'wc-product-gallery-slider' );
+            } 
+    */
+
+
+            
+    
+
 
 
 
