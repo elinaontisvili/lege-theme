@@ -48,10 +48,11 @@ if ( $product->is_in_stock() ) : ?>
 
 
         <div class="product__btns">
-            <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="product__btn btn">Положить в корзину</button>
-            <a href="#one-click" class="product__btn1 btn1 popup-link-1">Купить в один клик</a>
-        </div>
 
+            <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="product__btn btn">Положить в корзину</button>
+            <a href="#one-click" class="product__btn btn popup-link-1">Купить в один клик</a>
+             
+        </div>
 
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>

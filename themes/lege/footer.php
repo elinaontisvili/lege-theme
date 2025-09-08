@@ -152,6 +152,24 @@
 	</div>
 </footer>
 
+
+<?php /* if( is_singular( 'product' )) {
+	echo 'test';
+}*/
+?>
+
+<?php if(is_singular('product')){
+    get_template_part('template-parts/order_popup');
+}
+/*
+if( get_option( 'woocommerce_enable_myaccount_registration') === 'yes' ) {
+	get_template_part( 'template_parts/auth');
+}
+//Call us Modal Window 
+get_template_part( 'template-parts/popup_contact' );
+*/
+?>
+
 <?php wp_footer(); ?>
 
 </body>

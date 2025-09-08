@@ -42,7 +42,15 @@ if ( $max_value && $min_value === $max_value ) {
 			size="4"
 			pattern="<?php echo esc_attr( $pattern ); ?>"
 			inputmode="<?php echo esc_attr( $inputmode ); ?>"
-			aria-labelledby="<?php echo esc_attr( $labelledby ); ?>" />
+			aria-labelledby="<?php echo esc_attr( $labelledby ); ?>"
+			<?php 
+			if ( ! empty( $input_attrs ) && is_array( $input_attrs )) {
+				foreach ( $input_attrs as $attr => $val ) {
+					printf( '%s="%s" ', esc_attr( $attr ), esc_attr( $val ) );
+				}
+			}
+			?>
+		/>
         <span class="plus" title="Да-да, побольше!">+</span>
 	</div>
 	<?php

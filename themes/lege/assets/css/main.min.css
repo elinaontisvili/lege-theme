@@ -5554,7 +5554,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   margin: 53px 0 24px;
 }
 
-.product input.product__btn {
+.product button.product__btn { /* input changed to button */
   margin-right: 20px;
   background: none;
   box-shadow: none;
@@ -5562,7 +5562,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   color: #01b4fe;
 }
 
-.product input.product__btn:hover {
+.product button.product__btn:hover { /* input changed to button */
   background-color: #01b4fe;
   color: #fff;
   box-shadow: 0 0 0 4px #fff, 0 0 0 6px #01b4fe;
@@ -10244,8 +10244,30 @@ img.avatar {
   text-decoration: none;
 }
 
-/* quontity */
+/* quantity */
 .woocommerce .quantity .qty {
     width: 1.80em;
     text-align: center;
 }
+
+
+
+
+/* Reset WooCommerce default .button styles (single product, popup window) */
+.single_add_to_cart_button.click__link.link-more.button {
+    all: unset; /* removes all inherited/defined styles */
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    /* gap: 8px; */
+    color: #00a3ff;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 40px;
+}
+.single_add_to_cart_button.click__link.link-more.button:hover {
+  background-color: transparent;
+  color: #00cbff;
+}
+
+

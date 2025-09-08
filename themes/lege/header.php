@@ -186,42 +186,24 @@ if(is_page_template('template-home.php')) {
 <?php } else { ?>
 	<div class="caption">
 		<div class="wrapper">
-			<h1 class="caption__title">
-			
-			<?php
-				if ( is_single() ) {
-					$post_type = get_post_type( get_the_ID() );
-					$post_type_object = get_post_type_object( $post_type );
-					if ( $post_type_object ) {
-						echo esc_html( $post_type_object->labels->singular_name );
-					}
-				} elseif ( is_tax() || is_archive() ) {
-					$post_type = get_post_type();
-					$post_type_object = get_post_type_object( $post_type );
-					if ( $post_type_object ) {
-						echo esc_html( $post_type_object->labels->name );
-					} else {
-						echo esc_html( get_the_archive_title() );
-					}
-				} else {
-					echo esc_html( get_the_title() );
-				} 
-				/*
-					if(is_single()){
-						$current_post_type = get_post_type(get_the_ID());
-						$post_type_object = get_post_type_object($current_post_type);
+			<h1 class="caption__title"><?php
+                    if(is_single()){
+						//triggers when viewing a single product
+                        if(get_post_type() == 'product'){
+                            echo __('Магазин', 'lege');
+                        } else {
+                            $current_post_type = get_post_type(get_the_ID());
+                            $post_type_object = get_post_type_object($current_post_type);
+                            echo $post_type_object->labels->singular_name;
+                        }
 
-					if ($post_type_object) {
-						echo esc_html($post_type_object->labels->singular_name);
-					} else {
-						echo esc_html(get_the_title());
-					}
-					} else {
-						echo esc_html(wp_title('', false));
-					}
-				*/
-			?> 
-			</h1>
+                    } else if(is_tax()){
+                        $current_post_type = get_post_type(get_the_ID());
+                        $post_type_object = get_post_type_object($current_post_type);
+                        echo $post_type_object->labels->name;
+                    } else {
+                        echo wp_title('');
+                    } ?></h1>
 			<?php echo lege_get_breadcrumbs(); ?>
 		</div>
 	</div>

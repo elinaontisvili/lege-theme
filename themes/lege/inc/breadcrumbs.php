@@ -30,6 +30,14 @@ function lege_get_breadcrumbs() {
     } else {
         $parent_id    = $parent_id_2 = '';
     }
+
+
+    $short_name_product = get_the_title();
+    if(get_post_meta(get_the_ID(), 'lege_short_title', true)) {
+        $short_name_product = get_post_meta(get_the_ID(), 'lege_short_title', true);
+    } 
+
+
     
     $frontpage_id = get_option('page_on_front');
 
@@ -74,7 +82,18 @@ function lege_get_breadcrumbs() {
             echo $before . get_the_time('Y') . $after;
 
         } elseif ( is_single() && !is_attachment() ) {
-            if ( get_post_type() != 'post' ) {
+
+
+            if(get_post_type() == 'product') {
+                $post_type = get_post_type_object(get_post_type()); 
+                $slug = $post_type->rewrite; 
+                //printf($link, $home_link . '/' . $slug['slug'] . '/', '$post_type->singular_name');
+                printf($link, $home_link . '/' . $slug['slug'] . '/', 'Магазин');
+                if ($show_current == 1) echo $delimiter . $before . $short_name_product . $after;
+            }
+
+
+            else if ( get_post_type() != 'post' ) {
                 $post_type = get_post_type_object(get_post_type());
                 $slug = $post_type->rewrite;
                 printf($link, $home_link . '/' . $slug['slug'] . '/', $post_type->labels->singular_name);
@@ -117,7 +136,7 @@ function lege_get_breadcrumbs() {
             if ($parent_id != $frontpage_id) {
                 $breadcrumbs = array();
                 while ($parent_id) {
-                    $page = get_page($parent_id);
+                    $page = get_post($parent_id); //get_page() deprecated
                     if ($parent_id != $frontpage_id) {
                         $breadcrumbs[] = sprintf($link, get_permalink($page->ID), get_the_title($page->ID));
                     }

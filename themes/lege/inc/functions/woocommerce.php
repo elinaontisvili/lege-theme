@@ -179,6 +179,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         }
     }
 
+
     //price
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
     add_action('woocommerce_before_add_to_cart_button', 'lege_custom_addtocart_price', 5);
@@ -250,8 +251,10 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
             } 
     */
 
-
-            
+    //Change Add to Cart button text on single product page in popup modal window
+    add_filter( 'woocommerce_product_single_add_to_cart_text', function( $text ) {
+        return __( 'Перейти в корзину', 'lege_add_to_cart_button_text' );
+    });     
     
 
 
