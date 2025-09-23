@@ -119,6 +119,12 @@ $meta_boxes[] = array(
             'id'   => $prefix . 'photo_one',
             'type' => 'file',
         ),
+        array(
+            'name' => 'Фото 1 Alt text',
+            'desc' => 'Alt text',
+            'id' => $prefix . 'photo_one_alt',
+            'type' => 'text',
+        )
     )
 );
 
