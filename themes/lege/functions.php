@@ -162,33 +162,62 @@ function lege_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
 
+
+
+
 /**
- * Подключение скриптов и стилей в админке.
+ * Подключение скриптов и стилей в админке (для метабоксов).
  */
 function lege_admin_scripts($hook) {
+    // Load only on post/page/product edit screens
+    if ( in_array( $hook, ['post.php', 'post-new.php', 'page.php', 'page-new.php'] ) ) {
 
-  	if ( $hook == 'post.php' || $hook == 'post-new.php' || $hook == 'page-new.php' || $hook == 'page.php' ) {
-		wp_enqueue_script( 'lege_metaboxes', get_template_directory_uri() . '/assets/js/libs/metaboxes.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox') );
-		wp_enqueue_style('lege_metabox', get_template_directory_uri() . '/assets/css/libs/metabox.css', array(), '1.0');
-	}
+        // Modern uploader
+        wp_enqueue_media();
+
+        wp_enqueue_script(
+            'lege_metaboxes',
+            get_template_directory_uri() . '/assets/js/libs/metaboxes.js',
+            array('jquery', 'jquery-ui-core', 'jquery-ui-datepicker'),
+            filemtime(get_template_directory() . '/assets/js/libs/metaboxes.js'),
+            true
+        );
+
+        wp_enqueue_style(
+            'lege_metabox',
+            get_template_directory_uri() . '/assets/css/libs/metabox.css',
+            array(),
+            '1.0'
+        );
+    }
 }
 add_action( 'admin_enqueue_scripts', 'lege_admin_scripts', 10 );
 
+
 /**
- * Подключение скриптов медиафайлов для административной панели WordPress.
- * Enqueue media scripts for the WordPress admin.
+ * Подключение скриптов для медиазагрузки в виджетах.
+ * Enqueue media scripts for the Widgets admin screen.
  */
-function lege_enqueue_widget_scripts() {
-	wp_enqueue_media();
-	wp_enqueue_script(
-    'lege-widget-js',
-    get_template_directory_uri() . '/assets/js/libs/lege-widget.js',
-    array('jquery'),
-    filemtime(get_template_directory() . '/assets/js/libs/lege-widget.js'), // version
-    true
-);
+function lege_enqueue_widget_scripts($hook) {
+    // Widgets page
+    if ( $hook === 'widgets.php' ) {
+        wp_enqueue_media();
+
+        wp_enqueue_script(
+            'lege-widget-js',
+            get_template_directory_uri() . '/assets/js/libs/lege-widget.js',
+            array('jquery'),
+            filemtime(get_template_directory() . '/assets/js/libs/lege-widget.js'),
+            true
+        );
+    }
 }
 add_action( 'admin_enqueue_scripts', 'lege_enqueue_widget_scripts' );
+
+
+
+
+
 
 /**
  * Подключение функций WooCommerce.
