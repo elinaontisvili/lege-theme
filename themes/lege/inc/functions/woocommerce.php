@@ -126,7 +126,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
 //Открытый товар - single product page
 
-    //sku and in stock
+    //sku and in stock()
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
     add_action('woocommerce_single_product_summary', 'lege_woo_sku_custom', 4);
 
@@ -375,7 +375,12 @@ remove_action('woocommerce_review_before', 'woocommerce_review_display_gravatar'
     }
 
 
-    
+/* Checkout */
+    remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20);
+
+
+
+
 
 
 }
