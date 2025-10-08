@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Шаблон: Корзина & Checkout
+ * Template Name: Шаблон: Корзина и Оформление заказа
  */
 
 get_header(); 
