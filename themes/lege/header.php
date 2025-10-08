@@ -72,11 +72,21 @@ if(is_page_template('template-home.php')) {
 			<?php } ?>
 	</ul>
 	<div class="heading__block">
-		<a href="cart.html" class="heading__bag">
-			<svg width="17" height="20">
-				<use xlink:href="#bag"/>
-			</svg>
-		</a>
+
+	<?php
+	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+
+	global $woocommerce; ?> 
+
+	<a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="heading__bag">
+		<svg width="17" height="20"> 
+			<use xlink:href="#bag"/>
+		</svg>
+		<span class="count"><?php echo esc_html( WC()->cart->get_cart_contents_count() ); ?></span>
+	</a>
+
+	<?php } ?>
+
 		<div class="language">
 			<ul>
 				<li class="lang-item active">

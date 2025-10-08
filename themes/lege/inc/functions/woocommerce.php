@@ -1,10 +1,24 @@
 <?php 
 if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
 
+    //Интеграция WooCommerce Шаблона
     function lege_add_woocommerce_support() {
         add_theme_support('woocommerce');
     }
     add_action('after_setup_theme', 'lege_add_woocommerce_support');
+
+    //Enable woo's built-in Ajax fragment refresh for cart count
+    add_filter('woocommerce_add_to_cart_fragments', 'lege_header_add_to_cart_fragment');
+    function lege_header_add_to_cart_fragment( $fragments ) {
+        global $woocommerce; 
+
+        ob_start(); 
+
+        echo '<a href="'.esc_url(wc_get_cart_url()).'" class="heading__bag"><svg width="17" height="20"><use xlink:href="#bag"/></svg><span class="count">'. esc_attr(WC()->cart->get_cart_contents_count()).'</span></a>';
+
+        $fragments['a.heading__bag'] = ob_get_clean();
+        return $fragments; 
+    }
 
     //Убираем старый сайдбар и заменяем его персональным
     remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
