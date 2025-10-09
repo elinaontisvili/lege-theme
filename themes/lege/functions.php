@@ -258,6 +258,7 @@ require get_template_directory() . '/inc/widgets/widget-about.php';
 require get_template_directory() . '/inc/widgets/widget-customcategory.php';
 require get_template_directory() . '/inc/widgets/widget-subscribe.php';
 require get_template_directory() . '/inc/widgets/widget-customsearch.php';
+require get_template_directory() . '/inc/widgets/widget-shopbanner.php';
 
 // Debug - Sidebars briefly appear and then disappear on the Widgets admin screen.
 // Disable the block editor for widgets.
