@@ -51,6 +51,9 @@ function lege_init_widgets() {
 	register_widget('Lege_Subscribe_Widget');
 	register_widget('Lege_Customsearch_Widget');
 	register_widget('Lege_Shopbanner_Widget');
+	register_widget('Lege_PriceRange_Widget');
+	register_widget('Lege_Category_Filter_Widget');
+	register_widget('Lege_Rating_Widget');
 }
 
 add_action('widgets_init', 'lege_init_widgets');

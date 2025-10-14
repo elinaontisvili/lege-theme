@@ -159,11 +159,125 @@ function lege_scripts() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
+
+    //ajax request for woo filter
+    wp_register_script(
+    'lege_woo_filter',
+    get_template_directory_uri() . '/assets/js/woo_filter.js',
+    array('jquery'),
+    '',
+    true
+    );
+
+    wp_localize_script(
+        'lege_woo_filter',
+        'lege_settings',
+        array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+        )
+    );
+    wp_enqueue_script('lege_woo_filter');
+
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
 
+/* testing if ajax request is working
+add_action('wp_ajax_lege_filter', 'lege_filter_callback');
+add_action('wp_ajax_nopriv_lege_filter', 'lege_filter_callback'); 
+function lege_filter_callback() {
+    echo 'ajax request works';
 
+    wp_die();
+}
+*/
 
+// AJAX handler for WooCommerce filter 
+function lege_show_products(){
+
+    $query_data = $_GET;
+
+    $paged = (isset($query_data['paged']) ) ? intval($query_data['paged']) : 1;
+
+    $posts_per_page = get_option('woocommerce_catalog_columns') * get_option('woocommerce_catalog_rows');
+
+    //filter by category id
+    $cats = ($query_data['category']) ? explode(',',$query_data['category']) : false;
+
+    $tax_query = ($cats) ? array( array(
+        'taxonomy' => 'product_cat',
+        'field' => 'id',
+        'terms' => $cats
+    ) ) : false;
+
+    $args = array(
+        'post_type' => 'product',
+        'paged' => $paged,
+        'posts_per_page' => $posts_per_page,
+        'tax_query' => $tax_query,
+        'meta_query' => array(
+            array(
+                'key' => '_price',
+                'value' => array($query_data['min'], $query_data['max']),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            ),
+        ),
+    );
+
+    $loop = new WP_Query( $args );
+    if ( $loop->have_posts() ) {
+        echo '<div class="products columns-3" id="products">';
+
+        while ( $loop->have_posts() ) : $loop->the_post();
+            wc_get_template_part( 'content', 'product' );
+        endwhile;
+
+        echo '</div>';
+?>
+    <nav class="woocommerce-pagination">
+        <?php if($loop->max_num_pages > 1){ ?>
+            <nav class="pagination">
+                <div class="nav-links">
+                    <?php
+                    //Выводим левую стрелку для первой страницы
+                    if( $paged == 0 or $paged == 1){ ?>
+                        <span class="prev page-numbers"></span>
+                    <?php } ?>
+
+                    <?php
+
+                    //Вывод стандартной пагинации
+                    $big = 999999999; // need an unlikely integer
+
+                    echo paginate_links( array(
+                        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                        'format' => '?paged=%#%',
+                        'current' => max( 1, $paged ),
+                        'prev_text'          => '',
+                        'next_text'          => '',
+                        'total' => $loop->max_num_pages
+                    ) );
+                    ?>
+
+                    <?php
+                    //Выводим правую стрелку для последней страницы
+                    if( $paged == $loop->max_num_pages){ ?>
+                        <span class="next page-numbers"></span>
+                    <?php } ?>
+                </div>
+            </nav>
+        <?php } ?>
+    </nav>
+
+  <?php
+    } else {
+        echo __( 'No products found','lege' );
+    }
+    wp_reset_postdata();
+    die();
+}
+add_action('wp_ajax_lege_filter', 'lege_show_products');
+add_action('wp_ajax_nopriv_lege_filter', 'lege_show_products');
 
 /**
  * Подключение скриптов и стилей в админке (для метабоксов).
@@ -259,6 +373,9 @@ require get_template_directory() . '/inc/widgets/widget-customcategory.php';
 require get_template_directory() . '/inc/widgets/widget-subscribe.php';
 require get_template_directory() . '/inc/widgets/widget-customsearch.php';
 require get_template_directory() . '/inc/widgets/widget-shopbanner.php';
+require get_template_directory() . '/inc/widgets/widget-pricerange.php';
+require get_template_directory() . '/inc/widgets/widget-categoryfilter.php';
+require get_template_directory() . '/inc/widgets/widget-rating.php';
 
 // Debug - Sidebars briefly appear and then disappear on the Widgets admin screen.
 // Disable the block editor for widgets.
@@ -477,3 +594,5 @@ function lege_custom_excerpt($limit) {
 add_filter('mc4wp_form_response_position', function() {
     return 'after'; // or before
 });
+
+
