@@ -43,7 +43,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
     //Карточка Продукта, Product Image
 
-       //Create new hook to wrap product image in <di> tag and add custom class
+       //Create new hook to wrap product image in <div> tag and add custom class
        //add <div> wrapper with class products__img
     add_action('woocommerce_before_shop_loop_item','lege_wrapforimage_open', 5); //open wrapper
     add_action('woocommerce_before_shop_loop_item_title','lege_wrapforimage_close', 20); //close wrapper
@@ -54,7 +54,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         echo '</div>';
     }
 
-
+    
         //wrap <a> tag around product image
     add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_product_link_close', 15);
     remove_action ('woocommerce_after_shop_loop_item','woocommerce_template_loop_product_link_close', 5);
