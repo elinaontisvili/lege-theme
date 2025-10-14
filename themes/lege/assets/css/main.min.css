@@ -10464,7 +10464,7 @@ img.avatar {
 
 /* Rating */
 .woocommerce .star-rating {
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #FFCC00;
   width: 6em;
 }
@@ -10487,7 +10487,7 @@ img.avatar {
 }
 .woocommerce div.product .woocommerce-product-rating .star-rating {
   font-size: 0.85em; /* controls star size */
-  width: 7em;
+  width: 6em;
 }
 .woocommerce div.product .woocommerce-product-rating .star-rating::before {
   letter-spacing: 3px; 
