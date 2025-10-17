@@ -4647,13 +4647,14 @@ ul.payment_methods li.log__group::after {
 .inner-page .news .pagination {
   margin: 35px 0 0 55px;
 }
-
+/*
 .rate {
   width: 95px;
   height: 18px;
   background: url(../img/star-fill.svg) left center;
   margin: 19px 0 0 22px;
 }
+*/ 
 
 .share {
   margin-top: 32px;
@@ -5267,7 +5268,7 @@ ul.payment_methods li.log__group::after {
   color: #383838;
 }
 
-.card .clients .rate, .card .clients .rate_custom {
+.card .clients .rate, .clients .rate_custom {
   margin-left: 0;
   background-size: 15px 15px;
   width: 75px;
@@ -6842,6 +6843,7 @@ a.remove.cart__del:hover {
   border-radius: 2px;
   box-shadow: 0.5px 0.9px 3px rgba(206, 218, 228, 0.4), 0 0 46px rgba(160, 175, 185, 0.1);
   padding: 35px 30px 28px;
+  margin-bottom: 30px;
 }
 
 .shop .rating__block {
@@ -6930,7 +6932,7 @@ a.remove.cart__del:hover {
 /* Sortby slider */
 
 .sortby {
-  margin-top: 30px;
+  /* margin-top: 30px; */
   padding: 35px 30px;
   background-color: #fff;
   border-radius: 2px;
@@ -10408,7 +10410,8 @@ a.remove.cart__del:hover {
   margin: 20px 0 20px;
 }
 
-/* Comments */
+/* ***** Comments Form ***** */
+
 .comments-area {
   margin-top: 100px;
 }
@@ -10435,6 +10438,40 @@ img.avatar {
   max-width: none;
 }
 */
+.log__rate_custom {
+  margin-bottom: 20px;
+}
+.cookies__consent {
+ margin-left: 5px !important;
+ font-weight: 400 !important;
+}
+
+.woocommerce p.comment-notes { 
+ width: 100%; 
+ display: flex; 
+ -webkit-box-pack: start; 
+ -ms-flex-pack: start; 
+ justify-content: flex-start; 
+ font-size: 13px; 
+ color: #858585; 
+}
+
+.log__group_textarea_custom {
+  display: block;
+  width:100%;
+  max-width: 1053px !important;
+  height: 140px;
+  min-height: 140px;
+  border: 1px solid #c3c3c3; 
+  border-radius: 3px;
+  font-size: 16px; 
+  color: #858585; 
+  padding: 20px 40px 20px 18px;
+}
+
+.log__title_custom {
+  color: #383838;
+}
 
 /* Contact Page */
 /* Style the checkbox */

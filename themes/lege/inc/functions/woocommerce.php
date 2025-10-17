@@ -273,10 +273,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
 
 
-
-    
-
-//Remove Upsell and Related Products on Single Product
+// Remove Upsell and Related Products on Single Product
 //remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
 //remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 
@@ -284,58 +281,59 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 remove_action('woocommerce_review_before', 'woocommerce_review_display_gravatar', 10);
 
 
+
 //Comment Form on Single Product Page
     function my_custom_comment_fields( $fields ) {
-    $commenter = wp_get_current_commenter();
-    $req = (bool) get_option( 'require_name_email', 1 );
-    $aria_req = ( $req ? " aria-required='true'" : '' );
-    
-    // Custom field template with <div> wrappers and custom classes
-    $custom_field_template = function( $field_html, $key, $field_data ) use ( $commenter, $req, $aria_req ) {
-        $value = esc_attr( $commenter[ 'comment_author_' . $key ] );
-        $required_html = ( $field_data['required'] ? '&nbsp;<span class="required">*</span>' : '' );
+        $commenter = wp_get_current_commenter();
+        $req = (bool) get_option( 'require_name_email', 1 );
+        $aria_req = ( $req ? " aria-required='true'" : '' );
         
-        return '<div class="comment-form-' . esc_attr( $key ) . ' log__group">' .
-                   '<label for="' . esc_attr( $key ) . '" class="log__label">' . esc_html( $field_data['label'] ) . $required_html . '</label>' .
-                   '<input id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" type="' . esc_attr( $field_data['type'] ) . '" autocomplete="' . esc_attr( $field_data['autocomplete'] ) . '" value="' . $value . '" size="30" ' . ( $field_data['required'] ? 'required' : '' ) . ' class="log__input" />' .
-               '</div>';
-    };
+        // Custom field template with <div> wrappers and custom classes
+        $custom_field_template = function( $field_html, $key, $field_data ) use ( $commenter, $req, $aria_req ) {
+            $value = esc_attr( $commenter[ 'comment_author_' . $key ] );
+            $required_html = ( $field_data['required'] ? '&nbsp;<span class="required">*</span>' : '' );
+            
+            return '<div class="comment-form-' . esc_attr( $key ) . ' log__group">' .
+                    '<label for="' . esc_attr( $key ) . '" class="log__label">' . esc_html( $field_data['label'] ) . $required_html . '</label>' .
+                    '<input id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" type="' . esc_attr( $field_data['type'] ) . '" autocomplete="' . esc_attr( $field_data['autocomplete'] ) . '" value="' . $value . '" size="30" ' . ( $field_data['required'] ? 'required' : '' ) . ' class="log__input" />' .
+                '</div>';
+        };
 
-    // Modify the default fields and apply the custom template
-    if ( isset( $fields['author'] ) ) {
-        $fields['author'] = call_user_func( $custom_field_template, '', 'author', array(
-            'label' => __( 'Name', 'lege' ),
-            'type' => 'text',
-            'required' => $req,
-            'autocomplete' => 'name'
-        ) );
-    }
+        // Modify the default fields and apply the custom template
+        if ( isset( $fields['author'] ) ) {
+            $fields['author'] = call_user_func( $custom_field_template, '', 'author', array(
+                'label' => __( 'Name', 'lege' ),
+                'type' => 'text',
+                'required' => $req,
+                'autocomplete' => 'name'
+            ) );
+        }
 
-    if ( isset( $fields['email'] ) ) {
-        $fields['email'] = call_user_func( $custom_field_template, '', 'email', array(
-            'label' => __( 'Email', 'lege' ),
-            'type' => 'email',
-            'required' => $req,
-            'autocomplete' => 'email'
-        ) );
-    }
+        if ( isset( $fields['email'] ) ) {
+            $fields['email'] = call_user_func( $custom_field_template, '', 'email', array(
+                'label' => __( 'Email', 'lege' ),
+                'type' => 'email',
+                'required' => $req,
+                'autocomplete' => 'email'
+            ) );
+        }
 
-    // Add your custom fields using the same structure
-    $fields['lege_phone'] = '<div class="comment-form-lege_phone log__group">' .
-                                '<label for="lege_phone" class="log__label">' . __( 'Phone', 'lege' ) . '</label>' .
-                                '<input id="lege_phone" name="lege_phone" type="tel" value="" size="30" class="log__input" />' .
-                            '</div>';
-    
-    $fields['lege_social'] = '<div class="comment-form-lege_social log__group">' .
-                                '<label for="lege_social" class="log__label">' . __( 'Social', 'lege' ) . '</label>' .
-                                '<input id="lege_social" name="lege_social" type="url" value="" size="30" class="log__input" />' .
-                            '</div>';
-    
-    return $fields;
+        // Add your custom fields using the same structure
+        $fields['lege_phone'] = '<div class="comment-form-lege_phone log__group">' .
+                                    '<label for="lege_phone" class="log__label">' . __( 'Phone', 'lege' ) . '</label>' .
+                                    '<input id="lege_phone" name="lege_phone" type="tel" value="" size="30" class="log__input" />' .
+                                '</div>';
+        
+        $fields['lege_social'] = '<div class="comment-form-lege_social log__group">' .
+                                    '<label for="lege_social" class="log__label">' . __( 'Social', 'lege' ) . '</label>' .
+                                    '<input id="lege_social" name="lege_social" type="url" value="" size="30" class="log__input" />' .
+                                '</div>';
+        
+        return $fields;
     }
     add_filter( 'comment_form_default_fields', 'my_custom_comment_fields' );
 
-    //Saves the data from the custom fields to the database (phone, social)
+    // Saves the data from the custom fields to the database (phone, social)
     add_action('comment_post', 'lege_save_comment_meta_data');
     function lege_save_comment_meta_data($comment_id) {
         if(!empty($_POST['lege_phone'])) {
@@ -348,18 +346,30 @@ remove_action('woocommerce_review_before', 'woocommerce_review_display_gravatar'
         }
     }
 
-    //show phone number, only for admins ***error when admin leave comment - phone required
-    /*
-    add_filter('preprocess_comment', 'lege_validate_comment_fields'); 
+    // Show phone number, only to admins 
+    // Only validate for non-admins
+    add_filter('preprocess_comment', 'lege_validate_comment_fields');
     function lege_validate_comment_fields($commentdata) {
-        if(empty($_POST['lege_phone'])) {
-            wp_die(__('Error: Phone field is required.', 'lege'));
+        if ( ! current_user_can('manage_options') ) {
+            if ( empty($_POST['lege_phone']) ) {
+                wp_die(__('Error: Phone field is required.', 'lege'));
+            }
         }
         return $commentdata;
     }
-    */
+    // Show phone number to admins only in the comment text
+    add_filter('comment_text', 'lege_show_phone_to_admin', 10, 2);
+    function lege_show_phone_to_admin($comment_text, $comment) {
+        if ( current_user_can('manage_options') ) {
+            $phone = get_comment_meta($comment->comment_ID, 'lege_phone', true);
+            if ($phone) {
+                $comment_text .= '<p class="phone_number_admin_style">Phone: ' . esc_html($phone) . '</p>';
+            }
+        }
+        return $comment_text;
+    }
 
-    //Move comment field to bottom
+    /* Move comment field to bottom */
     function lege_move_comment_field_to_bottom($fields) {
         $comment_field = $fields['comment'];
         unset($fields['comment']);
@@ -367,8 +377,8 @@ remove_action('woocommerce_review_before', 'woocommerce_review_display_gravatar'
         return $fields;
     }
     add_filter('comment_form_fields', 'lege_move_comment_field_to_bottom');
-
-    //Remove the default cookies field
+ 
+    /* Remove the default cookies field */
     function remove_comment_cookies_field( $fields ) {
     if ( isset( $fields['cookies'] ) ) {
         unset( $fields['cookies'] );
@@ -377,7 +387,7 @@ remove_action('woocommerce_review_before', 'woocommerce_review_display_gravatar'
     }
     add_filter( 'comment_form_fields', 'remove_comment_cookies_field' );
 
-
+    
 /* Cart */ 
     //move cross sell - cart page */ 
     remove_action('woocommerce_cart_collaterals', 'woocommerce_cross_sell_display');
