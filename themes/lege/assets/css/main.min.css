@@ -4647,14 +4647,13 @@ ul.payment_methods li.log__group::after {
 .inner-page .news .pagination {
   margin: 35px 0 0 55px;
 }
-/*
+
 .rate {
   width: 95px;
   height: 18px;
   background: url(../img/star-fill.svg) left center;
   margin: 19px 0 0 22px;
 }
-*/ 
 
 .share {
   margin-top: 32px;
@@ -8889,7 +8888,8 @@ a.remove.cart__del:hover {
   .market {
     max-width: none;
     min-width: 280px;
-    width: auto;
+    /* width: auto; */
+    width: 100%;
     margin: 0px;
   }
 
@@ -10504,6 +10504,7 @@ img.avatar {
   font-size: 0.9em;
   color: #FFCC00;
   width: 6em;
+  float: left !important;
 }
 .products__detail .star-rating {
   font-size: 0.65em;
