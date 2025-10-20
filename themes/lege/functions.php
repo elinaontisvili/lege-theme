@@ -198,31 +198,86 @@ function lege_show_products(){
 
     $paged = (isset($query_data['paged']) ) ? intval($query_data['paged']) : 1;
 
+    // set orderby (default = date)
+    $orderby = isset($query_data['orderby']) ? sanitize_text_field($query_data['orderby']) : 'date';
+
     $posts_per_page = get_option('woocommerce_catalog_columns') * get_option('woocommerce_catalog_rows');
 
-    //filter by category id
-    $cats = ($query_data['category']) ? explode(',',$query_data['category']) : false;
+    //filter by category IDs
+    $cats = !empty($query_data['category']) ? explode('.', $query_data['category']) : false;
 
-    $tax_query = ($cats) ? array( array(
-        'taxonomy' => 'product_cat',
-        'field' => 'id',
-        'terms' => $cats
-    ) ) : false;
+    $tax_query = $cats ? [
+        [
+            'taxonomy' => 'product_cat',
+            'field'    => 'id',
+            'terms'    => $cats,
+        ]
+    ] : [];
 
-    $args = array(
-        'post_type' => 'product',
-        'paged' => $paged,
+    // base query
+    $meta_query = [
+        [
+            'key'     => '_price',
+            'value'   => [isset($query_data['min']) ? floatval($query_data['min']) : 0,
+                          isset($query_data['max']) ? floatval($query_data['max']) : 999999],
+            'compare' => 'BETWEEN',
+            'type'    => 'NUMERIC',
+        ]
+    ];
+
+    $args = [
+        'post_type'      => 'product',
+        'paged'          => $paged,
         'posts_per_page' => $posts_per_page,
-        'tax_query' => $tax_query,
-        'meta_query' => array(
-            array(
-                'key' => '_price',
-                'value' => array($query_data['min'], $query_data['max']),
-                'compare' => 'BETWEEN',
-                'type' => 'NUMERIC'
-            ),
-        ),
-    );
+        'tax_query'      => $tax_query,
+        'meta_query'     => $meta_query,
+    ];
+
+    // sorting logic
+    switch ($orderby) {
+        case 'price':
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_price';
+            $args['order']    = 'ASC';
+            break;
+
+        case 'price-desc':
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = '_price';
+            $args['order']    = 'DESC';
+            break;
+
+        case 'popularity':
+            $args['orderby']  = 'meta_value_num';
+            $args['meta_key'] = 'total_sales';
+            $args['order']    = 'DESC';
+            break;
+
+        case 'rating':
+            $args['meta_query'][] = [
+                'relation' => 'OR',
+                [
+                    'key'     => '_wc_average_rating',
+                    'compare' => 'EXISTS',
+                ],
+                [
+                    'key'     => '_wc_average_rating',
+                    'compare' => 'NOT EXISTS',
+                ],
+            ];
+            $args['orderby'] = [
+                'meta_value_num' => 'DESC', // rating
+                'title'          => 'ASC',  // secondary sort
+            ];
+            $args['meta_key'] = '_wc_average_rating';
+            break;
+
+        case 'date':
+        default:
+            $args['orderby']  = 'date';
+            $args['order']    = 'DESC';
+            break;
+    }
 
     $loop = new WP_Query( $args );
     if ( $loop->have_posts() ) {
@@ -273,6 +328,7 @@ function lege_show_products(){
     } else {
         echo __( 'No products found','lege' );
     }
+
     wp_reset_postdata();
     die();
 }

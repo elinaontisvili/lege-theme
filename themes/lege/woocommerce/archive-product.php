@@ -65,7 +65,7 @@ global $lege_options;
 					<li><a href="#" data-value="rating">по рейтингу</a></li>
 					<li><a href="#" data-value="date">по новизне</a></li>
 					<li><a href="#" data-value="price">по возрастанию</a></li>
-					<li><a href="#" data-value="price-desc">TEST по убыванию</a></li>
+					<li><a href="#" data-value="price-desc">по убыванию</a></li>
 					<!-- 
 					<li><a href="#">по цене</a></li>
 					<li><a href="#">по популярности</a></li>

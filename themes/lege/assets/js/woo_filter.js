@@ -10,6 +10,11 @@ jQuery(function($) {
         return $("#priceMax").val();
     }
 
+    // added for filter
+    function lege_order() {
+        return $(".sort-menu li.active a").data('value') || 'date';
+    }
+
     if ($('.lege_sortby').length) {
 
         var minprice = $('.lege_sortby').data('minprice');
@@ -63,13 +68,16 @@ jQuery(function($) {
                 category: getCats().join(','),
                 min: typeof getPriceMin === "function" ? getPriceMin() : 0,
                 max: typeof getPriceMax === "function" ? getPriceMax() : 999999, 
-                paged: paged
+                // added for filter
+                orderby: lege_order(),
+                paged: paged || 1
             }, 
             beforeSend: function() {
                 $('#main').html('<p>Загрузка...</p>');
             },
             success: function(data) { 
                 $('#main').html(data);
+                $('html, body').animate({ scrollTop: $('#main').offset().top - 50 }, 300);
             },
            error: function(xhr, status, error) {
             console.log("AJAX error:", status, error);
@@ -86,7 +94,7 @@ jQuery(function($) {
 
     // price range stop event
     $(document).on('lege:filter:update', function() {
-        lege_get_posts(); //call the same Ajax loader used for category filters
+        lege_get_posts(); 
     })
 
     // pagination click
@@ -97,14 +105,23 @@ jQuery(function($) {
         var paged = 1;
 
         if (url.indexOf('paged=') !== -1) {
-        paged = url.split('paged=')[1];
+            paged = url.split('paged=')[1];
         } else if (url.indexOf('/page/') !== -1) {
             paged = url.split('/page/')[1];
         }
         lege_get_posts(paged);
     });
 
+    // Sort menu
+    $('.sort-menu li').on('click',function(e) {
+        e.preventDefault();
+
+        $('.sort-menu li').removeClass('active');
+        $(this).addClass('active');
+        //alert(lege_order());
+        lege_get_posts(); 
     
+    }); 
     
 });
     
