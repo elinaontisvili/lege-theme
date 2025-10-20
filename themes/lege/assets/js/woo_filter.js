@@ -121,6 +121,19 @@ jQuery(function($) {
         //alert(lege_order());
         lege_get_posts(); 
     
+        var order_text = 'по популярности'
+
+        if(lege_order() == 'rating') {
+            order_text = 'по рейтингу';
+		} else if(lege_order() == 'date') {
+            order_text = 'по новизне';
+		} else if(lege_order() == 'price') {
+            order_text = 'по возрастанию';
+		} else if(lege_order() == 'price-desc'){
+            order_text = 'по убыванию';
+		}
+
+        $('#parametr').text(order_text);
     }); 
     
 });
