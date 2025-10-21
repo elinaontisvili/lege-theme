@@ -19,7 +19,10 @@
 
 <?php 
 global $lege_options;
-// print_r($lege_options['home_header_slider']);
+//print_r($lege_options['home_header_slider']);
+//echo '<pre>';
+//print_r($lege_options);
+//echo '</pre>';
 
 $class_header = '';
 $style_for_header = '';
@@ -165,20 +168,22 @@ if(is_page_template('template-home.php')) {
 	<div class="wrapper">
 		<div class="offer__slider">
 
-		<?php $slider = $lege_options['home_header_slider']; 
+			<?php $slider = $lege_options['home_header_slider']; 
 
-		foreach($slider as $slide) { ?>
-			<div class="offer__slide">
-				<p class="offer__text"><?php echo $slide['title']; ?></p>
-				<?php echo $slide['description']; ?>
-				<a href="<?php echo $slide['url'] ; ?>" class="offer__btn btn popup-link"><?php esc_html_e( 'Бесплатная консультация', 'lege' ); ?></a>
-			</div>
-		<?php } ?>
+			foreach($slider as $slide) { ?>
+				<div class="offer__slide">
+					<p class="offer__text"><?php echo $slide['title']; ?></p>
+					<?php echo $slide['description']; ?>
+					<a href="<?php echo $slide['url'] ; ?>" class="offer__btn btn popup-link">
+						<?php esc_html_e( 'Бесплатная консультация', 'lege' ); ?>
+					</a>
+				</div>
+			<?php } ?>
+
+		</div><!-- /.offer__slider -->
 
 		<?php 
 		//print_r($lege_options['header_video']);
-		//print_r($lege_options['header_time']);
-		//print_r($lege_options['header_video_title']);
 		
 		if( ! empty( $lege_options['header_video'] ) ) { ?>
 		<a class="offer__video popup-with-zoom-anim popup-youtube" href="<?php echo esc_url( $lege_options['header_video'] ); ?>" rel="nofollow" >
@@ -190,9 +195,9 @@ if(is_page_template('template-home.php')) {
 				<p class="offer__watch"><?php echo esc_html( $lege_options['header_video_title'] ); ?></p>
 			<?php } ?>
 		</a>
-		<?php } ?>
-	</div>
+		<?php } ?>		
 </div>
+
 <?php } else { ?>
 	<div class="caption">
 		<div class="wrapper">
