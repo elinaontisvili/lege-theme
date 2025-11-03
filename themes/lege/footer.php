@@ -129,45 +129,56 @@
 						</li>
 					</ul>
 				</div>
-				<div class="control__wrap">
-					<a  href="#enter" class="control__enter popup-link-1">
-						<svg class="control__icon" width="19" height="17">
-							<use xlink:href="#login"/>
-						</svg>
-						Вход
-					</a>
-					<a style="display: none;" href="cabinet.html" class="control__enter control__enter_cab">
-						<svg class="control__icon" width="16" height="16">
-							<use xlink:href="#user"/>
-						</svg>
-						Личный кабинет
-					</a>
-					<a href="#reg" class="control__reg noise popup-link-2">Регистрация</a>
-				</div>
-			</div>
-		</div>
-		<?php if ( $lege_options['footer_copyrights'] ) { ?>
-			<div class="footer__copy"><?php echo wp_kses_post( $lege_options['footer_copyrights']); ?></div>
-		<?php } ?>
+
+				<?php
+                if(get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes'){
+                if( is_user_logged_in()){ ?>
+                    <div class="control__wrap">
+                        <a href="<?php echo esc_url(home_url('/my-account')); ?>" class="control__enter control__enter_cab">
+                            <svg class="control__icon" width="16" height="16">
+                                <use xlink:href="#user"/>
+                            </svg>
+                            <?php esc_html_e('Личный кабинет','lege'); ?>
+                        </a>
+                        <a href="<?php echo esc_url(wp_logout_url( home_url() )); ?>" class="control__reg noise"><?php esc_html_e('Выход','lege'); ?></a>
+                    </div>
+                <?php } else { ?>
+                    <div class="control__wrap">
+                        <a  href="#enter" class="control__enter popup-link-1">
+                            <svg class="control__icon" width="19" height="17">
+                                <use xlink:href="#login"/>
+                            </svg>
+                            <?php esc_html_e('Вход','lege'); ?>
+                        </a>
+                        <a style="display: none;" href="<?php echo $my_account_url; ?>" class="control__enter control__enter_cab">
+                            <svg class="control__icon" width="16" height="16">
+                                <use xlink:href="#user"/>
+                            </svg>
+                            <?php esc_html_e('Личный кабинет','lege'); ?>
+                        </a>
+                        <a href="#reg" class="control__reg noise popup-link-2"><?php esc_html_e('Регистрация','lege'); ?></a>
+                    </div>
+                <?php } ?>
+
+                <?php } ?>
+
+            </div>
+        </div>
+        <?php if($lege_options['footer_copyrights']){ ?>
+            <div class="footer__copy"><?php echo $lege_options['footer_copyrights']; ?></div>
+        <?php } ?>
+
 	</div>
 </footer>
 
-
-<?php /* if( is_singular( 'product' )) {
-	echo 'test';
-}*/
-?>
-
-<?php if(is_singular('product')){
+<?php 
+if(is_singular('product')){
     get_template_part('template-parts/order_popup');
 }
-/*
+
 if( get_option( 'woocommerce_enable_myaccount_registration') === 'yes' ) {
-	get_template_part( 'template_parts/auth');
+	get_template_part( 'template-parts/auth');
 }
-//Call us Modal Window 
-get_template_part( 'template-parts/popup_contact' );
-*/
 ?>
 
 <?php wp_footer(); ?>

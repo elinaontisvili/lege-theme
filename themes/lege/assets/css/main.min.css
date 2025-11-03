@@ -2515,6 +2515,13 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   width: 75% !important;
   max-width: 100% !important;
 }
+/* reposition radio buttons 
+.woocommerce ul#shipping_method li input[type="radio"] {
+  position: absolute; 
+  left: 0;
+  top: 50%; 
+  transform: translateY(-50%);
+} */
 
 .log label:after {
   content: '*';
@@ -3958,7 +3965,8 @@ ul.payment_methods li.log__group::after {
 
 .edit .password-eye {
   right: 0;
-  bottom: 28px;
+  /* bottom: 28px; */
+  bottom: 8px;
 }
 
 .edit .btn {
@@ -10656,7 +10664,9 @@ img.avatar {
       width: 188px !important;
       min-width: 188px !important;
     }
-
+    .bnt_woo-custom {
+      margin-top: 20px !important;
+    }
     .coupon {
       display: inline-flex;
     }
@@ -10688,6 +10698,50 @@ img.avatar {
       border-radius: 3px;
       color: #858585;
     } 
+    /* WooCommerce Notice Buttons */ 
+    .woocommerce-notices-wrapper .woocommerce-message a.button.wc-forward {
+      cursor: pointer; 
+      background-image: linear-gradient(to right, #4caf50 0%, #2e7d32 100%); 
+      background-size: 200% auto; 
+      color: #fff; 
+      font-weight: 600; 
+      letter-spacing: .03em;
+      border: none; 
+      border-radius: 25px; 
+      transition: all 0.3s ease-in-out;
+    }
+    .woocommerce-notices-wrapper .woocommerce-message a.button.wc-forward:hover {
+      background-image: linear-gradient(to left, #4caf50 0%, #2e7d32 100%);
+    }
+    .woocommerce-notices-wrapper .woocommerce-info a.button.wc-forward {
+      cursor: pointer; 
+      background-image: linear-gradient(to right, #00a2ff 0%, #0077cc 100%); 
+      background-size: 200% auto; 
+      color: #fff; 
+      font-weight: 600; 
+      letter-spacing: .03em;
+      border: none; 
+      border-radius: 25px; 
+      transition: all 0.3s ease-in-out;
+    }
+    .woocommerce-notices-wrapper .woocommerce-info a.button.wc-forward:hover {
+      background-image: linear-gradient(to left, #00a2ff 0%, #0077cc 100%);
+    }
+    .woocommerce-notices-wrapper .woocommerce-error a.button.wc-forward {
+      cursor: pointer; 
+      background-image: linear-gradient(to right, #ff3b3b 0%, #c62828 100%); 
+      background-size: 200% auto; 
+      color: #fff; 
+      font-weight: 600; 
+      letter-spacing: .03em;
+      border: none; 
+      border-radius: 25px; 
+      transition: all 0.3s ease-in-out;
+    }
+    .woocommerce-notices-wrapper .woocommerce-error a.button.wc-forward:hover {
+      background-image: linear-gradient(to left, #ff3b3b 0%, #c62828 100%);
+    }
+
     
 /* CHECKOUT PAGE */
 
@@ -10767,3 +10821,61 @@ img.avatar {
     .woocommerce form .form-row label {
       line-height: 1.45 !important;
     }
+    .pay__title_details {
+      font-family: 'bitter', serif; 
+      
+    }
+
+/* MY ACCOUNT PAGE */
+
+  /* hide password eye */
+  button.show-password-input {
+    display:none;
+  }
+ 
+/* MY ACCOUNT PAGE - DASHBOARD */ 
+.woocommerce table.shop_table tbody th {
+  font-family: 'bitter', serif;
+}
+.woocommerce-orders-table__header {
+  font-family: 'bitter', serif;
+}
+td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view {
+  cursor: pointer; 
+  background-image: -webkit-linear-gradient(left, #0cf 0%, #00a2ff 100%);
+  background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%); 
+  background-size: 200% auto;
+  color: #fff; 
+  letter-spacing: .03em; 
+  font-weight: 600;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  border: none;
+  border-radius: 25px;
+}
+td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view:hover {
+  background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
+}
+.woocommerce-account .addresses .title {
+  font-family: 'bitter', serif;
+}
+.woocommerce-account .addresses .title .edit {
+  color: #00a2ff; 
+  font-family: "proxima", sans-serif;
+}
+.woocommerce-MyAccount-content .woocommerce-info a.button.wc-forward {
+  cursor: pointer; 
+  background-image: -webkit-linear-gradient(left, #0cf 0%, #00a2ff 100%);
+  background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%); 
+  background-size: 200% auto;
+  color: #fff; 
+  letter-spacing: .03em; 
+  font-weight: 600;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  border: none;
+  border-radius: 25px;
+}
+.woocommerce-MyAccount-content .woocommerce-info a.button.wc-forward:hover {
+  background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
+}

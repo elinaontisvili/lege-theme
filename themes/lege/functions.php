@@ -652,3 +652,43 @@ add_filter('mc4wp_form_response_position', function() {
 });
 
 
+/**
+ * Registration Form
+ */
+// Add phone field to Woo registration form 
+add_action( 'register_form', 'lege_add_registration_fields' );
+function lege_add_registration_fields() {
+    // Get and set any value already sent 
+    $user_phone = ( isset( $_POST['billing_phone'] ) ) ? $_POST['billing_phone'] : '';
+    ?> 
+
+    <p>
+        <label for="user_extra"><?php _e( 'Phone', 'lege' ) ?><br />
+            <input type="text" name="billing_phone" id="billing_phone" class="input" value="<?php echo esc_attr( stripslashes( $user_phone ) ); ?>" /></label>
+    </p>
+
+    <?php
+}
+// Validate the phone field (field is required)
+add_filter( 'registration_errors', 'lege_registration_errors', 10, 3 );
+function lege_registration_errors( $errors, $sanitized_user_login, $user_email ) {
+
+    if ( empty( $_POST['billing_phone'] ) || ! empty( $_POST['billing_phone'] ) && trim( $_POST['billing_phone'] ) == '' ) {
+        $errors->add( 'billing_phone_error', sprintf('<strong>%s</strong>: %s',__( 'ERROR', 'lege' ),__( 'Пожалуйста, введите номер телефона.', 'lege' ) ) );
+    }
+
+    return $errors;
+}
+// Save the phone number to user meta after registration
+add_action( 'user_register', 'lege_user_register' );
+function lege_user_register( $user_id ) {
+    if ( ! empty( $_POST['billing_phone'] ) ) {
+        update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone'] ) );
+    }
+}
+
+add_action('woocommerce_save_account_details', 'lege_woocommerce_save_account_details'); 
+function lege_woocommerce_save_account_details( $user_id ) {
+    update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone']));
+}
+
