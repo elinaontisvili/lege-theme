@@ -7049,12 +7049,48 @@ a.remove.cart__del:hover {
   line-height: 28px;
 }
 
+.new-item_sale {
+  background: #fdba4a;
+  position: absolute;
+  left: 60px;
+  top: 10px;
+  width: 55px;
+  height: 28px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2px;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 28px;
+  z-index: 9999;
+}
+
 /*
 .products .price__old,
 .products .rate {
   display: none;
 }
 */
+
+.discount_sale {
+    color: #fff;
+    background-color: #ff4a5d;
+    background-image: -webkit-linear-gradient(left, #fd5163 0%, #fe384d 100%);
+    background-image: linear-gradient(to right, #fd5163 0%, #fe384d 100%);
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    line-height: 28px;
+    margin-top: 10px;
+    margin-right: -25px;
+    width: 55px;
+    height: 28px;
+    position: absolute;
+    display: inline;
+    z-index: 9999;
+}
 
 .products .rate {
   width: 70px;

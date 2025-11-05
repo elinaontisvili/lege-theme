@@ -115,16 +115,19 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
 
 //Sale 
+    //display the “HOT / NEW” badge
     function lege_show_status(){
         if(get_post_meta(get_the_ID(),'lege_sale_button_title',true)){
             $color = '';
             if(get_post_meta(get_the_ID(),'lege_sale_button_color',true)){
                 $color = 'style="background:'.get_post_meta(get_the_ID(),'lege_sale_button_color',true).'"';
             }
-            echo '<span class="new-item" '.$color.'>'.get_post_meta(get_the_ID(),'lege_sale_button_title',true).'</span>';
+            echo '<span class="new-item new-item_sale" '.$color.'>'.get_post_meta(get_the_ID(),'lege_sale_button_title',true).'</span>';
         }
     }
     add_action('woocommerce_before_shop_loop_item', 'lege_show_status', 9);
+    //hook to single product page
+    add_action('woocommerce_before_single_product_summary', 'lege_show_status', 5);
 
     //show sale price at cart
     function my_custom_show_sale_price_at_cart( $old_display, $cart_item, $cart_item_key ) {

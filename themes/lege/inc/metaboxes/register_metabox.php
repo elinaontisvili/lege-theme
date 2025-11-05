@@ -103,7 +103,7 @@ $meta_boxes[] = array(
             'name' => 'Текст кнопки',
             'desc' => 'Укажите какой либо текст для кнопки',
             'id'   => $prefix . 'sale_button_title',
-            'std' => '',
+            'std' => 'e.g. NEW, HOT',
             'type' => 'text',
         ),
         array(
