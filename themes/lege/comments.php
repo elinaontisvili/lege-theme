@@ -71,7 +71,17 @@ if ( post_password_required() ) {
 
 	endif; // Check for have_comments().
 
-	comment_form();
+	comment_form( array(
+		'comment_field' => '
+			<p class="comment-form-comment"> 
+			<label for="comment">' . _x('Комментарий', 'lege') . '</label> 
+			<textarea id="comment" name="comment" class="log__input" rows="8" required></textarea>
+			</p>
+		',
+		'class_submit' => 'btn bnt_woo',
+		'label_submit' => __('Отправить комментарий', 'lege'),
+		'submit_button' => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
+	));
 	?>
 
 </div><!-- #comments -->
