@@ -10915,3 +10915,23 @@ td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view
 .woocommerce-MyAccount-content .woocommerce-info a.button.wc-forward:hover {
   background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
 }
+
+
+/* Social Login (frontend) */ 
+.theChampLogin {
+  width: 64px !important; 
+  border-radius: 16px !important;
+}
+
+.theChampLogin.theChampInstagramBackground.theChampInstagramLogin .theChampInstagramLoginSvg {
+  background-size: 40% !important;
+}
+
+.theChampLogin.theChampVkontakteBackground.theChampVkontakteLogin .theChampVkontakteLoginSvg {
+  background-size: 50% !important; 
+}
+
+.theChampFacebookLoginSvg {
+  padding-top: 0 !important;
+}
+
