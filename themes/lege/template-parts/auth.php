@@ -60,30 +60,10 @@
     
     <!-- SOCIALS -->
     <div class="var">
-        <p class="var__text">Или войдите в систему с помощью</p>
-        <ul class="var__list">
-            <li>
-                <a href="#" class="var__link var__link_goo">
-                    <svg width="14" height="14">
-                        <use xlink:href="#google"/>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="var__link var__link_vk">
-                    <svg width="18" height="18">
-                        <use xlink:href="#vk"/>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="var__link var__link_fb">
-                    <svg width="16" height="16">
-                        <use xlink:href="#facebook"/>
-                    </svg>
-                </a>
-            </li>
-        </ul>
+        <p class="var__text"><?php esc_html_e('Или войдите в систему с помощью','lege'); ?></p>
+
+        <?php echo do_shortcode('[TheChamp-Login]'); ?>
+
     </div>
 </div>
 
@@ -196,10 +176,10 @@
 <div id="reg" class="reg mfp-hide">
     
     <p class="reg__question modal-text">
-        <?php esc_html_e( 'Уже есть аккаунт?', 'your-text-domain' ); ?>
+        <?php esc_html_e( 'Уже есть аккаунт?', 'lege' ); ?>
             <span>
                 <a href="#enter" class="popup-link-1 link-more">
-                    <?php esc_html_e( 'Войдите', 'your-text-domain' ); ?>
+                    <?php esc_html_e( 'Войдите', 'lege' ); ?>
                 </a>
             </span>
     </p>
@@ -263,29 +243,9 @@
 		</form>
 
     <div class="var">
-        <p class="var__text">Или войдите в систему с помощью</p>
-        <ul class="var__list">
-            <li>
-                <a href="#" class="var__link var__link_goo">
-                    <svg width="14" height="14">
-                        <use xlink:href="#google"/>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="var__link var__link_vk">
-                    <svg width="18" height="18">
-                        <use xlink:href="#vk"/>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="var__link var__link_fb">
-                    <svg width="16" height="16">
-                        <use xlink:href="#facebook"/>
-                    </svg>
-                </a>
-            </li>
-        </ul>
+        <p class="var__text"><?php esc_html_e('Или войдите в систему с помощью','lege'); ?></p>
+
+        <?php echo do_shortcode('[TheChamp-Login]'); ?>
+
     </div>
 </div>
