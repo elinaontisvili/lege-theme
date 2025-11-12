@@ -49,9 +49,10 @@ function lege_setup() {
 	// Регистрация меню навигации.
 	register_nav_menus(
 		array(
-			'menu-header' => esc_html__( 'Header Navigation', 'lege' ),
+			'menu-header'  => esc_html__( 'Header Navigation', 'lege' ),
 			'menu-footer1' => esc_html__( 'Footer Navigation 1', 'lege' ),
-			'menu-footer2' => esc_html__( 'Footer Navigaion 2', 'lege' ),
+			'menu-footer2' => esc_html__( 'Footer Navigation 2', 'lege' ),
+            'menu-language'=> esc_html__( 'Language Switcher 1', 'lege')
 		)
 	);
 
@@ -432,6 +433,7 @@ require get_template_directory() . '/inc/widgets/widget-shopbanner.php';
 require get_template_directory() . '/inc/widgets/widget-pricerange.php';
 require get_template_directory() . '/inc/widgets/widget-categoryfilter.php';
 require get_template_directory() . '/inc/widgets/widget-rating.php';
+require get_template_directory() . '/inc/widgets/widget-customcategory-cases.php';
 
 // Debug - Sidebars briefly appear and then disappear on the Widgets admin screen.
 // Disable the block editor for widgets.

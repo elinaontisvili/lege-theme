@@ -12,7 +12,18 @@ function lege_widgets_init() {
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="subscr__title"><svg width="19" height="19"><use xlink:href="#mail"></use></svg>',
-        	'after_title'   => '</div>',
+        	'after_title'   => '</div>'
+		)
+	);
+	register_sidebar(
+		array(
+			'name'			=> esc_html__('Sidebar Cases', 'lege' ),
+			'id'			=> 'sidebarcases',
+			'description'	=> esc_html__('Add widgets here.', 'lege' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>', 
+			'before_title'  => '<div class="subscr__title"><svg width="19" height="19"><use xlink:href="#mail"></use></svg>',
+			'after_title'	=> '</div>'
 		)
 	);
 	/*
@@ -54,6 +65,7 @@ function lege_init_widgets() {
 	register_widget('Lege_PriceRange_Widget');
 	register_widget('Lege_Category_Filter_Widget');
 	register_widget('Lege_Rating_Widget');
+	register_widget('Lege_Category_Case_Widget');
 }
 
 add_action('widgets_init', 'lege_init_widgets');

@@ -670,6 +670,34 @@ Redux::set_section( $opt_name, array(
 	)
 ) );
 
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Cases', 'lege' ),
+	'id'               => 'casesposttype',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Data for Cases Page', 'lege' ),
+	'fields'           => array(
+		array(
+			'id'      => 'casearchivetitle1',
+			'type'    => 'text',
+			'title'   => __( 'Page Cases Heading 1', 'lege' ),
+			'default' => 'НАШИ',
+		),
+		array(
+			'id'      => 'casearchivetitle2',
+			'type'    => 'text',
+			'title'   => __( 'Page Cases Heading 2', 'lege' ),
+			'default' => 'КЕЙСЫ',
+		),
+		array(
+			'id'      => 'casearchivedesc',
+			'type'    => 'textarea',
+			'title'   => __( 'Page Cases Description', 'lege' ),
+			'default' => 'Описание страницы кейсов.',
+		),
+	)
+) );
+
 // Internal Pages
 Redux::set_section( $opt_name, array(
 	'title'            => __( 'Settings for Internal Pages', 'lege' ),
