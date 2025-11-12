@@ -16,7 +16,6 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-
 <?php 
 global $lege_options;
 //print_r($lege_options['home_header_slider']);
@@ -91,14 +90,25 @@ if(is_page_template('template-home.php')) {
 	<?php } ?>
 
 		<div class="language">
-			<ul>
+			<!-- <ul>
 				<li class="lang-item active">
 					<a href="#">Ru</a>
 				</li>
 				<li class="lang-item">
 					<a href="#">En</a>
 				</li>
-			</ul>
+			</ul> -->
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'menu-language',
+					'main-menu'		 => 'Language Switcher 1',
+					'menu_id'        => '',
+                    'menu_class'     => '',
+                    'container'      => '',
+				)
+			);
+			?>
 		</div>
 	</div>
 

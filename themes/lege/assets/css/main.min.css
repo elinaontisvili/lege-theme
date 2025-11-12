@@ -680,12 +680,18 @@ button {
   opacity: .6;
 }
 
+/*
 .language .lang-item.active {
   color: #26afff;
   position: relative;
   font-weight: 600;
+} */
+.language .lang-item.current-lang {
+  color: #26afff;
+  position: relative;
+  font-weight: 600;
 }
-
+/*
 .language .lang-item.active:before {
   position: absolute;
   content: '';
@@ -694,6 +700,16 @@ button {
   width: 4px;
   height: 4px;
   top: 40%;
+  left: -8px;
+} */ 
+.language .lang-item.current-lang:before {
+  position: absolute;
+  content: ''; 
+  background-color: #26afff; 
+  border-radius: 50%; 
+  width: 4px; 
+  height: 4px; 
+  top: 40%; 
   left: -8px;
 }
 
