@@ -10,10 +10,9 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see 	    https://docs.woocommerce.com/document/template-structure/
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     3.3.0
+ * @see         https://woocommerce.com/document/template-structure/
+ * @package     WooCommerce\Templates
+ * @version     9.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,31 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 
-//print_r($args['class']);
-
-
-// WITH AJAX
-/*
-echo apply_filters( 'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
-	sprintf( '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
+echo apply_filters(
+	'woocommerce_loop_add_to_cart_link',
+	sprintf(
+		'<a href="%s" %s data-quantity="%s" class="%s" %s>%s</a>',
 		esc_url( $product->add_to_cart_url() ),
+		$aria_describedby,
 		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
-		'product_type_simple add_to_cart_button ajax_add_to_cart products__but',
-		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-		''
-	),
-$product, $args );
-*/
-
-
-// NO AJAX (loads all the product archive page)
-echo apply_filters( 'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
-	sprintf( '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
-		esc_url( $product->add_to_cart_url() ),
-		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
-		// class removed -> ajax_add_to_cart 
 		'product_type_simple add_to_cart_button products__but',
 		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-		''
+		esc_html__( '' )
 	),
-$product, $args );
+	$product,
+	$args
+);
+?>
+<?php if ( isset( $args['aria-describedby_text'] ) ) : ?>
+	<span id="woocommerce_loop_add_to_cart_link_describedby_<?php echo esc_attr( $product->get_id() ); ?>" class="screen-reader-text">
+		<?php echo esc_html( $args['aria-describedby_text'] ); ?>
+	</span>
+<?php endif; ?>
