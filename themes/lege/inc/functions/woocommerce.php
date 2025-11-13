@@ -98,40 +98,24 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
 
     /* Sale */
-
     // Display the “HOT / NEW” badge
-    /*
-    function lege_show_status(){
-        if(get_post_meta(get_the_ID(),'lege_sale_button_title',true)){
-            $color = '';
-            if(get_post_meta(get_the_ID(),'lege_sale_button_color',true)){
-                $color = 'style="background:'.get_post_meta(get_the_ID(),'lege_sale_button_color',true).'"';
-            }
-            echo '<span class="new-item new-item_sale" '.$color.'>'.get_post_meta(get_the_ID(),'lege_sale_button_title',true).'</span>';
+    function lege_show_status() {
+        global $product;
+
+        if ( ! $product ) {
+            return;
+        }
+
+        $product_id = $product->get_id();
+        $title = get_post_meta( $product_id, 'lege_sale_button_title', true );
+        $color = get_post_meta( $product_id, 'lege_sale_button_color', true );
+
+        if ( ! empty( $title ) ) {
+            $style = $color ? 'style="background:' . esc_attr( $color ) . ';"' : '';
+            echo '<span class="new-item" ' . $style . '>' . esc_html( $title ) . '</span>';
         }
     }
-    add_action('woocommerce_before_shop_loop_item', 'lege_show_status', 9);
-    // Hook to single product page
-    add_action('woocommerce_before_single_product_summary', 'lege_show_status', 5);
-*/
-function lege_show_status() {
-    global $product;
-
-    if ( ! $product ) {
-        return;
-    }
-
-    $product_id = $product->get_id();
-    $title = get_post_meta( $product_id, 'lege_sale_button_title', true );
-    $color = get_post_meta( $product_id, 'lege_sale_button_color', true );
-
-    if ( ! empty( $title ) ) {
-        $style = $color ? 'style="background:' . esc_attr( $color ) . ';"' : '';
-        echo '<span class="new-item" ' . $style . '>' . esc_html( $title ) . '</span>';
-    }
-}
-add_action( 'woocommerce_before_shop_loop_item', 'lege_show_status', 9 );
-//add_action( 'woocommerce_before_single_product_summary', 'lege_show_status', 5 );
+    add_action( 'woocommerce_before_shop_loop_item', 'lege_show_status', 9 );
 
     // Show sale price at cart
     function my_custom_show_sale_price_at_cart( $old_display, $cart_item, $cart_item_key ) {
