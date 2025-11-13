@@ -1,0 +1,75 @@
+<wpml-config> 
+    <custom-fields>
+        <custom-field action="translate">lege_social_link</custom-field>
+        <custom-field action="translate">lege_testy_date</custom-field>
+        <custom-field action="translate">lege_service_cost</custom-field>
+        <custom-field action="translate">lege_service_icon</custom-field>
+        <custom-field action="translate">lege_shortcode_order</custom-field>
+        <custom-field action="translate">lege_short_title</custom-field>
+        <custom-field action="translate">lege_sale_button_title</custom-field>
+        <custom-field action="translate">lege_sale_button_color</custom-field> 
+        <custom-field action="translate">lege_photo_one</custom-field>
+        <custom-field action="translate">lege_photo_one_alt</custom-field>
+        <custom-field action="translate">lege_contact_title_left</custom-field>
+        <custom-field action="translate">lege_contact_title_right</custom-field>
+        <custom-field action="translate">lege_contact_shortcode</custom-field>
+        <custom-field action="translate">lege_contact_address</custom-field>
+        <custom-field action="translate">lege_contact_phone1</custom-field>
+        <custom-field action="translate">lege_contact_phone2</custom-field>
+        <custom-field action="translate">lege_contact_email</custom-field>
+        <custom-field action="translate">lege_contact_calendar</custom-field>
+        <custom-field action="translate">lege_contact_map</custom-field>
+    </custom-fields>
+    <custom-types>
+        <custom-type translate="1">news</custom-type>
+        <custom-type translate="1">testimonial</custom-type> 
+        <custom-type translate="1">service</custom-type> 
+        <custom-type translate="1">feature</custom-type>
+    </custom-types>
+    <taxonomies> 
+        <taxonomy translate="1">service-type</taxonomy>
+        <taxonomy translate="1">news-category</taxonomy> 
+        <taxonomy translate="1">feature-type</taxonomy> 
+    </taxonomies>
+    <admin-texts> 
+        <key name="lege_options"> 
+            <key name="footer_address" /> 
+            <key name="footer_phone" />
+            <key name="footer_copyrights" />
+            <key name="footer_section1" />
+            <key name="footer_section2" /> 
+            <key name="footer_section3" />
+            <key name="footer_section4" />
+            <key name="footer_subscribeshortcode" />
+            <key name="header_time" />
+            <key name="header_video" />
+            <key name="header_video_title" />
+            <key name="header_phone_label" /> 
+            <key name="header_phone" /> 
+            <key name="footer_section1" />
+            <key name="footer_section2" />
+            <key name="footer_section3" />
+            <key name="footer_section4" />
+            <key name="testylabel1" />
+            <key name="testylabel2" />
+            <key name="testimonial_form_shortcode" />
+            <key name="servicecurrency" />
+            <key name="caseslabel" />
+            <key name="servicearchivetitle11" />
+            <key name="servicearchivetitle12" />
+            <key name="servicearchivedesc" />
+            <key name="newstitle1" />
+            <key name="newstitle2" />
+            <key name="categorytitle" />
+            <key name="casearchivetitle1" /> 
+            <key name="casearchivetitle2" /> 
+            <key name="casearchivedesc" />
+            <key name="bloglabel1" /> 
+            <key name="bloglabel2" />
+            <key name="lege_form_policy_text" />
+            <key name="wootitle1" />
+            <key name="wootitle2" />
+            <key name="woolink" /> 
+        </key>
+    </admin-texts>
+</wpml-config>
