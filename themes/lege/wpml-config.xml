@@ -5,7 +5,6 @@
         <custom-field action="translate">lege_service_cost</custom-field>
         <custom-field action="translate">lege_service_icon</custom-field>
         <custom-field action="translate">lege_shortcode_order</custom-field>
-        <custom-field action="translate">lege_short_title</custom-field>
         <custom-field action="translate">lege_sale_button_title</custom-field>
         <custom-field action="translate">lege_sale_button_color</custom-field> 
         <custom-field action="translate">lege_photo_one</custom-field>
