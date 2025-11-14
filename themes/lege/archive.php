@@ -8,9 +8,10 @@
  */
 
 get_header(); 
-global $wp_query;
 
+global $wp_query;
 ?>
+
 <section class="inner events">
 	<div class="wrapper">
 		<div class="news">
@@ -61,28 +62,28 @@ global $wp_query;
 										<svg width="15" height="15">
 											<use xlink:href="#link"/>
 										</svg>
-										Поделиться:
+										<?php esc_html_e('Поделиться:', 'lege'); ?>
 									</p>
 									<ul class="social">
 										<li class="social__item">
-											<span>Vk</span>
-											<a data-social="vkontakte" onclick="window.open(this.href, 'Share on VK', 'width=600,height=300'); return false" class="social__icon social__icon_vk" href="<?php echo lege_get_share('vk', get_the_permalink(), get_the_title()); ?>">
+											<span><?php esc_html_e('Vk','lege'); ?></span>
+											<a data-social="vkontakte" onclick="window.open(this.href, 'Share on VK', 'width=600,height=300'); return false" class="social__icon social__icon_vk" href="<?php echo esc_url( lege_get_share('vk', get_the_permalink(), get_the_title()) ); ?>">
 												<svg  width="21" height="18">
 													<use xlink:href="#vk"/>
 												</svg>
 											</a>
 										</li>
 										<li class="social__item">
-											<span>Fb</span>
-											<a data-social="facebook" onclick="window.open(this.href, 'Share on Facebook', 'width=600,height=300'); return false" class="social__icon social__icon_fb" href="<?php echo lege_get_share('fb', get_the_permalink(), get_the_title()); ?>">
+											<span><?php esc_html_e('Fb', 'lege'); ?></span>
+											<a data-social="facebook" onclick="window.open(this.href, 'Share on Facebook', 'width=600,height=300'); return false" class="social__icon social__icon_fb" href="<?php echo esc_url( lege_get_share('fb', get_the_permalink(), get_the_title()) ); ?>">
 												<svg  width="14" height="17">
 													<use xlink:href="#facebook"/>
 												</svg>
 											</a>
 										</li>
 										<li class="social__item">
-											<span>Tw</span>
-											<a data-social="twitter" onclick="window.open(this.href, 'Share on Twitter', 'width=600,height=300'); return false" class="social__icon social__icon_tw" href="<?php echo lege_get_share('twi', get_the_permalink(), get_the_title()); ?>">
+											<span><?php esc_html_e('Tw','lege'); ?></span>
+											<a data-social="twitter" onclick="window.open(this.href, 'Share on Twitter', 'width=600,height=300'); return false" class="social__icon social__icon_tw" href="<?php echo esc_url( lege_get_share('twi', get_the_permalink(), get_the_title()) ); ?>">
 												<svg  width="18" height="15">
 													<use xlink:href="#twitter"/>
 												</svg>
@@ -91,7 +92,7 @@ global $wp_query;
 									</ul>
 								</div>
 								<a href="<?php the_permalink(); ?>" class="news__link link-more">
-									Читать больше
+									<?php esc_html_e('Читать больше', 'lege'); ?>
 									<svg width="18" height="20">
 										<use xlink:href="#nav-right"/>
 									</svg>

@@ -1,4 +1,13 @@
-<?php get_header(); ?>
+<?php 
+/**
+ * The template for displaying archive pages
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package Lege
+ */
+
+get_header(); ?>
 
 <section class="inner services tabs">
 			<div class="wrapper">
