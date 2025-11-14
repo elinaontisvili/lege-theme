@@ -54,14 +54,14 @@ if ( $show_downloads ) {
 <section class="woocommerce-order-details">
 	<?php do_action( 'woocommerce_order_details_before_order_table', $order ); ?>
 
-	<h2 class="woocommerce-order-details__title pay__title_details"><?php esc_html_e( 'Информация о заказе', 'lege' ); ?></h2>
+	<h2 class="woocommerce-order-details__title pay__title_details"><?php esc_html_e( 'Order details', 'lege' ); ?></h2>
 
 	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
 
 		<thead>
 			<tr>
-				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Товар', 'lege' ); ?></th>
-				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Итого', 'lege' ); ?></th>
+				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'lege' ); ?></th>
+				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'lege' ); ?></th>
 			</tr>
 		</thead>
 

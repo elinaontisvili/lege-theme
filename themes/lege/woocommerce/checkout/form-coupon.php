@@ -44,7 +44,7 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 	</p>
 
 	<p class="form-row form-row-last">
-		<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> bnt_woo promo__btn btn" name="apply_coupon" value="<?php esc_attr_e( 'Применить купон', 'lege' ); ?>"><?php esc_html_e( 'Применить купон', 'lege' ); ?></button>
+		<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> bnt_woo promo__btn btn" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'lege' ); ?>"><?php esc_html_e( 'Apply coupon', 'lege' ); ?></button>
 	</p>
 
 	<div class="clear"></div>

@@ -22,7 +22,6 @@ get_header( 'shop' );
 global $lege_options;
 ?>
 
-<!-- Market -->
 <section class="inner shop">
 	<div class="shop-top" style="background: #fff url(<?php echo $lege_options['woo_bg']['url']; ?>) no-repeat center top/ cover;">
 		<div class="wrapper">
@@ -32,17 +31,13 @@ global $lege_options;
 			</h1>
 			<?php } ?>
 			<?php if($lege_options['woolink']) { ?>
-			<a href="<?php $lege_options['woolink']; ?>" class="shop-top__btn btn">Купить сейчас</a>
+			<a href="<?php $lege_options['woolink']; ?>" class="shop-top__btn btn"><?php esc_html_e('Buy now', 'lege'); ?></a>
 			<?php } ?>
 		</div>
 	</div>
 
-
-
-
 	<div class="wrapper">
-		
-	
+
 	<div class="shop__heading">
 			<div class="shop__btns">
 				<div class="shop__btn" id="on-list">
@@ -57,26 +52,17 @@ global $lege_options;
 				</div>
 			</div>
 			
-			<?php //woocommerce_catalog_ordering(); ?>
 			<div class="sort-menu">
-				<span>Сортировать <a href="#" data-value="popularity" id="parametr">по популярности</a></span>
-				<ul>
-					<li><a href="#" data-value="popularity">по популярности</a></li>
-					<li><a href="#" data-value="rating">по рейтингу</a></li>
-					<li><a href="#" data-value="date">по новизне</a></li>
-					<li><a href="#" data-value="price">по возрастанию</a></li>
-					<li><a href="#" data-value="price-desc">по убыванию</a></li>
-					<!-- 
-					<li><a href="#">по цене</a></li>
-					<li><a href="#">по популярности</a></li>
-					<li><a href="#">по рейтингу</a></li>
-					<li><a href="#">новинки</a></li>
-					-->
-				</ul>
+				<span><?php echo esc_html__('Sort', 'lege'); ?> <a href="<?php echo esc_url( '#' ); ?> " data-value="<?php echo esc_attr('popularity'); ?>" id="parametr"><?php echo esc_html__( 'by popularity', 'lege' ); ?></a></span>
+					<ul>
+						<li><a href="<?php echo esc_url( '#' ); ?>" data-value="<?php echo esc_attr( 'popularity' ); ?>"><?php echo esc_html__( 'by popularity', 'lege'); ?></a></li>
+						<li><a href="<?php echo esc_url( '#' ); ?>" data-value="<?php echo esc_attr( 'rating' ); ?>"><?php echo esc_html__('by rating', 'lege'); ?></a></li>
+						<li><a href="<?php echo esc_url( '#' ); ?>" data-value="<?php echo esc_attr( 'date' ); ?>"><?php echo esc_html__('by newest', 'lege'); ?></a></li>
+						<li><a href="<?php echo esc_url( '#' ); ?>" data-value="<?php echo esc_attr( 'price' ); ?>"><?php echo esc_html__('price: low to high', 'lege'); ?></a></li>
+						<li><a href="<?php echo esc_url( '#' ); ?>" data-value="<?php echo esc_attr( 'price-desc' ); ?>"><?php echo esc_html__('price: high to low', 'lege'); ?></a></li>
+					</ul>
+				</div>
 			</div>
-		</div>
-
-		<!--<aside class="sidebar">-->
 
 			<?php 
 
@@ -89,16 +75,12 @@ global $lege_options;
 
 			?>
 
-		<!--</aside>-->
-
 		<div class="market">
 			<div class="market__heading">
 				<?php if (apply_filters('woocommerce_show_page_title', true)) : ?>
 					<h3 class="market__title"><?php woocommerce_page_title(); ?></h3>
-					<!--<h3 class="market__title">Аксессуары</h3>-->
 				<?php endif; ?>
 
-				<!--<header class="woocommerce-products-header">-->
 				<?php
 				/**
 				 * Hook: woocommerce_archive_description.
@@ -109,10 +91,6 @@ global $lege_options;
 				do_action( 'woocommerce_archive_description' );
 				?>
 				
-				<!-- Results count 
-				<p class="market__show">Показано 12 из 137</p>-->
-				
-				<!--</header>-->
 			</div>
 
 			<?php 

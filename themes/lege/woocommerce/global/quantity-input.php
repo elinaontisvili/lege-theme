@@ -25,10 +25,10 @@ if ( $max_value && $min_value === $max_value ) {
 	<?php
 } else {
 	/* translators: %s: Quantity. */
-	$labelledby = ! empty( $args['product_name'] ) ? sprintf( __( '%s quantity', 'woocommerce' ), strip_tags( $args['product_name'] ) ) : '';
+	$labelledby = ! empty( $args['product_name'] ) ? sprintf( __( '%s quantity', 'lege' ), strip_tags( $args['product_name'] ) ) : '';
 	?>
 	<div class="quantity">
-        <span class="minus" title="Не, лучше поменьше">-</span>
+        <span class="minus" title="<?php echo esc_attr__('Nah, better a bit less', 'lege'); ?>">-</span>
         <input
 			type="text"
 			id="<?php echo esc_attr( $input_id ); ?>"
@@ -38,7 +38,7 @@ if ( $max_value && $min_value === $max_value ) {
 			max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>"
 			name="<?php echo esc_attr( $input_name ); ?>"
 			value="<?php echo esc_attr( $input_value ); ?>"
-			title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'woocommerce' ); ?>"
+			title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'lege' ); ?>"
 			size="4"
 			pattern="<?php echo esc_attr( $pattern ); ?>"
 			inputmode="<?php echo esc_attr( $inputmode ); ?>"
@@ -51,7 +51,7 @@ if ( $max_value && $min_value === $max_value ) {
 			}
 			?>
 		/>
-        <span class="plus" title="Да-да, побольше!">+</span>
+        <span class="plus" title="<?php echo esc_attr('Yeah, yeah, more!', 'lege'); ?>">+</span>
 	</div>
 	<?php
 }

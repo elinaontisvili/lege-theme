@@ -23,13 +23,13 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php do_action( 'woocommerce_before_cart_totals' ); ?>
 
-	<div class="result__title"><?php esc_html_e('Итого', 'lege'); ?></div>
+	<div class="result__title"><?php esc_html_e('Cart totals', 'lege'); ?></div>
 
 	<div cellspacing="0" class="shop_table shop_table_responsive">
 
 		<div class="cart-subtotal result__row">
-			<div class="result__name"><?php esc_html_e( 'Всего', 'lege' ); ?></div>
-			<div data-title="<?php esc_attr_e( 'Всего', 'lege' ); ?>"><?php wc_cart_totals_subtotal_html(); ?></div>
+			<div class="result__name"><?php esc_html_e( 'Subtotal', 'lege' ); ?></div>
+			<div data-title="<?php esc_attr_e( 'Subtotal', 'lege' ); ?>"><?php wc_cart_totals_subtotal_html(); ?></div>
 		</div>
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>

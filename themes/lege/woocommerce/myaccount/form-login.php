@@ -21,5 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?> 
 
 <div class="woocommerce-custom-login-message">
-	<p><?php esc_html_e('Вы должны авторизоваться. Используйте форму входа, которая находится в шапке справа.', 'lege'); ?></p>
+
+	<p><?php esc_html_e('You must log in. Use the login form located in the header on the right.', 'lege'); ?></p>
+	
 </div>

@@ -107,17 +107,17 @@ if ( ! comments_open() ) {
 					'class_container'     => 'log clients',
                     'class_form'          => 'clients__form log__wrap',
                     /* translators: %s is product title */
-                    'title_reply'         => have_comments() ? esc_html__( 'Оставьте ваш отзыв', 'lege' ) : sprintf( esc_html__( 'Be the first to review &ldquo;%s&rdquo;', 'lege' ), get_the_title() ),
+                    'title_reply'         => have_comments() ? esc_html__( 'Add a review', 'lege' ) : sprintf( esc_html__( 'Be the first to review &ldquo;%s&rdquo;', 'lege' ), get_the_title() ),
                     /* translators: %s is product title */
                     'title_reply_to'      => esc_html__( 'Leave a Reply to %s', 'lege' ),
                     'title_reply_before'  => '<h2 id="reply-title" class="comment-reply-title log__title log__title_custom" role="heading" aria-level="3">',
                     'title_reply_after'   => '</h2>',
-                    'comment_notes_after' => '<p class="log__line"><span>*</span>' . esc_html__('Поля обязательные для заполнения', 'lege') . '</p>',
+                    'comment_notes_after' => '<p class="log__line"><span>*</span>' . esc_html__( 'Fields are required', 'lege' ) . '</p>',
                     'logged_in_as'        => '',
                     'comment_field'       => '',
                     'comment_notes_after' => '<p class="comment-form-cookies-consent">' .
                              '<input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />' .
-                             '<label class="cookies__consent" for="wp-comment-cookies-consent">' . esc_html__( 'Сохранить моё имя, email и адрес сайта в этом браузере для последующих моих комментариев.', 'lege' ) . '</label>' .
+                             '<label class="cookies__consent" for="wp-comment-cookies-consent">' . esc_html__( 'Save my name, email, and website in this browser for the next time I comment.', 'lege' ) . '</label>' .
                              '</p>',
 					'submit_button' => '<button type="submit" class="btn bnt_woo log__submit">' . esc_html__( 'Send Review', 'lege' ) . '</button>',
                 );
@@ -147,7 +147,7 @@ if ( ! comments_open() ) {
 				// Build comment textarea first
 				$comment_form['comment_field'] =
 					'<div class="log__group log__group_textarea">' .
-						'<label class="label_custom" for="comment">' . esc_html__('Ваш отзыв', 'lege') . '&nbsp;<span class="required">*</span></label>' .
+						'<label class="label_custom" for="comment">' . esc_html__('Your review', 'lege') . '&nbsp;<span class="required">*</span></label>' .
 						'<textarea id="comment" name="comment" cols="45" rows="8" required class="log__group_textarea_custom"></textarea>' .
 					'</div>';
 
@@ -161,7 +161,7 @@ if ( ! comments_open() ) {
 				$comment_form['comment_field'] .= '
 				<div class="log__block">
 					<div class="log__rate log__rate_custom rating">
-						<span>Ваша оценка</span>
+						<span>Your rating</span>
 						<div class="rating__choice" id="rate-choice">
 							<div class="rating__group"><input type="radio" value="1" name="rating"><label></label></div>
 							<div class="rating__group"><input type="radio" value="2" name="rating"><label></label></div>

@@ -37,12 +37,12 @@ if ( $attachment_ids && has_post_thumbnail() ) {
 		 * @param int    $attachment_id Attachment ID.
 		 */
 
-		//$image_element = '<img class="product__pic" src="'.wp_get_attachment_image_url( $attachment_id, 'full'  ).'"alt="" />';
-		//wordpress handles alt text and responsive images
 		$image_element = wp_get_attachment_image( $attachment_id, 'full', false, array( 'class' => 'product__pic' ));
 	    echo '<div class="product__item">';
-			//echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', wc_get_gallery_image_html( $attachment_id, false, $key ), $attachment_id ); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 		    echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', $image_element, $attachment_id );
+			
 		echo '</div>';
+		
 	}
 }

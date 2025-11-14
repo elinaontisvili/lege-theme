@@ -29,14 +29,11 @@ $calculator_text          = '';
 	<td data-title="<?php echo esc_attr( $package_name ); ?>">
 		<?php if ( ! empty( $available_methods ) && is_array( $available_methods ) ) : ?>
 			<ul id="shipping_method" class="woocommerce-shipping-methods">
-				
-
 
 				<?php foreach ( $available_methods as $method ) : ?>
 				<li>
 					<div class="table__value name label_custom_shipping_method">
 						<?php
-						// Radio or hidden input depending on number of methods
 						if ( 1 < count( $available_methods ) ) {
 							printf(
 								'<input type="radio" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d_%2$s" value="%3$s" class="shipping_method custom_class" %4$s />',
@@ -54,7 +51,6 @@ $calculator_text          = '';
 							);
 						}
 
-
 						if ( is_cart() ) {
 							// Cart page
 							printf(
@@ -65,7 +61,7 @@ $calculator_text          = '';
 							);
 						} elseif ( is_checkout() ) {
 							// Checkout page
-							$label_text = $method->label; // only text
+							$label_text = $method->label;
 							$price_html = wc_price( $method->cost );
 							?>
 							<label for="shipping_method_<?php echo $index; ?>_<?php echo esc_attr( sanitize_title( $method->id ) ); ?>" class="label_custom_shipping table__value_cutom">
@@ -88,7 +84,6 @@ $calculator_text          = '';
 					</div>
 				</li>
 <?php endforeach; ?>
-
 
 			</ul>
 			<?php if ( is_cart() ) : ?>

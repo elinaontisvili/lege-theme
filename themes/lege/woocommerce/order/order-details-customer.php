@@ -28,7 +28,7 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 
 	<?php endif; ?>
 
-	<h2 class="woocommerce-column__title pay__title_details"><?php esc_html_e( 'Платёжный адрес', 'lege' ); ?></h2>
+	<h2 class="woocommerce-column__title pay__title_details"><?php esc_html_e( 'Billing address', 'lege' ); ?></h2>
 
 	<address>
 		<?php echo wp_kses_post( $order->get_formatted_billing_address( esc_html__( 'N/A', 'lege' ) ) ); ?>
@@ -55,10 +55,10 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 
 	<?php if ( $show_shipping ) : ?>
 
-		</div><!-- /.col-1 -->
+		</div>
 
 		<div class="woocommerce-column woocommerce-column--2 woocommerce-column--shipping-address col-2">
-			<h2 class="woocommerce-column__title pay__title_details"><?php esc_html_e( 'Адрес доставки', 'lege' ); ?></h2>
+			<h2 class="woocommerce-column__title pay__title_details"><?php esc_html_e( 'Delivery address', 'lege' ); ?></h2>
 			<address>
 				<?php echo wp_kses_post( $order->get_formatted_shipping_address( esc_html__( 'N/A', 'lege' ) ) ); ?>
 
@@ -77,9 +77,9 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 					do_action( 'woocommerce_order_details_after_customer_address', 'shipping', $order );
 				?>
 			</address>
-		</div><!-- /.col-2 -->
+		</div>
 
-	</section><!-- /.col2-set -->
+	</section>
 
 	<?php endif; ?>
 

@@ -10,9 +10,9 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
- * @version 3.4.0
+ * @see https://woocommerce.com/document/template-structure/
+ * @package WooCommerce\Templates
+ * @version 10.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +31,6 @@ if ( $product->is_in_stock() ) : ?>
 
 	<form class="product__form" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
 
-
         <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 		<?php
@@ -46,14 +45,12 @@ if ( $product->is_in_stock() ) : ?>
         do_action( 'woocommerce_after_add_to_cart_quantity' );
         ?>
 
-
         <div class="product__btns">
 
-            <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="product__btn btn">Положить в корзину</button>
-            <a href="#one-click" class="product__btn btn popup-link-1">Купить в один клик</a>
+            <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="product__btn btn"><?php esc_html_e( 'Add to cart', 'lege' ); ?></button>
+            <a href="#one-click" class="product__btn btn popup-link-1"><?php esc_html_e( 'Buy in one click', 'lege' ); ?></a>
              
         </div>
-
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>

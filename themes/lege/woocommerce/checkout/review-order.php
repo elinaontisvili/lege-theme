@@ -21,10 +21,10 @@ defined( 'ABSPATH' ) || exit;
 <div class="shop_table woocommerce-checkout-review-order-table table">
 	<div class="row">
 		<div class="col col-3-4">
-			<div class="table__head_custom product-name"><?php esc_html_e( 'Товар', 'lege' ); ?></div>
+			<div class="table__head_custom product-name"><?php esc_html_e( 'Product', 'lege' ); ?></div>
 		</div>
 		<div class="col col-1-4">
-			<div class="table__head_custom product-total"><?php esc_html_e( 'Итого', 'lege' ); ?></div>
+			<div class="table__head_custom product-total"><?php esc_html_e( 'Subtotal', 'lege' ); ?></div>
 		</div>
 	</div>
 	<div>
@@ -58,7 +58,7 @@ defined( 'ABSPATH' ) || exit;
 	<div>
 
 	<div class="row">
-		<div class="col col-3-4 col_custom_class-3-4"><?php esc_html_e( 'Всего', 'lege' ); ?></div>
+		<div class="col col-3-4 col_custom_class-3-4"><?php esc_html_e( 'Subtotal', 'lege' ); ?></div>
 		<div class="col col-1-4 cart-subtotal col_custom_class-1-4"><?php wc_cart_totals_subtotal_html(); ?></div>
 	</div>
 
@@ -113,7 +113,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 		<div class="order-total row">
-			<div class="col col-3-4"><?php esc_html_e( 'Общий итог', 'lege' ); ?></div>
+			<div class="col col-3-4"><?php esc_html_e( 'Total', 'lege' ); ?></div>
 			<div class="col col-1-4"><?php wc_cart_totals_order_total_html(); ?></div>
 		</div>
 

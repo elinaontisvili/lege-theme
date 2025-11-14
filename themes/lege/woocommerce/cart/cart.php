@@ -25,11 +25,11 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 	<div class="shop_table shop_table_responsive cart woocommerce-cart-form__contents cart__content">
 		<div class="cart__heading">
-			<p class="cart__name"><?php esc_html_e('Товар', 'lege'); ?></p>
+			<p class="cart__name"><?php esc_html_e('Product', 'lege'); ?></p>
 			<div class="cart__wrap">
-				<p class="cart__name"><?php esc_html_e('Цена', 'lege'); ?></p>
-				<p class="cart__name"><?php esc_html_e('Количество', 'lege'); ?></p>
-				<p class="cart__name"><?php esc_html_e('Итого', 'lege'); ?></p>
+				<p class="cart__name"><?php esc_html_e('Price', 'lege'); ?></p>
+				<p class="cart__name"><?php esc_html_e('Quantity', 'lege'); ?></p>
+				<p class="cart__name"><?php esc_html_e('Subtotal', 'lege'); ?></p>
 			</div>
 		</div>
 
@@ -82,10 +82,10 @@ do_action( 'woocommerce_before_cart' ); ?>
 						<div style="align-items: center; display: flex;">
 					
 							<?php 
-							$regular_price = (float) $_product->get_regular_price(); // Regular price
-							$sale_price = (float) $_product->get_price(); // Active price (the "Sale price" when on-sale)
+							$regular_price = (float) $_product->get_regular_price();
+							$sale_price = (float) $_product->get_price();
 
-							$precision = 1; // Max number of decimals
+							$precision = 1;
 							$saving_percentage = round( 100 - ( $sale_price / $regular_price * 100 ), 1 ) . '%';
 
 							if($regular_price !== $sale_price){
@@ -115,10 +115,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 							echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', sprintf( '<a href="%s" class="cart__product">%s</a>', esc_url( $product_permalink ), $_product->get_name() ), $cart_item, $cart_item_key ) );
 						}
 
-						// Meta data.
 						echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
 
-						// Backorder notification.
 						if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) ) {
 							echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__( 'Available on backorder', 'lege' ) . '</p>', $product_id ) );
 						}
