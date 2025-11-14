@@ -1,4 +1,15 @@
-<?php get_header(); ?>
+<?php 
+/**
+ * The template for displaying all single posts
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package Lege
+ */
+
+get_header(); 
+?>
+
 <?php while ( have_posts() ) : the_post(); ?>
 <section class="single event">
     <div class="event-top" style="background: #fff url(<?php echo wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); ?>) no-repeat center top/ cover;">
