@@ -120,14 +120,17 @@
 
 			<div class="control">
 				<div class="language">
-					<ul>
-						<li class="lang-item active">
-							<a href="#">Ru</a>
-						</li>
-						<li class="lang-item">
-							<a href="#">En</a>
-						</li>
-					</ul>
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu-language',
+							'main-menu'		 => 'Language Switcher 1',
+							'menu_id'        => '',
+							'menu_class'     => '',
+							'container'      => '',
+						)
+					);
+					?>
 				</div>
 
 				<?php
