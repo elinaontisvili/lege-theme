@@ -819,6 +819,32 @@ Redux::set_section( $opt_name, array(
 	)
 ));
 
+// Thank you Modal window
+Redux::set_section( $opt_name, array(
+	'title'            => esc_html__( 'Modal Windows', 'lege' ),
+	'id'			   => 'modal_windows',
+	'subscription'	   => true,
+	'customiaer_width' => '450px',
+	'desc'			   => esc_html__( 'Add data', 'lege' ), 
+	'fields'		   => array(
+		array(
+			'id'	   => 'modal_contact_shortcode', 
+			'type'	   => 'text',
+			'title'	   => esc_html__('Specify the shortcode for Call me popup on header', 'lege'),
+			'default'  => ''
+		),
+		array(
+			'id'	   => 'modal_order_shortcode', 
+			'type'	   => 'text',
+			'title'	   => esc_html__('Specify the shortcode for Order form popup on Single Product page', 'lege'),
+			'default'  => ''
+		),
+	)
+));
+
+//
+
+
 // -> END Basic Fields
 
 

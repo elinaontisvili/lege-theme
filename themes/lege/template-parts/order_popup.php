@@ -2,10 +2,15 @@
 
 <div id="one-click" class="click mfp-hide">
     <div id="popupOrder" class="click__form log order-form">
+
+
         <div class="click__half">
-            <p class="click__head">Купить в один клик</p>
-            <p class="click__text">Оставьте свои контакнтые данные и мы свяжемся с вами в ближайшее время для уточнения заказа</p>
-            <div class="log__group">
+            <p class="click__head"><?php esc_html_e('Купить в один клик','lege') ;?></p>
+            <p class="click__text"><?php esc_html_e('Оставьте свои контакнтые данные и мы свяжемся с вами в ближайшее время для уточнения заказа' ,'lege'); ?></p>
+            
+            
+<!--
+           <div class="log__group">
                 <label>Имя</label>
                 <input type="text" name="name" class="log__input">
             </div>
@@ -16,9 +21,17 @@
             <div class="log__btn">
                 <input id="ordered" type="submit" data-submit value="Отправить" class="btn"/>
             </div>
+-->
+
+<?php global $lege_options; echo do_shortcode($lege_options['modal_order_shortcode']); ?>
+
+
         </div>
+
+
+
         <div class="click__half">
-            <p class="click__info">Информация о заказе</p>
+            <p class="click__info"><?php esc_html_e('Информация о заказе', 'lege'); ?></p>
 
             <?php //print_r( $product ); ?>
 
