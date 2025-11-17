@@ -802,6 +802,23 @@ Redux::set_section( $opt_name, array(
 	)
 ));
 
+// Call me Modal window
+Redux::set_section( $opt_name, array(
+	'title'            => esc_html__( 'Modal Windows', 'lege' ),
+	'id'			   => 'modal_windows',
+	'subscription'	   => true,
+	'customiaer_width' => '450px',
+	'desc'			   => esc_html__( 'Add data', 'lege' ), 
+	'fields'		   => array(
+		array(
+			'id'	   => 'modal_contact_shortcode', 
+			'type'	   => 'text',
+			'title'	   => esc_html__('Specify the shortcode', 'lege'),
+			'default'  => ''
+		),
+	)
+));
+
 // -> END Basic Fields
 
 

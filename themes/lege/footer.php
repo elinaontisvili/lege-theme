@@ -182,6 +182,9 @@ if(is_singular('product')){
 if( get_option( 'woocommerce_enable_myaccount_registration') === 'yes' ) {
 	get_template_part( 'template-parts/auth');
 }
+
+// Modal Windows
+get_template_part( 'template-parts/popup_contact' );
 ?>
 
 <?php wp_footer(); ?>

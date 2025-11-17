@@ -146,7 +146,8 @@ if(is_page_template('template-home.php')) {
 
 	<div class="navigation__wrap">
 		<?php if($lege_options['header_phone']) { ?>
-		<a href="tel:<?php echo esc_attr( $lege_options['header_phone'] ); ?>" class="call popup-link-1">
+		<!--<a href="tel:<?php //echo esc_attr( $lege_options['header_phone'] ); ?>" class="call popup-link-1">-->
+			<a href="#call" class="call popup-link-1">
 			<div class="call__icon btn">
 				<svg width="22" height="22">
 					<use xlink:href="#phone-solid"/>
