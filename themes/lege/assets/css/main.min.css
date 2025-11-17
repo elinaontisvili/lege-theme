@@ -5661,7 +5661,7 @@ ul.payment_methods li.log__group::after {
 
 .product__btn:before {
   width: 220px;
-  content: 'Купить в один клик';
+  /*content: 'Купить в один клик'; */
 }
 
 .product .share {
@@ -7091,7 +7091,7 @@ a.remove.cart__del:hover {
   color: #fff;
   text-transform: uppercase;
   line-height: 28px;
-  z-index: 9999;
+  z-index: 1;
 }
 
 /*
@@ -7117,7 +7117,7 @@ a.remove.cart__del:hover {
     height: 28px;
     position: absolute;
     display: inline;
-    z-index: 9999;
+    z-index: 1;
 }
 
 .products .rate {
