@@ -31,7 +31,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     remove_action('woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10);
     remove_action('woocommerce_archive_description', 'woocommerce_product_archive_description', 10);
 
-    // Переносим уведомление выше (woocommerce_result_count hook)
+    // Переносим уведомление выше
     remove_action('woocommerce_before_shop_loop','woocommerce_result_count',20);
     add_action('woocommerce_archive_description','woocommerce_result_count',10);
 
@@ -42,9 +42,8 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     remove_action('woocommerce_before_shop_loop','woocommerce_catalog_ordering',30);
 
     /* Карточка Продукта, Product Image */
-    // Add <div> wrapper
-    add_action('woocommerce_before_shop_loop_item','lege_wrapforimage_open', 5); //open wrapper
-    add_action('woocommerce_before_shop_loop_item_title','lege_wrapforimage_close', 20); //close wrapper
+    add_action('woocommerce_before_shop_loop_item','lege_wrapforimage_open', 5);
+    add_action('woocommerce_before_shop_loop_item_title','lege_wrapforimage_close', 20);
     function lege_wrapforimage_open(){
         echo '<div class="products__img">';
     }
@@ -52,11 +51,9 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         echo '</div>';
     }
     
-    // Wrap <a> tag around product image
     add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_product_link_close', 15);
     remove_action ('woocommerce_after_shop_loop_item','woocommerce_template_loop_product_link_close', 5);
  
-    // Add <div> wrappers
     add_action('woocommerce_shop_loop_item_title',function(){
         echo '<div class="products__bottom">';
     },5);
@@ -64,11 +61,12 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         echo '</div>';
     },15);
 
-    // Add <div> wrapper
     remove_action('woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title',10);
     add_action('woocommerce_shop_loop_item_title','lege_product_data',10);
     function lege_product_data(){
+
         global $product;
+
         $rating_count = $product->get_rating_count();
         $average      = $product->get_average_rating();
         $title = get_the_title();
@@ -97,8 +95,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     remove_action('woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price',10);
 
 
-    /* Sale */
-    // Display the “HOT / NEW” badge
+    // Sale - Display the “HOT / NEW” badge
     function lege_show_status() {
         global $product;
 
@@ -128,10 +125,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     }
     add_filter('woocommerce_cart_item_price', 'my_custom_show_sale_price_at_cart', 10, 3 );
 
-
-    /* Открытый товар - Single product page */
-
-    // Sku and in stock()
+    // Single product page - Sku and in stock()
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
     add_action('woocommerce_single_product_summary', 'lege_woo_sku_custom', 4);
 
@@ -139,16 +133,16 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         global $product;
         ?>
         <div class="product__article">
-        Артикул:
+        <?php esc_html_e( 'SKU:', 'lege' ); ?>
             <span class="product__article-value"><?php echo $product->get_sku(); ?></span>
         </div>
 
         <div class="availability <?php echo $product->is_in_stock() ? 'true' : 'false'; ?>"> 
             <span class="true"> 
-                В наличии
+                <?php esc_html_e( 'In stock', 'lege' ); ?>
         </span>
         <span class="false" style="<?php echo $product->is_in_stock() ? 'display:none;' : ''; ?>"> 
-            Нет в наличии
+            <?php esc_html_e( 'Out of stock', 'lege' ); ?>
     </span> 
     </div> 
     <?php
@@ -157,9 +151,9 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     // Remove woo's stock output completetly from single product
     add_filter('woocommerce_get_stock_html', function($html, $product) {
         if( is_product() ) {
-            return ''; //don't print stock
+            return '';
         } else {
-            return $html; //print stock on archive, cart
+            return $html;
         }
     }, 10, 2);
 
@@ -199,11 +193,11 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         ?>
         <div class="share">
         <p class="share__title">
-            Поделиться:
+            <?php esc_html_e( 'Share:', 'lege' ); ?>
         </p>
         <ul class="social">
             <li class="social__item">
-                <span>Vk</span>
+                <span><?php esc_html_e( 'Vk', 'lege' ); ?></span>
                 <a data-social="vkontakte" onclick="window.open(this.href, 'Share on VK', 'width=600,height=300'); return false" class="social__icon social__icon_vk" href="<?php echo lege_get_share('vk', get_the_permalink(), get_the_title()); ?>">
                     <svg  width="21" height="18">
                         <use xlink:href="#vk"/>
@@ -211,7 +205,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
                 </a>
             </li>
             <li class="social__item">
-                <span>Fb</span>
+                <span><?php esc_html_e( 'Fb', 'lege' ); ?></span>
                 <a data-social="facebook" onclick="window.open(this.href, 'Share on Facebook', 'width=600,height=300'); return false" class="social__icon social__icon_fb" href="<?php echo lege_get_share('fb', get_the_permalink(), get_the_title()); ?>">
                     <svg  width="14" height="17">
                         <use xlink:href="#facebook"/>
@@ -219,7 +213,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
                 </a>
             </li>
             <li class="social__item">
-                <span>Tw</span>
+                <span><?php esc_html_e( 'Tw', 'lege'); ?></span>
                 <a data-social="twitter" onclick="window.open(this.href, 'Share on Twitter', 'width=600,height=300'); return false" class="social__icon social__icon_tw" href="<?php echo lege_get_share('twi', get_the_permalink(), get_the_title()); ?>">
                     <svg  width="18" height="15">
                         <use xlink:href="#twitter"/>
@@ -233,7 +227,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
     // Change Add to Cart button text on single product page in popup modal window
     add_filter( 'woocommerce_product_single_add_to_cart_text', function( $text ) {
-        return __( 'Перейти в корзину', 'lege' );
+        return __( 'View cart', 'lege' );
     });     
 
     // Remove default avatar

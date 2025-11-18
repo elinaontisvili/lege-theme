@@ -31,19 +31,16 @@ function lege_get_breadcrumbs() {
         $parent_id    = $parent_id_2 = '';
     }
 
-
-    $short_name_product = get_the_title();
+    $short_name_product = esc_html(get_the_title());
     if(get_post_meta(get_the_ID(), 'lege_short_title', true)) {
         $short_name_product = get_post_meta(get_the_ID(), 'lege_short_title', true);
     } 
-
-
     
     $frontpage_id = get_option('page_on_front');
 
     if (is_home() || is_front_page()) {
 
-        if ($show_on_home == 1) echo '<div class="caption__bc"><a href="' . $home_link . '">' . $text['home'] . '</a></div>';
+        if ($show_on_home == 1) echo '<div class="caption__bc"><a href="' . esc_url( $home_link ) . '">' . esc_html($text['home']) . '</a></div>';
 
     }
     else {
@@ -64,10 +61,10 @@ function lege_get_breadcrumbs() {
                 if ($show_title == 0) $cats = preg_replace('/ title="(.*?)"/', '', $cats);
                 echo $cats;
             }
-            if ($show_current == 1) echo $before . sprintf($text['category'], single_cat_title('', false)) . $after;
+            if ($show_current == 1) echo $before . sprintf($text['category'], esc_html(single_cat_title('', false))) . $after;
 
         } elseif ( is_search() ) {
-            echo $before . sprintf($text['search'], get_search_query()) . $after;
+            echo $before . sprintf($text['search'], esc_html(get_search_query())) . $after;
 
         } elseif ( is_day() ) {
             echo sprintf($link, get_year_link(get_the_time('Y')), get_the_time('Y')) . $delimiter;
@@ -87,17 +84,15 @@ function lege_get_breadcrumbs() {
             if(get_post_type() == 'product') {
                 $post_type = get_post_type_object(get_post_type()); 
                 $slug = $post_type->rewrite; 
-                //printf($link, $home_link . '/' . $slug['slug'] . '/', '$post_type->singular_name');
-                printf($link, $home_link . '/' . $slug['slug'] . '/', 'Магазин');
+                printf($link, $home_link . '/' . $slug['slug'] . '/', esc_html__('Shop', 'lege') );
                 if ($show_current == 1) echo $delimiter . $before . $short_name_product . $after;
             }
-
 
             else if ( get_post_type() != 'post' ) {
                 $post_type = get_post_type_object(get_post_type());
                 $slug = $post_type->rewrite;
                 printf($link, $home_link . '/' . $slug['slug'] . '/', $post_type->labels->singular_name);
-                if ($show_current == 1) echo $delimiter . $before . get_the_title() . $after;
+                if ($show_current == 1) echo $delimiter . $before . esc_html(get_the_title()) . $after;
             } else {
                 $cat = get_the_category(); $cat = $cat[0];
                 $cats = get_category_parents($cat, TRUE, $delimiter);
@@ -106,7 +101,7 @@ function lege_get_breadcrumbs() {
                 $cats = str_replace('</a>', '</a>' . $link_after, $cats);
                 if ($show_title == 0) $cats = preg_replace('/ title="(.*?)"/', '', $cats);
                 echo $cats;
-                if ($show_current == 1) echo $before . get_the_title() . $after;
+                if ($show_current == 1) echo $before . esc_html(get_the_title()) . $after;
             }
 
         } elseif ( !is_single() && !is_page() && get_post_type() != 'post' && !is_404() ) {
@@ -127,18 +122,18 @@ function lege_get_breadcrumbs() {
             if ($show_title == 0) $cats = preg_replace('/ title="(.*?)"/', '', $cats);
             echo $cats;
             printf($link, get_permalink($parent), $parent->post_title);
-            if ($show_current == 1) echo $delimiter . $before . get_the_title() . $after;
+            if ($show_current == 1) echo $delimiter . $before . esc_html(get_the_title()) . $after;
 
         } elseif ( is_page() && !$parent_id ) {
-            if ($show_current == 1) echo $before . get_the_title() . $after;
+            if ($show_current == 1) echo $before . esc_html(get_the_title()) . $after;
 
         } elseif ( is_page() && $parent_id ) {
             if ($parent_id != $frontpage_id) {
                 $breadcrumbs = array();
                 while ($parent_id) {
-                    $page = get_post($parent_id); //get_page() deprecated
+                    $page = get_post($parent_id);
                     if ($parent_id != $frontpage_id) {
-                        $breadcrumbs[] = sprintf($link, get_permalink($page->ID), get_the_title($page->ID));
+                        $breadcrumbs[] = sprintf($link, get_permalink($page->ID), esc_html(get_the_title($page->ID)));
                     }
                     $parent_id = $page->post_parent;
                 }
@@ -150,7 +145,7 @@ function lege_get_breadcrumbs() {
             }
             if ($show_current == 1) {
                 if ($show_home_link == 1 || ($parent_id_2 != 0 && $parent_id_2 != $frontpage_id)) echo $delimiter;
-                echo $before . get_the_title() . $after;
+                echo $before . esc_html(get_the_title()) . $after;
             }
 
         } elseif ( is_tag() ) {
@@ -159,7 +154,7 @@ function lege_get_breadcrumbs() {
         } elseif ( is_author() ) {
             global $author;
             $userdata = get_userdata($author);
-            echo $before . sprintf($text['author'], $userdata->display_name) . $after;
+            echo $before . sprintf($text['author'], esc_html($userdata->display_name)) . $after;
 
         } elseif ( is_404() ) {
             echo $before . $text['404'] . $after;

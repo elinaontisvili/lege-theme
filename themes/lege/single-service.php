@@ -29,7 +29,7 @@ get_header(); ?>
                     <?php
                         $price = get_metadata('post',get_the_ID(),'lege_service_cost',true);
                     ?>
-                    <a href="<?php echo esc_url(home_url('/order/') . '?price=' . urlencode($price) . '&title=' . rawurlencode(get_the_title()) . '&content=' . rawurlencode(strip_tags(get_the_content()))); ?>" class="inner__btn btn">Заказать</a>
+                    <a href="<?php echo esc_url(home_url('/order/') . '?price=' . urlencode($price) . '&title=' . rawurlencode(get_the_title()) . '&content=' . rawurlencode(strip_tags(get_the_content()))); ?>" class="inner__btn btn"><?php esc_html_e( 'Order', 'lege' ); ?></a>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@ get_header(); ?>
         <!-- Slider -->
         <div class="cases">
                 <?php if( $lege_options['caseslabel'] ) { ?>
-                <h4 class="cases__cap"><?php if($lege_options['caseslabel']){ echo $lege_options['caseslabel']; } else { echo esc_html_e('Последние кейсы','lege'); } ?></h4>
+                <h4 class="cases__cap"><?php if($lege_options['caseslabel']){ echo $lege_options['caseslabel']; } else { echo esc_html_e('Latest Cases','lege'); } ?></h4>
                 <?php } ?>
                 <div class="cases__slider">
                 
@@ -57,7 +57,7 @@ get_header(); ?>
                             <div class="cases__block">
                                 <h3 class="cases__heading"><?php the_title(); ?></h3>
                                 <a href="<?php the_permalink(); ?>" class="cases__link link-more">
-                                    <?php esc_html_e('Читать больше', 'lege'); ?> 
+                                    <?php esc_html_e('Read more', 'lege'); ?> 
                                     <svg width="18" height="20">
                                         <use xlink:href="#nav-right"/>
                                     </svg>
@@ -72,7 +72,7 @@ get_header(); ?>
                 <?php endwhile;
 
                     wp_reset_postdata();
-else : echo "<div>Нет кейсов в базе</div>";
+else : echo "<div>No cases found</div>";
 
                     endif; ?>					
                     </div>

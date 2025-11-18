@@ -45,11 +45,11 @@ get_header();
                         <svg width="15" height="15">
                             <use xlink:href="#link"/>
                         </svg>
-                        <?php esc_html_e('Поделиться:', 'lege'); ?>
+                        <?php esc_html_e('Share:', 'lege'); ?>
                     </p>
                     <ul class="social">
                         <li class="social__item">
-                            <span>Vk</span>
+                            <span><?php esc_html_e( 'Vk', 'lege' ); ?></span>
                             <a data-social="vkontakte" onclick="window.open(this.href, 'Share on VK', 'width=600,height=300'); return false" class="social__icon social__icon_vk" href="<?php echo lege_get_share(type: 'vk'); ?>">
                                 <svg  width="21" height="18">
                                     <use xlink:href="#vk"/>
@@ -57,7 +57,7 @@ get_header();
                             </a>
                         </li>
                         <li class="social__item">
-                            <span>Fb</span>
+                            <span><?php esc_html_e( 'Fb', 'lege' ); ?></span>
                             <a data-social="facebook" onclick="window.open(this.href, 'Share on Facebook', 'width=600,height=300'); return false" class="social__icon social__icon_fb" href="<?php echo lege_get_share(type: 'fb'); ?>">
                                 <svg  width="14" height="17">
                                     <use xlink:href="#facebook"/>
@@ -65,7 +65,7 @@ get_header();
                             </a>
                         </li>
                         <li class="social__item">
-                            <span>Tw</span>
+                            <span><?php esc_html_e( 'Tw', 'lege' ); ?></span>
                             <a data-social="twitter" onclick="window.open(this.href, 'Share on Twitter', 'width=600,height=300'); return false" class="social__icon social__icon_tw" href="<?php echo lege_get_share(type: 'twi'); ?>">
                                 <svg  width="18" height="15">
                                     <use xlink:href="#twitter"/>
@@ -78,14 +78,14 @@ get_header();
                     <?php $prev_post = get_previous_post();
                         if (!empty( $prev_post )): ?>
                             <li class="prev">
-                                <a href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>"><?php esc_html_e('Предыдущая новость', 'lege'); ?></a>
+                                <a href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>"><?php esc_html_e('Previous post', 'lege'); ?></a>
                             </li>
                         <?php endif; 
 
                     $next_post = get_next_post();
                     if (!empty( $next_post )): ?>
                         <li class="next">
-                            <a href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>"><?php esc_html_e('Следующая новость', 'lege'); ?></a>
+                            <a href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>"><?php esc_html_e('Next post', 'lege'); ?></a>
                         </li>
                     <?php endif; ?>
                 </ul>

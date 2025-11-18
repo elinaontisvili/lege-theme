@@ -55,11 +55,6 @@ global $lege_options;
                 
             </ul>
 
-            <?php 
-            // $calendar = get_metadata('post', get_the_ID(), 'lege_contact_calendar', true);
-            // var_dump($calendar);
-            ?>
-
             <?php if(get_metadata('post', get_the_ID(),'lege_contact_calendar',true)){ ?>
             <div class="detail__time">
                 <svg width="35" height="35">
@@ -88,22 +83,22 @@ global $lege_options;
             <?php endif; ?>
             
             <div class="log__group">
-                <label><?php _e('Имя', 'lege'); ?></label>
+                <label><?php _e('Name', 'lege'); ?></label>
                 <input type="text" name="contact[name]" class="log__input" required>
             </div>
             <div class="log__group">
-                <label><?php _e('Телефон', 'lege'); ?></label>
+                <label><?php _e('Phone', 'lege'); ?></label>
                 <input type="tel" name="contact[tel]" class="log__input" required>
             </div>
             <div class="log__group log__group_company">
-                <label><?php _e('Компания', 'lege'); ?></label>
+                <label><?php _e('Company', 'lege'); ?></label>
                 <input type="text" name="contact[company]" class="log__input" required>
             </div>
             <div class="log__group log__group_textarea">
-                <label><?php _e('Сообщение', 'lege'); ?></label>
+                <label><?php _e('Message', 'lege'); ?></label>
                 <textarea type="text" name="contact[message]" class="log__input"></textarea>
             </div>
-            <p class="log__line"><span>*</span><?php _e('Поля обязательные для заполнения', 'lege'); ?></p>
+            <p class="log__line"><span>*</span><?php _e('Required field', 'lege'); ?></p>
             <div class="log__wrap">
                 <div class="log__group check">
                     <input id="insight" type="checkbox" name="contact[learn]" value="learn">
@@ -112,12 +107,17 @@ global $lege_options;
                         if(!empty($lege_options['lege_form_policy_text'])) {
                         echo wp_kses_post($lege_options['lege_form_policy_text']); 
                         } else {
-                            echo esc_html__('Я согласен с <a href="/privacy-policy">политикой конфиденциальности</a>', 'lege');
+                            echo wp_kses_post(
+                                sprintf(
+                                    __('I agree with the <a href="%s">privacy policy</a>', 'lege'),
+                                    esc_url('/privacy-policy')
+                                )
+                            );
                         }
                     ?></label>
                 </div>
                 <div class="log__btn">
-                    <input id="order" data-submit type="submit" value="<?php _e('Отправить', 'lege'); ?>" class="btn"/>
+                    <input id="order" data-submit type="submit" value="<?php _e('Send', 'lege'); ?>" class="btn"/>
                 </div>
             </div>
             

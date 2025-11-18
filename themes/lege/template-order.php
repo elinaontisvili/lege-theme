@@ -6,8 +6,8 @@
 get_header();
 
 $cost = 0;
-$title = 'Не выбранно';
-$content = 'Не выбрано';
+$title = 'Not selected';
+$content = 'Not selected';
 
 if(isset($_GET["price"])) {
     $cost = $_GET["price"];

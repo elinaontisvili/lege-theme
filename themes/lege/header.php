@@ -17,11 +17,8 @@
 <?php wp_body_open(); ?>
 
 <?php 
+
 global $lege_options;
-//print_r($lege_options['home_header_slider']);
-//echo '<pre>';
-//print_r($lege_options);
-//echo '</pre>';
 
 $class_header = '';
 $style_for_header = '';
@@ -90,14 +87,6 @@ if(is_page_template('template-home.php')) {
 	<?php } ?>
 
 		<div class="language">
-			<!-- <ul>
-				<li class="lang-item active">
-					<a href="#">Ru</a>
-				</li>
-				<li class="lang-item">
-					<a href="#">En</a>
-				</li>
-			</ul> -->
 			<?php
 			wp_nav_menu(
 				array(
@@ -119,9 +108,9 @@ if(is_page_template('template-home.php')) {
                         <svg class="control__icon" width="16" height="16">
                             <use xlink:href="#user"/>
                         </svg>
-                        <?php esc_html_e('Личный кабинет', 'lege'); ?>
+                        <?php esc_html_e('Personal Account', 'lege'); ?>
                     </a>
-                    <a href="<?php echo esc_url(wp_logout_url( home_url() ) ); ?>" class="control__reg noise"><?php esc_html_e('Выйти','lege'); ?></a>
+                    <a href="<?php echo esc_url(wp_logout_url( home_url() ) ); ?>" class="control__reg noise"><?php esc_html_e('Logout','lege'); ?></a>
                 </div>
             <?php } else { ?>
                 <div class="control">
@@ -129,9 +118,9 @@ if(is_page_template('template-home.php')) {
                         <svg class="control__icon" width="19" height="17">
                             <use xlink:href="#login"/>
                         </svg>
-                        <?php esc_html_e('Вход','lege'); ?>
+                        <?php esc_html_e('Login','lege'); ?>
                     </a>
-                    <a href="#reg" class="control__reg noise popup-link-2"><?php esc_html_e('Регистрация','lege'); ?></a>
+                    <a href="#reg" class="control__reg noise popup-link-2"><?php esc_html_e('Register','lege'); ?></a>
                 </div>
             <?php } ?>
 
@@ -146,7 +135,6 @@ if(is_page_template('template-home.php')) {
 
 	<div class="navigation__wrap">
 		<?php if($lege_options['header_phone']) { ?>
-		<!--<a href="tel:<?php //echo esc_attr( $lege_options['header_phone'] ); ?>" class="call popup-link-1">-->
 			<a href="#call" class="call popup-link-1">
 			<div class="call__icon btn">
 				<svg width="22" height="22">
@@ -193,18 +181,17 @@ if(is_page_template('template-home.php')) {
 
 			foreach($slider as $slide) { ?>
 				<div class="offer__slide">
-					<p class="offer__text"><?php echo $slide['title']; ?></p>
-					<?php echo $slide['description']; ?>
-					<a href="<?php echo $slide['url'] ; ?>" class="offer__btn btn popup-link">
-						<?php esc_html_e( 'Бесплатная консультация', 'lege' ); ?>
+					<p class="offer__text"><?php echo esc_html( $slide['title'] ); ?></p>
+					<?php echo wp_kses_post( $slide['description'] ); ?>
+					<a href="<?php echo esc_url( $slide['url'] ); ?>" class="offer__btn btn popup-link">
+						<?php esc_html_e( 'Free consultation', 'lege' ); ?>
 					</a>
 				</div>
 			<?php } ?>
 
-		</div><!-- /.offer__slider -->
+		</div>
 
 		<?php 
-		//print_r($lege_options['header_video']);
 		
 		if( ! empty( $lege_options['header_video'] ) ) { ?>
 		<a class="offer__video popup-with-zoom-anim popup-youtube" href="<?php echo esc_url( $lege_options['header_video'] ); ?>" rel="nofollow" >
@@ -224,9 +211,8 @@ if(is_page_template('template-home.php')) {
 		<div class="wrapper">
 			<h1 class="caption__title"><?php
                     if(is_single()){
-						//triggers when viewing a single product
                         if(get_post_type() == 'product'){
-                            echo __('Магазин', 'lege');
+                            echo __('Shop', 'lege');
                         } else {
                             $current_post_type = get_post_type(get_the_ID());
                             $post_type_object = get_post_type_object($current_post_type);

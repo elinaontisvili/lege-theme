@@ -7,7 +7,9 @@
  * @package Lege
  */
 
-get_header(); ?>
+get_header(); 
+
+?>
 
 <section class="inner services tabs">
 			<div class="wrapper">
@@ -15,7 +17,7 @@ get_header(); ?>
 				<div class="tabs__wrap">
 
 					<p class="tabs__descr"><?php echo wp_kses_post($lege_options['servicearchivedesc']); ?></p>
-					<!-- Cases titles -->
+
 					<ul class="tabs__caption">
 
 					<?php $services_types = get_terms( array(
@@ -36,7 +38,6 @@ get_header(); ?>
 
 				</div>
 
-			<!-- Cases content one-->
 			<?php
             $j = 0;
             $current = '';
@@ -89,19 +90,18 @@ get_header(); ?>
                                         ?>
                                     </p>
                                     <p class="services__price"><?php echo $lege_options['servicecurrency']; echo get_metadata('post',get_the_ID(),'lege_service_cost',true); ?></p>
-                                    <a href="<?php the_permalink(); ?>" class="services__order btn"><?php echo esc_html__( 'Подробнее', 'lege' ); ?></a>
+                                    <a href="<?php the_permalink(); ?>" class="services__order btn"><?php echo esc_html__( 'Read more', 'lege' ); ?></a>
                                     <div class="services__bg <?php echo $service_icon_bg_style; ?>"></div>
                                 </li>
                             <?php endwhile;
 
                             wp_reset_postdata();
 else : 
-                                echo "<div>Нет записей</div>";
+                                echo "<div>No posts found</div>";
 
                         endif; ?>
                     </ul>
-                </div><!-- End cases content one-->
-
+                </div>
             <?php
                 $j++;
             } ?>

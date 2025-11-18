@@ -38,11 +38,11 @@ global $wp_query;
                                 <svg width="15" height="15">
                                     <use xlink:href="#link"/>
                                 </svg>
-                                <?php esc_html_e('Поделиться:', 'lege'); ?>
+                                <?php esc_html_e('Share:', 'lege'); ?>
                             </p>
                             <ul class="social">
                                 <li class="social__item">
-                                    <span>Vk</span>
+                                    <span><?php esc_html_e( 'Vk', 'lege' ); ?></span>
                                     <a data-social="vkontakte" class="social__icon social__icon_vk" href="<?php echo lege_get_share(type: 'vk', permalink: get_the_permalink(), title: get_the_title()); ?>">
                                         <svg  width="21" height="18">
                                             <use xlink:href="#vk"/>
@@ -50,7 +50,7 @@ global $wp_query;
                                     </a>
                                 </li>
                                 <li class="social__item">
-                                    <span>Fb</span>
+                                    <span><?php esc_html_e( 'Fb', 'lege' ); ?></span>
                                     <a data-social="facebook" class="social__icon social__icon_fb" href="<?php echo lege_get_share(type: 'fb', permalink: get_the_permalink(), title: get_the_title()); ?>">
                                         <svg  width="14" height="17">
                                             <use xlink:href="#facebook"/>
@@ -58,7 +58,7 @@ global $wp_query;
                                     </a>
                                 </li>
                                 <li class="social__item">
-                                    <span>Tw</span>
+                                    <span><?php esc_html_e( 'Tw', 'lege' ); ?></span>
                                     <a data-social="twitter" class="social__icon social__icon_tw" href="<?php echo lege_get_share(type: 'twi', permalink: get_the_permalink(), title: get_the_title()); ?>">
                                         <svg  width="18" height="15">
                                             <use xlink:href="#twitter"/>
@@ -68,7 +68,7 @@ global $wp_query;
                             </ul>
                         </div>
                         <a href="<?php echo esc_url( get_permalink() ); ?>" class="news__link link-more">
-                            <?php esc_html_e( 'Читать больше', 'lege' ); ?>
+                            <?php esc_html_e( 'Read more', 'lege' ); ?>
                             <svg width="18" height="20">
                                 <use xlink:href="#nav-right"/>
                             </svg>
@@ -79,14 +79,12 @@ global $wp_query;
                 <p class="news__text"><?php the_excerpt(); ?></p>
             </article>
             
-            <!-- цикл -->
             <?php endwhile; 
             wp_reset_postdata(); 
 else :
-                echo "<div>Нет новых новостей</div>";
+                echo "<div>No news found</div>";
 
             endif; ?>
-            <!-- цикл -->
 
             <!-- Pagination -->
             <?php if($wp_query->max_num_pages > 1) { ?> 

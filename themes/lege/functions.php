@@ -110,9 +110,6 @@ function lege_setup() {
     add_image_size( 'news-thumb', 633, 476, true );
     add_image_size( 'news-home', 410, 270, true );
 
-    // Поддержка WooCommerce.
-    // add_theme_support( 'woocommerce' );
-
     // Поддержка Gutenberg.
     //add_editor_style( 'editor-style.css' );
 
@@ -181,16 +178,6 @@ function lege_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
-
-/* testing if ajax request is working
-add_action('wp_ajax_lege_filter', 'lege_filter_callback');
-add_action('wp_ajax_nopriv_lege_filter', 'lege_filter_callback'); 
-function lege_filter_callback() {
-    echo 'ajax request works';
-
-    wp_die();
-}
-*/
 
 // AJAX handler for WooCommerce filter 
 function lege_show_products(){
@@ -267,8 +254,8 @@ function lege_show_products(){
                 ],
             ];
             $args['orderby'] = [
-                'meta_value_num' => 'DESC', // rating
-                'title'          => 'ASC',  // secondary sort
+                'meta_value_num' => 'DESC',
+                'title'          => 'ASC',
             ];
             $args['meta_key'] = '_wc_average_rating';
             break;
@@ -386,10 +373,6 @@ function lege_enqueue_widget_scripts($hook) {
 add_action( 'admin_enqueue_scripts', 'lege_enqueue_widget_scripts' );
 
 
-
-
-
-
 /**
  * Подключение функций WooCommerce.
  */
@@ -435,7 +418,6 @@ require get_template_directory() . '/inc/widgets/widget-categoryfilter.php';
 require get_template_directory() . '/inc/widgets/widget-rating.php';
 require get_template_directory() . '/inc/widgets/widget-customcategory-cases.php';
 
-// Debug - Sidebars briefly appear and then disappear on the Widgets admin screen.
 // Disable the block editor for widgets.
 add_filter( 'use_widgets_block_editor', '__return_false' );
 
@@ -482,9 +464,9 @@ function lege_register_custom_post_type() {
 
     register_post_type( 'testimonial', array(
         'labels'             => array(
-            'name'            => _x( 'Отзывы', 'lege' ),
-            'singular_name'   => _x( 'Отзыв', 'lege' ),
-            'add_new'         => __( 'Добавить новый', 'lege' )
+            'name'            => _x( 'Testimonials', 'lege' ),
+            'singular_name'   => _x( 'Testimonial', 'lege' ),
+            'add_new'         => __( 'Add new', 'lege' )
         ),
         'public'             => true,
         'publicly_queryable' => true,
@@ -502,9 +484,9 @@ function lege_register_custom_post_type() {
 
     register_post_type( 'service', array(
         'labels'             => array(
-            'name'                  => __( 'Услуги','lege' ),
-            'singular_name'         => __( 'Услуга','lege' ),
-            'add_new'               => __( 'Добавить новую', 'lege' ),
+            'name'                  => __( 'Services','lege' ),
+            'singular_name'         => __( 'Service','lege' ),
+            'add_new'               => __( 'Add new', 'lege' ),
         ),
         'public'             => true,
         'publicly_queryable' => true,
@@ -522,9 +504,9 @@ function lege_register_custom_post_type() {
 
     register_post_type( 'news', array(
         'labels'             => array(
-            'name'                  => __( 'Новости','lege' ),
-            'singular_name'         => __( 'Новость','lege' ),
-            'add_new'               => __( 'Добавить новую', 'lege' ),
+            'name'                  => __( 'News','lege' ),
+            'singular_name'         => __( 'News','lege' ),
+            'add_new'               => __( 'Add new', 'lege' ),
         ),
         'public'             => true,
         'publicly_queryable' => true,
@@ -542,9 +524,9 @@ function lege_register_custom_post_type() {
 
     register_post_type( 'feature', array(
         'labels'             => array(
-            'name'                  => __( 'Кейсы', 'lege' ),
-            'singular_name'         => __( 'Кейс', 'lege' ),
-            'add_new'               => __( 'Добавить новый', 'lege' ),
+            'name'                  => __( 'Cases', 'lege' ),
+            'singular_name'         => __( 'Case', 'lege' ),
+            'add_new'               => __( 'Add new', 'lege' ),
         ),
         'public'             => true,
         'publicly_queryable' => true,
@@ -565,7 +547,7 @@ function lege_register_custom_post_type() {
 		'service-type',
 		'service',
 		array(
-			'label' => __( 'Категории услуг', 'lege' ),
+			'label' => __( 'Services categories', 'lege' ),
 			'rewrite' => array( 'slug' => 'service-type' ),
 			'hierarchical' => true,
 		)
@@ -575,7 +557,7 @@ function lege_register_custom_post_type() {
 		'news-category',
 		'news',
 		array(
-			'label' =>  __( 'Категории новостей', 'lege' ),
+			'label' =>  __( 'News categories', 'lege' ),
 			'rewrite' => array( 'slug' => 'news-category' ),
 			'hierarchical' => true,
 		)
@@ -650,7 +632,7 @@ function lege_custom_excerpt($limit) {
  * MC4WP Mailchimp form response for success and error messages
  */
 add_filter('mc4wp_form_response_position', function() {
-    return 'after'; // or before
+    return 'after';
 });
 
 
@@ -676,7 +658,7 @@ add_filter( 'registration_errors', 'lege_registration_errors', 10, 3 );
 function lege_registration_errors( $errors, $sanitized_user_login, $user_email ) {
 
     if ( empty( $_POST['billing_phone'] ) || ! empty( $_POST['billing_phone'] ) && trim( $_POST['billing_phone'] ) == '' ) {
-        $errors->add( 'billing_phone_error', sprintf('<strong>%s</strong>: %s',__( 'ERROR', 'lege' ),__( 'Пожалуйста, введите номер телефона.', 'lege' ) ) );
+        $errors->add( 'billing_phone_error', sprintf('<strong>%s</strong>: %s',__( 'ERROR', 'lege' ),__( 'Please enter your phone number.', 'lege' ) ) );
     }
 
     return $errors;

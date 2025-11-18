@@ -74,11 +74,6 @@ function lege_send_contact($data) {
 		$redirectUrl = substr_count($redirectUrl, '?') ? '&success' : '?success';
 		wp_redirect($redirectUrl);
 		exit;
-		/*
-        $redirectUrl = add_query_arg('success', '', get_permalink());
-        wp_redirect($redirectUrl);
-        exit;
-		*/
 
 	} catch (Exception $e) {
 		$return = array(
@@ -101,20 +96,23 @@ function lege_contact_email_send($data) {
 	try {
 		$blog = get_bloginfo('name');
 
-		$subject = 'Контактная форма на сайте ' . $blog;
+		$subject = sprintf(
+			/* translators: %s: site name */
+			__('Contact form on %s ', 'lege'),
+			$blog
+		);
 
-		// $name = __('Имя','legetheme');
 		$body = "
-			Имя: {$data['name']}
+			Name: {$data['name']}
 
-			Почта: {$data['email']}
+			Email : {$data['email']}
 
-			Телефон: {$data['tel']}
+			Phone: {$data['tel']}
 
-			Компания: {$data['company']}
+			Company: {$data['company']}
 
 
-			Сообщение:
+			Message:
 
 			{$data['message']}
 
@@ -123,7 +121,7 @@ function lege_contact_email_send($data) {
 			------------
 
 
-			Отправленно с {$blog}
+			Sent from {$blog}
 		";
 
 		$lege_mail_from->setName($data['name'])->setEmail($data['email'])->addFilters();

@@ -57,7 +57,7 @@ global $lege_options;
             wp_reset_postdata(); 
 else :
 
-                echo "<div>Нет отзывов</div>";
+                echo "<div>No testimonials found</div>";
 
             endif; ?>
 
@@ -95,10 +95,12 @@ else :
             </nav>
             <?php } ?>
         <!-- Pagination end -->
-        
+
         <?php echo do_shortcode($lege_options['testimonial_form_shortcode']); ?>
-        
+
     </div>
 </section>
 
-<?php get_footer(); ?>
+<?php
+
+get_footer();

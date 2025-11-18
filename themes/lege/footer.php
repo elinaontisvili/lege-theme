@@ -1,4 +1,9 @@
-<?php global $lege_options; ?>
+<?php 
+
+global $lege_options; 
+
+$my_account_url = wc_get_page_permalink( 'myaccount' );
+?>
 
 <footer class="footer">
 	<div class="wrapper">
@@ -36,7 +41,17 @@
 						<li class="social__item">
 						<?php echo $label; ?>
 						<a class="social__icon <?php echo esc_attr( $class ); ?>" target="_blank" href="<?php echo esc_url( $link ); ?>">
-								<?php echo $svg; ?>
+								<?php 
+									echo wp_kses( $svg, array(
+										'svg' => array(
+											'width'  => true,
+											'height' => true,
+										),
+										'use'  => array(
+											'xlink:href' => true,
+										),
+									)); 
+								?>
 							</a>
 						</li>
 					<?php } ?>
@@ -48,7 +63,7 @@
 		</div>
 		<nav class="guide">
 			<?php if( $lege_options['footer_section1'] ) { ?>
-			<p class="guide__title"><?php echo esc_html__($lege_options['footer_section1']); ?></p>
+			<p class="guide__title"><?php echo esc_html($lege_options['footer_section1']); ?></p>
 			<?php } ?>
 
 			<?php 
@@ -62,7 +77,7 @@
 		</nav>
 		<div class="serv">
 			<?php if( $lege_options['footer_section2'] ) { ?>
-				<p class="serv__title"><?php echo esc_html__( $lege_options['footer_section2']); ?></p>
+				<p class="serv__title"><?php echo esc_html( $lege_options['footer_section2']); ?></p>
 			<?php } ?>
 
 			<?php 
@@ -93,11 +108,13 @@
 					</svg>
 					<div class="contact__phones">
 						<?php 
+						if (! empty($lege_options['footer_phone']) && is_array($lege_options['footer_phone'])) {
 							foreach($lege_options['footer_phone'] as $phone) { 
 								if( $phone ) { ?>
-								<a href="tel:<?php echo esc_attr( $phone ); ?>" class="contact__text contact__text_phone"><?php echo esc_attr( $phone ); ?></a>
+								<a href="tel:<?php echo esc_attr( $phone ); ?>" class="contact__text contact__text_phone"><?php echo esc_html( $phone ); ?></a>
 							<?php } 
-							} 
+							}
+						}
 						?>
 					</div>
 				</li>
@@ -106,7 +123,7 @@
 					<svg width="25" height="19">
 						<use xlink:href="#mail"/>
 					</svg>
-					<p class="contact__text contact__text_mail"><?php echo antispambot( $lege_options['footer_email'] ); ?></p>
+					<p class="contact__text contact__text_mail"><?php echo esc_html( antispambot( $lege_options['footer_email'] ) ); ?></p>
 				</li>
 				<?php } ?>
 			</ul>
@@ -116,7 +133,7 @@
 				<p class="subscribe__title"><?php echo esc_html__( $lege_options['footer_section4'] ); ?></p>
 			<?php } ?>
 			
-			<?php echo do_shortcode($lege_options['footer_subscribeshortcode']); ?>
+			<?php echo do_shortcode( wp_kses_post( $lege_options['footer_subscribeshortcode'] ) ); ?>
 
 			<div class="control">
 				<div class="language">
@@ -141,9 +158,9 @@
                             <svg class="control__icon" width="16" height="16">
                                 <use xlink:href="#user"/>
                             </svg>
-                            <?php esc_html_e('Личный кабинет','lege'); ?>
+                            <?php esc_html_e('Personal account','lege'); ?>
                         </a>
-                        <a href="<?php echo esc_url(wp_logout_url( home_url() )); ?>" class="control__reg noise"><?php esc_html_e('Выход','lege'); ?></a>
+                        <a href="<?php echo esc_url(wp_logout_url( home_url() )); ?>" class="control__reg noise"><?php esc_html_e('Logout','lege'); ?></a>
                     </div>
                 <?php } else { ?>
                     <div class="control__wrap">
@@ -151,15 +168,15 @@
                             <svg class="control__icon" width="19" height="17">
                                 <use xlink:href="#login"/>
                             </svg>
-                            <?php esc_html_e('Вход','lege'); ?>
+                            <?php esc_html_e('Login','lege'); ?>
                         </a>
-                        <a style="display: none;" href="<?php echo $my_account_url; ?>" class="control__enter control__enter_cab">
+                        <a style="display: none;" href="<?php echo esc_url( $my_account_url ); ?>" class="control__enter control__enter_cab">
                             <svg class="control__icon" width="16" height="16">
                                 <use xlink:href="#user"/>
                             </svg>
-                            <?php esc_html_e('Личный кабинет','lege'); ?>
+                            <?php esc_html_e('Personal account','lege'); ?>
                         </a>
-                        <a href="#reg" class="control__reg noise popup-link-2"><?php esc_html_e('Регистрация','lege'); ?></a>
+                        <a href="#reg" class="control__reg noise popup-link-2"><?php esc_html_e('Registration','lege'); ?></a>
                     </div>
                 <?php } ?>
 
@@ -168,7 +185,7 @@
             </div>
         </div>
         <?php if($lege_options['footer_copyrights']){ ?>
-            <div class="footer__copy"><?php echo $lege_options['footer_copyrights']; ?></div>
+            <div class="footer__copy"><?php echo wp_kses_post( $lege_options['footer_copyrights'] ); ?></div>
         <?php } ?>
 
 	</div>

@@ -1,6 +1,5 @@
-<?php 
-
-/** 
+<?php
+/**
  * Регистрируем Metaboxes.
  */
 function lege_metaboxes($meta_boxes) {
@@ -11,21 +10,21 @@ function lege_metaboxes($meta_boxes) {
     // Metabox для Отзывов.
     $meta_boxes[] = array(
         'id'         => 'testimonial_metaboxes',
-        'title'      => esc_html__( 'Данные для отзыва', 'lege' ),
+        'title'      => esc_html__( 'Testimonial Data', 'lege' ),
         'pages'      => array( 'testimonial' ),
         'context'    => 'normal',
         'priority'   => 'high',
         'show_names' => true,
         'fields' => array(
             array(
-                'name' => esc_html__( 'Социальная Сеть', 'lege' ),
-                'desc' => esc_html__( 'Введите ссылку на соц сеть', 'lege' ),
+                'name' => esc_html__( 'Social Network', 'lege' ),
+                'desc' => esc_html__( 'Enter the social network link', 'lege' ),
                 'id'   => $prefix . 'social_link',
                 'type' => 'text',
             ),
             array(
-                'name' => esc_html__( 'Дата отзыва', 'lege' ),
-                'desc' => esc_html__( 'Введите дату отзыва', 'lege' ),
+                'name' => esc_html__( 'Testimonial Date', 'lege' ),
+                'desc' => esc_html__( 'Enter the testimonial date', 'lege' ),
                 'id'   => $prefix . 'testy_date',
                 'type' => 'text_date',
             ),
@@ -35,39 +34,40 @@ function lege_metaboxes($meta_boxes) {
     // Metabox для Услуг.
     $meta_boxes[] = array(
         'id'         => 'service_metaboxes',
-        'title'      => esc_html__( 'Данные для сервиса', 'lege' ),
+        'title'      => esc_html__( 'Service Data', 'lege' ),
         'pages'      => array( 'service' ),
         'context'    => 'normal',
         'priority'   => 'high',
         'show_names' => true,
         'fields' => array(
             array(
-                'name' => esc_html__( 'Стоимость', 'lege' ),
-                'desc' => esc_html__( 'Введите цену данной услуги', 'lege' ),
+                'name' => esc_html__( 'Cost', 'lege' ),
+                'desc' => esc_html__( 'Enter the service price', 'lege' ),
                 'id'   => $prefix . 'service_cost',
                 'type' => 'text',
             ),
             array(
-                'name' => esc_html__( 'Фоновое изображение', 'lege' ),
-                'desc' => esc_html__( 'Выберите фон для выбора', 'lege' ),
+                'name' => esc_html__( 'Background Image', 'lege' ),
+                'desc' => esc_html__( 'Select a background', 'lege' ),
                 'id'   => $prefix . 'service_icon',
                 'type' => 'select',
                 'options' => array(
-                    array('name' => esc_html__( 'Стиль Статистика', 'lege' ), 'value' => 'stat'),
-                    array('name' => esc_html__( 'Стиль Идея', 'lege' ), 'value' => 'idea'),
-                    array('name' => esc_html__( 'Стиль Интернет', 'lege' ), 'value' => 'internet'),
-                    array('name' => esc_html__( 'Стиль Инфо', 'lege' ), 'value' => 'info'),
-                    array('name' => esc_html__( 'Стиль Деловой', 'lege' ), 'value' => 'busy'),
-                    array('name' => esc_html__( 'Стиль Таргет', 'lege' ), 'value' => 'target'),
+                    array('name' => esc_html__( 'Statistics Style', 'lege' ), 'value' => 'stat'),
+                    array('name' => esc_html__( 'Idea Style', 'lege' ), 'value' => 'idea'),
+                    array('name' => esc_html__( 'Internet Style', 'lege' ), 'value' => 'internet'),
+                    array('name' => esc_html__( 'Info Style', 'lege' ), 'value' => 'info'),
+                    array('name' => esc_html__( 'Business Style', 'lege' ), 'value' => 'busy'),
+                    array('name' => esc_html__( 'Target Style', 'lege' ), 'value' => 'target'),
                 ),
             ),
         )
     );
 
+    
 // Добавляет метабокс для страницы с шаблоном "template-order.php", позволяющий указать шорткод формы заказа
 $meta_boxes[] = array(
     'id'         => 'order_metaboxes',
-    'title'      => esc_html__( 'Данные для страницы заказа', 'lege' ),
+    'title'      => esc_html__( 'Order Page Data', 'lege' ),
     'pages'      => array( 'page' ),
     'context'    => 'normal',
     'priority'   => 'high',
@@ -75,8 +75,8 @@ $meta_boxes[] = array(
     'show_on'    => array( 'key' => 'page-template', 'value' => array('template-order.php') ),
     'fields' => array(
         array(
-            'name' => esc_html__( 'Шорткод формы', 'lege' ),
-            'desc' => esc_html__( 'Установите плагин для формы и вставьте шорткод формы', 'lege' ),
+            'name' => esc_html__( 'Form Shortcode', 'lege' ),
+            'desc' => esc_html__( 'Install a form plugin and insert its shortcode', 'lege' ),
             'id'   => $prefix . 'shortcode_order',
             'type' => 'text',
         ),
@@ -85,43 +85,42 @@ $meta_boxes[] = array(
 
 $meta_boxes[] = array(
     'id'         => 'woocommerce_metaboxes',
-    'title'      => 'Данные для Товара',
-    'pages'      => array( 'product', ), // Post type
+    'title'      => esc_html__('Product Data', 'lege'),
+    'pages'      => array( 'product', ),
     'context'    => 'normal',
     'priority'   => 'low',
-    'show_names' => true, // Show field names on the left
-    //'show_on'    => array( 'key' => 'page-template', 'value' => array('template-contact.php'), ), // Specific post templates to display this metabox
+    'show_names' => true,
     'fields' => array(
         array(
-            'name' => 'Короткий заголовок',
-            'desc' => 'Укажите короткий заголовок',
+            'name' => esc_html__('Short Title', 'lege'),
+            'desc' => esc_html__('Enter a short title', 'lege'),
             'id'   => $prefix . 'short_title',
             'std' => '',
             'type' => 'text',
         ),
         array(
-            'name' => 'Текст кнопки',
-            'desc' => 'Укажите какой либо текст для кнопки',
+            'name' => esc_html__('Button Text', 'lege'),
+            'desc' => esc_html__('Enter button text', 'lege'),
             'id'   => $prefix . 'sale_button_title',
-            'std' => 'e.g. NEW, HOT',
+            'std' => '',
             'type' => 'text',
         ),
         array(
-            'name' => 'Цвет кнопки',
-            'desc' => 'Укажите цвет для кнопки',
+            'name' => esc_html__('Button Color', 'lege'),
+            'desc' => esc_html__('Enter a button color', 'lege'),
             'id'   => $prefix . 'sale_button_color',
             'type' => 'text',
             'std' => '#fdba4a'
         ),
         array(
-            'name' => 'Фото 1',
-            'desc' => 'Загрузите фото',
+            'name' => esc_html__('Photo 1', 'lege'),
+            'desc' => esc_html__('Upload a photo', 'lege'),
             'id'   => $prefix . 'photo_one',
             'type' => 'file',
         ),
         array(
-            'name' => 'Фото 1 Alt text',
-            'desc' => 'Alt text',
+            'name' => esc_html('Photo 1 Alt text', 'lege'),
+            'desc' => esc_html('Alt text', 'lege'),
             'id' => $prefix . 'photo_one_alt',
             'type' => 'text',
         )
@@ -130,7 +129,7 @@ $meta_boxes[] = array(
 
 $meta_boxes[] = array(
     'id'         => 'contact_metaboxes',
-    'title'      => esc_html__( 'Данные для страницы контакта', 'lege' ),
+    'title'      => esc_html__( 'Contact Page Data', 'lege' ),
     'pages'      => array( 'page' ),
     'context'    => 'normal',
     'priority'   => 'high',
@@ -138,59 +137,59 @@ $meta_boxes[] = array(
     'show_on'    => array( 'key' => 'page-template', 'value' => array('template-contact.php') ),
     'fields' => array(
         array(
-            'name' => esc_html__( 'Заголовок 1', 'lege' ),
-            'desc' => esc_html__( 'Укажите заголовок для левой части страницы', 'lege' ),
+            'name' => esc_html__( 'Title 1', 'lege' ),
+            'desc' => esc_html__( 'Enter the title for the left section', 'lege' ),
             'id'   => $prefix . 'contact_title_left',
-            'std'  => esc_html__( 'Как нас найти', 'lege' ),
+            'std'  => esc_html__( 'How to Find Us', 'lege' ),
             'type' => 'text',
         ),
         array(
-            'name' => esc_html__( 'Заголовок 2', 'lege' ),
-            'desc' => esc_html__( 'Укажите заголовок для правой части страницы', 'lege' ),
+            'name' => esc_html__( 'Title 2', 'lege' ),
+            'desc' => esc_html__( 'Enter the title for the right section', 'lege' ),
             'id'   => $prefix . 'contact_title_right',
-            'std'  => esc_html__( 'Получите бесплатную консультацию уже сегодня', 'lege' ),
+            'std'  => esc_html__( 'Get a free consultation today', 'lege' ),
             'type' => 'text',
         ),
         array(
-            'name' => esc_html__( 'Шорткод для Контактной формы', 'lege' ),
-            'desc' => esc_html__( 'Создайте новую форму в плагине CF7 и вставьте сюда шорткод', 'lege' ),
+            'name' => esc_html__( 'Contact Form Shortcode', 'lege' ),
+            'desc' => esc_html__( 'Create a new form in the CF7 plugin and insert the shortcode here', 'lege' ),
             'id'   => $prefix . 'contact_shortcode',
             'type' => 'text',
         ),
         array(
-            'name' => esc_html__( 'Адрес', 'lege' ),
-            'desc' => esc_html__( 'Укажите ваше адрес', 'lege' ),
+            'name' => esc_html__( 'Address', 'lege' ),
+            'desc' => esc_html__( 'Enter your address', 'lege' ),
             'id'   => $prefix . 'contact_address',
             'type' => 'text',
         ),
         array(
-            'name' => esc_html__( 'Телефон 1', 'lege' ),
-            'desc' => esc_html__( 'Укажите ваш телефон 1', 'lege' ),
+            'name' => esc_html__( 'Phone number 1', 'lege' ),
+            'desc' => esc_html__( 'Enter your phone number 1', 'lege' ),
             'id'   => $prefix . 'contact_phone1',
             'type' => 'text',
         ),
         array(
-            'name' => esc_html__( 'Телефон 2', 'lege' ),
-            'desc' => esc_html__( 'Укажите ваш телефон 2', 'lege' ),
+            'name' => esc_html__( 'Phone number 2', 'lege' ),
+            'desc' => esc_html__( 'Enter your phone number 2', 'lege' ),
             'id'   => $prefix . 'contact_phone2',
             'type' => 'text',
         ),
         array(
             'name' => esc_html__( 'Email', 'lege' ),
-            'desc' => esc_html__( 'Укажите ваш Email', 'lege' ),
+            'desc' => esc_html__( 'Enter your email', 'lege' ),
             'id'   => $prefix . 'contact_email',
             'type' => 'text',
         ),
         array(
-            'name' => esc_html__( 'График', 'lege' ),
-            'desc' => esc_html__( 'Укажите текст для рабочего графика', 'lege' ),
+            'name' => esc_html__( 'Working Hours', 'lege' ),
+            'desc' => esc_html__( 'Enter your working hours', 'lege' ),
             'id'   => $prefix . 'contact_calendar',
             'type' => 'text',
-            'std'  => esc_html__( 'Мы работаем с 9:00 до 22:00 в рабочие дни', 'lege'),
+            'std'  => esc_html__( 'We work from 9:00 to 22:00 on weekdays', 'lege'),
         ),
         array(
-            'name' => esc_html__( 'Шорткод Карты', 'lege' ),
-            'desc' => esc_html__( 'Установите плагин для отображения карт и вставьте сюда шоткод', 'lege' ),
+            'name' => esc_html__( 'Map Shortcode', 'lege' ),
+            'desc' => esc_html__( 'Install a map plugin and insert the shortcode here', 'lege' ),
             'id'   => $prefix . 'contact_map',
             'type' => 'text',
         ),
@@ -199,3 +198,6 @@ $meta_boxes[] = array(
 
 return $meta_boxes;
 }
+
+
+

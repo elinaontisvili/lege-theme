@@ -362,7 +362,7 @@ Redux::set_section($opt_name, array(
             'type'     => 'text',
             'title'    => __('Header Phone Label', 'lege'),
             'subtitle' => __('Insert the Label', 'lege'),
-            'default'  => 'Заказать звонок',
+            'default'  => 'Request a Call',
 		),
 		array(
             'id'       => 'header_phone',
@@ -415,7 +415,7 @@ Redux::set_section($opt_name, array(
 			'id'      => 'footer_copyrights',
 			'type'    => 'editor',
 			'title'   => __( 'Copyrights', 'lege' ),
-			'default' => '©2007-2018 Все права защищены',
+			'default' => '©2007-2018 All rights resereved',
 			'args'    => array(
 				'wpautop'       => false,
 				'media_buttons' => false,
@@ -441,36 +441,36 @@ Redux::set_section($opt_name, array(
 			'id'      => 'footer_section1',
 			'type'    => 'text',
 			'title'   => __( 'First Section Title', 'lege' ),
-			'default' => 'Карта сайта'
+			'default' => 'Site map'
 		),
 		array(
 			'id'      => 'footer_section2',
 			'type'    => 'text',
 			'title'   => __( 'Second Section Title', 'lege' ),
-			'default' => 'Услуги'
+			'default' => 'Services'
 		),
 		array(
 			'id'      => 'footer_section3',
 			'type'    => 'text',
 			'title'   => __( 'Third Section Title', 'lege' ),
-			'default' => 'Контакты'
+			'default' => 'Contact'
 		),
 		array(
 			'id'      => 'footer_section4',
 			'type'    => 'text',
 			'title'   => __( 'Fourth Section Title', 'lege' ),
-			'default' => 'Подписаться на рассылку новостей'
+			'default' => 'Subscribe to Newsletter'
 		),
 		array(
 			'id'     => 'footer-widget-end',
 			'type'   => 'section',
-			'indent' => false, // false -> End indentation. Options below are not nested until the next 'indent' => true section.
+			'indent' => false,
 		),
 		array(
 			'id'       => 'footer-subscribe-start',
 			'type'     => 'section',
 			'title'    => esc_html__( 'Footer Subscribe Form', 'lege' ),
-			'indent'   => true, // Start a new subsection. Options below will be nested under this section.
+			'indent'   => true,
 		),
 		array(
 			'id'      => 'footer_subscribeshortcode',
@@ -480,7 +480,7 @@ Redux::set_section($opt_name, array(
 		array(
 			'id'     => 'footer-subscribe-end',
 			'type'   => 'section',
-			'indent' => false, // false -> End indentation.
+			'indent' => false,
 		),
     )
 ));
@@ -514,8 +514,8 @@ Redux::set_section( $opt_name, array(
 			'title'   => __( 'Specify the video link', 'lege' ),
 			'default' => '',
 			'text_hint' => array(
-				'title'   => 'Ссылка с YouTube',
-				'content' => 'Используйте простую ссылку из строки браузера на ролик с Ютуб'
+				'title'   => 'YouTube Link',
+				'content' => 'Use the simple link from the browser address bar for a YouTube video'
 			)
 		),
 		array(
@@ -561,13 +561,13 @@ Redux::set_section( $opt_name, array(
 			'id'      => 'testylabel1',
 			'type'    => 'text',
 			'title'   => __( 'Specify the Label', 'lege' ),
-			'default' =>'За нас говорят'
+			'default' =>'What They Say About Us'
 		),
 		array(
 			'id'      => 'testylabel2',
 			'type'    => 'text',
 			'title'   => __( 'Specify the Label', 'lege' ),
-			'default' =>'НАШИ КЛИЕНТЫ'
+			'default' =>'OUR CLIENTS'
 		),
 		array(
 			'id'      => 'testimonial_posts',
@@ -575,14 +575,6 @@ Redux::set_section( $opt_name, array(
 			'title'   => __( 'Specify the count of testimonials per page', 'lege' ),
 			'default' => '6' 
 		),
-		/*
-		array(
-			'id'      => 'testimonial_form_label',
-			'type'    => 'text',
-			'title'   => esc_html__( 'Form Label', 'lege' ),
-			'default' => 'Оставьте ваш отзыв'
-		),
-		*/
 		array(
 			'id'      => 'testimonial_form_shortcode',
 			'type'    => 'text',
@@ -611,26 +603,26 @@ Redux::set_section( $opt_name, array(
 			'id'      => 'caseslabel',
 			'type'    => 'text',
 			'title'   => __( 'Title for the Cases Slider', 'lege' ),
-			'default' => 'Посмотрите наши последние кейсы',
+			'default' => 'Check Out Our Latest Cases',
 		),
 
 		array(
 			'id'      => 'servicearchivetitle11',
 			'type'    => 'text',
 			'title'   => __( 'Page Archive Heading 1', 'lege' ),
-			'default' => 'НАШИ'
+			'default' => 'OUR'
 		),
 		array(
 			'id'      => 'servicearchivetitle12',
 			'type'    => 'text',
 			'title'   => __( 'Page Archive Heading 2', 'lege' ),
-			'default' => 'УСЛУГИ'
+			'default' => 'SERVICES'
 		),
 		array(
 			'id'      => 'servicearchivedesc',
 			'type'    => 'text',
 			'title'   => __( 'Archive Page Description', 'lege' ),
-			'default' => 'Вы хотите реализовать свои бизнес идеи?<br>Начало вашего нового бизнеса требует прочной юридической основы, и мы поможем вам на каждом этапе'
+			'default' => 'Do you want to implement your business ideas?<br>The start of your new business requires a solid legal foundation, and we will help you at every step'
 		),
 	)
 ) );
@@ -646,13 +638,13 @@ Redux::set_section( $opt_name, array(
 			'id'      => 'newstitle1',
 			'type'    => 'text',
 			'title'   => __( 'Heading (first part)', 'lege' ),
-			'default' => 'Актуальные'
+			'default' => 'Hot'
 		),
 		array(
 			'id'      => 'newstitle2',
 			'type'    => 'text',
 			'title'   => __( 'Heading (second part)', 'lege' ),
-			'default' => 'НОВОСТИ'
+			'default' => 'NEWS'
 		),
 		array(
 			'id'      => 'newspostsperpage',
@@ -664,7 +656,7 @@ Redux::set_section( $opt_name, array(
 			'id'      => 'categorytitle',
 			'type'    => 'text',
 			'title'   => __( 'Heading for category archive page', 'lege' ),
-			'default' => 'Категории новостей'
+			'default' => 'News categories'
 		),
 
 	)
@@ -681,19 +673,19 @@ Redux::set_section( $opt_name, array(
 			'id'      => 'casearchivetitle1',
 			'type'    => 'text',
 			'title'   => __( 'Page Cases Heading 1', 'lege' ),
-			'default' => 'НАШИ',
+			'default' => 'OUR',
 		),
 		array(
 			'id'      => 'casearchivetitle2',
 			'type'    => 'text',
 			'title'   => __( 'Page Cases Heading 2', 'lege' ),
-			'default' => 'КЕЙСЫ',
+			'default' => 'CASES',
 		),
 		array(
 			'id'      => 'casearchivedesc',
 			'type'    => 'textarea',
 			'title'   => __( 'Page Cases Description', 'lege' ),
-			'default' => 'Описание страницы кейсов.',
+			'default' => 'Description of the cases page.',
 		),
 	)
 ) );
@@ -719,13 +711,13 @@ Redux::set_section( $opt_name, array(
 			'id'      => 'bloglabel1',
 			'type'    => 'text',
 			'title'   => __( 'Specify the Label', 'lege' ),
-			'default' =>'Наш'
+			'default' =>'Our'
 		),
 		array(
 			'id'      => 'bloglabel2',
 			'type'    => 'text',
 			'title'   => __( 'Specify the Label', 'lege' ),
-			'default' =>'БЛОГ'
+			'default' =>'BLOG'
 		)
 	)
 ) );
@@ -749,9 +741,9 @@ Redux::set_section( $opt_name, array(
 		array(
 			'id'       => 'lege_form_policy_text',
 			'type'     => 'editor',
-			'title'    => __( 'Текст согласия для формы', 'lege' ),
-			'default'  => __( 'Я ознакомился и согласен с <a href="#">Правилами пользования</a> и <a href="#">политикой конфиденциальности</a> сайта', 'lege' ),
-			'subtitle' => __( 'Этот текст будет отображаться рядом с чекбоксом согласия.', 'lege' ),
+			'title'    => __( 'Consent Text for the Form', 'lege' ),
+			'default'  => __( 'I have read and agree to the <a href="#">Terms of Use</a> and the website’s <a href="#">Privacy Policy</a>.', 'lege' ),
+			'subtitle' => __( 'This text will be displayed next to the consent checkbox.', 'lege' ),
 		),
 	)
 ) );
@@ -766,60 +758,43 @@ Redux::set_section( $opt_name, array(
 	) );
 	
 Redux::set_section( $opt_name, array(
-	'title'            => 'Магазин',
+	'title'            => 'Shop',
 	'id'			   => 'woosettings',
 	'subsection'       => true, 
 	'customizer_width' => '450px',
-	'desc'			 => __( 'Опции для страницы Магазина', 'lege' ),
+	'desc'			 => __( 'Options for the Shop page', 'lege' ),
 	'fields'           => array(
 		array(
 			'id'      => 'wootitle1',
 			'type'    => 'text',
-			'title'   => __( 'Заголовок первой части', 'lege' ),
-			'default' => 'НОВАЯ КОЛЛЕКЦИЯ 2018'
+			'title'   => __( 'First Title Part', 'lege' ),
+			'default' => 'NEW COLLECTION 2018'
 		),
 		array(
 			'id'      => 'wootitle2',
 			'type'    => 'text',
-			'title'   => __( 'Заголовок второй части', 'lege' ),
+			'title'   => __( 'Second Title Part', 'lege' ),
 			'default' => 'FOR REAL MAN.'
 		),
 		array(
 			'id'      => 'woolink',
 			'type'    => 'text',
-			'title'   => __( 'Ссылка на коллекцию', 'lege' ),
+			'title'   => __( 'Collection Link', 'lege' ),
 			'default' => '#'
 		),
 		array(
 			'id'	  => 'woo_bg',
 			'type'    => 'media',
 			'url'     => true,
-			'title'  => __( 'Фон для Шапки', 'lege' ),
+			'title'  => __( 'Header Background', 'lege' ),
 			'compiler' => 'true',
-			'desc'    => __( 'Загрузите картинку', 'lege' ),
+			'desc'    => __( 'Upload an image', 'lege' ),
 			'default' => array( 'url' => get_template_directory_uri() . '/assets/img/wshop_bg.jpg'),
 		)
 	)
 ));
 
-// Call me Modal window
-Redux::set_section( $opt_name, array(
-	'title'            => esc_html__( 'Modal Windows', 'lege' ),
-	'id'			   => 'modal_windows',
-	'subscription'	   => true,
-	'customiaer_width' => '450px',
-	'desc'			   => esc_html__( 'Add data', 'lege' ), 
-	'fields'		   => array(
-		array(
-			'id'	   => 'modal_contact_shortcode', 
-			'type'	   => 'text',
-			'title'	   => esc_html__('Specify the shortcode', 'lege'),
-			'default'  => ''
-		),
-	)
-));
-
-// Thank you Modal window
+// Call me and Thank you Modal window
 Redux::set_section( $opt_name, array(
 	'title'            => esc_html__( 'Modal Windows', 'lege' ),
 	'id'			   => 'modal_windows',
@@ -842,7 +817,7 @@ Redux::set_section( $opt_name, array(
 	)
 ));
 
-//
+
 
 
 // -> END Basic Fields

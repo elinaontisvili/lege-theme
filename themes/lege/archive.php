@@ -10,6 +10,7 @@
 get_header(); 
 
 global $wp_query;
+
 ?>
 
 <section class="inner events">
@@ -23,7 +24,6 @@ global $wp_query;
 
 				while ( have_posts() ) : the_post(); ?>
 
-					<!-- One new -->
 					<article class="news__item">
 						<div class="news__wrap">
 							<div class="news__img blue-noise">
@@ -33,7 +33,7 @@ global $wp_query;
 									<?php
 										$taxonomies = get_object_taxonomies(get_post_type(), 'objects');
 										foreach ($taxonomies as $taxonomy) {
-											if ($taxonomy->public && ! $taxonomy->hierarchical) continue; // Skip tags, if needed remove the if (...) continue;
+											if ($taxonomy->public && ! $taxonomy->hierarchical) continue;
 											$terms = get_the_terms(get_the_ID(), $taxonomy->name);
 											if ($terms && !is_wp_error($terms)) {
 												foreach ($terms as $term) {
@@ -42,11 +42,6 @@ global $wp_query;
 											}
 										}
 										?>
-									<?php //$news_categories = wp_get_post_terms(get_the_ID(),'news-category');
-
-									/* foreach($news_categories as $category){ ?>
-										<li><a href="<?php echo get_term_link($category); ?>"><?php echo esc_attr($category->name); ?></a></li>
-									<?php } */ ?>
 								</ul>
 							</div>
 							<div class="news__side">
@@ -62,7 +57,7 @@ global $wp_query;
 										<svg width="15" height="15">
 											<use xlink:href="#link"/>
 										</svg>
-										<?php esc_html_e('Поделиться:', 'lege'); ?>
+										<?php esc_html_e('Share:', 'lege'); ?>
 									</p>
 									<ul class="social">
 										<li class="social__item">
@@ -92,7 +87,7 @@ global $wp_query;
 									</ul>
 								</div>
 								<a href="<?php the_permalink(); ?>" class="news__link link-more">
-									<?php esc_html_e('Читать больше', 'lege'); ?>
+									<?php esc_html_e('Read more', 'lege'); ?>
 									<svg width="18" height="20">
 										<use xlink:href="#nav-right"/>
 									</svg>
@@ -101,8 +96,7 @@ global $wp_query;
 						</div>
 						<h5 class="news__heading"><?php the_title(); ?></h5>
 						<p class="news__text"><?php the_excerpt(); ?></p>
-					</article><!-- End one new -->
-
+					</article>
 
 				<?php endwhile;
 
@@ -127,7 +121,7 @@ global $wp_query;
 						echo paginate_links( array(
 							'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 							'format' => 'page/%#%/',
-							'current' => max( 1, get_query_var('paged') ? get_query_var('paged') : get_query_var('page') ), // fallback for pagination
+							'current' => max( 1, get_query_var('paged') ? get_query_var('paged') : get_query_var('page') ), // fallback
 							'prev_text'          => '',
 							'next_text'          => '',
 							'total' => $wp_query->max_num_pages

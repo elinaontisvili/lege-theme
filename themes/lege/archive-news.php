@@ -10,6 +10,7 @@
 get_header();
 
 global $lege_options;
+
 ?>
 
 <section class="inner events">
@@ -17,7 +18,6 @@ global $lege_options;
         <div class="news">
             <h2 class="news__title secondary-title"><span><?php echo $lege_options['newstitle1']; ?></span><br><?php echo $lege_options['newstitle2']; ?></h2>
 
-            <!-- цикл -->
             <?php
             // Pagination
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -29,7 +29,6 @@ global $lege_options;
 
             if ( $news->have_posts() ) : 
                 while ( $news->have_posts() ) : $news->the_post(); ?>
-            <!-- цикл -->
 
             <article class="news__item">
                 <div class="news__wrap">
@@ -55,7 +54,7 @@ global $lege_options;
                                 <svg width="15" height="15">
                                     <use xlink:href="#link"/>
                                 </svg>
-                                <?php esc_html_e('Поделиться:', 'lege'); ?>
+                                <?php esc_html_e('Share:', 'lege'); ?>
                             </p>
                             <ul class="social">
                                 <li class="social__item">
@@ -85,7 +84,7 @@ global $lege_options;
                             </ul>
                         </div>
                         <a href="<?php echo esc_url( get_permalink() ); ?>" class="news__link link-more">
-                            <?php esc_html_e( 'Читать больше', 'lege' ); ?>
+                            <?php esc_html_e( 'Read more', 'lege' ); ?>
                             <svg width="18" height="20">
                                 <use xlink:href="#nav-right"/>
                             </svg>
@@ -96,14 +95,12 @@ global $lege_options;
                 <p class="news__text"><?php the_excerpt(); ?></p>
             </article>
             
-            <!-- цикл -->
             <?php endwhile; 
             wp_reset_postdata(); 
 else :
-                echo "<div>Нет новых новостей</div>";
+                echo "<div>No news found</div>";
 
             endif; ?>
-            <!-- цикл -->
 
             <!-- Pagination -->
             <?php if($news->max_num_pages > 1) { ?> 

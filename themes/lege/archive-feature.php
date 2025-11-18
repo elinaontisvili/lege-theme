@@ -55,7 +55,7 @@ global $lege_options;
 										<svg width="15" height="15">
 											<use xlink:href="#link"/>
 										</svg>
-										<?php esc_html_e('Поделиться:', 'lege'); ?>
+										<?php esc_html_e('Share:', 'lege'); ?>
 									</p>
 									<ul class="social">
 										<li class="social__item">
@@ -85,7 +85,7 @@ global $lege_options;
 									</ul>
 								</div>
 								<a href="<?php the_permalink(); ?>" class="news__link link-more">
-									<?php esc_html_e('Читать больше', 'lege'); ?>
+									<?php esc_html_e('Read more', 'lege'); ?>
 									<svg width="18" height="20">
 										<use xlink:href="#nav-right"/>
 									</svg>
