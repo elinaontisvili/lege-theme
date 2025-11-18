@@ -676,3 +676,8 @@ function lege_woocommerce_save_account_details( $user_id ) {
     update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone']));
 }
 
+// In admin always show all posts all languages
+add_filter( 'pll_the_languages_args', function( $args ) {
+    $args['hide_if_empty'] = 0;
+    return $args;
+} );
