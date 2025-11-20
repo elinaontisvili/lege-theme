@@ -32,11 +32,12 @@ class Lege_Category_Filter_Widget extends WP_Widget
     {
         extract( $args );
 
-        $title = $instance['title'];
+        //$title = $instance['title'];
+        $title = pll__( $instance['title']); 
 
         ?>
         <div class="categories side-nav log">
-        <h5 class="categories__title"><?php $title; ?></h5>
+        <h5 class="categories__title"><?php echo esc_html( $title ); ?></h5>
         <div id="st-accordion" class="st-accordion">
             <ul>
 
@@ -105,6 +106,11 @@ class Lege_Category_Filter_Widget extends WP_Widget
 
         $instance['title'] = strip_tags( $new_instance['title'] );
 
+        // Register strings for Polylang
+        if ( function_exists( 'pll_register_string' ) ) {
+            pll_register_string( 'Shop Category Filter Widget Title', $instance['title'], 'Widgets' );
+        }
+
         return $instance;
     }
 
@@ -122,7 +128,7 @@ class Lege_Category_Filter_Widget extends WP_Widget
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Фильтрация по категории | Заголовок</label>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Фильтрация по категории | Заголовок', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
         </p>
 

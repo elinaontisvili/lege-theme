@@ -34,14 +34,13 @@
         <key name="lege_options"> 
             <key name="footer_address" /> 
             <key name="footer_phone" />
+            <key name="footer_info" />
             <key name="footer_copyrights" />
             <key name="footer_section1" />
             <key name="footer_section2" /> 
             <key name="footer_section3" />
             <key name="footer_section4" />
-            <key name="footer_subscribeshortcode" />
             <key name="header_time" />
-            <key name="header_video" />
             <key name="header_video_title" />
             <key name="header_phone_label" /> 
             <key name="header_phone" /> 
@@ -51,7 +50,6 @@
             <key name="footer_section4" />
             <key name="testylabel1" />
             <key name="testylabel2" />
-            <key name="testimonial_form_shortcode" />
             <key name="servicecurrency" />
             <key name="caseslabel" />
             <key name="servicearchivetitle11" />
@@ -68,7 +66,6 @@
             <key name="lege_form_policy_text" />
             <key name="wootitle1" />
             <key name="wootitle2" />
-            <key name="woolink" /> 
         </key>
     </admin-texts>
 </wpml-config>

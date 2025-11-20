@@ -75,12 +75,12 @@ class Lege_Rating_Widget extends WP_Widget
     {
         extract( $args );
 
-        $title = $instance['title'];
+        $title = pll__( $instance['title'] );
         ob_start();
 
         $found = false;
 
-        echo '<div class="rating"><h5 class="rating__title">'.$title.'</h5>';
+        echo '<div class="rating"><h5 class="rating__title">'.esc_html( $title ).'</h5>';
 
         for ( $rating = 5; $rating >= 1; $rating-- ) {
             $count = $this->get_filtered_product_count( $rating );
@@ -128,6 +128,11 @@ class Lege_Rating_Widget extends WP_Widget
 
         $instance['title'] = strip_tags( $new_instance['title'] );
 
+        // Register strings for Polylang
+        if ( function_exists( 'pll_register_string' ) ) {
+            pll_register_string( 'Rating Widget Title', $instance['title'], 'Widgets' );
+        }
+
         return $instance;
     }
 
@@ -146,7 +151,7 @@ class Lege_Rating_Widget extends WP_Widget
         ?>
 
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Заголовок</label>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e('Заголовок', 'lege'); ?></label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
         </p>
 

@@ -43,9 +43,10 @@ public function widget( $args, $instance ) {
         'image'     => 0,
     ) );
 
-    $title = apply_filters('widget_title', $instance['title'] );
-    $text = apply_filters('widget_content', $instance['text']); 
-    $link_more = !empty($instance['link_more']) ? apply_filters('link_more', $instance['link_more']) : '';
+    // Polylang
+    $title = pll__( $instance['title'] );
+    $text  = pll__( $instance['text'] );
+    $link_more = !empty($instance['link_more']) ? pll__( $instance['link_more'] ) : '';
 
     /* Our variables from the widget settings. */
     $image_id = (int) $instance[$this->image_field];
@@ -60,10 +61,10 @@ public function widget( $args, $instance ) {
                 <h4 class="banner__title"><?php echo esc_html( $title ); ?></h4>
             <?php endif; ?>
 
-            <p class="banner__text"><?php echo wp_kses_post( $instance['text'] ); ?></p>
+            <p class="banner__text"><?php echo wp_kses_post( $text ); ?></p>
 
             <?php if ( $link_more ) : ?>
-                <a href="<?php echo esc_url( $link_more ); ?>" class="banner__btn"><?php echo esc_html__( 'Купить', 'lege' ); ?></a>
+                <a href="<?php echo esc_url( pll__( $link_more ) ); ?>" class="banner__btn"><?php echo esc_html__( 'Buy', 'lege' ); ?></a>
             <?php endif; ?>
         </div>
     <?php
@@ -84,6 +85,13 @@ public function widget( $args, $instance ) {
         $instance['link_more'] = esc_url_raw( $new_instance['link_more'] );
 
         $instance['image'] = ! empty( $new_instance['image'] ) ? intval( $new_instance['image'] ) : '';
+
+        // Register strings for Polylang
+        if ( function_exists( 'pll_register_string' ) ) {
+            pll_register_string( 'Shop Widget Title', $instance['title'], 'Widgets' );
+            pll_register_string( 'Shop Widget Text', $instance['text'], 'Widgets' );
+            pll_register_string( 'Shop Widget Link', $instance['link_more'], 'Widgets' );
+        }
 
 		return $instance;
 	}

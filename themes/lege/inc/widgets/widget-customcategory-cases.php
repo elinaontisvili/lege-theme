@@ -32,7 +32,7 @@ class Lege_Category_Case_Widget extends WP_Widget
     {
         extract( $args );
 
-        $title = $instance['title'];
+        $title = pll__( $instance['title'] );
 
         // Display Widget
         ?>
@@ -42,7 +42,7 @@ class Lege_Category_Case_Widget extends WP_Widget
                 <svg  width="19" height="19">
                     <use xlink:href="#content-post"/>
                 </svg>
-                <?php echo $title; ?>
+                <?php echo esc_html( $title ); ?>
             </h5>
             <ul>
 
@@ -76,6 +76,11 @@ class Lege_Category_Case_Widget extends WP_Widget
 
         $instance['title'] = strip_tags( $new_instance['title'] );
 
+        // Register strings for Polylang 
+        if( function_exists( 'pll_register_string' ) ) {
+            pll_register_string( 'Case Categories Widget Title', $instance['title'], 'Widgets' );
+        }
+
         return $instance;
     }
 
@@ -93,7 +98,7 @@ class Lege_Category_Case_Widget extends WP_Widget
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Заголовок</label>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Заголовок', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
         </p>
 

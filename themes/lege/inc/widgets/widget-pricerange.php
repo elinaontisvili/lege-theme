@@ -32,7 +32,7 @@ class Lege_PriceRange_Widget extends WP_Widget
     {
         extract( $args );
 
-        $title = $instance['title'];
+        $title = pll__( $instance['title'] );
 
         $prices = $this->get_filtered_price();
         $min_price = floor( $prices->min_price);
@@ -42,10 +42,10 @@ class Lege_PriceRange_Widget extends WP_Widget
 
         ?>
         <div class="sortby lege_sortby" data-minprice="<?php echo $min_price; ?>" data-maxprice="<?php echo $max_price; ?>"> 
-            <h5 class="sortby__title"><?php echo $title ?></h5>
+            <h5 class="sortby__title"><?php echo esc_html( $title ); ?></h5>
             <div id="slider-range"></div>
             <p class="sortby__price">
-                <label for="amount">Цена：</label>
+                <label for="amount"><?php esc_html_e( 'Цена：', 'lege' ); ?></label>
                 <span class="field">
                     <?php echo get_woocommerce_currency_symbol(); ?><input type="text" id="priceMin" class="min_price"> - <?php echo get_woocommerce_currency_symbol(); ?> <input type="text" id="priceMax" class="max_price">
                 </span>
@@ -107,6 +107,11 @@ class Lege_PriceRange_Widget extends WP_Widget
 
         $instance['title'] = strip_tags( $new_instance['title'] );
 
+        // Register strings for Polylang 
+        if ( function_exists( 'pll_register_string' ) ) {
+            pll_register_string( 'Price Range Widget Title', $instance['title'], 'Widgets' );
+        }
+
         return $instance;
     }
 
@@ -124,7 +129,7 @@ class Lege_PriceRange_Widget extends WP_Widget
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Фильтрация по цене | Заголовок</label>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Фильтрация по цене | Заголовок', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
         </p>
 

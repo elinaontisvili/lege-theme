@@ -409,6 +409,7 @@ Redux::set_section($opt_name, array(
 			'type'    => 'text',
 			'title'   => __( 'Footer Info', 'lege' ),
 			'subtitle'=> __( 'Info after social icons', 'lege' ),
+			'default' => 'Designed specifically for LEGE coaching',
 		),
 
 		array(
