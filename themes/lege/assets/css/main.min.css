@@ -1114,9 +1114,14 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   margin: 0 auto 50px;
 }
 
+/*
 .offer__btn:before {
-  content: 'Free consultation';
-  /* content: 'Бесплатная консультация'; */
+  content: 'Бесплатная консультация';
+}
+*/
+
+.offer__btn:hover:before {
+    content: attr(data-content);
 }
 
 .offer__video {
@@ -2002,13 +2007,17 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .services__order:before {
   padding-top: 3px;
-  content: 'Подробнее';
+  /* content: 'Подробнее'; */
   color: rgba(255, 255, 255, 0.7);
   width: 154px !important;
   border: 2px solid #fff;
   opacity: 0;
   -webkit-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
+}
+
+.services__order:hover:before {
+  content: attr(data-content);
 }
 
 /* Section News */
@@ -3248,8 +3257,12 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .inner__btn:before {
-  content: 'Заказать';
+  /* content: 'Заказать'; */
   width: 154px;
+}
+
+.inner__btn:hover:before {
+  content: attr(data-content);
 }
 
 .inner .cases {
@@ -4893,7 +4906,11 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .banner__btn:before {
   width: 154px;
-  content: 'Подробнее';
+  /* content: 'Подробнее'; */
+}
+
+.banner__btn:hover:before {
+  content: attr(data-content);
 }
 
 .subscr {
@@ -5657,7 +5674,11 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .product__btn:before {
   width: 220px;
-  /*content: 'Купить в один клик'; */
+  /* content: 'Купить в один клик'; */
+}
+
+.product__btn:hover:before {
+  content: attr(data-content);
 }
 
 .product .share {

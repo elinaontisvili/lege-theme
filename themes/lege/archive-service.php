@@ -90,7 +90,7 @@ get_header();
                                         ?>
                                     </p>
                                     <p class="services__price"><?php echo $lege_options['servicecurrency']; echo get_metadata('post',get_the_ID(),'lege_service_cost',true); ?></p>
-                                    <a href="<?php the_permalink(); ?>" class="services__order btn"><?php echo esc_html__( 'Read more', 'lege' ); ?></a>
+                                    <a href="<?php the_permalink(); ?>" class="services__order btn" data-content="<?php echo esc_attr( __( 'Read more', 'lege' ) ); ?>"><?php echo esc_html( __('Read more', 'lege' ) ); ?></a>
                                     <div class="services__bg <?php echo $service_icon_bg_style; ?>"></div>
                                 </li>
                             <?php endwhile;

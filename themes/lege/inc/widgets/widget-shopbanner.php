@@ -64,7 +64,7 @@ public function widget( $args, $instance ) {
             <p class="banner__text"><?php echo wp_kses_post( $text ); ?></p>
 
             <?php if ( $link_more ) : ?>
-                <a href="<?php echo esc_url( pll__( $link_more ) ); ?>" class="banner__btn"><?php echo esc_html__( 'Buy', 'lege' ); ?></a>
+                <a href="<?php echo esc_url( pll__( $link_more ) ); ?>" class="banner__btn" ><?php echo esc_html( __( 'Buy', 'lege' ) ); ?></a>
             <?php endif; ?>
         </div>
     <?php

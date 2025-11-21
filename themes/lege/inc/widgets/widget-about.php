@@ -67,7 +67,7 @@ public function widget( $args, $instance ) {
             <?php if ( $link_more ) : ?>
 
                 <!-- Polylang -->
-                <a href="<?php echo esc_url( pll__( $link_more ) ); ?>" class="banner__btn btn"><?php echo esc_html__( 'Read more', 'lege' ); ?></a>
+                <a href="<?php echo esc_url( pll__( $link_more ) ); ?>" class="banner__btn btn" data-content="<?php echo esc_attr( __( 'Read more', 'lege' ) ); ?>"><?php echo esc_html( __( 'Read more', 'lege' ) ); ?></a>
 
             <?php endif; ?>
         </div>

@@ -183,8 +183,8 @@ if(is_page_template('template-home.php')) {
 				<div class="offer__slide">
 					<p class="offer__text"><?php echo esc_html( $slide['title'] ); ?></p>
 					<?php echo wp_kses_post( $slide['description'] ); ?>
-					<a href="<?php echo esc_url( $slide['url'] ); ?>" class="offer__btn btn popup-link">
-						<?php esc_html_e( 'Free consultation', 'lege' ); ?>
+					<a href="<?php echo esc_url( $slide['url'] ); ?>" class="offer__btn btn popup-link" data-content="<?php echo esc_attr( __( 'Free consultation' ) ); ?>">
+						<?php echo esc_html( __( 'Free consultation' ) ); ?>
 					</a>
 				</div>
 			<?php } ?>
@@ -192,7 +192,7 @@ if(is_page_template('template-home.php')) {
 		</div>
 
 		<?php 
-		
+
 		if( ! empty( $lege_options['header_video'] ) ) { ?>
 		<a class="offer__video popup-with-zoom-anim popup-youtube" href="<?php echo esc_url( $lege_options['header_video'] ); ?>" rel="nofollow" >
 			<?php if( ! empty( $lege_options['header_time'] ) ) { ?>

@@ -29,7 +29,7 @@ get_header(); ?>
                     <?php
                         $price = get_metadata('post',get_the_ID(),'lege_service_cost',true);
                     ?>
-                    <a href="<?php echo esc_url(home_url('/order/') . '?price=' . urlencode($price) . '&title=' . rawurlencode(get_the_title()) . '&content=' . rawurlencode(strip_tags(get_the_content()))); ?>" class="inner__btn btn"><?php esc_html_e( 'Order', 'lege' ); ?></a>
+                    <a href="<?php echo esc_url(home_url('/order/') . '?price=' . urlencode($price) . '&title=' . rawurlencode(get_the_title()) . '&content=' . rawurlencode(strip_tags(get_the_content()))); ?>" class="inner__btn btn" data-content="<?php echo esc_attr( __( 'Order', 'lege' ) ); ?>"><?php echo esc_html( __( 'Order', 'lege' ) ); ?></a>
                 </div>
             </div>
 
