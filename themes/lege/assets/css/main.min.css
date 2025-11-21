@@ -2100,6 +2100,15 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   transition: all .3s ease;
 }
 
+.news__item_search_results {
+  width: auto !important; 
+  max-width: 927px;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  margin-top: 30px;
+
+}
+
 .news__heading {
   margin-top: auto;
   font-family: 'bitter', serif;

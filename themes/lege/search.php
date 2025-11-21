@@ -10,6 +10,10 @@
 get_header();
 ?>
 
+<section class="inner contacts">
+    <div class="wrapper">
+		<div id="primary" class="content-area"> 
+
 	<main id="primary" class="site-main">
 
 		<?php if ( have_posts() ) : ?>
@@ -45,9 +49,15 @@ get_header();
 
 		endif;
 		?>
-
+	
 	</main><!-- #main -->
 
+	</div> 
+
+
+	<?php get_sidebar(); ?>
+	</div> 
+</section>
 <?php
-get_sidebar();
+
 get_footer();
