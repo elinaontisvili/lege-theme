@@ -38,10 +38,10 @@ class Lege_Customsearch_Widget extends WP_Widget
         ?>
 
         <div class="widget widget_customsearch" >
-            <form role="search" method="get" id="searchform" action="<?php echo home_url("/"); ?>">
+            <form role="search" method="get" id="searchform" action="<?php echo esc_url( home_url("/") ); ?>">
 
-                <input class="text-search" type="search" name="s" value="" placeholder="<?php echo $custom_placeholder; ?>">
-                <input type="hidden" name="post_type" value="<?php echo $custom_post_type; ?>" />
+                <input class="text-search" type="search" name="s" value="" placeholder="<?php echo esc_attr( $custom_placeholder ); ?>">
+                <input type="hidden" name="post_type" value="<?php echo esc_attr( $custom_post_type ); ?>" />
                 <input type="submit" class="submit-search" value="" />
 
             </form>
@@ -83,12 +83,12 @@ class Lege_Customsearch_Widget extends WP_Widget
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'custom_placeholder' ); ?>">Заголовок</label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'custom_placeholder' ); ?>" name="<?php echo $this->get_field_name( 'custom_placeholder' ); ?>" value="<?php echo $instance['custom_placeholder']; ?>" />
+            <label for="<?php echo esc_attr($this->get_field_id( 'custom_placeholder' )); ?>"><?php esc_html__('Заголовок', 'lege' ); ?></label>
+            <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'custom_placeholder' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'custom_placeholder' )); ?>" value="<?php echo esc_attr($instance['custom_placeholder']); ?>" />
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'custom_post_type' ); ?>">Заголовок</label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'custom_post_type' ); ?>" name="<?php echo $this->get_field_name( 'custom_post_type' ); ?>" value="<?php echo $instance['custom_post_type']; ?>" />
+            <label for="<?php echo esc_attr($this->get_field_id( 'custom_post_type' )); ?>"><?php esc_html__('Заголовок', 'lege' ); ?></label>
+            <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'custom_post_type' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'custom_post_type' )); ?>" value="<?php echo esc_attr($instance['custom_post_type']); ?>" />
         </p>
 
         <?php

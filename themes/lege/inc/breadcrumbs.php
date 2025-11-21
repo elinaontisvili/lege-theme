@@ -32,8 +32,9 @@ function lege_get_breadcrumbs() {
     }
 
     $short_name_product = esc_html(get_the_title());
-    if(get_post_meta(get_the_ID(), 'lege_short_title', true)) {
-        $short_name_product = get_post_meta(get_the_ID(), 'lege_short_title', true);
+    $short_title_meta = get_post_meta(get_the_ID(), 'lege_short_title', true);
+    if($short_title_meta) {
+        $short_name_product = esc_html($short_title_meta);
     } 
     
     $frontpage_id = get_option('page_on_front');
@@ -69,14 +70,14 @@ function lege_get_breadcrumbs() {
         } elseif ( is_day() ) {
             echo sprintf($link, get_year_link(get_the_time('Y')), get_the_time('Y')) . $delimiter;
             echo sprintf($link, get_month_link(get_the_time('Y'),get_the_time('m')), get_the_time('F')) . $delimiter;
-            echo $before . get_the_time('d') . $after;
+            echo $before . esc_html(get_the_time('d')) . $after;
 
         } elseif ( is_month() ) {
             echo sprintf($link, get_year_link(get_the_time('Y')), get_the_time('Y')) . $delimiter;
-            echo $before . get_the_time('F') . $after;
+            echo $before . esc_html(get_the_time('F')) . $after;
 
         } elseif ( is_year() ) {
-            echo $before . get_the_time('Y') . $after;
+            echo $before . esc_html(get_the_time('Y')) . $after;
 
         } elseif ( is_single() && !is_attachment() ) {
 
@@ -149,7 +150,7 @@ function lege_get_breadcrumbs() {
             }
 
         } elseif ( is_tag() ) {
-            echo $before . sprintf($text['tag'], single_tag_title('', false)) . $after;
+            echo $before . sprintf($text['tag'], esc_html(single_tag_title('', false))) . $after;
 
         } elseif ( is_author() ) {
             global $author;
@@ -162,7 +163,7 @@ function lege_get_breadcrumbs() {
 
         if ( get_query_var('paged') ) {
             if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ' (';
-            echo __('Page') . ' ' . get_query_var('paged');
+            echo esc_html( __('Page')) . ' ' . (int) get_query_var('paged');
             if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ')';
         }
 

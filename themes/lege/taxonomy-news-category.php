@@ -5,23 +5,20 @@ global $wp_query;
 <section class="inner events">
     <div class="wrapper">
         <div class="news">
-            <h2 class="news__title secondary-title"><span><?php echo $lege_options['categorytitle']; ?></span><br><?php echo single_term_title(); ?></h2>
-
-            <!-- цикл -->
+            <h2 class="news__title secondary-title"><span><?php echo esc_html($lege_options['categorytitle']); ?></span><br><?php echo esc_html(single_term_title('', false)); ?></h2>
             <?php
 
             if ( have_posts() ) : 
                 while ( have_posts() ) : the_post(); ?>
-            <!-- цикл -->
 
             <article class="news__item">
                 <div class="news__wrap">
                     <div class="news__img blue-noise">
-                        <?php echo get_the_post_thumbnail(get_the_ID(), 'news-thumb'); ?>
+                        <?php echo wp_kses_post( get_the_post_thumbnail(get_the_ID(), 'news-thumb') ); ?>
                         <ul class="tags-list">
                             <?php $news_categories = wp_get_post_terms(get_the_ID(),'news-category'); 
                             foreach($news_categories as $category){ ?>
-                                <li><a href="<?php echo get_term_link($category); ?>"><?php echo $category->name; ?></a></li>
+                                <li><a href="<?php echo esc_url( get_term_link($category) ); ?>"><?php echo esc_html($category->name); ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -30,7 +27,7 @@ global $wp_query;
                             <svg width="13" height="13">
                                 <use xlink:href="#time"/>
                             </svg>
-                            <p class="add-time__date"><?php echo get_the_date(); ?></p>
+                            <p class="add-time__date"><?php echo esc_html( get_the_date() ); ?></p>
                         </div>
                         <div class="rate"></div>
                         <div class="share">
@@ -43,7 +40,7 @@ global $wp_query;
                             <ul class="social">
                                 <li class="social__item">
                                     <span><?php esc_html_e( 'Vk', 'lege' ); ?></span>
-                                    <a data-social="vkontakte" class="social__icon social__icon_vk" href="<?php echo lege_get_share(type: 'vk', permalink: get_the_permalink(), title: get_the_title()); ?>">
+                                    <a data-social="vkontakte" class="social__icon social__icon_vk" href="<?php echo esc_url( lege_get_share(type: 'vk', permalink: get_the_permalink(), title: get_the_title()) ); ?>">
                                         <svg  width="21" height="18">
                                             <use xlink:href="#vk"/>
                                         </svg>
@@ -51,7 +48,7 @@ global $wp_query;
                                 </li>
                                 <li class="social__item">
                                     <span><?php esc_html_e( 'Fb', 'lege' ); ?></span>
-                                    <a data-social="facebook" class="social__icon social__icon_fb" href="<?php echo lege_get_share(type: 'fb', permalink: get_the_permalink(), title: get_the_title()); ?>">
+                                    <a data-social="facebook" class="social__icon social__icon_fb" href="<?php echo esc_url( lege_get_share(type: 'fb', permalink: get_the_permalink(), title: get_the_title()) ); ?>">
                                         <svg  width="14" height="17">
                                             <use xlink:href="#facebook"/>
                                         </svg>
@@ -59,7 +56,7 @@ global $wp_query;
                                 </li>
                                 <li class="social__item">
                                     <span><?php esc_html_e( 'Tw', 'lege' ); ?></span>
-                                    <a data-social="twitter" class="social__icon social__icon_tw" href="<?php echo lege_get_share(type: 'twi', permalink: get_the_permalink(), title: get_the_title()); ?>">
+                                    <a data-social="twitter" class="social__icon social__icon_tw" href="<?php echo esc_url( lege_get_share(type: 'twi', permalink: get_the_permalink(), title: get_the_title()) ); ?>">
                                         <svg  width="18" height="15">
                                             <use xlink:href="#twitter"/>
                                         </svg>
@@ -92,7 +89,7 @@ else :
                 <div class="nav-links">
 
                     <?php 
-                    if( get_query_var('paged') < 2){ ?>
+                    if( (int)get_query_var('paged') < 2){ ?>
                         <span class="prev page-numbers"></span>
                     <?php } ?>
 

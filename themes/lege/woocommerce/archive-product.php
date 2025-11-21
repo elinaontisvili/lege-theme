@@ -23,11 +23,11 @@ global $lege_options;
 ?>
 
 <section class="inner shop">
-	<div class="shop-top" style="background: #fff url(<?php echo $lege_options['woo_bg']['url']; ?>) no-repeat center top/ cover;">
+	<div class="shop-top" style="background: #fff url(<?php echo esc_html( $lege_options['woo_bg']['url'] ); ?>) no-repeat center top/ cover;">
 		<div class="wrapper">
-			<?php if($lege_options['wootitle1'] && $lege_options['wootitle2']) { ?>
+			<?php if($lege_options['wootitle1'] && esc_html( $lege_options['wootitle2'] ) ) { ?>
 			<h1 class="shop-top__title">
-				<?php echo $lege_options['wootitle1']; ?><br><span><?php echo $lege_options['wootitle2']; ?></span>
+				<?php echo esc_html( $lege_options['wootitle1'] ); ?><br><span><?php echo esc_html( $lege_options['wootitle2'] ); ?></span>
 			</h1>
 			<?php } ?>
 			<?php if($lege_options['woolink']) { ?>

@@ -20,7 +20,7 @@ global $wp_query;
 <section class="inner events">
 	<div class="wrapper">
 		<div class="news">
-			<h2 class="news__title secondary-title"><span><?php echo $lege_options['bloglabel1']; ?></span><br><?php echo $lege_options['bloglabel2']; ?></h2>
+			<h2 class="news__title secondary-title"><span><?php echo esc_html( $lege_options['bloglabel1'] ); ?></span><br><?php echo esc_html( $lege_options['bloglabel2'] ); ?></h2>
 
 			<?php
 

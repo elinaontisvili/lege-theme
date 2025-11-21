@@ -6,7 +6,7 @@ global $lege_options;
 
 <section class="inner clients">
     <div class="wrapper">
-        <h2 class="clients__title secondary-title"><span><?php echo $lege_options['testylabel1']; ?></span><br><?php echo $lege_options['testylabel2']; ?></h2>
+        <h2 class="clients__title secondary-title"><span><?php echo esc_html( $lege_options['testylabel1'] ); ?></span><br><?php echo esc_html( $lege_options['testylabel2'] ); ?></h2>
         
         <?php
         // Pagination
@@ -48,7 +48,7 @@ global $lege_options;
                         <svg width="13" height="13">
                             <use xlink:href="#time"/>
                         </svg>
-                        <p class="add-time__date"><?php echo $date; ?></p>
+                        <p class="add-time__date"><?php echo esc_html( $date ); ?></p>
                     </div>
                     <?php } ?>
                 </div>

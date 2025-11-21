@@ -169,10 +169,10 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         if(get_post_meta(get_the_ID(), 'lege_short_title', true)) {
             echo '<h1 class="product__title">' . get_post_meta(get_the_ID(), 'lege_short_title', true) . '</h1>';
         } else {
-            echo '<h1 class="product__title">' . get_the_title() . '</h1>';
+            echo '<h1 class="product__title">' . esc_html(get_the_title()) . '</h1>';
         }
         if(get_the_excerpt()) {
-            echo '<p class="product__desc">' . get_the_excerpt() . '</p>';
+            echo '<p class="product__desc">' . esc_html(get_the_excerpt()) . '</p>';
         }
     }
 

@@ -16,7 +16,7 @@ global $lege_options;
 <section class="inner events">
     <div class="wrapper">
         <div class="news">
-            <h2 class="news__title secondary-title"><span><?php echo $lege_options['newstitle1']; ?></span><br><?php echo $lege_options['newstitle2']; ?></h2>
+            <h2 class="news__title secondary-title"><span><?php echo esc_html( $lege_options['newstitle1'] ); ?></span><br><?php echo esc_html( $lege_options['newstitle2'] ); ?></h2>
 
             <?php
             // Pagination
@@ -37,7 +37,7 @@ global $lege_options;
                         <ul class="tags-list">
                             <?php $news_categories = wp_get_post_terms(get_the_ID(),'news-category'); 
                             foreach($news_categories as $category){ ?>
-                                <li><a href="<?php echo get_term_link($category); ?>"><?php echo $category->name; ?></a></li>
+                                <li><a href="<?php echo esc_url( get_term_link($category) ); ?>"><?php echo esc_html ( $category->name ); ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>

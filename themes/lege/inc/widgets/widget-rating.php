@@ -80,7 +80,7 @@ class Lege_Rating_Widget extends WP_Widget
 
         $found = false;
 
-        echo '<div class="rating"><h5 class="rating__title">'.esc_html( $title ).'</h5>';
+        echo '<div class="rating"><h5 class="rating__title">'. esc_html( $title ). '</h5>';
 
         for ( $rating = 5; $rating >= 1; $rating-- ) {
             $count = $this->get_filtered_product_count( $rating );
@@ -98,7 +98,7 @@ class Lege_Rating_Widget extends WP_Widget
             else{ $class='stars1'; }
             ?>
 
-            <div class="rating__block <?php echo $class ?>">
+            <div class="rating__block <?php echo esc_attr( $class ); ?>">
                 <div class="rate"></div>
                 <span><?php echo $count_html; ?></span>
             </div>
@@ -151,8 +151,8 @@ class Lege_Rating_Widget extends WP_Widget
         ?>
 
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e('Заголовок', 'lege'); ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
+            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e('Заголовок', 'lege'); ?></label>
+            <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" value="<?php echo esc_attr($instance['title']); ?>" />
         </p>
 
         <?php

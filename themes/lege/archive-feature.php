@@ -14,7 +14,7 @@ global $lege_options;
 	<div class="wrapper">
 		<div class="news">
 
-        <h2 class="clients__title secondary-title"><span><?php echo $lege_options['casearchivetitle1']; ?></span><br><?php echo $lege_options['casearchivetitle2']; ?></h2>
+        <h2 class="clients__title secondary-title"><span><?php echo esc_html( $lege_options['casearchivetitle1'] ); ?></span><br><?php echo esc_html( $lege_options['casearchivetitle2'] ); ?></h2>
 			
 			<?php
 

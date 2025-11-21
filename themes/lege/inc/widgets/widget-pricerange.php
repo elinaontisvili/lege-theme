@@ -41,7 +41,7 @@ class Lege_PriceRange_Widget extends WP_Widget
         global $woocommerce;
 
         ?>
-        <div class="sortby lege_sortby" data-minprice="<?php echo $min_price; ?>" data-maxprice="<?php echo $max_price; ?>"> 
+        <div class="sortby lege_sortby" data-minprice="<?php echo esc_attr($min_price); ?>" data-maxprice="<?php echo esc_attr($max_price); ?>"> 
             <h5 class="sortby__title"><?php echo esc_html( $title ); ?></h5>
             <div id="slider-range"></div>
             <p class="sortby__price">
@@ -129,8 +129,8 @@ class Lege_PriceRange_Widget extends WP_Widget
 
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Фильтрация по цене | Заголовок', 'lege' ); ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Фильтрация по цене | Заголовок', 'lege' ); ?></label>
+            <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr($instance['title']); ?>" />
         </p>
 
         <?php

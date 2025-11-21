@@ -77,7 +77,7 @@ get_header();
                                     $service_icon_bg_style = 'services__item_stat';
                                     $service_icon_item_style = 'services__bg_stat';
                                 } ?>
-                                <li class="services__item <?php echo $service_icon_item_style; ?>">
+                                <li class="services__item <?php echo esc_attr( $service_icon_item_style ); ?>">
                                     <h3 class="services__heading"><?php the_title(); ?></h3>
                                     <p class="services__descr">
                                         <?php 
@@ -85,13 +85,13 @@ get_header();
                                             if ( ! empty( $excerpt ) ) {
                                                 echo esc_html( $excerpt );
                                             } else {
-                                                echo wp_trim_words( get_the_content(), 20 );
+                                                echo esc_html( wp_trim_words( get_the_content(), 20 ) );
                                             }
                                         ?>
                                     </p>
-                                    <p class="services__price"><?php echo $lege_options['servicecurrency']; echo get_metadata('post',get_the_ID(),'lege_service_cost',true); ?></p>
+                                    <p class="services__price"><?php echo esc_html( $lege_options['servicecurrency'] ); echo esc_html( get_metadata('post',get_the_ID(),'lege_service_cost',true) ); ?></p>
                                     <a href="<?php the_permalink(); ?>" class="services__order btn" data-content="<?php echo esc_attr( __( 'Read more', 'lege' ) ); ?>"><?php echo esc_html( __('Read more', 'lege' ) ); ?></a>
-                                    <div class="services__bg <?php echo $service_icon_bg_style; ?>"></div>
+                                    <div class="services__bg <?php echo esc_attr( $service_icon_bg_style ); ?>"></div>
                                 </li>
                             <?php endwhile;
 

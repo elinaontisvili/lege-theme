@@ -38,7 +38,7 @@ get_header(); ?>
         <!-- Slider -->
         <div class="cases">
                 <?php if( $lege_options['caseslabel'] ) { ?>
-                <h4 class="cases__cap"><?php if($lege_options['caseslabel']){ echo $lege_options['caseslabel']; } else { echo esc_html_e('Latest Cases','lege'); } ?></h4>
+                <h4 class="cases__cap"><?php if($lege_options['caseslabel']){ echo esc_html( $lege_options['caseslabel'] ); } else { echo esc_html_e('Latest Cases','lege'); } ?></h4>
                 <?php } ?>
                 <div class="cases__slider">
                 

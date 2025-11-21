@@ -29,7 +29,7 @@ get_header(); ?>
                 <?php $case_categories = wp_get_post_terms(get_the_ID(),'feature-type');
 					
                     foreach($case_categories as $category){ ?>
-                        <li><a href="<?php echo get_term_link($category); ?>"><?php echo $category->name; ?></a></li>
+                        <li><a href="<?php echo get_term_link($category); ?>"><?php echo esc_html( $category->name ); ?></a></li>
                     <?php } ?>
             </ul>
         </div>
