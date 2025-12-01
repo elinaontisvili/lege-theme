@@ -30,18 +30,19 @@ global $wp_query;
 
 								<?php echo get_the_post_thumbnail(get_the_ID(),'news-thumb'); ?>
 								<ul class="tags-list">
+
 									<?php
-										$taxonomies = get_object_taxonomies(get_post_type(), 'objects');
-										foreach ($taxonomies as $taxonomy) {
-											if ($taxonomy->public && ! $taxonomy->hierarchical) continue;
-											$terms = get_the_terms(get_the_ID(), $taxonomy->name);
-											if ($terms && !is_wp_error($terms)) {
-												foreach ($terms as $term) {
-													echo '<li><a href="' . esc_url(get_term_link($term)) . '">' . esc_html($term->name) . '</a></li>';
-												}
+
+										$terms = get_the_terms(get_the_ID(), 'category');
+										if ($terms && !is_wp_error($terms)) {
+											foreach ($terms as $term) {
+												echo '<li><a href="' . esc_url(get_term_link($term)) . '">' .
+													esc_html($term->name) . '</a></li>';
 											}
 										}
-										?>
+
+									?>
+
 								</ul>
 							</div>
 							<div class="news__side">
