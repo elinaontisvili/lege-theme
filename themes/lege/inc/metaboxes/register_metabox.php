@@ -27,7 +27,13 @@ function lege_metaboxes($meta_boxes) {
                 'desc' => esc_html__( 'Enter the testimonial date', 'lege' ),
                 'id'   => $prefix . 'testy_date',
                 'type' => 'text_date',
-            ),
+            ), 
+            array(
+                'name' => esc_html__( 'Testimonial to show on Home Page', 'lege' ),
+                'desc' => esc_html__( 'Enter the testimonial', 'lege' ),
+                'id'   => $prefix . 'testy_frontpage',
+                'type' => 'textarea',
+            ), 
         )
     );
 

@@ -22,11 +22,13 @@ function register_elementor_lege_widget( $widgets_manager ) {
     require_once( __DIR__ . '/widgets/why-us-widget.php' );
     require_once( __DIR__ . '/widgets/cta-widget.php' );
     require_once( __DIR__ . '/widgets/cases-widget.php' );
+    require_once( __DIR__ . '/widgets/testimonials-widget.php' );
 
     $widgets_manager->register( new \Elementor_Help_Widget() ); 
     $widgets_manager->register( new \Elementor_Why_Us_Widget() );
     $widgets_manager->register( new \Elementor_CTA_Widget() );
     $widgets_manager->register( new \Elementor_Cases_Widget() );
+    $widgets_manager->register( new \Elementor_Testimonials_Widget() );
 
 }
 add_action( 'elementor/widgets/register', 'register_elementor_lege_widget' );
