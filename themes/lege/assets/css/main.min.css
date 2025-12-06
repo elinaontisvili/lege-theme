@@ -1301,7 +1301,8 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .help__btn:before {
-  content: 'Получить консультацию';
+  /* content: 'Получить консультацию'; */
+  content: attr(data-content);
 }
 
 .help__icon {
@@ -1462,7 +1463,8 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .connect__btn:before {
-  content: 'Связаться с нами';
+  /* content: 'Связаться с нами'; */
+  content: attr(data-content);
 }
 
 .connect__wrap {
