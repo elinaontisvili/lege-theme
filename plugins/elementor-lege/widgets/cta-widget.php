@@ -13,7 +13,7 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
 
 
     public function get_icon(): string {
-        return 'eicon-tabs';
+        return 'eicon-call-to-action';
     }
 
 

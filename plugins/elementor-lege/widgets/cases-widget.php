@@ -23,6 +23,10 @@ class Elementor_Cases_Widget extends \Elementor\Widget_Base {
         return [ 'lege-widgets' ];
     }
 
+      public function get_keywords(): array {
+        return ['cases'];
+    }
+
     // Get all post types 
     private function get_all_post_types() {
         $post_types = get_post_types( [ 'public' => true ], 'objects' );

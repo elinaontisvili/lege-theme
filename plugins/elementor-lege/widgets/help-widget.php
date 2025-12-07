@@ -10,7 +10,7 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon(): string {
-		return 'eicon-tabs';
+		return 'eicon-tools';
 	}
 
 	public function get_categories(): array {
