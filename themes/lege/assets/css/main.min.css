@@ -1307,18 +1307,25 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .help__icon {
   height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.help__icon img {
+  height: 50px !important;
+  width: auto !important;
 }
 
 .help__icon_rocket {
-  background: url(../img/rocket.jpg) no-repeat center center;
+  /* background: url(../img/rocket.jpg) no-repeat center center; */
 }
 
 .help__icon_monitor {
-  background: url(../img/monitor.jpg) no-repeat center center;
+  /* background: url(../img/monitor.jpg) no-repeat center center; */
 }
 
 .help__icon_brain {
-  background: url(../img/brain.jpg) no-repeat center center;
+  /* background: url(../img/brain.jpg) no-repeat center center; */
 }
 
 .help__heading {

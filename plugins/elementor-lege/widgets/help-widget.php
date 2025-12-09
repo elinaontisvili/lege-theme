@@ -23,7 +23,7 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
 
 	protected function register_controls(): void { 
 
-        // Content Tab Start 
+        // Content Tab
         $this->start_controls_section( 
             'help_content',
             [
@@ -97,6 +97,17 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
                 'default' => esc_html__('Стартапам', 'elementor-lege'),
             ]
         ); 
+
+        $this->add_control(
+            'item1_icon_image',
+            [
+                'label' => esc_html__( 'Item 1 Icon Image', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => get_template_directory_uri() . '/assets/img/rocket.jpg',
+                ],
+            ]
+        );
         
         $this->add_control(
             'item1_text',
@@ -106,7 +117,7 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
                 'default' => esc_html__('Когда вы будете готовы вывести свой стартап на новый уровень, мы можем оказать вам юридические услуги, чтобы помочь вам расти', 'elementor-lege'),
             ]
         );
-        
+
         // Item 2
         $this->add_control(
             'item2_title',
@@ -114,6 +125,17 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Iten 2 Title', 'elementor-lege'), 
                 'type' => Elementor\Controls_Manager::TEXT, 
                 'default' => esc_html__('Фрилансеру', 'elementor-lege'),
+            ]
+        );
+
+         $this->add_control(
+            'item2_icon_image',
+            [
+                'label' => esc_html__( 'Item 1 Icon Image', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => get_template_directory_uri() . '/assets/img/rocket.jpg',
+                ],
             ]
         );
 
@@ -137,6 +159,17 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
         );
 
         $this->add_control(
+            'item3_icon_image',
+            [
+                'label' => esc_html__( 'Item 1 Icon Image', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => get_template_directory_uri() . '/assets/img/rocket.jpg',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'item3_text', 
             [
                 'label' => esc_html__('Item 3 Text', 'elementor-lege'), 
@@ -145,11 +178,10 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-
         $this->end_controls_section();
-		// Content Tab End
 
-		// Style Tab Start
+
+		// Style Tab
 
         // Main Style Section
         $this->start_controls_section(
@@ -366,8 +398,8 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
         );
             
         $this->end_controls_section();
-		// Style Tab End
 	}
+
 
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
@@ -391,10 +423,9 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
                 <?php endif; ?>
 
                 <p class="help__descr">
-                    <?php if ( ! empty( $settings['description'] ) ) : ?>
-                        <?php echo esc_html($settings['description']); ?>
+                    <?php if (!empty($settings['description'])) : ?>
+                        <p class="help__descr"><?php echo esc_html($settings['description']); ?></p>
                     <?php endif; ?>
-                </p>
 
                 <?php if ( ! empty( $settings['button_text'] ) ) : ?>
                     <a href="<?php echo esc_url($btn_url); ?>" class="help__btn btn popup-link" data-content="<?php echo esc_attr( $settings['button_text'] ); ?>">
@@ -407,17 +438,31 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
             <ul class="help__list">
 
                 <li class="help__item">
-                    <div class="help__icon help__icon_rocket"></div>
-                    <h4 class="help__heading"><?php echo esc_html($settings['item1_title']); ?></h4>
+                    <?php if ( ! empty( $settings['item1_icon_image']['url'] ) ) : ?>
+                        <div class="help__icon">
+                            <img src="<?php echo esc_url( $settings['item1_icon_image']['url'] ); ?>" alt="<?php echo esc_attr( $settings['item1_title'] ); ?>">
+                        </div>
+                    <?php endif; ?>
+                    <h4 class="help__heading "><?php echo esc_html($settings['item1_title']); ?></h4>
                     <p class="help__par"><?php echo esc_html($settings['item1_text']); ?></p>
                 </li>
+
                 <li class="help__item">
-                    <div class="help__icon help__icon_monitor"></div>
+                    <?php if ( ! empty( $settings['item2_icon_image']['url'] ) ) : ?>
+                        <div class="help__icon">
+                            <img src="<?php echo esc_url( $settings['item2_icon_image']['url'] ); ?>" alt="<?php echo esc_attr( $settings['item2_title'] ); ?>">
+                        </div>
+                    <?php endif; ?>
                     <h4 class="help__heading"><?php echo esc_html($settings['item2_title']); ?></h4>
                     <p class="help__par"><?php echo esc_html($settings['item2_text']); ?></p>
                 </li>
+
                 <li class="help__item">
-                    <div class="help__icon help__icon_brain"></div>
+                    <?php if ( ! empty( $settings['item3_icon_image']['url'] ) ) : ?>
+                        <div class="help__icon">
+                            <img src="<?php echo esc_url( $settings['item3_icon_image']['url'] ); ?>" alt="<?php echo esc_attr( $settings['item3_title'] ); ?>">
+                        </div>
+                    <?php endif; ?>
                     <h4 class="help__heading"><?php echo esc_html($settings['item3_title']); ?></h4>
                     <p class="help__par"><?php echo esc_html($settings['item3_text']); ?></p>
                 </li>
@@ -446,7 +491,7 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
                         {{ settings.description }}
                     </p>
 					
-                    <a href="{{ settings.button_link.url }}" class="help__btn btn popup-link">
+                    <a href="{{ settings.button_link.url  || '#' }}" class="help__btn btn popup-link">
                         {{ settings.button_text}}
                     </a>
 
@@ -454,23 +499,41 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
 
 				<ul class="help__list">
 
-					<li class="help__item">
-						<div class="help__icon help__icon_rocket"></div>
-						<h4 class="help__heading">{{ settings.item1_title }}</h4>
-						<p class="help__par">{{ settings.item1_text }}</p>
-					</li>
+				<li class="help__item">
+                    <# if ( settings.item1_icon_image && settings.item1_icon_image.url ) { #>
+                        <div class="help__icon">
+                            <img src="{{ settings.item1_icon_image.url }}" alt="">
+                        </div>
+                    <# } else { #>
+                        <div class="help__icon help__icon_rocket"></div>
+                    <# } #>
+                    <h4 class="help__heading">{{ settings.item1_title }}</h4>
+                    <p class="help__par">{{ settings.item1_text }}</p>
+                </li>
 
-					<li class="help__item">
-						<div class="help__icon help__icon_monitor"></div>
-						<h4 class="help__heading">{{ settings.item2_title }}</h4>
-						<p class="help__par">{{ settings.item2_text }}</p>
-					</li>
+                <li class="help__item">
+                    <# if ( settings.item2_icon_image && settings.item2_icon_image.url ) { #>
+                        <div class="help__icon">
+                            <img src="{{ settings.item2_icon_image.url }}" alt="">
+                        </div>
+                    <# } else { #>
+                        <div class="help__icon help__icon_monitor"></div>
+                    <# } #>
+                    <h4 class="help__heading">{{ settings.item2_title }}</h4>
+                    <p class="help__par">{{ settings.item2_text }}</p>
+                </li>
 
-					<li class="help__item">
-						<div class="help__icon help__icon_brain"></div>
-						<h4 class="help__heading">{{ settings.item3_title }}</h4>
-						<p class="help__par">{{ settings.item3_text }}</p>
-					</li>
+                <li class="help__item">
+                    <# if ( settings.item3_icon_image && settings.item3_icon_image.url ) { #>
+                        <div class="help__icon">
+                            <img src="{{ settings.item3_icon_image.url }}" alt="">
+                        </div>
+                    <# } else { #>
+                        <div class="help__icon help__icon_brain"></div>
+                    <# } #>
+                    <h4 class="help__heading">{{ settings.item3_title }}</h4>
+                    <p class="help__par">{{ settings.item3_text }}</p>
+                </li>
 
 				</ul>
 			</div>
