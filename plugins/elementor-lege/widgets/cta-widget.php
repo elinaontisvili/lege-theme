@@ -29,7 +29,7 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
     protected function register_controls(): void {
 
 
-        // Content Tab Start
+        // Content Tab
 
         // Content Tab Section
         $this->start_controls_section(
@@ -87,10 +87,9 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // Content Tab End
 
 
-        // Style Tab Start
+        // Style Tab
 
         // Background options 
         $this->start_controls_section(
@@ -148,8 +147,8 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-        // Style Tab End
     }
+
 
     protected function render(): void {
         $settings = $this->get_settings_for_display();
@@ -161,35 +160,34 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
 
         ?>
 
-    <section class="connect">
-        <div class="connect__decor"></div>
-        <div class="wrapper">
-            <div class="connect__wrap">
+        <section class="connect">
+            <div class="connect__decor"></div>
+            <div class="wrapper">
+                <div class="connect__wrap">
 
-            <?php if ( ! empty( $settings['cta_title']) ) : ?>
-                <h3 class="connect__title">
-                    <?php echo wp_kses_post( $settings['cta_title'] ); ?>
-                </h3>
-            <?php endif; ?>
+                <?php if ( ! empty( $settings['cta_title']) ) : ?>
+                    <h3 class="connect__title">
+                        <?php echo wp_kses_post( $settings['cta_title'] ); ?>
+                    </h3>
+                <?php endif; ?>
 
-            <?php if ( ! empty( $settings['cta_button_text'] ) ) : ?>
-                <a href="<?php echo esc_url( $settings['cta_button_url']['url'] ); ?>"
-                    class="connect__btn btn-white popup-link" 
-                    data-content="<?php echo esc_attr( $settings['cta_button_text'] ); ?>">
-                    <?php echo esc_html( $settings['cta_button_text'] ) ; ?>
-                </a>
-            <?php endif; ?>
+                <?php if ( ! empty( $settings['cta_button_text'] ) ) : ?>
+                    <a href="<?php echo esc_url( $settings['cta_button_url']['url'] ); ?>"
+                        class="connect__btn btn-white popup-link" 
+                        data-content="<?php echo esc_attr( $settings['cta_button_text'] ); ?>">
+                        <?php echo esc_html( $settings['cta_button_text'] ) ; ?>
+                    </a>
+                <?php endif; ?>
+
+                </div>
+
+                <div class="connect__img" <?php echo $side_img; ?>></div>
 
             </div>
 
-            <div class="connect__img" <?php echo $side_img; ?>></div>
-
-        </div>
-
-    </section>
+        </section>
    
     <?php
-
 
     }
 
@@ -200,10 +198,20 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
         <section class="connect">
             <div class="wrapper">
                 <div class="connect__wrap">
-                    <h3 class="connect__title">{{ settings.cta_title }}</h3>
-                    <a href="contacts.html#callback" class="connect__btn btn-white popup-link">{{ settings.cta_button_url.url }}</a>
+                    <h3 class="connect__title">{{ settings.cta_title || '' }}</h3>
+                    <a href="{{ settings.cta_button_url.url || '#' }}#callback" 
+                    class="connect__btn btn-white popup-link"
+                    data-content="{{ settings.cta_button_text || '' }}">
+                        {{ settings.cta_button_text || '' }}
+                    </a>
                 </div>
-                <div class="connect__img"></div>
+
+                <# if ( settings.side_image && settings.side_image.url ) { #>
+                    <div class="connect__img" style="background-image: url( {{ settings.side_image.url }} );"></div>
+                <# } else { #>
+                    <div class="connect__img"></div>
+                <# } #>
+
             </div>
         </section>
        
