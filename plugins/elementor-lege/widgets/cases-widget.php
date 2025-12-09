@@ -192,26 +192,31 @@ class Elementor_Cases_Widget extends \Elementor\Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
         $tabs = $settings['tabs_list'];
+
+        if ( empty( $tabs ) || ! is_array( $tabs ) ) {
+            echo '<p>No tabs configured.</p>';
+            return;
+        }
         ?>
 
         <section class="cases tabs">
             <div class="wrapper">
 
                 <h2 class="cases__title secondary-title">
-                    <span><?php echo $settings['main_title_span']; ?></span><br>
-                    <?php echo $settings['main_title']; ?>
+                    <span><?php echo esc_html( $settings['main_title_span'] ); ?></span><br>
+                    <?php echo esc_html( $settings['main_title'] ); ?>
                 </h2>
 
                 <div class="tabs__wrap">
                 <?php if ( ! empty( $settings['section_description'] ) ) : ?>
-                    <p class="tabs__descr"><?php echo $settings['section_description']; ?></p>
+                    <p class="tabs__descr"><?php echo esc_html( $settings['section_description'] ); ?></p>
                 <?php endif; ?>
 
                     <!-- Tab titles -->
                     <ul class="tabs__caption">
                         <?php foreach ( $tabs as $index => $tab ) : ?>
                             <li class="<?php echo $index === 0 ? 'active' : ''; ?>">
-                                <?php echo esc_html( $tab['tab_title'] ); ?>
+                                <?php echo esc_html( $tab['tab_title'] ?? 'Untitled' ); ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -224,8 +229,8 @@ class Elementor_Cases_Widget extends \Elementor\Widget_Base {
 
                         <?php
                         $query_args = [
-                            'post_type'      => $tab['post_type'],
-                            'posts_per_page' => $tab['posts_per_page'],
+                            'post_type'      => $tab['post_type'] ?? 'post',
+                            'posts_per_page' => absint( $tab['posts_per_page'] ?? 4 ),
                         ];
 
                         if ( ! empty( $tab['taxonomy'] ) && ! empty( $tab['taxonomy_term'] ) ) {
@@ -246,13 +251,13 @@ class Elementor_Cases_Widget extends \Elementor\Widget_Base {
 
                                 $img = get_the_post_thumbnail_url( get_the_ID(), 'large' );
                                 if ( ! $img ) {
-                                    $img = 'https://via.placeholder.com/600x400?text=No+Image';
+                                    $img = 'https://placehold.co/600x400?text=No+Image';
                                 }
                                 ?>
 
                                 <div class="cases__item">
                                     <div class="cases__block">
-                                        <h3 class="cases__heading"><?php the_title(); ?></h3>
+                                        <h3 class="cases__heading"><?php echo esc_html( get_the_title() ); ?></h3>
 
                                         <a href="<?php the_permalink(); ?>" class="cases__link link-more">
                                             <?php echo esc_html( $tab['button_text'] ); ?>
@@ -260,7 +265,7 @@ class Elementor_Cases_Widget extends \Elementor\Widget_Base {
                                         </a>
                                     </div>
                                     <div class="cases__img">
-                                        <img src="<?php echo esc_url( $img ); ?>" alt="<?php the_title_attribute(); ?>">
+                                        <img src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
                                     </div>
                                 </div>
 

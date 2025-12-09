@@ -1493,7 +1493,8 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   display: flex;
   height: 53px;
   /* width: 494px; */
-  min-width: 494px;
+  /* min-width: 494px; */
+  min-width: fit-content;
   max-width: fit-content;
   background-color: #fff;
   border-radius: 5px;
