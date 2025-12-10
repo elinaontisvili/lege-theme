@@ -207,7 +207,7 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
                 </div>
 
                 <# if ( settings.side_image && settings.side_image.url ) { #>
-                    <div class="connect__img" style="background-image: url( {{ settings.side_image.url }} );"></div>
+                    <div class="connect__img" style="background-image: url( '{{ settings.side_image.url }}' );"></div>
                 <# } else { #>
                     <div class="connect__img"></div>
                 <# } #>
