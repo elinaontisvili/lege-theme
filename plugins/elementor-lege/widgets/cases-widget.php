@@ -187,8 +187,233 @@ class Elementor_Cases_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
+
+        // Style Tab 
+        $this->start_controls_section(
+            'style_section',
+            [
+                'label' => __( 'Sections & Titles', 'elementor-lege' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'main_title_color',
+            [
+                'label'     => __( 'Main Title Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .cases__title' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'main_title_typography',
+                'selector' => '{{WRAPPER}} .cases__title',
+            ]
+        );
+
+        $this->add_control(
+            'main_title_span_color',
+            [
+                'label'     => __( 'Small Title (span) Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .cases__title span' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'main_title_span_typography',
+                'selector' => '{{WRAPPER}} .cases__title span',
+            ]
+        );
+
+        $this->add_control(
+            'section_description_color',
+            [
+                'label'     => __( 'Description Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tabs__descr' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'section_description_typography',
+                'selector' => '{{WRAPPER}} .tabs__descr',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Style Tab - Tabs
+        $this->start_controls_section(
+            'style_tabs_section',
+            [
+                'label' => __( 'Tabs', 'elementor-lege' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'tab_text_color',
+            [
+                'label'     => __( 'Tab Text Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tabs__caption li' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tab_active_text_color',
+            [
+                'label'     => __( 'Active Tab Text Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tabs__caption li.active' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tab_border_color',
+            [
+                'label'     => __( 'Tab Bottom Border', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tabs__caption li' => 'border-color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'tabs_typography',
+                'selector' => '{{WRAPPER}} .tabs__caption li',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Style Tab - Cases 
+        $this->start_controls_section(
+            'style_cards_section',
+            [
+                'label' => __( 'Case Cards', 'elementor-lege' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name'     => 'card_background',
+                'selector' => '{{WRAPPER}} .cases__item',
+                'types'    => [ 'classic', 'gradient' ],
+            ]
+        );
+
+        $this->add_control(
+            'card_padding',
+            [
+                'label'      => __( 'Padding', 'elementor-lege' ),
+                'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .cases__item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'card_radius',
+            [
+                'label'      => __( 'Border Radius', 'elementor-lege' ),
+                'type'       => \Elementor\Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 60,
+                    ],
+                ],
+                'selectors'  => [
+                    '{{WRAPPER}} .cases__item, {{WRAPPER}} .cases__img img' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        // Style Tab - Buttons 
+        $this->start_controls_section(
+            'style_buttons_section',
+            [
+                'label' => __( 'Buttons', 'elementor-lege' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'button_text_color',
+            [
+                'label'     => __( 'Text Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .cases__link' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_text_color_hover',
+            [
+                'label'     => __( 'Hover Text Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .cases__link:hover' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'more_button_color',
+            [
+                'label'     => __( '"Show More" Button Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .cases__more' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'more_button_color_hover',
+            [
+                'label'     => __( '"Show More" Hover Color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .cases__more:hover' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
+    // Render 
     protected function render() {
         $settings = $this->get_settings_for_display();
         $tabs = $settings['tabs_list'];
@@ -293,6 +518,80 @@ class Elementor_Cases_Widget extends \Elementor\Widget_Base {
             </div>
         </section>
 
+        <?php
+    }
+
+    // Live preview
+    protected function content_template(): void {
+        ?>
+        <section class="cases tabs">
+        <div class="wrapper">
+
+
+            <h2 class="cases__title secondary-title">
+                <span>{{{ settings.main_title_span }}}</span><br>
+                {{{ settings.main_title }}}
+            </h2>
+
+
+            <div class="tabs__wrap">
+                <# if ( settings.section_description ) { #>
+                    <p class="tabs__descr">{{{ settings.section_description }}}</p>
+                <# } #>
+
+                <!-- Tab titles -->
+                <ul class="tabs__caption">
+                    <# if ( settings.tabs_list.length ) {
+                        _.each( settings.tabs_list, function( tab, index ) { #>
+                            <li class="{{ index === 0 ? 'active' : '' }}">{{{ tab.tab_title }}}</li>
+                        <# });
+                    } else { #>
+                        <li>No tabs</li>
+                    <# } #>
+                </ul>
+            </div>
+
+            <!-- Tab content -->
+            <# if ( settings.tabs_list.length ) {
+                _.each( settings.tabs_list, function( tab, index ) { #>
+
+
+                    <div class="tabs__content {{ index === 0 ? 'active' : '' }}">
+                        <#
+                        let previewCount = tab.posts_per_page ? tab.posts_per_page : 3;
+                        for ( let i = 0; i < previewCount; i++ ) {
+                        #>
+
+                            <div class="cases__item">
+                                <div class="cases__block">
+                                    <h3 class="cases__heading">Preview Title</h3>
+                                    <a href="#" class="cases__link link-more">
+                                        {{{ tab.button_text }}}
+                                        <svg width="18" height="20"><use xlink:href="#nav-right"/></svg>
+                                    </a>
+                                </div>
+                                <div class="cases__img">
+                                    <img src="https://placehold.co/600x400" alt="">
+                                </div>
+                            </div>
+
+
+                        <# } #>
+                    </div>
+
+
+                <# });
+            } #>
+
+            <# if ( settings.more_button_text ) { #>
+                <a href="{{ settings.more_button_url.url }}" class="cases__more link-more">
+                    {{{ settings.more_button_text }}}
+                    <svg width="18" height="20"><use xlink:href="#nav-right"/></svg>
+                </a>
+            <# } #>
+
+        </div>
+    </section>
         <?php
     }
 }
