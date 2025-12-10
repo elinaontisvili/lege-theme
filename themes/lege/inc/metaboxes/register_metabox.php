@@ -69,6 +69,54 @@ function lege_metaboxes($meta_boxes) {
         )
     );
 
+    // Metabox для Команды (Team Members)
+    $meta_boxes[] = array(
+        'id'         => 'team_metaboxes',
+        'title'      => esc_html__( 'Team Member Data', 'lege' ),
+        'pages'      => array( 'team' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'show_names' => true,
+        'fields' => array(
+
+            array(
+                'name' => esc_html__( 'Job Position', 'lege' ),
+                'desc' => esc_html__( 'Enter the job title or position', 'lege' ),
+                'id'   => $prefix . 'team_job_position',
+                'type' => 'text',
+            ),
+
+            array(
+                'name' => esc_html__( 'Facebook', 'lege' ),
+                'desc' => esc_html__( 'Enter Facebook profile URL', 'lege' ),
+                'id'   => $prefix . 'team_facebook',
+                'type' => 'text',
+            ),
+
+            array(
+                'name' => esc_html__( 'Instagram', 'lege' ),
+                'desc' => esc_html__( 'Enter Instagram profile URL', 'lege' ),
+                'id'   => $prefix . 'team_instagram',
+                'type' => 'text',
+            ),
+
+            array(
+                'name' => esc_html__( 'VK', 'lege' ),
+                'desc' => esc_html__( 'Enter VK profile URL', 'lege' ),
+                'id'   => $prefix . 'team_vk',
+                'type' => 'text',
+            ),
+
+            array(
+                'name' => esc_html__( 'Twitter / X', 'lege' ),
+                'desc' => esc_html__( 'Enter Twitter/X profile URL', 'lege' ),
+                'id'   => $prefix . 'team_twitter',
+                'type' => 'text',
+            ),
+
+        )
+    );
+
     
 // Добавляет метабокс для страницы с шаблоном "template-order.php", позволяющий указать шорткод формы заказа
 $meta_boxes[] = array(

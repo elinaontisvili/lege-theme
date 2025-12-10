@@ -462,6 +462,54 @@ add_filter( 'body_class', 'lege_body_class' );
  */
 function lege_register_custom_post_type() {
 
+    register_post_type( 'team', array(
+        'labels' => array(
+            'name'                  => __( 'Team', 'lege' ),
+            'singular_name'         => __( 'Team Member', 'lege' ),
+            'add_new'               => __( 'Add New Member', 'lege' ),
+            'add_new_item'          => __( 'Add New Team Member', 'lege' ),
+            'edit_item'             => __( 'Edit Team Member', 'lege' ),
+            'new_item'              => __( 'New Team Member', 'lege' ),
+            'view_item'             => __( 'View Team Member', 'lege' ),
+        ),
+        'public'                 => true,
+        'publicly_queryable'     => true,
+        'show_ui'                => true,
+        'show_in_menu'           => true,
+        'query_var'              => true,
+        'rewrite'                => array( 'slug' => 'team' ),
+        'capability_type'        => 'post',
+        'has_archive'            => true,
+        'hierarchical'           => false,
+        'menu_position'          => null,
+        'menu_icon'              => 'dashicons-groups',
+        'supports'               => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+    ) );
+
+    register_post_type( 'offices', array(
+        'labels' => array(
+            'name'                  => __( 'Offices', 'lege' ),
+            'singular_name'         => __( 'Office', 'lege' ),
+            'add_new'               => __( 'Add New Office', 'lege' ),
+            'add_new_item'          => __( 'Add New Office', 'lege' ),
+            'edit_item'             => __( 'Edit Office', 'lege' ),
+            'new_item'              => __( 'New Office', 'lege' ),
+            'view_item'             => __( 'View Office', 'lege' ),
+        ),
+        'public'                 => true,
+        'publicly_queryable'     => true,
+        'show_ui'                => true,
+        'show_in_menu'           => true,
+        'query_var'              => true,
+        'rewrite'                => array( 'slug' => 'office' ),
+        'capability_type'        => 'post',
+        'has_archive'            => true,
+        'hierarchical'           => false,
+        'menu_position'          => null,
+        'menu_icon'              => 'dashicons-building',
+        'supports'               => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+    ) );
+
     register_post_type( 'testimonial', array(
         'labels'             => array(
             'name'            => _x( 'Testimonials', 'lege' ),
