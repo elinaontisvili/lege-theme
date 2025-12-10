@@ -2008,6 +2008,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   font-size: 19px;
   font-weight: 600;
   color: #26afff;
+  word-spacing: -5px; /* for 19px font size */
 }
 
 .services__order {
