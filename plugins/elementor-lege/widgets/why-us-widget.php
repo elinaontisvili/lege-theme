@@ -37,7 +37,7 @@ class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
             'main_title_span',
             [
                 'label' => esc_html__('Main Title Span', 'elementor-lege'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => esc_html__('Почему мы –', 'elementor-lege'),
                 'placeholder' => esc_html('Type your above title here', 'elementor-lege'),
                 'label_block' => true,
@@ -48,7 +48,7 @@ class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
             'main_title',
             [
                 'label' => esc_html__('Main Title', 'elementor-lege'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => esc_html__('правильный выбор для вас', 'elementor-lege'),
                 'placeholder' => esc_html('Type your below title here', 'elementor-lege'),
                 'label_block' => true,
@@ -104,10 +104,9 @@ class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
-		// Content Tab End
 
 
-		// Style Tab Start
+		// Style Tab
 
         // Title Style Section 
         $this->start_controls_section(
