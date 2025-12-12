@@ -25,6 +25,7 @@ function register_elementor_lege_widget( $widgets_manager ) {
     require_once( __DIR__ . '/widgets/testimonials-widget.php' );
     require_once( __DIR__ . '/widgets/services-widget.php' );
     require_once( __DIR__ . '/widgets/news-widget.php' );
+    require_once( __DIR__ . '/widgets/office-widget.php' );
 
     $widgets_manager->register( new \Elementor_Help_Widget() ); 
     $widgets_manager->register( new \Elementor_Why_Us_Widget() );
@@ -33,6 +34,7 @@ function register_elementor_lege_widget( $widgets_manager ) {
     $widgets_manager->register( new \Elementor_Testimonials_Widget() );
     $widgets_manager->register( new \Elementor_Services_Widget() );
     $widgets_manager->register( new \Elementor_News_Widget() );
+    $widgets_manager->register( new \Elementor_Office_Widget() );
 
 }
 add_action( 'elementor/widgets/register', 'register_elementor_lege_widget' );
