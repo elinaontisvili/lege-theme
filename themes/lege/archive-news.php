@@ -22,13 +22,8 @@ global $lege_options;
             // Pagination
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-            $news = new WP_Query (array(
-                'post_type' => 'news',
-                'paged' => $paged
-            ));
-
-            if ( $news->have_posts() ) : 
-                while ( $news->have_posts() ) : $news->the_post(); ?>
+            if ( have_posts() ) : 
+                while ( have_posts() ) : the_post(); ?> 
 
             <article class="news__item">
                 <div class="news__wrap">
@@ -96,14 +91,15 @@ global $lege_options;
             </article>
             
             <?php endwhile; 
-            wp_reset_postdata(); 
 else :
                 echo "<div>No news found</div>";
 
             endif; ?>
 
             <!-- Pagination -->
-            <?php if($news->max_num_pages > 1) { ?> 
+            <?php 
+            
+            if ( $wp_query->max_num_pages > 1 ) { ?> 
             <nav class="pagination">
                 <div class="nav-links">
 
@@ -121,11 +117,11 @@ else :
                         'current' => max( 1, get_query_var('paged') ),
                         'prev_text'          => '',
                         'next_text'          => '',
-                        'total'   => $news->max_num_pages
+                        'total'     => $wp_query->max_num_pages,
                     ) ); ?>
 
                     <?php 
-                    if( get_query_var('paged') == $news->max_num_pages){ ?>
+                    if( get_query_var('paged') == $wp_query->max_num_pages){ ?>
                         <span class="next page-numbers"></span>
                     <?php } ?>
 

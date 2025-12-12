@@ -9,17 +9,14 @@ global $lege_options;
         <h2 class="clients__title secondary-title"><span><?php echo esc_html( $lege_options['testylabel1'] ); ?></span><br><?php echo esc_html( $lege_options['testylabel2'] ); ?></h2>
         
         <?php
+
         // Pagination
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-        $testimonials = new WP_Query (array(
-            'post_type' => 'testimonial',
-            'paged' => $paged
-        ));
 
-        if ( $testimonials->have_posts() ) : 
-            while ( $testimonials->have_posts() ) : $testimonials->the_post(); ?>
-        
+        if ( have_posts() ) : 
+            while ( have_posts() ) : the_post(); ?> 
+
                 <div class="clients__box">
                     <div class="clients__photo">
                         <div class="clients__img">
@@ -53,8 +50,7 @@ global $lege_options;
                     <?php } ?>
                 </div>
 
-            <?php endwhile; 
-            wp_reset_postdata(); 
+            <?php endwhile; ; 
 else :
 
                 echo "<div>No testimonials found</div>";
@@ -62,7 +58,13 @@ else :
             endif; ?>
 
         <!-- Pagination -->
-        <?php if($testimonials->max_num_pages > 1) { ?> 
+        <?php 
+
+        global $wp_query;
+
+        if ( $wp_query->max_num_pages > 1 ) { 
+            
+        ?> 
             <nav class="pagination">
                 <div class="nav-links">
 
@@ -77,17 +79,18 @@ else :
                     $big = 999999999;
 
                     echo paginate_links( array(
-                        'base'    => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                        'format'  => '?paged=%#%',
-                        'current' => max( 1, get_query_var('paged') ),
-                        'prev_text'          => '',
-                        'next_text'          => '',
-                        'total'   => $testimonials->max_num_pages
-                    ) ); ?>
+                        'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                        'format'    => '?paged=%#%',
+                        'current'   => max( 1, get_query_var('paged') ),
+                        'total'     => $wp_query->max_num_pages,
+                        'prev_text' => '',
+                        'next_text' => '',
+                    ) );
+                    ?>
 
                     <?php 
                     // Выводим правую стрелку для последней страницы.
-                    if( get_query_var('paged') == $testimonials->max_num_pages){ ?>
+                    if( get_query_var('paged') == $wp_query->max_num_pages){ ?>
                         <span class="next page-numbers"></span>
                     <?php } ?>
 

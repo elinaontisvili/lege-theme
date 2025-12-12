@@ -159,22 +159,24 @@ function lege_scripts() {
     }
 
     //ajax request for woo filter
-    wp_register_script(
-    'lege_woo_filter',
-    get_template_directory_uri() . '/assets/js/woo_filter.js',
-    array('jquery'),
-    '',
-    true
-    );
-
-    wp_localize_script(
+    if ( is_shop() || is_product_taxonomy() ) {
+        wp_register_script(
         'lege_woo_filter',
-        'lege_settings',
-        array(
-            'ajax_url' => admin_url('admin-ajax.php'),
-        )
-    );
-    wp_enqueue_script('lege_woo_filter');
+        get_template_directory_uri() . '/assets/js/woo_filter.js',
+        array('jquery'),
+        '',
+        true
+        );
+
+        wp_localize_script(
+            'lege_woo_filter',
+            'lege_settings',
+            array(
+                'ajax_url' => admin_url('admin-ajax.php'),
+            )
+        );
+        wp_enqueue_script('lege_woo_filter');
+    }
 
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
@@ -628,20 +630,27 @@ add_action( 'init', 'lege_register_custom_post_type' );
  * Pagination. Количество постов на странице архива.
  */
 function lege_posts_per_archiepage( $query ) {
+    
     global $lege_options;
-    $posts_per_page_testy = -1;
-    $posts_per_page_news = -1;
-    if($lege_options['testimonial_posts']){ $posts_per_page_testy =$lege_options['testimonial_posts']; }
-    if($lege_options['newspostsperpage']){ $posts_per_page_news =$lege_options['newspostsperpage']; }
 
-    if (is_post_type_archive('testimonial')) {
-        $query->set( 'posts_per_page', $posts_per_page_testy );
+    // Show all posts in admin 
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }     
+
+    if ( $query->is_post_type_archive('testimonial') ) {
+        $posts_per_page = isset( $lege_options['testimonial_posts'] ) ? (int) $lege_options['testimonial_posts'] : 6;
+        $query->set( 'posts_per_page', $posts_per_page );
     }
-    if (is_post_type_archive('news')) {
-        $query->set( 'posts_per_page', $posts_per_page_news );
+
+    if ( $query->is_post_type_archive('news') || $query->is_archive() && $query->get('post_type') == 'post') {
+        $posts_per_page = isset( $lege_options['newspostsperpage'] ) ? (int) $lege_options['newspostsperpage'] : 10; // Use a default if not set
+        $query->set( 'posts_per_page', $posts_per_page );
     }
+
 }
-add_action( 'pre_get_posts', 'lege_posts_per_archiepage' );
+add_action( 'pre_get_posts', 'lege_posts_per_archiepage', 5 );
+
 
 /**
  * Функция возвращает массив с данными вложения по его ID.
