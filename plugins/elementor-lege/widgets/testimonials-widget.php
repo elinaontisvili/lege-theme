@@ -318,13 +318,6 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
                         // middle slide should be active
                         $active = ($i === ceil($total / 2)) ? ' active' : '';
 
-                        /* Get featured image
-                        $image = get_the_post_thumbnail_url(get_the_ID(), 'large');
-                        if (!$image) {
-                            $image = \Elementor\Utils::get_placeholder_image_src();
-                        }
-                        */ 
-
                         // Get image from metabox 
                         $custom_image_meta = get_post_meta(get_the_ID(), $prefix . 'testimonial_image', true);
 
