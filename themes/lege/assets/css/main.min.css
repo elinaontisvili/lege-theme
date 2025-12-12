@@ -1772,9 +1772,9 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .clients__photo {
   position: relative;
-  min-width: 224px;
-  max-height: 335px;
-  margin: 0 45px 0 -30px;
+  min-width: 224px !important;
+  max-height: 335px !important;
+  margin: 0 45px 0 -30px !important;
 }
 
 .clients__img {
@@ -4591,7 +4591,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   position: relative;
   z-index: 1;
   height: 740px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .map__frame iframe {

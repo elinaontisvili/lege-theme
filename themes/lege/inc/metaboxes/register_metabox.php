@@ -34,6 +34,15 @@ function lege_metaboxes($meta_boxes) {
                 'id'   => $prefix . 'testy_frontpage',
                 'type' => 'textarea',
             ), 
+            array(
+                'name' => esc_html__( 'Client Image (Frontpage)', 'lege' ),
+                'desc' => esc_html__( 'Upload a custom image for use in the Elementor testimonials widget.', 'lege' ),
+                'id'   => $prefix . 'testimonial_image',
+                'type' => 'file',
+                'options' => array(
+                    'url' => false, // don't show the URL field
+                ),
+            ),
         )
     );
 

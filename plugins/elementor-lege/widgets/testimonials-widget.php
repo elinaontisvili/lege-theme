@@ -84,7 +84,7 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
             [
                 'label'   => __('Number of Posts', 'elementor-lege'),
                 'type'    => \Elementor\Controls_Manager::NUMBER,
-                'default' => 5,
+                'default' => 4,
             ]
         );
 
@@ -182,24 +182,48 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        // Width image
         $this->add_control(
-            'image_size',
+            'image_width',
             [
-                'label' => __('Image Size', 'elementor-lege'),
+                'label' => __('Image Width', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%' ],
+                'size_units' => ['px', '%'],
                 'range' => [
                     'px' => [
                         'min' => 40,
-                        'max' => 300,
+                        'max' => 500,
                     ],
                 ],
                 'default' => [
                     'unit' => 'px',
-                    'size' => 120,
+                    'size' => 224, // default width
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .clients__img img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .clients__img img' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // Height image
+        $this->add_control(
+            'image_height',
+            [
+                'label' => __('Image Height', 'elementor-lege'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 40,
+                        'max' => 500,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 335, // default height
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .clients__img img' => 'height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -294,10 +318,31 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
                         // middle slide should be active
                         $active = ($i === ceil($total / 2)) ? ' active' : '';
 
+                        /* Get featured image
                         $image = get_the_post_thumbnail_url(get_the_ID(), 'large');
                         if (!$image) {
                             $image = \Elementor\Utils::get_placeholder_image_src();
                         }
+                        */ 
+
+                        // Get image from metabox 
+                        $custom_image_meta = get_post_meta(get_the_ID(), $prefix . 'testimonial_image', true);
+
+                        if ($custom_image_meta) {
+                            // If numeric, treat as attachment ID; otherwise treat as URL
+                            $image = is_numeric($custom_image_meta) 
+                                ? wp_get_attachment_image_url($custom_image_meta, 'large') 
+                                : esc_url($custom_image_meta);
+                        } else {
+                            // Fallback to featured image
+                            $image = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                        }
+
+                        // Final fallback to Elementor placeholder
+                        if (!$image) {
+                            $image = \Elementor\Utils::get_placeholder_image_src();
+                        }
+
                         ?>
 
                         <div class="clients__slide<?php echo $active; ?>">
