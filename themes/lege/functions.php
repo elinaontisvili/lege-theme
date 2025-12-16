@@ -181,6 +181,22 @@ function lege_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
 
+/**
+ * Подключение Elementor скриптов.
+ */
+function lege_register_elementor_scripts() {
+    wp_register_script(
+        'lege-circular-progress',
+        get_stylesheet_directory_uri() . '/assets/js/circular-progress.js',
+        [ 'jquery' ],
+        '1.0',
+        true
+    );
+}
+add_action( 'wp_enqueue_scripts', 'lege_register_elementor_scripts' );
+add_action( 'elementor/frontend/after_register_scripts', 'lege_register_elementor_scripts' );
+
+
 // AJAX handler for WooCommerce filter 
 function lege_show_products(){
 
