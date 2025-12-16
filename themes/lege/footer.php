@@ -39,7 +39,7 @@ $my_account_url = wc_get_page_permalink( 'myaccount' );
 					?>
 					<?php if($link) { ?>
 						<li class="social__item">
-						<?php echo $label; ?>
+						<?php echo wp_kses_post( $label ); ?>
 						<a class="social__icon <?php echo esc_attr( $class ); ?>" target="_blank" href="<?php echo esc_url( $link ); ?>">
 								<?php 
 									echo wp_kses( $svg, array(

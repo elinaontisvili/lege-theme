@@ -79,7 +79,7 @@ global $lege_options;
                 <p class="success"><?php _e('Thank you for your message!', 'lege')?></p>
             <?php endif; ?>
             <?php if (isset($error) && isset($error['msg'])) : ?>
-                <p class="error"><?php echo $error['msg']?></p>
+                <p class="error"><?php echo esc_html( $error['msg']); ?></p>
             <?php endif; ?>
             
             <div class="log__group">

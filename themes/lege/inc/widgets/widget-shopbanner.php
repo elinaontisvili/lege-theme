@@ -130,7 +130,7 @@ public function form( $instance ) {
             $field_html = $image->get_widget_field();
 
             if (is_string($field_html)) {
-                echo $field_html;
+                echo wp_kses_post( $field_html );
             }
         ?>
     </p>

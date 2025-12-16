@@ -25,14 +25,16 @@ $style_for_header = '';
 
 if(is_page_template('template-home.php')) {
     $class_header = 'header-home';
-    $style_for_header = 'style="background: #fff url('. $lege_options['header_bg']['url'] .') no-repeat center top/ cover;"';
+	// Sanitize url
+	$header_bg_url = isset($lege_options['header_bg']['url']) ? esc_url($lege_options['header_bg']['url']) : '';
+	$style_for_header = 'style="background: #fff url('. $header_bg_url .') no-repeat center top/ cover;"';
 } else {
     $class_header = 'header-inner';
     $style_for_header = '';
 }
 ?>
 
-<header class="header <?php echo esc_attr($class_header); ?>" <?php echo $style_for_header; ?>>
+<header class="header <?php echo esc_attr($class_header); ?>" <?php echo wp_kses_post( $style_for_header ); ?>>
 
 <div class="heading">
 	<ul class="social">
@@ -62,9 +64,19 @@ if(is_page_template('template-home.php')) {
 				?>
 				<?php if($link) { ?>
 					<li class="social__item">
-					<?php echo $label; ?>
+					<?php echo wp_kses_post( $label ); ?>
 						<a class="social__icon <?php echo esc_attr( $class ); ?>" target="_blank" href="<?php echo esc_url( $link ); ?>">
-							<?php echo $svg; ?>
+							<?php 
+								echo wp_kses( $svg, array(
+									'svg' => array(
+										'width'  => true,
+										'height' => true,
+									),
+									'use'  => array(
+										'xlink:href' => true,
+									),
+								)); 
+							?>
 						</a>
 					</li>
 				<?php } ?>

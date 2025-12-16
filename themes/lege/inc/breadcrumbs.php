@@ -86,13 +86,13 @@ function lege_get_breadcrumbs() {
                 $post_type = get_post_type_object(get_post_type()); 
                 $slug = $post_type->rewrite; 
                 printf($link, $home_link . '/' . $slug['slug'] . '/', esc_html__('Shop', 'lege') );
-                if ($show_current == 1) echo $delimiter . $before . $short_name_product . $after;
+                if ($show_current == 1) echo $delimiter . $before . esc_html( $short_name_product ) . $after;
             }
 
             else if ( get_post_type() != 'post' ) {
                 $post_type = get_post_type_object(get_post_type());
                 $slug = $post_type->rewrite;
-                printf($link, $home_link . '/' . $slug['slug'] . '/', $post_type->labels->singular_name);
+                printf($link, esc_url( $home_link ) . '/' . $slug['slug'] . '/', esc_html( $post_type->labels->singular_name ));
                 if ($show_current == 1) echo $delimiter . $before . esc_html(get_the_title()) . $after;
             } else {
                 $cat = get_the_category(); $cat = $cat[0];
@@ -109,9 +109,9 @@ function lege_get_breadcrumbs() {
             $post_type = get_post_type_object(get_post_type());
            
             if($post){
-                echo $before . $post_type->labels->singular_name . $after;
+                echo $before . esc_html( $post_type->labels->singular_name ) . $after;
             } else {
-                echo $before .wp_title(''). $after;
+                echo $before .esc_html( wp_title('', false) ). $after;
             }
             
         } elseif ( is_attachment() ) {
