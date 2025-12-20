@@ -51,7 +51,7 @@
         </div>
         <div class="log__btn">
             <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
-            <input type="submit" name="login" value="<?php esc_attr_e( 'Log in', 'lege' ); ?>" class="btn woocommerce-button button woocommerce-form-login__submit" />
+            <input type="submit" name="login" value="<?php esc_attr_e( 'Log in', 'lege' ); ?>" class="btn woocommerce-form-login__submit" />
         </div>
 
         <?php do_action( 'woocommerce_login_form_end' ); ?>
@@ -103,7 +103,8 @@
 
 <!-- Registration -->
 <div id="reg" class="reg mfp-hide">
-    
+    <h4 class="reg__title modal-title"><?php esc_html_e('Registering a new account', 'lege'); ?></h4>
+
     <p class="reg__question modal-text">
         <?php esc_html_e( 'Already have an account?', 'lege' ); ?>
             <span>
@@ -158,8 +159,18 @@
 
 			<div class="woocommerce-form-row form-row log__wrap">
 				<div class="log__btn">
-                <input id="do-reg" type="submit" name="register" value="<?php esc_attr_e( 'Register', 'lege' ); ?>" class="woocommerce-Button woocommerce-button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> woocommerce-form-register__submit btn"/>
-                </div>
+               
+                <?php
+                    $class = 'btn woocommerce-form-register__submit';
+
+                    $element_class = wc_wp_theme_get_element_class_name( 'button' );
+                    if ( $element_class ) {
+                        $class .= ' ' . $element_class;
+                    }
+                ?>
+                <input type="submit" class="<?php echo esc_attr( $class ); ?>"/>
+               
+            </div>
                 <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
                 <div class="log__group check">
                     <input id="check" class="woocommerce-form__input woocommerce-form__input-checkbox" type="checkbox" name="rememberme" value="forever">
