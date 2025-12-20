@@ -2928,16 +2928,17 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   display: block;
 }
 
-.reg .btn {
+.woocommerce .reg .btn {
   width: 216px;
 }
 
-.reg .log__btn {
+.woocommerce .reg .log__btn {
   width: 228px;
 }
 
 .reg .log__btn:before {
-  width: 228px;
+  /* width: 228px; */
+  width: 182px;
 }
 
 .recovery .link-more {
@@ -4290,7 +4291,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .clients .log .btn {
-  width: 170px;
+  width: 170px !important;
 }
 
 .clients .log__btn {
@@ -8147,6 +8148,7 @@ a.remove.cart__del:hover {
 
   .map {
     height: 500px;
+    overflow: hidden;
   }
 
   .event-top {
@@ -10858,6 +10860,23 @@ img.avatar {
   background-image: linear-gradient(to left, #ff3b3b 0%, #c62828 100%);
 }
 
+.woocommerce form.register {
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: none;
+  border-radius: 0;
+}
+
+.woocommerce .woocommerce-form-login .woocommerce-form-login__submit {
+    float: none;
+}
+
+.reg .woocommerce-privacy-policy-text {
+  color: #858585;
+  font-size: 15px;
+  padding-bottom: 5px;
+}
     
 /* CHECKOUT PAGE */
 
