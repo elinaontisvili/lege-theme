@@ -31,7 +31,7 @@ if ( $product->is_on_sale() ) :
 		$saving_percentage = round( $percentage ); 
 		echo apply_filters(
 			'woocommerce_sale_flash', 
-			'<span class="discount_sale">-' . $saving_percentage . '%</span>',
+			'<span class="discount">-' . $saving_percentage . '%</span>',
 			$post, 
 			$product
 		);
@@ -44,7 +44,7 @@ $status = get_post_meta(get_the_ID(), 'lege_sale_button_title', true);
 $color = get_post_meta(get_the_ID(), 'lege_sale_button_color', true);
 
 if ($status) {
-	echo '<span class="new-item_sale" style="background:'.esc_attr($color).'">' . esc_html($status) . '</span>';
+	echo '<span class="new-item" style="background:'.esc_attr($color).'">' . esc_html($status) . '</span>';
 }
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

@@ -7172,6 +7172,25 @@ a.remove.cart__del:hover {
   font-size: 13px;
 }
 
+.single .card .discount {
+  background-color: #ff4a5d;
+  background-image: -webkit-linear-gradient(left, #fd5163 0%, #fe384d 100%);
+  background-image: linear-gradient(to right, #fd5163 0%, #fe384d 100%);
+  font-size: 14px;
+  width: 55px;
+  height: 28px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 2px;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 28px;
+}
+
+.single .card .new-item {
+  font-size: 14px;
+}
+
 .products .new-item {
   font-size: 11px;
   background-color: #53ddb8;

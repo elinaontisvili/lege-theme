@@ -165,6 +165,28 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
     /* **** Single product page **** */ 
 
+        // opening wrap for badges
+    add_action(
+        'woocommerce_before_single_product_summary',
+        'lege_open_product_badges_wrapper',
+        5
+    );
+
+    function lege_open_product_badges_wrapper() {
+        echo '<div class="product-badges">';
+    }
+
+    // closing wrap for badges
+    add_action(
+        'woocommerce_before_single_product_summary',
+        'lege_close_product_badges_wrapper',
+        15
+    );
+
+    function lege_close_product_badges_wrapper() {
+        echo '</div>';
+    }
+
     // Sku and in stock()
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
     add_action('woocommerce_single_product_summary', 'lege_woo_sku_custom', 4);
