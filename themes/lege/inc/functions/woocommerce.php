@@ -51,7 +51,6 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         echo '</div>';
     }
     
-    add_action('woocommerce_before_shop_loop_item_title','woocommerce_template_loop_product_link_close', 15);
     remove_action ('woocommerce_after_shop_loop_item','woocommerce_template_loop_product_link_close', 5);
  
     add_action('woocommerce_shop_loop_item_title',function(){
@@ -96,6 +95,26 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
 
     // Sale - Display the “HOT / NEW” badge
+
+    // remove thumbnail
+    remove_action(
+        'woocommerce_before_shop_loop_item_title',
+        'woocommerce_template_loop_product_thumbnail',
+        10
+    );
+
+    // add <div>
+    add_action(
+        'woocommerce_before_shop_loop_item_title',
+        'lege_open_badges_wrapper',
+        8 
+    );
+
+    function lege_open_badges_wrapper() {
+        echo '<div class="product-badges">';
+    }
+
+    // NEW / HOT badge
     function lege_show_status() {
         global $product;
 
@@ -107,12 +126,30 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         $title = get_post_meta( $product_id, 'lege_sale_button_title', true );
         $color = get_post_meta( $product_id, 'lege_sale_button_color', true );
 
-        if ( ! empty( $title ) ) {
+        if ( $title ) {
             $style = $color ? 'style="background:' . esc_attr( $color ) . ';"' : '';
             echo '<span class="new-item" ' . $style . '>' . esc_html( $title ) . '</span>';
         }
     }
-    add_action( 'woocommerce_before_shop_loop_item', 'lege_show_status', 9 );
+    add_action( 'woocommerce_before_shop_loop_item_title', 'lege_show_status', 11 );
+
+    // close </div>
+    add_action(
+        'woocommerce_before_shop_loop_item_title',
+        'lege_close_badges_wrapper',
+        12
+    );
+
+    function lege_close_badges_wrapper() {
+        echo '</div>';
+    }
+
+    // add thumbnail
+    add_action(
+        'woocommerce_before_shop_loop_item_title',
+        'woocommerce_template_loop_product_thumbnail',
+        13
+    );
 
     // Show sale price at cart
     function my_custom_show_sale_price_at_cart( $old_display, $cart_item, $cart_item_key ) {
@@ -125,7 +162,10 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     }
     add_filter('woocommerce_cart_item_price', 'my_custom_show_sale_price_at_cart', 10, 3 );
 
-    // Single product page - Sku and in stock()
+
+    /* **** Single product page **** */ 
+
+    // Sku and in stock()
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
     add_action('woocommerce_single_product_summary', 'lege_woo_sku_custom', 4);
 
@@ -148,7 +188,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     <?php
     }
 
-    // Remove woo's stock output completetly from single product
+    // Remove woo's stock output completetly
     add_filter('woocommerce_get_stock_html', function($html, $product) {
         if( is_product() ) {
             return '';
@@ -161,7 +201,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
     add_action('woocommerce_single_product_summary', 'lege_template_single_title', 5); 
 
-    // Excerpt - remove description cpmletele
+    // Excerpt - remove description comletely
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 6);
 
@@ -187,7 +227,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
         <?php }
 
-    // Share Icons on single product page
+    // Share Icons
     add_action('woocommerce_share', 'lege_custom_share', 5);
     function lege_custom_share() { 
         ?>
@@ -225,15 +265,18 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     
     <?php }
 
-    // Change Add to Cart button text on single product page in popup modal window
+    // Change Add to Cart button text in popup modal window
     add_filter( 'woocommerce_product_single_add_to_cart_text', function( $text ) {
         return __( 'View cart', 'lege' );
-    });     
+    });  
+    
+
+    /* **** Reviews - Single Product **** */
 
     // Remove default avatar
     remove_action('woocommerce_review_before', 'woocommerce_review_display_gravatar', 10);
 
-    /* Comment Form on Single Product Page */
+    // Comment Form
     function my_custom_comment_fields( $fields ) {
         $commenter = wp_get_current_commenter();
         $req = (bool) get_option( 'require_name_email', 1 );
