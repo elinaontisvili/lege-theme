@@ -10854,14 +10854,28 @@ img.avatar {
 .bnt_woo:hover::before {
   opacity: 1 !important; 
 }
-.bnt_woo_update_shipping_info{
-  width: 177px !important;
-  min-width: 177px !important;
+
+.cart .button.btn_update_shipping_info.button {
+  cursor: pointer;
+    background-image: -webkit-linear-gradient(left, #0cf 0%, #00a2ff 100%);
+    background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%);
+    background-size: 200% auto;
+    color: #fff;
+    letter-spacing: .03em;
+    font-weight: 600;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    width: 120px;
+    min-width: 120px;
+    line-height: 20px;
 }
-.bnt_woo_update_shipping_info:before {
-  width: 188px !important;
-  min-width: 188px !important;
+.cart button.btn_update_shipping_info.button:hover {
+  background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
 }
+
 .bnt_woo-custom {
   margin-top: 20px !important;
 }
