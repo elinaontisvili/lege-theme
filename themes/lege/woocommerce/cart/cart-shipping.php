@@ -32,18 +32,19 @@ $calculator_text          = '';
 
 				<?php foreach ( $available_methods as $method ) : ?>
 				<li>
-					<div class="table__value name label_custom_shipping_method">
+					<div>
 						<?php
+
 						if ( 1 < count( $available_methods ) ) {
-							printf(
-								'<input type="radio" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d_%2$s" value="%3$s" class="shipping_method custom_class" %4$s />',
+							$input_html = sprintf(
+								'<input type="radio" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d_%2$s" value="%3$s" class="shipping_method" %4$s />',
 								$index,
 								esc_attr( sanitize_title( $method->id ) ),
 								esc_attr( $method->id ),
 								checked( $method->id, $chosen_method, false )
 							);
 						} else {
-							printf(
+							$input_html = sprintf(
 								'<input type="hidden" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d_%2$s" value="%3$s" class="shipping_method" />',
 								$index,
 								esc_attr( sanitize_title( $method->id ) ),
@@ -53,25 +54,41 @@ $calculator_text          = '';
 
 						if ( is_cart() ) {
 							// Cart page
-							printf(
-								'<label for="shipping_method_%1$s_%2$s">%3$s</label>',
-								$index,
-								esc_attr( sanitize_title( $method->id ) ),
-								wc_cart_totals_shipping_method_label( $method )
-							);
+
+							$label_text = $method->label;
+							$price_html  = wc_price( $method->cost );
+							?>
+							<label for="shipping_method_<?php echo $index; ?>_<?php echo esc_attr( sanitize_title( $method->id ) ); ?>">
+								<div class="row row_custom">
+
+									<div class="col col-3-4_custom_cart">
+										<?php echo $input_html; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+										<div class="result__name name"><?php echo esc_html( $label_text ); ?></div>
+									</div>
+									<div class="col col-1-4_custom_cart">
+										<strong>
+											<div><?php echo wp_kses_post( $price_html ); ?></div>
+										</strong>
+									</div>
+
+								</div>
+							</label>
+							<?php
 						} elseif ( is_checkout() ) {
 							// Checkout page
 							$label_text = $method->label;
-							$price_html = wc_price( $method->cost );
+							$price_html  = wc_price( $method->cost );
 							?>
 							<label for="shipping_method_<?php echo $index; ?>_<?php echo esc_attr( sanitize_title( $method->id ) ); ?>" class="label_custom_shipping table__value_cutom">
 								<div class="row">
-									<div class="col_custom_shipping label_custom_shipping_method">
-										<?php echo esc_html( $label_text ); ?>
+									
+									<div class="col col-3-4 col_no_border">
+										<?php echo $input_html; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+										<div class="table__value"><?php echo esc_html( $label_text ); ?></div>
 									</div>
-									<div class="col_custom_shipping">
+									<div class="col col-1-4 col_no_border_1_4">
 										<strong class="product-quantity_custom_custom">
-											<?php echo wp_kses_post( $price_html ); ?>
+											<div class="table__value"><?php echo wp_kses_post( $price_html ); ?></div>
 										</strong>
 									</div>
 								</div>
@@ -83,7 +100,7 @@ $calculator_text          = '';
 						?>
 					</div>
 				</li>
-<?php endforeach; ?>
+		<?php endforeach; ?>
 
 			</ul>
 			<?php if ( is_cart() ) : ?>

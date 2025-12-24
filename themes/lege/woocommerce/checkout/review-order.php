@@ -58,8 +58,8 @@ defined( 'ABSPATH' ) || exit;
 	<div>
 
 	<div class="row">
-		<div class="col col-3-4 col_custom_class-3-4"><?php esc_html_e( 'Subtotal', 'lege' ); ?></div>
-		<div class="col col-1-4 cart-subtotal col_custom_class-1-4"><?php wc_cart_totals_subtotal_html(); ?></div>
+		<div class="col col-3-4 cart-subtotal-title"><?php esc_html_e( 'Subtotal', 'lege' ); ?></div>
+		<div class="col col-1-4 cart-subtotal"><?php wc_cart_totals_subtotal_html(); ?></div>
 	</div>
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
@@ -77,7 +77,7 @@ defined( 'ABSPATH' ) || exit;
 
 			
 			<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
-		<div class="col col-custom">
+		<div class="col col_custom_shipping_checkout">
 			<?php wc_cart_totals_shipping_html(); ?>
 		</div>
 			<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
@@ -97,9 +97,9 @@ defined( 'ABSPATH' ) || exit;
 		<?php if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() ) : ?>
 			<?php if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) : ?>
 				<?php foreach ( WC()->cart->get_tax_totals() as $code => $tax ) : // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited ?>
-					<div class="tax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-						<div><?php echo esc_html( $tax->label ); ?></div>
-						<div><?php echo wp_kses_post( $tax->formatted_amount ); ?></div>
+					<div class="row tax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+						<div class="col col-3-4 total_tax_checkout"><?php echo esc_html( $tax->label ); ?></div>
+						<div class="col col-1-4"><?php echo wp_kses_post( $tax->formatted_amount ); ?></div>
 					</div>
 				<?php endforeach; ?>
 			<?php else : ?>
