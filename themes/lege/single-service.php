@@ -7,7 +7,10 @@
  * @package Lege
  */
 
-get_header(); ?>
+get_header();
+
+global $lege_options;
+?>
 
     <section class="inner service">
         <div class="wrapper">
@@ -26,10 +29,35 @@ get_header(); ?>
                 </div>
                 <div class="inner__text">
                 <?php the_content(); ?>
-                    <?php
-                        $price = get_metadata('post',get_the_ID(),'lege_service_cost',true);
-                    ?>
-                    <a href="<?php echo esc_url(home_url('/order/') . '?price=' . urlencode($price) . '&title=' . rawurlencode(get_the_title()) . '&content=' . rawurlencode(strip_tags(get_the_content()))); ?>" class="inner__btn btn" data-content="<?php echo esc_attr( __( 'Order', 'lege' ) ); ?>"><?php echo esc_html( __( 'Order', 'lege' ) ); ?></a>
+
+                <?php
+
+                $service_id = get_the_ID(); 
+                $price      = get_post_meta( $service_id, 'lege_service_cost', true );
+
+                $order_page_id = $lege_options['order_page'] ?? 0;
+
+                // Translate order page to current language
+                if ( function_exists( 'pll_get_post' ) && $order_page_id ) {
+                    $order_page_id = pll_get_post( $order_page_id );
+                }
+
+                if ( $order_page_id ) :
+
+                    $order_url = add_query_arg(
+                        array(
+                            'service_id' => $service_id,
+                            'price'   => $price,
+                        ),
+                        get_permalink( $order_page_id )
+                    );
+                ?>
+                <a href="<?php echo esc_url( $order_url ); ?>"
+                class="inner__btn btn">
+                <?php esc_html_e( 'Order', 'lege' ); ?>
+                </a>
+                <?php endif; ?>
+
                 </div>
             </div>
 

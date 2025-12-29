@@ -1,24 +1,37 @@
 <?php
 /**
-* Template name: Шаблон: заказ
+*  Template name: Order page
 */
 
 get_header();
 
 $cost = 0;
-$title = 'Not selected';
-$content = 'Not selected';
+$title = __( 'Not selected', 'lege' );
+$content = '';
 
-if(isset($_GET["price"])) {
-    $cost = $_GET["price"];
-}
-if(isset($_GET["title"])) {
-    $title = $_GET["title"];
-}
-if(isset($_GET["content"])) {
-    $content = $_GET["content"];
+$service_id = isset( $_GET['service_id'] )
+    ? absint( $_GET['service_id'] )
+    : 0;
+
+// Translate service to current language
+if ( function_exists( 'pll_get_post' ) && $service_id ) {
+    $translated_id = pll_get_post( $service_id );
+    if ( $translated_id ) {
+        $service_id = $translated_id;
+    }
 }
 
+if ( $service_id ) {
+    $title   = get_the_title( $service_id );
+    $content = wp_strip_all_tags(
+        get_post_field( 'post_content', $service_id )
+    );
+    $cost    = get_post_meta( $service_id, 'lege_service_cost', true );
+}
+
+$cost = isset( $_GET['price'] )
+    ? floatval( wp_unslash( $_GET['price'] ) )
+    : 0;
 ?>
 
 <section class="inner order-page">
