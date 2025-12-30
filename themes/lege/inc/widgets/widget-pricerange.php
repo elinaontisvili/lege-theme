@@ -45,7 +45,7 @@ class Lege_PriceRange_Widget extends WP_Widget
             <h5 class="sortby__title"><?php echo esc_html( $title ); ?></h5>
             <div id="slider-range"></div>
             <p class="sortby__price">
-                <label for="amount"><?php esc_html_e( 'Цена：', 'lege' ); ?></label>
+                <label for="amount"><?php esc_html_e( 'Price：', 'lege' ); ?></label>
                 <span class="field">
                     <?php echo get_woocommerce_currency_symbol(); ?><input type="text" id="priceMin" class="min_price"> - <?php echo get_woocommerce_currency_symbol(); ?> <input type="text" id="priceMax" class="max_price">
                 </span>
