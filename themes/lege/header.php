@@ -221,23 +221,38 @@ if(is_page_template('template-home.php')) {
 <?php } else { ?>
 	<div class="caption">
 		<div class="wrapper">
-			<h1 class="caption__title"><?php
-                    if(is_single()){
-                        if(get_post_type() == 'product'){
-                            echo __('Shop', 'lege');
-                        } else {
-                            $current_post_type = get_post_type(get_the_ID());
-                            $post_type_object = get_post_type_object($current_post_type);
-                            echo $post_type_object->labels->singular_name;
-                        }
+			<h1 class="caption__title">
+				<?php
+                    if ( is_shop() ) {
+                    echo esc_html__( 'Shop', 'lege' );
 
-                    } else if(is_tax()){
-                        $current_post_type = get_post_type(get_the_ID());
-                        $post_type_object = get_post_type_object($current_post_type);
-                        echo $post_type_object->labels->name;
+                } elseif ( is_singular() ) {
+                    $current_post_type = get_post_type( get_the_ID() );
+                    $post_type_object = get_post_type_object( $current_post_type );
+
+                    if ( $current_post_type === 'product' ) {
+                        echo esc_html( get_the_title() );
                     } else {
-                        echo wp_title('');
-                    } ?></h1>
+                        echo esc_html( $post_type_object->labels->singular_name );
+                    }
+
+                } elseif ( is_tax() || is_category() || is_tag() ) {
+                    $current_post_type = get_post_type();
+                    $post_type_object = get_post_type_object( $current_post_type );
+
+                    if ( is_category() ) {
+                        echo esc_html( single_cat_title( '', false ) );
+                    } elseif ( is_tag() ) {
+                        echo esc_html( single_tag_title( '', false ) );
+                    } else {
+                        echo esc_html( $post_type_object->labels->name );
+                    }
+
+                } else {
+                    echo wp_kses_post( get_the_title() ?: wp_title( '', false ) );
+                }
+                ?>
+				</h1>
 			<?php echo lege_get_breadcrumbs(); ?>
 		</div>
 	</div>
