@@ -154,7 +154,7 @@ $my_account_url = wc_get_page_permalink( 'myaccount' );
                 if(get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes'){
                 if( is_user_logged_in()){ ?>
                     <div class="control__wrap">
-                        <a href="<?php echo esc_url(home_url('/my-account')); ?>" class="control__enter control__enter_cab">
+						<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="control__enter control__enter_cab">
                             <svg class="control__icon" width="16" height="16">
                                 <use xlink:href="#user"/>
                             </svg>

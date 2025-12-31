@@ -73,7 +73,7 @@
         <p class="forget__title modal-subtitle"><?php esc_html_e('Forgot password?', 'lege'); ?></p>
         <p class="forget__text modal-text"><?php esc_html_e('Enter your email. A verification code will be sent to you. After confirming it, you can choose a new password for your account.','lege'); ?></p>
         
-        <form action="<?php echo home_url('/my-account'); ?>" method="post" id="recover" class="woocommerce-ResetPassword lost_reset_password log">
+        <form action="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" method="post" id="recover" class="woocommerce-ResetPassword lost_reset_password log">
 
             <div class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first log__group">
                 <label for="user_login"><?php esc_html_e( 'Username or email', 'lege' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'lege' ); ?></span></label>
