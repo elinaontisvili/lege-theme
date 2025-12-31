@@ -37,7 +37,6 @@ global $lege_options;
 
                 $order_page_id = $lege_options['order_page'] ?? 0;
 
-                // Translate order page to current language
                 if ( function_exists( 'pll_get_post' ) && $order_page_id ) {
                     $order_page_id = pll_get_post( $order_page_id );
                 }
@@ -47,7 +46,6 @@ global $lege_options;
                     $order_url = add_query_arg(
                         array(
                             'service_id' => $service_id,
-                            'price'   => $price,
                         ),
                         get_permalink( $order_page_id )
                     );

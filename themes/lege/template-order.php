@@ -13,18 +13,6 @@ $service_id = isset( $_GET['service_id'] )
     ? absint( $_GET['service_id'] )
     : 0;
 
-/*
-* No Direct URL access
-* No Invalid IDs
-* No Wrong post types
-* No Language mismatch
-*/
-$has_service_context = (
-    $service_id &&
-    get_post_status( $service_id ) &&
-    get_post_type( $service_id ) === 'service'
-);
-
 // Translate service to current language
 if ( function_exists( 'pll_get_post' ) && $service_id ) {
     $translated_id = pll_get_post( $service_id );
@@ -33,17 +21,20 @@ if ( function_exists( 'pll_get_post' ) && $service_id ) {
     }
 }
 
-if ( $service_id ) {
+// Validate service 
+$has_service_context = (
+    $service_id &&
+    get_post_status( $service_id ) &&
+    get_post_type( $service_id ) === 'service'
+);
+ 
+if ( $has_service_context ) {
     $title   = get_the_title( $service_id );
     $content = wp_strip_all_tags(
         get_post_field( 'post_content', $service_id )
     );
-    $cost    = get_post_meta( $service_id, 'lege_service_cost', true );
+    $cost    = (float) get_post_meta( $service_id, 'lege_service_cost', true );
 }
-
-$cost = isset( $_GET['price'] )
-    ? floatval( wp_unslash( $_GET['price'] ) )
-    : 0;
 ?>
 
 <section class="inner order-page">
@@ -64,7 +55,7 @@ $cost = isset( $_GET['price'] )
                     <h5 class="inner__top"><?php echo esc_html($title); ?></h5>
                     
                     <?php
-                    $trimmed_content = mb_substr($content, 0, 897);
+                    $trimmed_content = wp_trim_words($content, 100, '...');
                     $last_space = strrpos($trimmed_content, ' ');
                     if ($last_space !== false) {
                         $trimmed_content = substr($trimmed_content, 0, $last_space);
