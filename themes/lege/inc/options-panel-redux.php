@@ -700,24 +700,6 @@ Redux::set_section( $opt_name, array(
 	'icon'             => 'el el-home'
 	) );
 
-// Order page
-Redux::set_section( $opt_name, array(
-    'title'       => __( 'Internal Pages Mapping', 'lege' ),
-    'id'          => 'internalpages_mapping',
-    'subsection'  => true,
-    'fields'      => array(
-
-        array(
-            'id'       => 'order_page', // PAGE_ID 
-            'type'     => 'select',
-            'title'    => __( 'Order Page', 'lege' ),
-            'subtitle' => __( 'Select the page used for service orders', 'lege' ),
-            'data'     => 'pages',
-        ),
-
-    )
-) );
-
 Redux::set_section( $opt_name, array(
 	'title'            => __( 'Blog', 'lege' ),
 	'id'               => 'blogposts',
