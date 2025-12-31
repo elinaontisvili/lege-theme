@@ -13,6 +13,18 @@ $service_id = isset( $_GET['service_id'] )
     ? absint( $_GET['service_id'] )
     : 0;
 
+/*
+* No Direct URL access
+* No Invalid IDs
+* No Wrong post types
+* No Language mismatch
+*/
+$has_service_context = (
+    $service_id &&
+    get_post_status( $service_id ) &&
+    get_post_type( $service_id ) === 'service'
+);
+
 // Translate service to current language
 if ( function_exists( 'pll_get_post' ) && $service_id ) {
     $translated_id = pll_get_post( $service_id );
@@ -46,6 +58,9 @@ $cost = isset( $_GET['price'] )
             </div>
             <div class="inner__block">
                 <div class="inner__text">
+            
+                <?php if ( $has_service_context ) : ?>
+
                     <h5 class="inner__top"><?php echo esc_html($title); ?></h5>
                     
                     <?php
@@ -59,11 +74,33 @@ $cost = isset( $_GET['price'] )
 
                     <!-- Price -->
                     <span class="inner__price">$<?php echo esc_html($cost); ?></span>
-                </div>
+                    
+                <?php else : ?>
+
+                    <div class="order-fallback">
+                        <h5 class="inner__top">
+                            <?php esc_html_e( 'No service selected', 'lege' ); ?>
+                        </h5>
+
+                        <p>
+                            <?php esc_html_e(
+                                'Please select a service first in order to proceed with your order.',
+                                'lege'
+                            ); ?>
+                        </p>
+
+                        <a href="<?php echo esc_url( get_post_type_archive_link( 'service' ) ); ?>"
+                        class="btn">
+                            <?php esc_html_e( 'View services', 'lege' ); ?>
+                        </a>
+
+                    </div>
+                <?php endif; ?>
 
                 <!-- Form -->
-                <?php echo do_shortcode(get_metadata('post',get_the_ID(),'lege_shortcode_order',true)); ?>
-
+                <?php if($has_service_context) : ?>
+                    <?php echo do_shortcode(get_metadata('post',get_the_ID(),'lege_shortcode_order',true)); ?>
+                <?php endif; ?>
             </div>
         </div>
         <?php endwhile; ?>
