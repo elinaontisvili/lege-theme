@@ -224,7 +224,7 @@ class Elementor_Services_Widget extends \Elementor\Widget_Base {
                             <?php endif; ?>
 
                             <a href="<?php the_permalink(); ?>" class="services__order btn">
-                                <?php echo esc_html__('Подробнее', 'elementor-lege'); ?>
+                                <?php echo esc_html__('Read more', 'elementor-lege'); ?>
                             </a>
 
                             <div class="services__bg services__bg_<?php echo esc_attr($icon); ?>"></div>
