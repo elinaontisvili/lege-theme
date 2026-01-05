@@ -1888,7 +1888,8 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .services__btn:before {
   width: 182px;
-  content: 'Все услуги';
+  /* content: 'Все услуги'; */
+  content: attr(data-content);
 }
 
 .services__list {

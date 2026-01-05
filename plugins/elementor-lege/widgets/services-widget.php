@@ -189,7 +189,7 @@ class Elementor_Services_Widget extends \Elementor\Widget_Base {
                     </h2>
 
                     <?php if (!empty($settings['button_text'])) : ?>
-                        <a href="<?php echo esc_url($settings['button_link']['url']); ?>" class="services__btn btn">
+                        <a href="<?php echo esc_url($settings['button_link']['url']); ?>" class="services__btn btn" data-content="<?php echo esc_attr($settings['button_text']); ?>">
                             <?php echo esc_html($settings['button_text']); ?>
                         </a>
                     <?php endif; ?>
