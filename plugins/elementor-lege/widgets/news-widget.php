@@ -39,7 +39,7 @@ class Elementor_News_Widget extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Main Title', 'elementor-lege' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'новости',
+                'default' => 'news',
                 'label_block' => true,
             ]
         );
@@ -50,7 +50,7 @@ class Elementor_News_Widget extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__( 'Title Small Letters', 'elementor-lege' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Актуальные',
+                'default' => 'Hot',
                 'label_block' => true,
             ]
         );
@@ -73,7 +73,7 @@ class Elementor_News_Widget extends \Elementor\Widget_Base {
             [
                 'label' => __( 'Button Text', 'elementor-lege' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Все новости',
+                'default' => 'View all news',
             ]
         );
 
@@ -345,7 +345,7 @@ class Elementor_News_Widget extends \Elementor\Widget_Base {
                                     </p>
 
                                     <a href="<?php the_permalink(); ?>" class="news__link link-more">
-                                        <?php echo esc_html__( 'Читать больше', 'elementor-lege '); ?>
+                                        <?php echo esc_html__( 'Read more', 'elementor-lege '); ?>
                                         <svg width="18" height="20">
                                             <use xlink:href="#nav-right"></use>
                                         </svg>
@@ -404,7 +404,7 @@ class Elementor_News_Widget extends \Elementor\Widget_Base {
                                 <p class="news__text">This is sample preview text for Elementor live editor…</p>
 
                                 <a href="#" class="news__link link-more">
-                                    Читать больше
+                                    <?php echo esc_html__( 'Read more', 'elementor-lege' ); ?>
                                     <svg width="18" height="20"><use xlink:href="#nav-right"></use></svg>
                                 </a>
                             </div>
