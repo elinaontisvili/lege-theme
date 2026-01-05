@@ -2144,7 +2144,8 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 .news .btn:before {
   width: 182px;
   padding-top: 3px;
-  content: 'Все новости';
+  /* content: 'Все новости'; */
+  content: attr(data-content);
   color: #26afff;
 }
 

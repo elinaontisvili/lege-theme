@@ -366,7 +366,7 @@ class Elementor_News_Widget extends \Elementor\Widget_Base {
 
                 </div>
 
-                <a href="<?php echo $button_url; ?>" class="news__btn btn">
+                <a href="<?php echo $button_url; ?>" class="news__btn btn" data-content="<?php echo esc_attr($settings['button_text']); ?>">
                     <?php echo esc_html( $settings['button_text'] ); ?>
                 </a>
 
