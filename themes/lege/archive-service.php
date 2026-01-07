@@ -22,7 +22,7 @@ get_header();
 
 					<?php $services_types = get_terms( array(
 							'taxonomy'   => 'service-type',
-							'hide_empty' => false,
+							'hide_empty' => true,
 					) ); 
 					
 					$i = 0;
