@@ -48,7 +48,7 @@ class Lege_Category_Widget extends WP_Widget
 
                 <?php $news_cats = get_terms( array(
                     'taxonomy' => 'news-category',
-                    'hide_empty' => false,
+                    'hide_empty' => true,
                 ) );
 
                 foreach($news_cats as $cat){ ?>
