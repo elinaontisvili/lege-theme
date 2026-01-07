@@ -93,7 +93,7 @@ global $lege_options;
 							</div>
 						</div>
 						<h5 class="news__heading"><?php the_title(); ?></h5>
-						<p class="news__text"><?php the_excerpt(); ?></p>
+						<p class="news__text"><?php echo esc_html( get_the_excerpt() ); ?></p>
 					</article>
 
 
