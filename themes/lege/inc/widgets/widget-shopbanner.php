@@ -44,9 +44,9 @@ public function widget( $args, $instance ) {
     ) );
 
     // Polylang
-    $title = pll__( $instance['title'] );
-    $text  = pll__( $instance['text'] );
-    $link_more = !empty($instance['link_more']) ? pll__( $instance['link_more'] ) : '';
+    $title = __( $instance['title'] );
+    $text  = __( $instance['text'] );
+    $link_more = !empty($instance['link_more']) ? __( $instance['link_more'] ) : '';
 
     /* Our variables from the widget settings. */
     $image_id = (int) $instance[$this->image_field];
@@ -64,7 +64,7 @@ public function widget( $args, $instance ) {
             <p class="banner__text"><?php echo wp_kses_post( $text ); ?></p>
 
             <?php if ( $link_more ) : ?>
-                <a href="<?php echo esc_url( pll__( $link_more ) ); ?>" class="banner__btn" ><?php echo esc_html( __( 'Buy', 'lege' ) ); ?></a>
+                <a href="<?php echo esc_url( __( $link_more ) ); ?>" class="banner__btn" ><?php echo esc_html( __( 'Buy', 'lege' ) ); ?></a>
             <?php endif; ?>
         </div>
     <?php
@@ -85,13 +85,6 @@ public function widget( $args, $instance ) {
         $instance['link_more'] = esc_url_raw( $new_instance['link_more'] );
 
         $instance['image'] = ! empty( $new_instance['image'] ) ? intval( $new_instance['image'] ) : '';
-
-        // Register strings for Polylang
-        if ( function_exists( 'pll_register_string' ) ) {
-            pll_register_string( 'Shop Widget Title', $instance['title'], 'Widgets' );
-            pll_register_string( 'Shop Widget Text', $instance['text'], 'Widgets' );
-            pll_register_string( 'Shop Widget Link', $instance['link_more'], 'Widgets' );
-        }
 
 		return $instance;
 	}
