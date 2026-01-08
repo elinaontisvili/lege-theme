@@ -32,7 +32,7 @@ class Lege_PriceRange_Widget extends WP_Widget
     {
         extract( $args );
 
-        $title = pll__( $instance['title'] );
+        $title = __( $instance['title'] );
 
         $prices = $this->get_filtered_price();
         $min_price = floor( $prices->min_price);
@@ -106,11 +106,6 @@ class Lege_PriceRange_Widget extends WP_Widget
         $instance = $old_instance;
 
         $instance['title'] = strip_tags( $new_instance['title'] );
-
-        // Register strings for Polylang 
-        if ( function_exists( 'pll_register_string' ) ) {
-            pll_register_string( 'Price Range Widget Title', $instance['title'], 'Widgets' );
-        }
 
         return $instance;
     }
