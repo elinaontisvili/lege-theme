@@ -32,7 +32,7 @@ class Lege_Subscribe_Widget extends WP_Widget
     {
         extract( $args );
 
-        $title = pll__( $instance['title'] );
+        $title = __( $instance['title'] );
         $shortcode = $instance['shortcode'];
 
 
@@ -62,11 +62,6 @@ class Lege_Subscribe_Widget extends WP_Widget
 
         $instance['title'] = strip_tags( $new_instance['title'] );
         $instance['shortcode'] = strip_tags( $new_instance['shortcode'] );
-
-        // Register strings for Polylang
-        if ( function_exists( 'pll_register_string' ) ) {
-            pll_register_string( 'Subscribe Widget Title', $instance['title'], 'Widgets' );
-        }
 
         return $instance;
     }
