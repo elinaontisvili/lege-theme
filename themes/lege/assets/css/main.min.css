@@ -11137,6 +11137,18 @@ td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view
   background-image: linear-gradient(to left, #cfd9df 0%, #b6c2cc 100%);
 }
 
+/* Remove number input spinners – Chrome, Safari, Edge */
+.quantity input[type="number"]::-webkit-inner-spin-button,
+.quantity input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Remove number input spinners – Firefox */
+.quantity input[type="number"] {
+	-moz-appearance: textfield;
+}
+
 /* Social Login (frontend) */ 
 .theChampLogin {
   width: 64px !important; 
