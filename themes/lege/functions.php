@@ -12,6 +12,39 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', '1.0.0' );
 }
 
+/*
+ * Polylang fallback helpers when Polylang is deactivated
+ */
+if ( ! function_exists( 'pll__' ) ) {
+    function pll__( $string ) {
+        return $string;
+    }
+}
+
+if ( ! function_exists( 'pll_e' ) ) {
+    function pll_e( $string ) {
+        echo $string;
+    }
+}
+
+if ( ! function_exists( 'pll_register_string' ) ) {
+    function pll_register_string( $name, $string, $group = '' ) {
+        return null;
+    }
+}
+
+if ( ! function_exists( 'pll_get_post' ) ) {
+    function pll_get_post( $post_id ) {
+        return $post_id;
+    }
+}
+
+if ( ! function_exists( 'pll_get_term' ) ) {
+    function pll_get_term( $term_id ) {
+        return $term_id;
+    }
+}
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -748,9 +781,3 @@ add_action('woocommerce_save_account_details', 'lege_woocommerce_save_account_de
 function lege_woocommerce_save_account_details( $user_id ) {
     update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone']));
 }
-
-// In admin always show all posts all languages
-add_filter( 'pll_the_languages_args', function( $args ) {
-    $args['hide_if_empty'] = 0;
-    return $args;
-} );
