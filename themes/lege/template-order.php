@@ -87,7 +87,9 @@ if ( $has_service_context ) {
 
                     </div>
                 <?php endif; ?>
-
+                
+                </div>
+                
                 <!-- Form -->
                 <?php if($has_service_context) : ?>
                     <?php echo do_shortcode(get_metadata('post',get_the_ID(),'lege_shortcode_order',true)); ?>
