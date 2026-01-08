@@ -23,7 +23,7 @@ global $lege_options;
 ?>
 
 <section class="inner shop">
-	<div class="shop-top" style="background: #fff url(<?php echo esc_html( $lege_options['woo_bg']['url'] ); ?>) no-repeat center top/ cover;">
+	<div class="shop-top" style="background: #fff url(<?php echo esc_url( $lege_options['woo_bg']['url'] ); ?>) no-repeat center top/ cover;">
 		<div class="wrapper">
 			<?php if($lege_options['wootitle1'] && esc_html( $lege_options['wootitle2'] ) ) { ?>
 			<h1 class="shop-top__title">
@@ -31,7 +31,7 @@ global $lege_options;
 			</h1>
 			<?php } ?>
 			<?php if($lege_options['woolink']) { ?>
-			<a href="<?php $lege_options['woolink']; ?>" class="shop-top__btn btn"><?php esc_html_e('Buy now', 'lege'); ?></a>
+			<a href="<?php echo esc_url( $lege_options['woolink'] ); ?>" class="shop-top__btn btn"><?php esc_html_e('Buy now', 'lege'); ?></a>
 			<?php } ?>
 		</div>
 	</div>
