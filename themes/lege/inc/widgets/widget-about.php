@@ -44,9 +44,9 @@ public function widget( $args, $instance ) {
     ) ); 
 
     // Polylang
-    $title = pll__( $instance['title'] );
-    $text  = pll__( $instance['text'] );
-    $link_more = !empty($instance['link_more']) ? pll__( $instance['link_more'] ) : '';
+    $title = __( $instance['title'] );
+    $text  = __( $instance['text'] );
+    $link_more = !empty($instance['link_more']) ? __( $instance['link_more'] ) : '';
 
 
     /* Our variables from the widget settings. */
@@ -66,8 +66,7 @@ public function widget( $args, $instance ) {
 
             <?php if ( $link_more ) : ?>
 
-                <!-- Polylang -->
-                <a href="<?php echo esc_url( pll__( $link_more ) ); ?>" class="banner__btn btn" data-content="<?php echo esc_attr( __( 'Read more', 'lege' ) ); ?>"><?php echo esc_html( __( 'Read more', 'lege' ) ); ?></a>
+                <a href="<?php echo esc_url( __( $link_more ) ); ?>" class="banner__btn btn" data-content="<?php echo esc_attr( __( 'Read more', 'lege' ) ); ?>"><?php echo esc_html( __( 'Read more', 'lege' ) ); ?></a>
 
             <?php endif; ?>
         </div>
@@ -89,13 +88,6 @@ public function widget( $args, $instance ) {
         $instance['link_more'] = esc_url_raw( $new_instance['link_more'] );
 
         $instance['image'] = ! empty( $new_instance['image'] ) ? intval( $new_instance['image'] ) : '';
-
-        // Register strings for Polylang
-        if ( function_exists( 'pll_register_string' ) ) {
-            pll_register_string( 'About Widget Title', $instance['title'], 'Widgets' );
-            pll_register_string( 'About Widget Text', $instance['text'], 'Widgets' );
-            pll_register_string( 'About Widget Link', $instance['link_more'], 'Widgets' );
-        }
 
 		return $instance;
 	}
