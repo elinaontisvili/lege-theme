@@ -224,7 +224,20 @@ if(is_page_template('template-home.php')) {
 			<h1 class="caption__title">
 				<?php
                     if ( is_shop() ) {
-                    echo esc_html__( 'Shop', 'lege' );
+					echo esc_html__( 'Shop', 'lege' );
+
+				} elseif ( is_post_type_archive() ) {
+					$pt = get_query_var( 'post_type' );
+					if ( is_array( $pt ) ) {
+						$pt = reset( $pt );
+					}
+					$pt = $pt ?: get_post_type();
+					$post_type_object = $pt ? get_post_type_object( $pt ) : null;
+					if ( $post_type_object ) {
+						echo esc_html( $post_type_object->labels->name );
+					} else {
+						echo esc_html( post_type_archive_title( '', false ) );
+					}
 
                 } elseif ( is_singular() ) {
                     $current_post_type = get_post_type( get_the_ID() );
@@ -249,7 +262,9 @@ if(is_page_template('template-home.php')) {
                     }
 
                 } else {
-                    echo wp_kses_post( get_the_title() ?: wp_title( '', false ) );
+					// echo wp_kses_post( get_the_title() ?: wp_title( '', false ) );
+					// echo esc_html( get_the_archive_title() ?: wp_kses_post( get_the_title() ?: wp_title( '', false ) ) );
+					echo esc_html( wp_strip_all_tags( get_the_archive_title() ?: wp_kses_post( get_the_title() ?: wp_title( '', false ) ) ) );
                 }
                 ?>
 				</h1>
