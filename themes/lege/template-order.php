@@ -13,14 +13,6 @@ $service_id = isset( $_GET['service_id'] )
     ? absint( $_GET['service_id'] )
     : 0;
 
-// Translate service to current language
-if ( function_exists( 'pll_get_post' ) && $service_id ) {
-    $translated_id = pll_get_post( $service_id );
-    if ( $translated_id ) {
-        $service_id = $translated_id;
-    }
-}
-
 // Validate service 
 $has_service_context = (
     $service_id &&

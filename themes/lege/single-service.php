@@ -37,10 +37,6 @@ global $lege_options;
 
                 $order_page_id = $lege_options['order_page'] ?? 0;
 
-                if ( function_exists( 'pll_get_post' ) && $order_page_id ) {
-                    $order_page_id = pll_get_post( $order_page_id );
-                }
-
                 if ( $order_page_id ) :
 
                     $order_url = add_query_arg(
