@@ -11111,21 +11111,30 @@ td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view
   background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
 }
 
-a.woocommerce-button.woocommerce-button--next.woocommerce-Button.woocommerce-Button--next.button {
-  cursor: pointer; 
-  background-image: -webkit-linear-gradient(left, #0cf 0%, #00a2ff 100%);
-  background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%); 
-  background-size: 200% auto; 
+/* My Account Page - Orders Pagination Buttons */
+.woocommerce-pagination a.woocommerce-button.button {
+  cursor: pointer;
+  background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%);
+  background-size: 200% auto;
   color: #fff;
   letter-spacing: .03em;
   font-weight: 600;
-  -webkit-transition: all .3s ease-in-out; 
-  transition: all .3s ease-in-out; 
-  border: none; 
+  transition: all .3s ease-in-out;
+  border: none;
   border-radius: 25px;
 }
-a.woocommerce-button.woocommerce-button--next.woocommerce-Button.woocommerce-Button--next.button:hover {
- background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
+
+.woocommerce-pagination a.woocommerce-button.button:hover {
+  background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
+}
+
+.woocommerce-pagination a.woocommerce-button--previous.button {
+  background-image: linear-gradient(to right, #cfd9df 0%, #b6c2cc 100%);
+  color: #2c3e50;
+}
+
+.woocommerce-pagination a.woocommerce-button--previous.button:hover {
+  background-image: linear-gradient(to left, #cfd9df 0%, #b6c2cc 100%);
 }
 
 /* Social Login (frontend) */ 
