@@ -241,13 +241,21 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     // Price
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
     add_action('woocommerce_before_add_to_cart_button', 'lege_custom_addtocart_price', 5);
-    function lege_custom_addtocart_price() {
-        global $product; ?>
-        <div class="product__price"> 
-            <?php echo $product->get_price_html(); ?> 
-        </div>
 
-        <?php }
+    function lege_custom_addtocart_price() {
+        global $product;
+
+        if ( ! $product ) {
+            return;
+        }
+
+        // simple product
+        if ( $product->is_type( 'simple' ) ) : ?>
+            <div class="product__price">
+                <?php echo $product->get_price_html(); ?>
+            </div>
+        <?php endif;
+    }
 
     // Share Icons
     add_action('woocommerce_share', 'lege_custom_share', 5);
