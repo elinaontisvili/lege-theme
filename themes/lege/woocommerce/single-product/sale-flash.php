@@ -21,21 +21,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $post, $product;
 
-if ( $product->is_on_sale() ) : 
+if ( $product->is_on_sale() ) :
 
-	$regular_price = (float) wc_get_price_to_display( $product, [ 'price' => $product->get_regular_price() ] ); 
-	$sale_price    = (float) wc_get_price_to_display( $product, [ 'price' => $product->get_sale_price() ] ); 
+	$discount = lege_get_product_discount_percentage( $product );
 
-	if ( $regular_price > 0 && $sale_price > 0 ) {
-		$percentage = ( ( $regular_price - $sale_price ) / $regular_price ) * 100;
-		$saving_percentage = round( $percentage ); 
-		echo apply_filters(
-			'woocommerce_sale_flash', 
-			'<span class="discount">-' . $saving_percentage . '%</span>',
-			$post, 
-			$product
-		);
-	}
+if ( $discount ) {
+	echo apply_filters(
+		'woocommerce_sale_flash',
+		'<span class="discount">-' . esc_html( $discount ) . '%</span>',
+		$post,
+		$product
+	);
+}
 
 endif;
 

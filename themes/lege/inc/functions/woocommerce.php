@@ -424,6 +424,51 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     /* Checkout */
     remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20);
 
+    // Calculate discount percentage
+    function lege_get_product_discount_percentage( $product ) {
+
+	if ( ! $product || ! $product->is_on_sale() ) {
+		return false;
+	}
+
+	// simple product
+	if ( $product->is_type( 'simple' ) ) {
+		$regular = (float) $product->get_regular_price();
+		$sale    = (float) $product->get_sale_price();
+
+		if ( $regular > 0 && $sale > 0 && $sale < $regular ) {
+			return round( ( ( $regular - $sale ) / $regular ) * 100 );
+		}
+	}
+
+    // variable product
+    if ( $product->is_type( 'variable' ) ) {
+
+        $max_percentage = 0;
+
+        foreach ( $product->get_children() as $variation_id ) {
+
+            $variation = wc_get_product( $variation_id );
+
+            if ( ! $variation || ! $variation->is_on_sale() ) {
+                continue;
+            }
+
+            $regular = (float) $variation->get_regular_price();
+            $sale    = (float) $variation->get_sale_price();
+
+            if ( $regular > 0 && $sale > 0 && $sale < $regular ) {
+                $percentage = ( ( $regular - $sale ) / $regular ) * 100;
+                $max_percentage = max( $max_percentage, $percentage );
+            }
+        }
+
+        return $max_percentage ? round( $max_percentage ) : false;
+    }
+
+    return false;
+    }
+
 
 }
 

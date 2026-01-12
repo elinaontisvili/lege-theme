@@ -82,14 +82,20 @@ do_action( 'woocommerce_before_cart' ); ?>
 						<div style="align-items: center; display: flex;">
 					
 							<?php 
-							$regular_price = (float) $_product->get_regular_price();
-							$sale_price = (float) $_product->get_price();
+							if ( $_product->is_type( 'variable' ) ) {
+								$regular_price = (float) $_product->get_variation_regular_price( 'min', true );
+								$sale_price    = (float) $_product->get_variation_sale_price( 'min', true );
+							} else {
+								$regular_price = (float) $_product->get_regular_price();
+								$sale_price = (float) $_product->get_price();
+							}
 
 							$precision = 1;
 							$saving_percentage = round( 100 - ( $sale_price / $regular_price * 100 ), 1 ) . '%';
 
-							if($regular_price !== $sale_price){
-								echo '<span class="discount" style="margin-right: 15px;">'.$saving_percentage.'</span>';
+							if ( $regular_price > 0 && $sale_price > 0 && $sale_price < $regular_price ) {
+								$saving_percentage = round( ( ( $regular_price - $sale_price ) / $regular_price ) * 100 );
+								echo '<span class="discount" style="margin-right:15px;">-' . esc_html( $saving_percentage ) . '%</span>';
 							}
 
 							$rating_count = $_product->get_rating_count();

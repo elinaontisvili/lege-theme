@@ -22,26 +22,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $post, $product;
 
 ?>
-<?php if ( $product->is_on_sale() ) :
+<?php 
 
-    $regular_price = (float) wc_get_price_to_display( $product, [ 'price' => $product->get_regular_price() ] );
-    $sale_price    = (float) wc_get_price_to_display( $product, [ 'price' => $product->get_sale_price() ] );
+if ( $product->is_on_sale() ) {
+	$discount = lege_get_product_discount_percentage( $product );
 
-    if ( $regular_price > 0 && $sale_price > 0 ) {
-        $percentage = ( ( $regular_price - $sale_price ) / $regular_price ) * 100;
-
-        $saving_percentage = round( $percentage );
-    
-        echo wp_kses_post( 
-            apply_filters(
-            'woocommerce_sale_flash',
-            '<span class="discount">-' . esc_html( $saving_percentage ) . '%</span>',
-            $post,
-            $product
-            )
-        );
-    } ?>
-    
-<?php endif;
+	if ( $discount ) {
+		echo apply_filters(
+			'woocommerce_sale_flash',
+			'<span class="discount">-' . esc_html( $discount ) . '%</span>',
+			$post,
+			$product
+		);
+	}
+}
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
