@@ -777,7 +777,21 @@ function lege_user_register( $user_id ) {
     }
 }
 
+/* Save the phone number when user updates account details */
+/*
 add_action('woocommerce_save_account_details', 'lege_woocommerce_save_account_details'); 
 function lege_woocommerce_save_account_details( $user_id ) {
     update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone']));
+}
+*/
+add_action( 'woocommerce_save_account_details', 'lege_woocommerce_save_account_details' );
+
+function lege_woocommerce_save_account_details( $user_id ) {
+    if ( isset( $_POST['billing_phone'] ) ) {
+        update_user_meta(
+            $user_id,
+            'billing_phone',
+            sanitize_text_field( $_POST['billing_phone'] )
+        );
+    }
 }
