@@ -1,4 +1,12 @@
 <?php
+/**
+ * Elementor Why Us Widget
+ * 
+ * @package Elementor_Lege
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
 
 	public function get_name(): string {

@@ -1,6 +1,8 @@
 <?php
 /**
  * Elementor Multiple Tabs – Dynamic Post Types + Taxonomies
+ * 
+ * @package Elementor_Lege
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;

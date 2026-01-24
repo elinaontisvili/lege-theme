@@ -1,4 +1,12 @@
 <?php
+/**
+ * Elementor About Widget
+ * 
+ * @package Elementor_Lege
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Elementor_About_Choose_Us_Widget extends \Elementor\Widget_Base {
 
 

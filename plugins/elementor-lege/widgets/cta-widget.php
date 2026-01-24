@@ -1,4 +1,12 @@
 <?php
+/**
+ * Elementor Connect Cta Widget
+ * 
+ * @package Elementor_Lege
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Elementor_CTA_Widget extends \Elementor\Widget_Base {
 
 

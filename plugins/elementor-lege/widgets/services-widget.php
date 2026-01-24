@@ -1,4 +1,10 @@
 <?php
+/**
+ * Elementor Services Widget
+ * 
+ * @package Elementor_Lege
+ */
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Elementor_Services_Widget extends \Elementor\Widget_Base {

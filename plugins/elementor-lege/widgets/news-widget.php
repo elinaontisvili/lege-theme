@@ -1,4 +1,12 @@
 <?php
+/**
+ * Elementor News Widget
+ * 
+ * @package Elementor_Lege
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Elementor_News_Widget extends \Elementor\Widget_Base {
 
     public function get_name(): string {
