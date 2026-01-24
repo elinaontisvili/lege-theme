@@ -211,6 +211,37 @@ function lege_scripts() {
         wp_enqueue_script('lege_woo_filter');
     }
 
+    /* Подключение скрипта для быстрого просмотра (Quick View) товаров в popup */
+    if ( is_product() || is_shop() || is_product_taxonomy() ) {
+        wp_enqueue_script(
+            'lege-quickview',
+            get_template_directory_uri() . '/assets/js/lege-quickview.js',
+            array( 'jquery', 'wc-add-to-cart-variation' ),
+            '1.0',
+            true
+        );
+        
+        // Pass AJAX URL to JavaScript
+        wp_localize_script(
+            'lege-quickview',
+            'legeQuickview',
+            array(
+                'ajax_url' => admin_url( 'admin-ajax.php' )
+            )
+        );
+    }
+
+    // Grouped Product Script
+    if ( is_product() || is_shop() || is_product_taxonomy() ) {
+        wp_enqueue_script(
+            'lege-grouped-product', 
+            get_template_directory_uri() . '/assets/js/grouped-product.js',
+            array('jquery'), 
+            '1.0', 
+            true 
+        );
+    }
+
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
 
@@ -778,12 +809,6 @@ function lege_user_register( $user_id ) {
 }
 
 /* Save the phone number when user updates account details */
-/*
-add_action('woocommerce_save_account_details', 'lege_woocommerce_save_account_details'); 
-function lege_woocommerce_save_account_details( $user_id ) {
-    update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone']));
-}
-*/
 add_action( 'woocommerce_save_account_details', 'lege_woocommerce_save_account_details' );
 
 function lege_woocommerce_save_account_details( $user_id ) {

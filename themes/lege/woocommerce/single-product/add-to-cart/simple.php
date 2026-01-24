@@ -48,7 +48,11 @@ if ( $product->is_in_stock() ) : ?>
         <div class="product__btns">
 
             <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="product__btn btn"><?php esc_html_e( 'Add to cart', 'lege' ); ?></button>
-            <a href="#one-click" class="product__btn btn popup-link-1" data-content="<?php echo esc_attr( __( 'Buy in one click', 'lege' ) ); ?>"><?php echo esc_html( __( 'Buy in one click', 'lege' ) ); ?></a>
+            <a href="#one-click"
+                class="product__btn btn popup-link-quickview"
+                data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
+                <?php esc_html_e( 'Buy in one click', 'lege' ); ?>
+            </a>
              
         </div>
 
