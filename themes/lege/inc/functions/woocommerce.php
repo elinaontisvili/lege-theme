@@ -165,7 +165,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
 
     /* **** Single product page **** */ 
 
-        // opening wrap for badges
+    // opening wrap for badges
     add_action(
         'woocommerce_before_single_product_summary',
         'lege_open_product_badges_wrapper',
@@ -187,7 +187,7 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
         echo '</div>';
     }
 
-    // Sku and in stock()
+    // Sku and instock
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
     add_action('woocommerce_single_product_summary', 'lege_woo_sku_custom', 4);
 
@@ -210,20 +210,28 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     <?php
     }
 
-    // Remove woo's stock output completetly
-    add_filter('woocommerce_get_stock_html', function($html, $product) {
-        if( is_product() ) {
+    // Hide stock everywhere except variable products page + popup
+    add_filter( 'woocommerce_get_stock_html', 'lege_capture_stock_html', 10, 2 );
+    function lege_capture_stock_html( $html, $product ) {
+
+        if ( ! $product ) {
             return '';
-        } else {
+        }
+
+        // Variable products
+        if ( $product instanceof WC_Product_Variation ) {
             return $html;
         }
-    }, 10, 2);
+
+        // Everything else
+        return '';
+    }
 
     // Title 
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
     add_action('woocommerce_single_product_summary', 'lege_template_single_title', 5); 
 
-    // Excerpt - remove description comletely
+    // Excerpt - remove description completely
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 6);
 
@@ -243,21 +251,20 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     add_action('woocommerce_before_add_to_cart_button', 'lege_custom_addtocart_price', 5);
 
     function lege_custom_addtocart_price() {
-        global $product;
-
+        global $product; 
+        
         if ( ! $product ) {
             return;
         }
+        ?>
 
-        // simple product
-        if ( $product->is_type( 'simple' ) ) : ?>
-            <div class="product__price">
-                <?php echo $product->get_price_html(); ?>
-            </div>
-        <?php endif;
-    }
+        <div class="product__price">
+            <?php echo $product->get_price_html(); ?>
+        </div>
+        
+        <?php }
 
-    // Share Icons
+    // Share Icons, single product page
     add_action('woocommerce_share', 'lege_custom_share', 5);
     function lege_custom_share() { 
         ?>
@@ -469,32 +476,59 @@ if(in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_o
     return false;
     }
 
+    /* Quick View - AJAX */
+    add_action( 'wp_ajax_lege_load_popup_product', 'lege_load_popup_product' );
+    add_action( 'wp_ajax_nopriv_lege_load_popup_product', 'lege_load_popup_product' );
+
+    function lege_load_popup_product() {
+   
+        $product_id = isset( $_POST['product_id'] ) ? absint( $_POST['product_id'] ) : 0;
+
+        if ( ! $product_id ) {
+            echo '<p>No product ID provided</p>';
+            wp_die();
+        }
+
+        $product = wc_get_product( $product_id );
+
+        if ( ! $product ) {
+            echo '<p>Product not found</p>';
+            wp_die();
+        }
+
+        global $post;
+        $post = get_post( $product_id );
+        setup_postdata( $post );
+        
+        $GLOBALS['product'] = $product;
+
+        wc_setup_product_data( $product_id );
+
+        $template_path = get_template_directory() . '/template-parts/';
+
+        if ( $product->is_type( 'simple' ) ) {
+            $template_file = $template_path . 'order-popup-simple.php';
+
+        } elseif ( $product->is_type( 'variable' ) ) {
+            $template_file = $template_path . 'order-popup-variable.php';
+
+        } elseif ( $product->is_type( 'grouped' ) ) {
+            $template_file = $template_path . 'order-popup-grouped.php';
+
+        } else {
+            $template_file = $template_path . 'order-popup-simple.php';
+        }
+
+        if ( file_exists( $template_file ) ) {
+            include $template_file;
+        } else {
+            echo '<p>Template file not found: ' . esc_html( basename( $template_file ) ) . '</p>';
+        }
+
+        wp_reset_postdata();
+        wp_die();
+    }
+
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-    
-
-
