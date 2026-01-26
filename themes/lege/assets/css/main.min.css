@@ -11505,3 +11505,27 @@ a.woocommerce-MyAccount-downloads-file.button.alt:hover {
 .is-popup .woocommerce-grouped-product-list-item label {
   font-weight: 500;
 }
+
+/* External Product */
+.product-type-external .cart {
+  padding: 0;
+  margin-top: 22px;
+}
+
+.product-type-external form.cart {
+  margin-bottom: 0;
+}
+
+.product-type-external .cart del .woocommerce-Price-amount {
+  text-decoration: line-through;
+  font-size: inherit;
+  font-weight: inherit;
+  margin-right: inherit;
+}
+
+.product-type-external .cart ins {
+  font-size: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  word-spacing: inherit;
+}
