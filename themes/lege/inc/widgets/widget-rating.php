@@ -11,16 +11,18 @@ class Lege_Rating_Widget extends WP_Widget
         /* Widget settings. */
         $widget_ops = array(
             'classname' => 'lege_rating_widget',
-            'description' => 'Виджет который выводит блок с Рейтингом'
+            'description' => 'A widget that displays a block with a rating'
         );
+        
         /* Widget control settings. */
         $control_ops = array(
             'width'		=> 500,
             'height'	=> 450,
             'id_base'	=> 'lege_rating_widget'
         );
+
         /* Create the widget. */
-        parent::__construct( 'lege_rating_widget', 'Lege | Рейтинг', $widget_ops, $control_ops );
+        parent::__construct( 'lege_rating_widget', 'Lege | Rating', $widget_ops, $control_ops );
     }
 
     protected function get_filtered_product_count( $rating ) {
@@ -139,14 +141,14 @@ class Lege_Rating_Widget extends WP_Widget
     {
         //default widget settings.
         $defaults = array(
-            'title'		=> 'Рейтинг',
+            'title'		=> 'Rating',
         );
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         ?>
 
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e('Заголовок', 'lege'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e('Heading', 'lege'); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" value="<?php echo esc_attr($instance['title']); ?>" />
         </p>
 

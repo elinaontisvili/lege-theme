@@ -11,16 +11,18 @@ class Lege_Subscribe_Widget extends WP_Widget
         /* Widget settings. */
         $widget_ops = array(
             'classname' => 'lege_subscribe_widget',
-            'description' => 'Виджет который выводит блок Подписки'
+            'description' => 'A widget that displays a Subscription block'
         );
+
         /* Widget control settings. */
         $control_ops = array(
             'width'		=> 500,
             'height'	=> 450,
             'id_base'	=> 'lege_subscribe_widget'
         );
+
         /* Create the widget. */
-        parent::__construct( 'lege_subscribe_widget', 'Lege | Подписка', $widget_ops, $control_ops );
+        parent::__construct( 'lege_subscribe_widget', 'Lege | Subscription', $widget_ops, $control_ops );
     }
 
     /**
@@ -34,7 +36,6 @@ class Lege_Subscribe_Widget extends WP_Widget
 
         $title = __( $instance['title'] );
         $shortcode = $instance['shortcode'];
-
 
         // Display Widget
         ?>
@@ -50,6 +51,7 @@ class Lege_Subscribe_Widget extends WP_Widget
         <?php
 
     }
+    
     /**
      * Update Widget
      * @param array $new_instance
@@ -74,18 +76,18 @@ class Lege_Subscribe_Widget extends WP_Widget
     {
         //default widget settings.
         $defaults = array(
-            'title'		=> 'Подписаться на рассылку',
+            'title'		=> 'Subscribe to the newsletter',
             'shortcode'	=> '',
         );
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         ?>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Заголовок', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Heading', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
         </p>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'shortcode' ) ); ?>"><?php esc_html_e( 'Шорткод', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'shortcode' ) ); ?>"><?php esc_html_e( 'Shortcode', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'shortcode' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'shortcode' ) ); ?>" value="<?php echo esc_attr( $instance['shortcode'] ); ?>" />
         </p>
 

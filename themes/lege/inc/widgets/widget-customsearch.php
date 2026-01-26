@@ -9,7 +9,7 @@ class Lege_Customsearch_Widget extends WP_Widget
         /* Widget settings. */
         $widget_ops = array(
             'classname' => 'lege_customsearch_widget',
-            'description' => 'Виджет который выводит персональный поиск'
+            'description' => 'A widget that displays a personalized search'
         );
         /* Widget control settings. */
         $control_ops = array(
@@ -18,7 +18,7 @@ class Lege_Customsearch_Widget extends WP_Widget
             'id_base'	=> 'lege_customwidget_widget'
         );
         /* Create the widget. */
-        parent::__construct( 'lege_customwidget_widget', 'Lege | Персональный поиск', $widget_ops, $control_ops );
+        parent::__construct( 'lege_customwidget_widget', 'Lege | Custom search', $widget_ops, $control_ops );
     }
 
     /**
@@ -46,12 +46,9 @@ class Lege_Customsearch_Widget extends WP_Widget
 
             </form>
         </div>
-
-
-
         <?php
-
     }
+    
     /**
      * Update Widget
      * @param array $new_instance
@@ -76,18 +73,18 @@ class Lege_Customsearch_Widget extends WP_Widget
     {
         //default widget settings.
         $defaults = array(
-            'custom_placeholder'		=> 'Поиск по Новостям',
+            'custom_placeholder'		=> 'Search by News',
             'custom_post_type'		    => 'news',
         );
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id( 'custom_placeholder' )); ?>"><?php esc_html__('Заголовок', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id( 'custom_placeholder' )); ?>"><?php esc_html__('Heading', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'custom_placeholder' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'custom_placeholder' )); ?>" value="<?php echo esc_attr($instance['custom_placeholder']); ?>" />
         </p>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id( 'custom_post_type' )); ?>"><?php esc_html__('Заголовок', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id( 'custom_post_type' )); ?>"><?php esc_html__('Heading', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'custom_post_type' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'custom_post_type' )); ?>" value="<?php echo esc_attr($instance['custom_post_type']); ?>" />
         </p>
 

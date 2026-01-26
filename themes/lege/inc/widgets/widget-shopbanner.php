@@ -43,12 +43,10 @@ public function widget( $args, $instance ) {
         'image'     => 0,
     ) );
 
-    // Polylang
     $title = __( $instance['title'] );
     $text  = __( $instance['text'] );
     $link_more = !empty($instance['link_more']) ? __( $instance['link_more'] ) : '';
 
-    /* Our variables from the widget settings. */
     $image_id = (int) $instance[$this->image_field];
 
     $image      = new Lege_WidgetImageField( $this, $image_id, 'image' );
@@ -56,17 +54,17 @@ public function widget( $args, $instance ) {
 
     // Display Widget
     ?> 
-        <div class="banner"<?php if ( $image_src ) echo ' style="background-image: url(' . esc_url( $image_src ) . '); background-size: cover; background-position: center;"'; ?>>
-            <?php if ( $title ) : ?>
-                <h4 class="banner__title"><?php echo esc_html( $title ); ?></h4>
-            <?php endif; ?>
+    <div class="banner"<?php if ( $image_src ) echo ' style="background-image: url(' . esc_url( $image_src ) . '); background-size: cover; background-position: center;"'; ?>>
+        <?php if ( $title ) : ?>
+            <h4 class="banner__title"><?php echo esc_html( $title ); ?></h4>
+        <?php endif; ?>
 
-            <p class="banner__text"><?php echo wp_kses_post( $text ); ?></p>
+        <p class="banner__text"><?php echo wp_kses_post( $text ); ?></p>
 
-            <?php if ( $link_more ) : ?>
-                <a href="<?php echo esc_url( __( $link_more ) ); ?>" class="banner__btn" ><?php echo esc_html( __( 'Buy', 'lege' ) ); ?></a>
-            <?php endif; ?>
-        </div>
+        <?php if ( $link_more ) : ?>
+            <a href="<?php echo esc_url( __( $link_more ) ); ?>" class="banner__btn" ><?php echo esc_html( __( 'Buy', 'lege' ) ); ?></a>
+        <?php endif; ?>
+    </div>
     <?php
 }
 
@@ -93,40 +91,40 @@ public function widget( $args, $instance ) {
 	 * Widget Settings
 	 * @param array $instance 
 	 */
-public function form( $instance ) {
-    $defaults = array(
-        'title'     => __('Product title', 'lege'),
-        'text'      => __('Product description', 'lege'),
-        'link_more' => "",
-        'image'     => 0,
-    );
-    $instance = wp_parse_args( (array) $instance, $defaults ); 
+    public function form( $instance ) {
+        $defaults = array(
+            'title'     => __('Product title', 'lege'),
+            'text'      => __('Product description', 'lege'),
+            'link_more' => "",
+            'image'     => 0,
+        );
+        $instance = wp_parse_args( (array) $instance, $defaults ); 
 
-    $image_id = isset( $instance[$this->image_field] ) ? (int) $instance[$this->image_field] : 0;
-    $image      = new Lege_WidgetImageField( $this, $image_id );
-    ?>
-    <p>
-        <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e('Title:', 'lege') ?></label>
-        <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-    </p>
-    <p>
-        <label for="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>"><?php esc_html_e('Description:', 'lege') ?></label>
-        <textarea class="widefat" cols="100" rows="5" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" ><?php echo esc_textarea( $instance['text'] ); ?></textarea>
-    </p>
-    <p>
-        <label for="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>"><?php esc_html_e('Url:', 'lege') ?></label>
-        <textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'link_more' ) ); ?>" ><?php echo esc_textarea( $instance['link_more'] ); ?></textarea>
-    </p>
-    <p>
-    <label><?php esc_html_e('Image:', 'lege'); ?> </label>
-        <?php
-            $field_html = $image->get_widget_field();
-
-            if (is_string($field_html)) {
-                echo wp_kses_post( $field_html );
-            }
+        $image_id = isset( $instance[$this->image_field] ) ? (int) $instance[$this->image_field] : 0;
+        $image      = new Lege_WidgetImageField( $this, $image_id );
         ?>
-    </p>
-<?php
-}
+        <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e('Title:', 'lege') ?></label>
+            <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+        </p>
+        <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>"><?php esc_html_e('Description:', 'lege') ?></label>
+            <textarea class="widefat" cols="100" rows="5" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" ><?php echo esc_textarea( $instance['text'] ); ?></textarea>
+        </p>
+        <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>"><?php esc_html_e('Url:', 'lege') ?></label>
+            <textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'link_more' ) ); ?>" ><?php echo esc_textarea( $instance['link_more'] ); ?></textarea>
+        </p>
+        <p>
+        <label><?php esc_html_e('Image:', 'lege'); ?> </label>
+            <?php
+                $field_html = $image->get_widget_field();
+
+                if (is_string($field_html)) {
+                    echo wp_kses_post( $field_html );
+                }
+            ?>
+        </p>
+    <?php
+    }
 }

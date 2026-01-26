@@ -11,7 +11,7 @@ class Lege_Category_Case_Widget extends WP_Widget
         /* Widget settings. */
         $widget_ops = array(
             'classname' => 'lege_category_case_widget',
-            'description' => 'Виджет который выводит блок категории'
+            'description' => 'A widget that displays a category block'
         );
         /* Widget control settings. */
         $control_ops = array(
@@ -20,7 +20,7 @@ class Lege_Category_Case_Widget extends WP_Widget
             'id_base'	=> 'lege_category_case_widget'
         );
         /* Create the widget. */
-        parent::__construct( 'lege_category_case_widget', 'Lege | Категории Кейсов', $widget_ops, $control_ops );
+        parent::__construct( 'lege_category_case_widget', 'Lege | Case Categories', $widget_ops, $control_ops );
     }
 
     /**
@@ -36,7 +36,6 @@ class Lege_Category_Case_Widget extends WP_Widget
 
         // Display Widget
         ?>
-
         <div class="widget categories side-nav">
             <h5 class="categories__title">
                 <svg  width="19" height="19">
@@ -48,7 +47,7 @@ class Lege_Category_Case_Widget extends WP_Widget
 
                 <?php $case_cats = get_terms( array(
                     'taxonomy' => 'feature-type',
-                    'hide_empty' => true, // hide empty terms
+                    'hide_empty' => true,
                 ) );
 
                 foreach($case_cats as $cat){ ?>
@@ -60,10 +59,9 @@ class Lege_Category_Case_Widget extends WP_Widget
                 } ?>
             </ul>
         </div>
-
         <?php
-
     }
+    
     /**
      * Update Widget
      * @param array $new_instance
@@ -87,13 +85,13 @@ class Lege_Category_Case_Widget extends WP_Widget
     {
         //default widget settings.
         $defaults = array(
-            'title'		=> 'Категории кейсов',
+            'title'		=> 'Case categories',
         );
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e( 'Заголовок', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e( 'Heading', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" value="<?php echo esc_attr($instance['title']); ?>" />
         </p>
 

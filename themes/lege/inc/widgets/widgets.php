@@ -15,6 +15,7 @@ function lege_widgets_init() {
         	'after_title'   => '</div>'
 		)
 	);
+	
 	register_sidebar(
 		array(
 			'name'			=> esc_html__('Sidebar Cases', 'lege' ),
@@ -26,19 +27,7 @@ function lege_widgets_init() {
 			'after_title'	=> '</div>'
 		)
 	);
-	/*
-    register_sidebar(
-		array(
-			'name'          => esc_html__( 'Shop', 'lege' ),
-			'id'            => 'woocommerce',
-			'description'   => esc_html__( 'Add widgets here.', 'lege' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-	*/
+
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Shop', 'lege' ),
@@ -50,6 +39,7 @@ function lege_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+
 }
 add_action( 'widgets_init', 'lege_widgets_init' );
 

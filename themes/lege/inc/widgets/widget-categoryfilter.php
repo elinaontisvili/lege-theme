@@ -11,7 +11,7 @@ class Lege_Category_Filter_Widget extends WP_Widget
         /* Widget settings. */
         $widget_ops = array(
             'classname' => 'lege_categoryfilter_widget',
-            'description' => 'Виджет который выводит блок с фильтрацией по категориям товаров'
+            'description' => 'A widget that displays a block with filtering by product categories'
         );
         /* Widget control settings. */
         $control_ops = array(
@@ -20,7 +20,7 @@ class Lege_Category_Filter_Widget extends WP_Widget
             'id_base'	=> 'lege_categoryfilter_widget'
         );
         /* Create the widget. */
-        parent::__construct( 'lege_categoryfilter_widget', 'Lege | Ajax Фильтрация по категориям товаров', $widget_ops, $control_ops );
+        parent::__construct( 'lege_categoryfilter_widget', 'Lege | Ajax Filtering by Product Categories', $widget_ops, $control_ops );
     }
 
     /**
@@ -115,13 +115,13 @@ class Lege_Category_Filter_Widget extends WP_Widget
     {
         //default widget settings.
         $defaults = array(
-            'title'		=> 'Категории товаров',
+            'title'		=> 'Product categories',
         );
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         ?>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Фильтрация по категории | Заголовок', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Filter by category | Heading', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
         </p>
 

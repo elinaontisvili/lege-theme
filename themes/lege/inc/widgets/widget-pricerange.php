@@ -11,16 +11,18 @@ class Lege_PriceRange_Widget extends WP_Widget
         /* Widget settings. */
         $widget_ops = array(
             'classname' => 'lege_pricerange_widget',
-            'description' => 'Виджет который выводит блок с фильтром по цене'
+            'description' => 'A widget that displays a block with a price filter'
         );
+
         /* Widget control settings. */
         $control_ops = array(
             'width'		=> 500,
             'height'	=> 450,
             'id_base'	=> 'lege_pricerange_widget'
         );
+        
         /* Create the widget. */
-        parent::__construct( 'lege_pricerange_widget', 'Lege | Ajax Фильтрация', $widget_ops, $control_ops );
+        parent::__construct( 'lege_pricerange_widget', 'Lege | Ajax Filtering', $widget_ops, $control_ops );
     }
 
     /**
@@ -124,7 +126,7 @@ class Lege_PriceRange_Widget extends WP_Widget
 
         ?>
         <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Фильтрация по цене | Заголовок', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Filter by price | Heading', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr($instance['title']); ?>" />
         </p>
 

@@ -11,16 +11,18 @@ class Lege_Category_Widget extends WP_Widget
         /* Widget settings. */
         $widget_ops = array(
             'classname' => 'lege_category_widget',
-            'description' => 'Виджет который выводит блок категории'
+            'description' => 'A widget that displays a category block'
         );
+        
         /* Widget control settings. */
         $control_ops = array(
             'width'		=> 500,
             'height'	=> 450,
             'id_base'	=> 'lege_category_widget'
         );
+
         /* Create the widget. */
-        parent::__construct( 'lege_category_widget', 'Lege | Категории', $widget_ops, $control_ops );
+        parent::__construct( 'lege_category_widget', 'Lege | Categories', $widget_ops, $control_ops );
     }
 
     /**
@@ -36,7 +38,6 @@ class Lege_Category_Widget extends WP_Widget
 
         // Display Widget
         ?>
-
         <div class="widget categories side-nav">
             <h5 class="categories__title">
                 <svg  width="19" height="19">
@@ -60,11 +61,9 @@ class Lege_Category_Widget extends WP_Widget
                 } ?>
             </ul>
         </div>
-
-
         <?php
-
     }
+
     /**
      * Update Widget
      * @param array $new_instance
@@ -88,13 +87,13 @@ class Lege_Category_Widget extends WP_Widget
     {
         //default widget settings.
         $defaults = array(
-            'title'		=> 'Категории новостей',
+            'title'		=> 'News categories',
         );
         $instance = wp_parse_args( (array) $instance, $defaults );
 
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e( 'Заголовок', 'lege' ); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id( 'title' )); ?>"><?php esc_html_e( 'Heading', 'lege' ); ?></label>
             <input type="text" class="widefat" id="<?php echo esc_attr($this->get_field_id( 'title' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'title' )); ?>" value="<?php echo esc_attr($instance['title']); ?>" />
         </p>
 
