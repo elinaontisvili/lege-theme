@@ -10,7 +10,7 @@
 get_header();
 ?>
 
-<section class="inner contacts">
+<section class="inner events">
     <div class="wrapper">
 		<div id="primary" class="content-area"> 
 
