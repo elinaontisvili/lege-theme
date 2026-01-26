@@ -1,3 +1,17 @@
+
+<?php
+/**
+ * Template part for displaying variable product content inside the order popup.
+ *
+ * Outputs product image, title, and WooCommerce variable
+ * add-to-cart form with attribute selection.
+ *
+ * Only renders for variable product types.
+ *
+ * @package Lege
+ */
+?>
+
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; 
 global $product;

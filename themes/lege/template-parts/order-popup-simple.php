@@ -1,4 +1,17 @@
 <?php
+/**
+ * Template part for displaying simple product content inside the order popup.
+ *
+ * Renders product image, title, price, quantity selector,
+ * and add-to-cart form for simple WooCommerce products.
+ *
+ * Loaded dynamically inside the "Buy in One Click" popup.
+ *
+ * @package Lege
+ */
+?>
+
+<?php
 if ( ! defined( 'ABSPATH' ) ) exit; 
 
 global $product;

@@ -1,3 +1,26 @@
+<?php
+/**
+ * Template part for displaying authentication modal popups.
+ *
+ * Outputs modal windows for:
+ * - User login
+ * - Password recovery
+ * - User registration
+ *
+ * Integrates with WooCommerce authentication flows,
+ * nonces, and hooks, and may include social login shortcodes.
+ *
+ * Loaded via get_template_part().
+ *
+ * @package Lege
+ */
+
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
+
 <!-- Login -->
 <div id="enter" class="login mfp-hide">
     <h4 class="login__title modal-title"><?php esc_html_e('Log in to your account', 'lege'); ?></h4>

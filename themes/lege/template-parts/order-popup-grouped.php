@@ -1,4 +1,17 @@
 <?php
+/**
+ * Template part for displaying grouped product content inside the order popup.
+ *
+ * Outputs product image, title, and grouped product
+ * add-to-cart form for selecting multiple child products.
+ *
+ * Only renders for grouped product types.
+ *
+ * @package Lege
+ */
+?>
+
+<?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 global $product;

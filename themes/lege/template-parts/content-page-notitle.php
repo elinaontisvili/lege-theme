@@ -1,12 +1,12 @@
 <?php
 /**
- * Template part for displaying page content in page.php
+ * Template part for displaying page content without a title.
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * Used for pages where the title is intentionally hidden,
+ * while still rendering the page content and featured image.
  *
  * @package Lege
  */
-
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -24,7 +24,7 @@
 			)
 		);
 		?>
-	</div><!-- .entry-content -->
+	</div>
 
 	<?php if ( get_edit_post_link() ) : ?>
 		<footer class="entry-footer">
@@ -46,6 +46,6 @@
 				'</span>'
 			);
 			?>
-		</footer><!-- .entry-footer -->
+		</footer>
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->
