@@ -11051,6 +11051,21 @@ img.avatar {
 }
     
 /* CHECKOUT PAGE */
+li.log__group.check.wc_payment_method.payment_method_cod:first-child {
+  max-width: 145px;
+}
+
+/* payment methods icons */
+.woocommerce-checkout #payment ul.payment_methods li img {
+  float: none;
+}
+li.payment_method_ppcp label:first-of-type img {
+  float: none;
+}
+.wc-stripe-card-icons-container {
+  line-height: 30px;
+}
+
 
 .woocommerce-info {
   border-top-color: #26afff;
@@ -11088,8 +11103,8 @@ img.avatar {
 
 /* payments */
 #add_payment_method #payment, .woocommerce-cart #payment, .woocommerce-checkout #payment {
-background: none;
-border-radius: 0;
+  background: none;
+  border-radius: 0;
 }
 
 .woocommerce-checkout .log label:after {
@@ -11099,6 +11114,7 @@ border-radius: 0;
 .woocommerce-checkout #payment ul.payment_methods {
   padding: 0 !important;
   border: 0 !important;
+  justify-content: space-between;
 }
 .woocommerce-checkout #payment ul.payment_methods li  {
   line-height: inherit !important;
