@@ -781,6 +781,10 @@ button {
   max-width: 350px;
 }
 
+widget_search_form {
+  margin-bottom: 30px;
+}
+
 .text-search {
   width: 100%;
   height: 40px;
