@@ -6119,6 +6119,10 @@ a.remove.cart__del:hover {
   padding: 0 5px;
 }
 
+.cart .price del {
+  font-size: 14px;
+}
+
 .cart .price__now, .cart ins, .cart .woocommerce-cart-form .woocommerce-Price-amount {
   font-size: 18px;
   font-weight: 600;
@@ -6126,7 +6130,7 @@ a.remove.cart__del:hover {
   word-spacing: -5px;
 }
 
-.cart .price__old, .cart del .woocommerce-Price-amount {
+.cart .price__old, .cart .price del .woocommerce-Price-amount {
   text-decoration: line-through;
   font-size: 14px; 
   font-weight: 400;
