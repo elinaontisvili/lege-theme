@@ -10996,16 +10996,6 @@ section.up-sells.upsells.products .star-rating span::before {
   margin-top: 38px;
 }
 
-/* Cross sells heading (on cart page - use it on other pages too */
-.heading_custom {
-  font-family: 'bitter', serif;
-  font-size: 24px; 
-  font-weight: 400;
-  letter-spacing: .02em;
-  text-align: center;
-  margin-top: 80px;
-}
-
 /* shipping calculator file */
 .custom_shipping_input_style {
   border: 1px solid #c3c3c3 !important; 
