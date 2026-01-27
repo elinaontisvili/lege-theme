@@ -11055,6 +11055,10 @@ img.avatar {
 }
     
 /* CHECKOUT PAGE */
+.woocommerce-checkout .pay .input-text {
+  max-width: none;
+}
+
 li.log__group.check.wc_payment_method.payment_method_cod:first-child {
   max-width: 145px;
 }
