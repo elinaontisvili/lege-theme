@@ -10,7 +10,7 @@
 get_header();
 ?>
 
-<section class="inner events">
+<section class="inner events search_form_results">
     <div class="wrapper">
 		<div id="primary" class="content-area"> 
 
