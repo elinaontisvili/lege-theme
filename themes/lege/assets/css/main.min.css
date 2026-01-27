@@ -7300,6 +7300,10 @@ a.remove.cart__del:hover {
   width: 100%;
 }
 
+.upsells .products .products__item {
+  width: 100%;
+}
+
 .products__item.sale .price {
   margin-right: 25px;
 }
@@ -8307,6 +8311,15 @@ a.remove.cart__del:hover {
   .products__item {
     width: calc(50% - 25px);
   }
+
+  .related .products .products__item {
+    width: calc(50% - 25px);
+  }
+
+  .upsells .products .products__item {
+    width: calc(50% - 25px);
+  }
+
 }
 
 @media screen and (max-width: 1100px) {
