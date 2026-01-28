@@ -6141,6 +6141,7 @@ a.remove.cart__del:hover {
 
 .cart .price del {
   font-size: 14px;
+  text-decoration: none;
 }
 
 .cart .price__now, .cart ins, .cart .woocommerce-cart-form .woocommerce-Price-amount {
@@ -11372,11 +11373,15 @@ a.woocommerce-MyAccount-downloads-file.button.alt:hover {
   width: auto;
   color: #383838; 
   font-size: 25px;
+  font-weight: 600;
   margin-bottom: 8px;
 }
 .variations_form .single_variation del .woocommerce-Price-amount {
   font-size: 25px;
-  font-weight: 400;
+  font-weight: 600;
+}
+.woocommerce .variations_form .single_variation span.price del {
+    opacity: unset;
 }
 .variations_form .single_variation ins {
   font-size: 25px;
@@ -11451,6 +11456,7 @@ a.woocommerce-MyAccount-downloads-file.button.alt:hover {
   border: 1px solid #c3c3c3;
   border-radius: 3px;
   width: 100%;
+  padding-left: 4px;
 }
 
 /* Variable & Grouped */
