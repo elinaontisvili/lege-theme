@@ -61,9 +61,6 @@ function lege_setup() {
 		*/
 	load_theme_textdomain( 'lege', get_template_directory() . '/languages' );
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
-
 	/*
 		* Let WordPress manage the document title.
 		* By adding theme support, we declare that this theme does not use a
@@ -548,8 +545,8 @@ function lege_register_custom_post_type() {
         'labels' => array(
             'name'                  => __( 'Team', 'lege' ),
             'singular_name'         => __( 'Team Member', 'lege' ),
-            'add_new'               => __( 'Add New Member', 'lege' ),
-            'add_new_item'          => __( 'Add New Team Member', 'lege' ),
+            'add_new'               => __( 'Add New', 'lege' ),
+            'add_new_item'          => __( 'Add New Team Member', 'lege' ), // Specific for the header
             'edit_item'             => __( 'Edit Team Member', 'lege' ),
             'new_item'              => __( 'New Team Member', 'lege' ),
             'view_item'             => __( 'View Team Member', 'lege' ),
@@ -572,7 +569,7 @@ function lege_register_custom_post_type() {
         'labels' => array(
             'name'                  => __( 'Offices', 'lege' ),
             'singular_name'         => __( 'Office', 'lege' ),
-            'add_new'               => __( 'Add New Office', 'lege' ),
+            'add_new'               => __( 'Add New', 'lege' ),
             'add_new_item'          => __( 'Add New Office', 'lege' ),
             'edit_item'             => __( 'Edit Office', 'lege' ),
             'new_item'              => __( 'New Office', 'lege' ),
@@ -596,7 +593,11 @@ function lege_register_custom_post_type() {
         'labels'             => array(
             'name'            => _x( 'Testimonials', 'lege' ),
             'singular_name'   => _x( 'Testimonial', 'lege' ),
-            'add_new'         => __( 'Add new', 'lege' )
+            'add_new'         => __( 'Add New', 'lege' ),
+            'add_new_item'    => __( 'Add New Testimonial', 'lege' ), // Specific for the header
+            'edit_item'       => __( 'Edit Testimonial', 'lege' ),
+            'new_item'        => __( 'New Testimonial', 'lege' ),
+            'view_item'       => __( 'View Testimonial', 'lege' ),
         ),
         'public'             => true,
         'publicly_queryable' => true,
@@ -616,7 +617,11 @@ function lege_register_custom_post_type() {
         'labels'             => array(
             'name'                  => __( 'Services','lege' ),
             'singular_name'         => __( 'Service','lege' ),
-            'add_new'               => __( 'Add new', 'lege' ),
+            'add_new'               => __( 'Add New', 'lege' ),
+            'add_new_item'          => __( 'Add New Service', 'lege' ), // Specific for the header
+            'edit_item'             => __( 'Edit Service', 'lege' ),
+            'new_item'              => __( 'New Service', 'lege' ),
+            'view_item'             => __( 'View Service', 'lege' ),
         ),
         'public'             => true,
         'publicly_queryable' => true,
@@ -636,7 +641,11 @@ function lege_register_custom_post_type() {
         'labels'             => array(
             'name'                  => __( 'News','lege' ),
             'singular_name'         => __( 'News','lege' ),
-            'add_new'               => __( 'Add new', 'lege' ),
+            'add_new'               => __( 'Add New', 'lege' ),
+            'add_new_item'          => __( 'Add New News Article', 'lege' ), // Specific for the header
+            'edit_item'             => __( 'Edit News Article', 'lege' ),
+            'new_item'              => __( 'New News Article', 'lege' ),
+            'view_item'             => __( 'View News Article', 'lege' ),
         ),
         'public'             => true,
         'publicly_queryable' => true,
@@ -656,7 +665,11 @@ function lege_register_custom_post_type() {
         'labels'             => array(
             'name'                  => __( 'Cases', 'lege' ),
             'singular_name'         => __( 'Case', 'lege' ),
-            'add_new'               => __( 'Add new', 'lege' ),
+            'add_new'               => __( 'Add New', 'lege' ),
+            'add_new_item'          => __( 'Add New Case', 'lege' ), // Specific for the header
+            'edit_item'             => __( 'Edit Case', 'lege' ),
+            'new_item'              => __( 'New Case', 'lege' ),
+            'view_item'             => __( 'View Case', 'lege' ),
         ),
         'public'             => true,
         'publicly_queryable' => true,

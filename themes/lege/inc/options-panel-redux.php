@@ -531,7 +531,7 @@ Redux::set_section( $opt_name, array(
 			'type'        => 'slides',
 			'title'       => __( 'Slides Options', 'lege' ),
 			'subtitle'    => __( 'Unlimited slides with drag and drop sortings.', 'lege' ),
-			'desc'        => __( 'This field will store all slides values into a multidimensional array to use into a foreach loop.', 'lege' ),
+			'desc'        => __( 'Add and organize slides for the homepage header slider.', 'lege' ),
 			'placeholder' => array(
 				'title'       => __( 'This is a title', 'lege' ),
 				'description' => __( 'Description Here', 'lege' ),
@@ -693,7 +693,7 @@ Redux::set_section( $opt_name, array(
 
 // Internal Pages
 Redux::set_section( $opt_name, array(
-	'title'            => __( 'Settings for Internal Pages', 'lege' ),
+	'title'            => __( 'Internal Pages', 'lege' ),
 	'id'               => 'internalpages',
 	'desc'             => __( 'Options for Internal Pages', 'lege' ),
 	'customizer_width' => '400px',
@@ -725,7 +725,7 @@ Redux::set_section( $opt_name, array(
 
 // Contact form concent checkbox
 Redux::set_section( $opt_name, array(
-	'title'            => __( 'Settings for Contact Form Policy Text', 'lege' ),
+	'title'            => __( 'Contact Form Policy', 'lege' ),
 	'id'               => 'contactformconcent',
 	'desc'             => __( 'Option for Contact Form Concent', 'lege' ),
 	'customizer_width' => '400px',
@@ -751,7 +751,7 @@ Redux::set_section( $opt_name, array(
 
 // Settings for woocommerce shop page
 Redux::set_section( $opt_name, array(
-	'title'            => __( 'Settings for woocommerce shop page', 'lege' ),
+	'title'            => __( 'Woocommerce shop page', 'lege' ),
 	'id'               => 'woocommercesett',
 	'desc'             => __( 'Option for woocommerce shop page', 'lege' ),
 	'customizer_width' => '400px',
@@ -801,7 +801,7 @@ Redux::set_section( $opt_name, array(
 	'id'			   => 'modal_windows',
 	'subscription'	   => true,
 	'customiaer_width' => '450px',
-	'desc'			   => esc_html__( 'Add data', 'lege' ), 
+	'desc'			   => esc_html__( 'Add data for Modal Windows', 'lege' ), 
 	'fields'		   => array(
 		array(
 			'id'	   => 'modal_contact_shortcode', 
