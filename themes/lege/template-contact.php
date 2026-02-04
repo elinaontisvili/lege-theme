@@ -108,9 +108,11 @@ global $lege_options;
                         echo wp_kses_post($lege_options['lege_form_policy_text']); 
                         } else {
                             echo wp_kses_post(
-                                sprintf(
-                                    __('I agree with the <a href="%s">privacy policy</a>', 'lege'),
-                                    esc_url('/privacy-policy')
+                                printf(
+                                    /* translators: %s: opening <a> tag, %2$s: closing </a> tag */
+                                    __('I agree with the %1$sprivacy policy%2$s', 'lege'),
+                                    '<a href="' . esc_url('/privacy-policy') . '">',
+                                    '</a>'
                                 )
                             );
                         }
