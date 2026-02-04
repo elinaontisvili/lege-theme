@@ -30,7 +30,7 @@ echo apply_filters(
 		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
 		'product_type_simple add_to_cart_button products__but',
 		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-		esc_html__( '' )
+		esc_html( '' )
 	),
 	$product,
 	$args
