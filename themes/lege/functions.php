@@ -257,151 +257,6 @@ function lege_register_elementor_scripts() {
 add_action( 'wp_enqueue_scripts', 'lege_register_elementor_scripts' );
 add_action( 'elementor/frontend/after_register_scripts', 'lege_register_elementor_scripts' );
 
-
-// AJAX handler for WooCommerce filter 
-function lege_show_products(){
-
-    $query_data = $_GET;
-
-    $paged = (isset($query_data['paged']) ) ? intval($query_data['paged']) : 1;
-
-    // set orderby (default = date)
-    $orderby = isset($query_data['orderby']) ? sanitize_text_field($query_data['orderby']) : 'date';
-
-    $posts_per_page = get_option('woocommerce_catalog_columns') * get_option('woocommerce_catalog_rows');
-
-    //filter by category IDs
-    $cats = !empty($query_data['category']) ? explode('.', $query_data['category']) : false;
-
-    $tax_query = $cats ? [
-        [
-            'taxonomy' => 'product_cat',
-            'field'    => 'id',
-            'terms'    => $cats,
-        ]
-    ] : [];
-
-    // base query
-    $meta_query = [
-        [
-            'key'     => '_price',
-            'value'   => [isset($query_data['min']) ? floatval($query_data['min']) : 0,
-                          isset($query_data['max']) ? floatval($query_data['max']) : 999999],
-            'compare' => 'BETWEEN',
-            'type'    => 'NUMERIC',
-        ]
-    ];
-
-    $args = [
-        'post_type'      => 'product',
-        'paged'          => $paged,
-        'posts_per_page' => $posts_per_page,
-        'tax_query'      => $tax_query,
-        'meta_query'     => $meta_query,
-    ];
-
-    // sorting logic
-    switch ($orderby) {
-        case 'price':
-            $args['orderby']  = 'meta_value_num';
-            $args['meta_key'] = '_price';
-            $args['order']    = 'ASC';
-            break;
-
-        case 'price-desc':
-            $args['orderby']  = 'meta_value_num';
-            $args['meta_key'] = '_price';
-            $args['order']    = 'DESC';
-            break;
-
-        case 'popularity':
-            $args['orderby']  = 'meta_value_num';
-            $args['meta_key'] = 'total_sales';
-            $args['order']    = 'DESC';
-            break;
-
-        case 'rating':
-            $args['meta_query'][] = [
-                'relation' => 'OR',
-                [
-                    'key'     => '_wc_average_rating',
-                    'compare' => 'EXISTS',
-                ],
-                [
-                    'key'     => '_wc_average_rating',
-                    'compare' => 'NOT EXISTS',
-                ],
-            ];
-            $args['orderby'] = [
-                'meta_value_num' => 'DESC',
-                'title'          => 'ASC',
-            ];
-            $args['meta_key'] = '_wc_average_rating';
-            break;
-
-        case 'date':
-        default:
-            $args['orderby']  = 'date';
-            $args['order']    = 'DESC';
-            break;
-    }
-
-    $loop = new WP_Query( $args );
-    if ( $loop->have_posts() ) {
-        echo '<div class="products columns-3" id="products">';
-
-        while ( $loop->have_posts() ) : $loop->the_post();
-            wc_get_template_part( 'content', 'product' );
-        endwhile;
-
-        echo '</div>';
-?>
-    <nav class="woocommerce-pagination">
-        <?php if($loop->max_num_pages > 1){ ?>
-            <nav class="pagination">
-                <div class="nav-links">
-                    <?php
-                    //Выводим левую стрелку для первой страницы
-                    if( $paged == 0 or $paged == 1){ ?>
-                        <span class="prev page-numbers"></span>
-                    <?php } ?>
-
-                    <?php
-
-                    //Вывод стандартной пагинации
-                    $big = 999999999; // need an unlikely integer
-
-                    echo paginate_links( array(
-                        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                        'format' => '?paged=%#%',
-                        'current' => max( 1, $paged ),
-                        'prev_text'          => '',
-                        'next_text'          => '',
-                        'total' => $loop->max_num_pages
-                    ) );
-                    ?>
-
-                    <?php
-                    //Выводим правую стрелку для последней страницы
-                    if( $paged == $loop->max_num_pages){ ?>
-                        <span class="next page-numbers"></span>
-                    <?php } ?>
-                </div>
-            </nav>
-        <?php } ?>
-    </nav>
-
-  <?php
-    } else {
-        echo __( 'No products found','lege' );
-    }
-
-    wp_reset_postdata();
-    die();
-}
-add_action('wp_ajax_lege_filter', 'lege_show_products');
-add_action('wp_ajax_nopriv_lege_filter', 'lege_show_products');
-
 /**
  * Подключение скриптов и стилей в админке (для метабоксов).
  */
@@ -451,11 +306,11 @@ function lege_enqueue_widget_scripts($hook) {
 }
 add_action( 'admin_enqueue_scripts', 'lege_enqueue_widget_scripts' );
 
-
 /**
  * Подключение функций WooCommerce.
  */
 require get_template_directory() . '/inc/functions/woocommerce.php';
+require get_template_directory() . '/inc/functions/woocommerce-scripts.php';
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
@@ -786,50 +641,3 @@ add_filter('mc4wp_form_response_position', function() {
 });
 
 
-/**
- * Registration Form
- */
-// Add phone field to Woo registration form 
-add_action( 'register_form', 'lege_add_registration_fields' );
-function lege_add_registration_fields() {
-    // Get and set any value already sent 
-    $user_phone = ( isset( $_POST['billing_phone'] ) ) ? $_POST['billing_phone'] : '';
-    ?> 
-
-    <p>
-        <label for="user_extra"><?php _e( 'Phone', 'lege' ) ?><br />
-            <input type="text" name="billing_phone" id="billing_phone" class="input" value="<?php echo esc_attr( stripslashes( $user_phone ) ); ?>" /></label>
-    </p>
-
-    <?php
-}
-// Validate the phone field (field is required)
-add_filter( 'registration_errors', 'lege_registration_errors', 10, 3 );
-function lege_registration_errors( $errors, $sanitized_user_login, $user_email ) {
-
-    if ( empty( $_POST['billing_phone'] ) || ! empty( $_POST['billing_phone'] ) && trim( $_POST['billing_phone'] ) == '' ) {
-        $errors->add( 'billing_phone_error', sprintf('<strong>%s</strong>: %s',__( 'ERROR', 'lege' ),__( 'Please enter your phone number.', 'lege' ) ) );
-    }
-
-    return $errors;
-}
-// Save the phone number to user meta after registration
-add_action( 'user_register', 'lege_user_register' );
-function lege_user_register( $user_id ) {
-    if ( ! empty( $_POST['billing_phone'] ) ) {
-        update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone'] ) );
-    }
-}
-
-/* Save the phone number when user updates account details */
-add_action( 'woocommerce_save_account_details', 'lege_woocommerce_save_account_details' );
-
-function lege_woocommerce_save_account_details( $user_id ) {
-    if ( isset( $_POST['billing_phone'] ) ) {
-        update_user_meta(
-            $user_id,
-            'billing_phone',
-            sanitize_text_field( $_POST['billing_phone'] )
-        );
-    }
-}
