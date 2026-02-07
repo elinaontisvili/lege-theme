@@ -141,7 +141,7 @@ function lege_setup() {
     add_image_size( 'news-home', 410, 270, true );
 
     // Поддержка Gutenberg.
-    //add_editor_style( 'editor-style.css' );
+    add_editor_style( 'editor-style.css' );
 
 }
 add_action( 'after_setup_theme', 'lege_setup' );

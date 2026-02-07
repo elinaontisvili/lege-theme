@@ -82,10 +82,18 @@ public function widget( $args, $instance ) {
         $instance['text'] = sanitize_textarea_field( $new_instance['text'] );
         $instance['link_more'] = esc_url_raw( $new_instance['link_more'] );
 
-        $instance['image'] = ! empty( $new_instance['image'] ) ? intval( $new_instance['image'] ) : '';
-
-		return $instance;
-	}
+        // Handle ID | URL format
+        if ( ! empty( $new_instance['image'] ) ) {
+            $image_data = sanitize_text_field( $new_instance['image'] );
+            // Extract ID (first part before |)
+            $image_parts = explode( '|', $image_data );
+            $instance['image'] = intval( $image_parts[0] );
+        } else {
+            $instance['image'] = '';
+        }
+       
+        return $instance;
+    }
 	
 	/**
 	 * Widget Settings
@@ -116,14 +124,14 @@ public function widget( $args, $instance ) {
             <textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'link_more' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'link_more' ) ); ?>" ><?php echo esc_textarea( $instance['link_more'] ); ?></textarea>
         </p>
         <p>
-        <label><?php esc_html_e('Image:', 'lege'); ?> </label>
-            <?php
-                $field_html = $image->get_widget_field();
-
-                if (is_string($field_html)) {
-                    echo wp_kses_post( $field_html );
-                }
-            ?>
+            <label><?php esc_html_e('Image:', 'lege'); ?></label><br>
+            <input type="text"
+                class="widefat lege-image-url"
+                name="<?php echo esc_attr( $this->get_field_name('image') ); ?>"
+                value="<?php echo esc_attr( $instance['image'] ); ?>" />
+            <button class="button lege-media-button">
+                <?php esc_html_e('Select Image', 'lege'); ?>
+            </button>
         </p>
     <?php
     }
