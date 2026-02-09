@@ -479,23 +479,7 @@ button {
   stroke: #383838;
   margin-top: 5px;
 }
-
-/*
-.heading__bag:after {
-  position: absolute;
-  content: '2';
-  color: #fff;
-  font-size: 9px;
-  width: 14px;
-  height: 14px;
-  background-color: #26afff;
-  border-radius: 50%;
-  top: 6px;
-  right: -6px;
-  line-height: 15px;
-  text-align: center;
-}
-*/ 
+ 
 .heading__bag .count {
   position: absolute;
   color: #fff; 
@@ -680,29 +664,30 @@ button {
   opacity: .6;
 }
 
-/*
-.language .lang-item.active {
-  color: #26afff;
-  position: relative;
-  font-weight: 600;
-} */
 .language .lang-item.current-lang {
   color: #26afff;
   position: relative;
   font-weight: 600;
 }
-/*
-.language .lang-item.active:before {
-  position: absolute;
-  content: '';
-  background-color: #26afff;
-  border-radius: 50%;
-  width: 4px;
-  height: 4px;
-  top: 40%;
-  left: -8px;
-} */ 
+/* TranslatePress */
+.language li.current-language-menu-item {
+  color: #26afff;
+  position: relative;
+  font-weight: 600;
+}
+
 .language .lang-item.current-lang:before {
+  position: absolute;
+  content: ''; 
+  background-color: #26afff; 
+  border-radius: 50%; 
+  width: 4px; 
+  height: 4px; 
+  top: 40%; 
+  left: -8px;
+}
+/* TranslatePress */
+.language li.current-language-menu-item:before {
   position: absolute;
   content: ''; 
   background-color: #26afff; 
@@ -10665,7 +10650,7 @@ a.remove.cart__del:hover {
     max-width: 250px;
   }
 
-    .coupon {
+  .coupon {
     display: block !important;
     margin-bottom: 20px;
   }
@@ -10744,7 +10729,7 @@ a.remove.cart__del:hover {
     margin-top: 22px;
   }
 
-  /* Single Product Variable, Popup, Add to Cart Button */
+/* Single Product Variable, Popup, Add to Cart Button */
   .is-popup .btn, .is-popup .product__btn {
     width: auto !important;
   }
@@ -11265,7 +11250,7 @@ li.payment_method_ppcp label:first-of-type img {
 
 /* MY ACCOUNT PAGE */
 
-/* hide password eye */
+/* Hide password eye */
 button.show-password-input {
   display:none;
 }
@@ -11277,22 +11262,7 @@ button.show-password-input {
 .woocommerce-orders-table__header {
   font-family: 'bitter', serif;
 }
-td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view {
-  cursor: pointer; 
-  background-image: -webkit-linear-gradient(left, #0cf 0%, #00a2ff 100%);
-  background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%); 
-  background-size: 200% auto;
-  color: #fff; 
-  letter-spacing: .03em; 
-  font-weight: 600;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-  border: none;
-  border-radius: 25px;
-}
-td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view:hover {
-  background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
-}
+
 .woocommerce-account .addresses .title {
   font-family: 'bitter', serif;
 }
@@ -11300,58 +11270,53 @@ td.woocommerce-orders-table__cell-order-actions a.woocommerce-button.button.view
   color: #00a2ff; 
   font-family: "proxima", sans-serif;
 }
-.woocommerce-MyAccount-content .woocommerce-info a.button.wc-forward {
-  cursor: pointer; 
-  background-image: -webkit-linear-gradient(left, #0cf 0%, #00a2ff 100%);
-  background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%); 
-  background-size: 200% auto;
-  color: #fff; 
-  letter-spacing: .03em; 
-  font-weight: 600;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-  border: none;
-  border-radius: 25px;
-}
-.woocommerce-MyAccount-content .woocommerce-info a.button.wc-forward:hover {
-  background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
-}
 
-/* My Account Page - Downloads Buttons */
-a.woocommerce-MyAccount-downloads-file.button.alt {
-  cursor: pointer; 
-  background-image: -webkit-linear-gradient(left, #0cf 0%, #00a2ff 100%);
-  background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%); 
-  background-size: 200% auto;
-  color: #fff; 
-  letter-spacing: .03em; 
-  font-weight: 600;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-  border: none;
-  border-radius: 25px;
-}
-a.woocommerce-MyAccount-downloads-file.button.alt:hover {
-  background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
-}
-
-/* My Account Page - Orders Pagination Buttons */
-.woocommerce-pagination a.woocommerce-button.button {
+/* MY ACCOUNT PAGE - BUTTONS */
+td.woocommerce-orders-table__cell-order-actions a.button.view,
+.woocommerce-MyAccount-content .woocommerce-info a.button.wc-forward,
+a.woocommerce-MyAccount-downloads-file.button.alt,
+.woocommerce-pagination a.woocommerce-button.button,
+.woocommerce-address-fields button.button[name="save_address"],
+.woocommerce-MyAccount-content a.button[href*="add-payment-method"] {
   cursor: pointer;
   background-image: linear-gradient(to right, #0cf 0%, #00a2ff 100%);
   background-size: 200% auto;
   color: #fff;
   letter-spacing: .03em;
   font-weight: 600;
-  transition: all .3s ease-in-out;
   border: none;
   border-radius: 25px;
+  padding: 10px 25px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
 }
 
-.woocommerce-pagination a.woocommerce-button.button:hover {
+/* Hover State */
+td.woocommerce-orders-table__cell-order-actions a.button.view:hover,
+.woocommerce-MyAccount-content .woocommerce-info a.button.wc-forward:hover,
+a.woocommerce-MyAccount-downloads-file.button.alt:hover,
+.woocommerce-pagination a.woocommerce-button.button:hover,
+.woocommerce-address-fields button.button[name="save_address"]:hover,
+.woocommerce-MyAccount-content a.button[href*="add-payment-method"]:hover {
+  background-position: right center;
   background-image: linear-gradient(to left, #0cf 0%, #00a2ff 100%);
 }
 
+/* Buttons Font Styles */
+.woocommerce table.shop_table tbody th,
+.woocommerce-orders-table__header,
+.woocommerce-account .addresses .title {
+  font-family: 'bitter', serif;
+}
+
+.woocommerce-account .addresses .title .edit {
+  color: #00a2ff;
+  font-family: "proxima", sans-serif;
+}
+
+/* Pagination (Previous Button) */
 .woocommerce-pagination a.woocommerce-button--previous.button {
   background-image: linear-gradient(to right, #cfd9df 0%, #b6c2cc 100%);
   color: #2c3e50;
