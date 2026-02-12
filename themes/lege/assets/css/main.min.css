@@ -351,43 +351,91 @@ button {
   opacity: 1;
 }
 
-.btn-white {
-  height: 50px;
-  background-color: #fff;
+.lege-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+
+  /* Variables */
+  --btn-bg: #fff;
+  --btn-text: #26afff;
+  --btn-hover-text: #fff;
+  --btn-ring-color: var(--btn-bg);
+  --btn-ring-opacity: 1;
+  --btn-hover-weight: 500;
+  --btn-hover-spacing: .04em;
+
+  /* Map variables to properties */
+  background: var(--btn-bg);
+  color: var(--btn-text);
+
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+/* Hover text overlay */
+.lege-btn::before {
+  content: attr(data-content);
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  color: var(--btn-hover-text);
+
+  font-weight: var(--btn-hover-weight, inherit);
+  letter-spacing: var(--btn-hover-spacing, inherit);
+
+  pointer-events: none; /* Prevents the ring from interfering with clicks */
+  transition: opacity .3s ease;
+}
+
+.lege-btn:hover::before {
+  opacity: 1;
+}
+
+/* White button variant */
+.btn--default {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+
   border-radius: 25px;
   box-shadow: 0 5px 20px rgba(0, 163, 255, 0.6);
-  display: block;
-  text-align: center;
-  line-height: 50px;
-  color: #26afff;
-  letter-spacing: .03em;
+
   font-size: 15px;
   font-weight: 600;
+  letter-spacing: .03em;
+
   width: 220px;
-  position: relative;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
+  padding: 14px 24px;
+  text-align: center;
 }
 
-.btn-white:before {
-  padding-top: 3px;
-  color: #fff;
+/* Hover border (ring) */
+.lege-btn::after {
   content: '';
-  display: block;
-  width: 232px;
-  height: 62px;
-  border: 2px solid #fff;
-  border-radius: 30px;
   position: absolute;
-  top: -6px;
-  left: -6px;
+  inset: -6px;
+
+  border: 2px solid var(--btn-ring-color);
+  border-radius: inherit; /* Match the button's radius automatically */
   opacity: 0;
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
+  pointer-events: none;
+  transition: opacity .3s ease, border-color .3s ease;
 }
 
-.btn-white:hover::before {
-  opacity: 1;
+.lege-btn:hover::after {
+  opacity: var(--btn-ring-opacity);
+}
+
+.lege-btn:visited {
+  color: var(--btn-text);
 }
 
 .secondary-title {
@@ -1453,12 +1501,9 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 /* Section Connect */
 
 .connect {
-  margin-bottom: 100px;
   position: relative;
-  height: 386px;
-  background-image: -webkit-linear-gradient(24deg, #0cf 0%, #00a2ff 100%);
-  background-image: linear-gradient(66deg, #0cf 0%, #00a2ff 100%);
   color: #fffefe;
+  padding: 106px 0px 106px 0px;
 }
 
 .connect .wrapper {
@@ -1471,6 +1516,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  width: 100%;
 }
 
 .connect__decor {
@@ -1479,11 +1525,15 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   position: absolute;
   left: 2%;
   bottom: -50px;
-  background: url(../img/decor.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left bottom;
+  pointer-events: none;
 }
 
 .connect__title {
-  max-width: 635px;
+  display: block;
+  width: 100%;
   font-family: 'bitter';
   font-size: 30px;
   font-weight: 700;
@@ -1492,11 +1542,17 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 
 .connect__img {
   width: 421px;
-  height: 495px;
-  background: url(../img/phone.png) no-repeat;
-  margin-top: -55px;
+  height: 495px; 
+  background-repeat: no-repeat;
+  margin-top: -50%;
   margin-right: 33px;
   min-width: 260px;
+  margin-bottom: -50%;
+}
+
+.elementor img.connect__img__img {
+    width: fit-content;
+    max-width: fit-content;
 }
 
 .connect__btn {
@@ -1504,14 +1560,11 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   margin-top: 37px;
 }
 
-.connect__btn:before {
-  /* content: 'Связаться с нами'; */
-  content: attr(data-content);
-}
-
 .connect__wrap {
-  margin: -59px 30px 0 14.3%;
+  margin: 0 30px 0 14.3%;
   min-width: 545px;
+  display: block;
+  flex: 1;
 }
 
 /* Section Cases */
@@ -8094,6 +8147,7 @@ a.remove.cart__del:hover {
 
   .connect__img {
     width: 320px;
+    overflow: hidden;
   }
 
   .services__list {
@@ -8206,10 +8260,18 @@ a.remove.cart__del:hover {
 
   .connect__img {
     width: 260px;
+    overflow: hidden;
   }
 
+  .elementor img.connect__img__img {
+    width: fit-content;
+    max-width: fit-content;
+}
+
   .connect__wrap {
-    margin: -59px 30px 0 4.3%;
+    /* margin: -59px 30px 0 4.3%; */
+    margin: 0 30px 0 4.3%;
+
   }
 
   .tabs__wrap {
@@ -8740,6 +8802,7 @@ a.remove.cart__del:hover {
     height: 100%;
   }
 
+  /* 
   .connect__img {
     background: url(../img/decor.png) no-repeat;
     width: 147px !important;
@@ -8748,6 +8811,19 @@ a.remove.cart__del:hover {
     min-width: 0;
     top: -123px;
     right: -9%;
+  }
+  */ 
+
+  .connect__img { 
+    background-repeat: no-repeat;
+    width: 147px !important;
+    height: 286px;
+    position: absolute;
+    min-width: 0;
+    top: -123px;
+    right: -9%;
+
+    margin-top: -160px;
   }
 
   .connect__wrap {
