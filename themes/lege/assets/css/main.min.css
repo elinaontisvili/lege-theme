@@ -405,7 +405,7 @@ button {
   background: var(--btn-bg);
   color: var(--btn-text);
 
-  border-radius: 25px;
+  border-radius: 30px;
   box-shadow: 0 5px 20px rgba(0, 163, 255, 0.6);
 
   font-size: 15px;
@@ -413,6 +413,24 @@ button {
   letter-spacing: .03em;
 
   width: 220px;
+  padding: 14px 24px;
+  text-align: center;
+}
+
+.btn--blue {
+  --btn-bg: linear-gradient(to right, #0cf 0%, #00a2ff 100%);
+  --btn-text: #ffffff;
+  --btn-hover-text: #00a2ff;
+  --btn-ring-color: #26afff;
+
+  border-radius: 30px;
+  box-shadow: 0 5px 20px rgba(0, 163, 255, 0.6);
+
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .03em;
+
+  width: 262px;
   padding: 14px 24px;
   text-align: center;
 }
@@ -1330,6 +1348,10 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .help .wrapper {
+  padding-left: 80px;
+}
+
+.help .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1344,7 +1366,6 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .help__item {
-  max-width: 320px;
   width: 45%;
   background-color: #fff;
   border-radius: 5px;
@@ -1361,6 +1382,7 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
   display: -ms-flexbox;
   display: flex;
   position: relative;
+  justify-content: space-between; /* Layout fix for @max-1270px */
 }
 
 .help__list:after {
@@ -1384,31 +1406,18 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 }
 
 .help__btn:before {
-  /* content: 'Получить консультацию'; */
   content: attr(data-content);
 }
 
 .help__icon {
-  height: 50px;
   display: flex;
   justify-content: center;
 }
 
 .help__icon img {
-  height: 50px !important;
-  width: auto !important;
-}
-
-.help__icon_rocket {
-  /* background: url(../img/rocket.jpg) no-repeat center center; */
-}
-
-.help__icon_monitor {
-  /* background: url(../img/monitor.jpg) no-repeat center center; */
-}
-
-.help__icon_brain {
-  /* background: url(../img/brain.jpg) no-repeat center center; */
+  height: 50px; 
+  width: auto;
+  max-width: 100%;
 }
 
 .help__heading {
@@ -8221,6 +8230,10 @@ a.remove.cart__del:hover {
     top: 5%;
     height: 100%;
   }
+
+  .help .wrapper {
+    padding-left: 30px;
+  }
 }
 
 @media screen and (max-width: 1270px) {
@@ -8230,6 +8243,7 @@ a.remove.cart__del:hover {
 
   .help .wrapper {
     display: block;
+    padding-left: 30px;
   }
 
   .help__title {

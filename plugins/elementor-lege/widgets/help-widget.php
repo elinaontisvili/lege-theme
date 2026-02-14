@@ -5,7 +5,6 @@
  * @package Elementor_Lege
  */
 
-
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Elementor_Help_Widget extends \Elementor\Widget_Base {
@@ -15,7 +14,7 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_title(): string {
-		return esc_html__( 'Help Widget', 'elementor-lege' );
+		return esc_html__( 'Lege Who We Help Widget', 'elementor-lege' );
 	}
 
 	public function get_icon(): string {
@@ -30,182 +29,157 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
         return ['help', 'support', 'consultation' ];
 	}
 
+    /* -------------------------------------------------
+     * CONTROLS
+     * ------------------------------------------------- */
 	protected function register_controls(): void { 
 
-        // Content Tab
+        /* =========================
+         * CONTENT SECTION
+         * ========================= */
         $this->start_controls_section( 
             'help_content',
             [
-                'label' => esc_html__('Help Section', 'elementor-lege'),
+                'label' => esc_html__('Content Section', 'elementor-lege'),
             ]
         );
 
         $this->add_control(
-            'main_title_span',
+            'help_main_title_span',
             [
-                'label' => esc_html__('Main Title Span', 'elementor-lege'),
+                'label' => esc_html__('Subheading', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__('Кому мы', 'elementor-lege'),
+                'dynamic' => [ 'active' => true ],
+                'default' => esc_html__('Who we', 'elementor-lege'),
             ]
         );
 
         $this->add_control(
-            'main_title',
+            'help_main_title',
             [
-                'label' => esc_html__('Mian Title', 'elementor-lege'),
-                'type' => \Elementor\Controls_Manager::TEXT, 
-                'default' => esc_html__('помогаем', 'elementor-lege'),
+                'label' => esc_html__('Heading', 'elementor-lege'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'dynamic' => [ 'active' => true ],
+                'default' => esc_html__('help', 'elementor-lege'),
             ]
         );
 
         $this->add_control(
-            'description',
+            'title_tag',
+            [
+                'label' => esc_html__( 'HTML Tag', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'h1' => 'H1',
+                    'h2' => 'H2',
+                    'h3' => 'H3',
+                    'h4' => 'H4',
+                    'h5' => 'H5',
+                    'h6' => 'H6',
+                    'div' => 'div',
+                    'p'   => 'p',
+                ],
+                'default' => 'h3',
+            ]
+        );
+
+        $this->add_control(
+            'help_description',
             [
                 'label' => esc_html__('Description', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => esc_html__('Мы фокусируемся на юридических вопросах, актуальных для успешного современного бизнеса', 'elementor-lege'),
+                'dynamic' => [ 'active' => true ],
             ]
         );
 
         $this->add_control(
-            'button_text',
+            'help_button_text',
             [
                 'label' => esc_html__('Button Text', 'elementor-lege'),
-                'type' => Elementor\Controls_Manager::TEXT, 
-                'default' => esc_html__('Получить консультацию', 'elementor-lege'),
+                'type' => Elementor\Controls_Manager::TEXT,
+                'dynamic' => [ 'active' => true ],
+                'default' => esc_html__('Get a consultation', 'elementor-lege'),
             ]
         );
 
         $this->add_control(
-            'button_hover_text',
-            [
-                'label'       => esc_html__( 'Button Hover Text', 'elementor-lege' ),
-                'type'        => \Elementor\Controls_Manager::TEXT,
-                'default'     => esc_html( 'Получить консультацию', 'elementor-lege' ),
-                'label_block' => true,
-            ]
-        );
-
-        $this->add_control(
-            'button_link',
+            'help_button_link',
             [
                 'label' => esc_html__('Button Link', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::URL,
-                'default' => [
-                    'url' => '#',
-                ],
+                'dynamic' => [ 'active' => true ],
             ]
         ); 
 
-        // Item 1 
-        $this->add_control(
-            'item1_title',
+        /* Items */
+        for ( $i = 1; $i <= 3; $i++ ) {
+            $this->add_control( 
+                "item{$i}_title", 
             [
-                'label' => esc_html__('Item 1 Title', 'elementor-lege'),
+                'label' => esc_html__("Service {$i}: Title", 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__('Стартапам', 'elementor-lege'),
-            ]
-        ); 
+                'separator' => 'before',
+            ]);
 
-        $this->add_control(
-            'item1_icon_image',
+            $this->add_control( 
+                "item{$i}_icon_type", 
             [
-                'label' => esc_html__( 'Item 1 Icon Image', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => get_template_directory_uri() . '/assets/img/rocket.jpg',
+                'label' => esc_html__( 'Icon Type', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'icon'  => [ 'title' => esc_html__( 'Icon', 'elementor-lege' ), 'icon' => 'eicon-star' ],
+                    'image' => [ 'title' => esc_html__( 'Image', 'elementor-lege' ), 'icon' => 'eicon-image-bold' ],
                 ],
-            ]
-        );
-        
-        $this->add_control(
-            'item1_text',
-            [
-                'label' => esc_html__('Item 1 Text', 'elementor-lege'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA, 
-                'default' => esc_html__('Когда вы будете готовы вывести свой стартап на новый уровень, мы можем оказать вам юридические услуги, чтобы помочь вам расти', 'elementor-lege'),
-            ]
-        );
+                'default' => 'image',
+            ]);
 
-        // Item 2
-        $this->add_control(
-            'item2_title',
+            $this->add_control( 
+                "item{$i}_icon", 
             [
-                'label' => esc_html__('Iten 2 Title', 'elementor-lege'), 
-                'type' => Elementor\Controls_Manager::TEXT, 
-                'default' => esc_html__('Фрилансеру', 'elementor-lege'),
-            ]
-        );
+                'label' => esc_html__( 'Icon', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::ICONS,
+                'condition' => [ "item{$i}_icon_type" => 'icon' ],
+            ]);
 
-         $this->add_control(
-            'item2_icon_image',
+            $this->add_control( 
+                "item{$i}_icon_image", 
             [
-                'label' => esc_html__( 'Item 1 Icon Image', 'elementor-lege' ),
+                'label' => esc_html__( 'Image', 'elementor-lege' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => get_template_directory_uri() . '/assets/img/rocket.jpg',
-                ],
-            ]
-        );
+                'condition' => [ "item{$i}_icon_type" => 'image' ],
+            ]);
 
-        $this->add_control(
-            'item2_text', 
+            $this->add_control( 
+                "item{$i}_text", 
             [
-                'label' => esc_html__('Item 2 Text', 'elementor-lege'), 
-                'type' => \Elementor\Controls_Manager::TEXTAREA, 
-                'default' => esc_html__('Начать независимый бизнес проще, чем когда-либо...', 'elementor-lege'),
-            ]
-        );
-
-        // Item 3 
-        $this->add_control(
-            'item3_title',
-            [
-                'label' => esc_html__('Item 3 Title', 'elementor-lege'),
-                'type' => \Elementor\Controls_Manager::TEXT, 
-                'default' => esc_html__('Малому бизнесу', 'elementor-lege'), 
-            ]
-        );
-
-        $this->add_control(
-            'item3_icon_image',
-            [
-                'label' => esc_html__( 'Item 1 Icon Image', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => get_template_directory_uri() . '/assets/img/rocket.jpg',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'item3_text', 
-            [
-                'label' => esc_html__('Item 3 Text', 'elementor-lege'), 
-                'type' => \Elementor\Controls_Manager::TEXTAREA, 
-                'default' => esc_html__('Мы поможем направить ваш бизнес в правильном направлении...', 'elementor-lege'),
-            ]
-        );
+                'label' => esc_html__("Service {$i}: Content", 'elementor-lege'),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+            ]);
+        }
 
         $this->end_controls_section();
 
 
-		// Style Tab
+    /*--------------------------------------------------------------
+    # Style Controls
+    --------------------------------------------------------------*/
 
-        // Main Style Section
+        /* =========================
+        * HEADING SECTION
+        * ========================= */
         $this->start_controls_section(
             'help_style_section',
             [
-                'label' => esc_html__('Main Title', 'elementor-lege'), 
+                'label' => esc_html__('Heading', 'elementor-lege'), 
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Main title color
+        /* Title color */
         $this->add_control(
             'help_main_title_color',
             [
-                'label' => esc_html__('Title Color', 'elementor-lege'),
+                'label' => esc_html__('Text color', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::COLOR, 
                 'selectors' => [
                     '{{WRAPPER}} .help__title' => 'color: {{VALUE}};', 
@@ -214,114 +188,59 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        // Main title typography 
+        /* Title typography */
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'main_title_typography', 
+                'name' => 'help_main_title_typography', 
                 'selector' => '{{WRAPPER}} .help__title',
             ]
-            ); 
+        ); 
 
-        // Spacing under main title 
+        /* Margin */
         $this->add_responsive_control(
-            'main_title_margin',
+            'help_main_title_margin',
             [
-                'label' => esc_html__('Bottom Spacing', 'elementor-lege'),
+                'label' => esc_html__('Margin', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
+                'size_units' => [ 'px', 'em', '%' ],
                     'selectors' => [
-                        '{{WRAPPER}} .help__title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .secondary-title' => 'margin: {{SIZE}}{{UNIT}};',
                     ],
-                ]
+            ]
+        );
+
+        /* Padding */
+        $this->add_responsive_control(
+            'help_main_title_padding',
+            [
+                'label' => esc_html__('Padding', 'elementor-lege'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .secondary-title' => 'padding: {{SIZE}}{{UNIT}};',
+                    ],
             ]
         );
 
         $this->end_controls_section();
 
-        // Description Style Section
+        /* Description */
         $this->start_controls_section(
             'help_description_style',
             [
                 'label' => esc_html__('Description', 'elementor-lege'),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
-            ); 
-
-            $this->add_control(
-                'help_description_color',
-                [
-                    'label' => esc_html__('Text Color', 'elementor-lege'),
-                    'type' => \Elementor\Controls_Manager::COLOR,
-                    'selectors' => [
-                        '{{WRAPPER}} .help__descr' => 'color: {{VALUE}};',
-                    ],
-                ]
-            );
-
-            $this->add_group_control(
-                \Elementor\Group_Control_Typography::get_type(),
-                [
-                    'name' => 'description_typography',
-                    'selector' => '{{WRAPPER}} .help__descr',
-                ]
-            );
-
-        $this->end_controls_section();
-
-        // Button Style Section 
-        $this->start_controls_section(
-            'help_button_style',
-            [
-                'label' => esc_html__('Button', 'elementor-lege'), 
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE, 
-            ]
-        );
+        ); 
 
         $this->add_control(
-            'btn_color',
+            'help_description_color',
             [
-                'label' => esc_html__('Text Color', 'elementor-lege'), 
+                'label' => esc_html__('Text Color', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .help__btn' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'btn_bg',
-            [
-                'label' => esc_html__('Background Color', 'elementor-lege'), 
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .help__btn' => 'background-color: {{VALUE}};',
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'btn_color_hover',
-            [
-                'label' => esc_html__('Hover Text Color', 'elementor-lege'),
-                'type' => \Elementor\Controls_Manager::COLOR, 
-                'selectors' => [
-                    '{{WRAPPER}} .help__btn:hover' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'btn_bg_hover',
-            [
-                'label' => esc_html__('Hover Background Color', 'elementor-lege'),
-                'type' => \Elementor\Controls_Manager::COLOR, 
-                'selectors' => [
-                    '{{WRAPPER}} .help__btn:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .help__descr' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -329,57 +248,285 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'btn_typography',
-                'selector' => '{{WRAPPER}} .help__btn',
+                'name' => 'help_description_typography',
+                'selector' => '{{WRAPPER}} .help__descr',
             ]
         );
 
-        // Padding 
-        $this->add_control(
-            'btn_padding',
+        /* Margin */
+        $this->add_responsive_control(
+            'help_description_margin',
             [
-                'label' => esc_html__('Padding', 'elementor-lege'), 
-                'type' => \Elementor\Controls_Manager::DIMENSIONS, 
-                'selectors' => [
-                    '{{WRAPPER}} .help__btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        // Border Radius 
-        $this->add_control(
-            'btn_border_radius', 
-            [
-                'label' => esc_html__('Border Radius', 'elementor-lege'), 
+                'label' => esc_html__('Margin', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
+                'size_units' => [ 'px', 'em', '%' ],
                     'selectors' => [
-                        '{{WRAPPER}} .help__btn' => 'border-radius: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .help__descr' => 'margin: {{SIZE}}{{UNIT}};',
                     ],
-                ]
+            ]
+        );
+
+        /* Padding */
+        $this->add_responsive_control(
+            'help_description_padding',
+            [
+                'label' => esc_html__('Padding', 'elementor-lege'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', '%' ],
+                    'selectors' => [
+                        '{{WRAPPER}} .help__descr' => 'padding: {{SIZE}}{{UNIT}};',
+                    ],
             ]
         );
 
         $this->end_controls_section();
 
+        /* =========================
+        * BUTTON SECTION
+        * ========================= */
+        /*
 
-        // Icon & Items Style Section
+        /* Button Section */
+        $this->start_controls_section(
+            'help_section_style_button',
+            [
+                'label' => esc_html__( 'Button', 'elementor-lege' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        /* Base typography (normal text) */
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'button_typography',
+                'selector' => '{{WRAPPER}} .lege-btn',
+            ]
+        );
+
+        /* Button width */
+        $this->add_responsive_control(
+            'help_button_width',
+            [
+                'label' => esc_html__( 'Width', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 100,
+                        'max' => 500,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* Button padding */
+        $this->add_responsive_control(
+            'help_btn_padding',
+            [
+                'label' => esc_html__( 'Padding', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* Button border radius */
+        $this->add_control(
+            'btn_border_radius',
+            [
+                'label' => __( 'Border Radius', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem' ],
+                'default' => [
+                    'top'      => '30',
+                    'right'    => '30',
+                    'bottom'   => '30',
+                    'left'     => '30',
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* -------------------------------------------------
+        * Normal / Hover Tabs
+        * ------------------------------------------------- */
+        $this->start_controls_tabs( 'cta_button_tabs' );
+
+        /* NORMAL */
+        $this->start_controls_tab(
+            'help_button_tab_normal',
+            [ 'label' => esc_html__( 'Normal', 'elementor-lege' ) ]
+        );
+
+        /* Text color */
+        $this->add_control(
+            'help_button_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-text: {{VALUE}};',
+                ],
+            ]
+        );
+
+        /* Background */
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'button_bg',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .lege-btn',
+            ]
+        );
+        
+        /* Button shadow */
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'button_shadow',
+                'selector' => '{{WRAPPER}} .lege-btn',
+            ]
+        );
+        $this->end_controls_tab();
+
+        /* HOVER */
+        $this->start_controls_tab(
+            'help_cta_button_hover',
+            [ 'label' => esc_html__( 'Hover', 'elementor-lege' ) ]
+        );
+
+        /* Hover text color */
+        $this->add_control(
+            'button_hover_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-hover-text: {{VALUE}};',
+                ],
+            ]
+        );
+
+        /* Text font weight on hover */
+        $this->add_control(
+            'help_button_hover_font_weight',
+            [
+                'label' => esc_html__( 'Font Weight', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '500',
+                'options' => [
+                    '400' => '400',
+                    '500' => '500',
+                    '600' => '600',
+                    '700' => '700',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-hover-weight: {{VALUE}};',
+                ],
+            ]
+        );
+
+        /* Letter spacing on hover */
+        $this->add_responsive_control(
+            'help_button_hover_letter_spacing',
+            [
+                'label' => esc_html__( 'Letter Spacing', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', 'rem', '%' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 20,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 1.0,
+                        'step' => 0.01,
+                    ],
+                    'rem' => [
+                        'min' => 0,
+                        'max' => 1.0,
+                        'step' => 0.01,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'em',
+                    'size' => 0.04,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-hover-spacing: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        /* -------------------------------------------------
+        * Button Ring
+        * ------------------------------------------------- */
+
+        $this->add_control(
+            'help_button_ring_color',
+            [
+                'label' => esc_html__( 'Ring Color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-ring-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'help_button_ring_opacity',
+            [
+                'label' => esc_html__( 'Ring Opacity', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1,
+                        'step' => 0.05,
+                    ],
+                ],
+                'default' => [
+                    'size' => 1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-ring-opacity: {{SIZE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section(); 
+
+        /* =========================
+        * SERVICES CONTENT SECTION
+        * ========================= */
         $this->start_controls_section(
             'help_items_style',
             [
-                'label' => esc_html__('Items', 'elementor-lege'), 
+                'label' => esc_html__('Services', 'elementor-lege'), 
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_control(
-            'item_heading_color',
+            'help_item_heading_color',
             [
-                'label' => esc_html__('Heading Color', 'elementor-lege'),
+                'label' => esc_html__('Heading color', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::COLOR, 
                 'selectors' => [
                     '{{WRAPPER}} .help__heading' => 'color: {{VALUE}};',
@@ -387,10 +534,18 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'item_text_color',
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
             [
-                'label' => esc_html__('Text Color', 'elementor-lege'), 
+                'name' => 'help_item_heading_typography',
+                'selector' => '{{WRAPPER}} .help__heading',
+            ]
+        );
+
+        $this->add_control(
+            'help_item_text_color',
+            [
+                'label' => esc_html__('Text color', 'elementor-lege'), 
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .help__par' => 'color: {{VALUE}};',
@@ -401,80 +556,169 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'item_text_typography',
+                'name' => 'help_item_text_typography',
                 'selector' => '{{WRAPPER}} .help__par',
             ]
         );
             
         $this->end_controls_section();
-	}
 
+        /* =========================
+        * SERVICES ICON / IMAGE SECTION
+        * ========================= */
+        $this->start_controls_section(
+            'help_items_images_style',
+            [
+                'label' => esc_html__('Icons / Images', 'elementor-lege'), 
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
 
+        /* =========================
+        * ICON SECTION
+        * ========================= */
+        $this->add_control(
+            'help_icon_color',
+            [
+                'label' => esc_html__( 'Icon Color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .help__icon i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .help__icon svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'help_icon_size',
+            [
+                'label' => esc_html__( 'Icon Size', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', 'rem' ],
+                'range' => [
+                    'px' => [ 'min' => 10, 'max' => 200 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .help__icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .help__icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* =========================
+        * IMAGE SIZE SECTION
+        * ========================= */
+
+        /* Width */
+        $this->add_responsive_control(
+			'help_image_width',
+			[
+				'label' => esc_html__( 'Image width', 'elementor-lege' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+                    '{{WRAPPER}} .help__icon img' => 'width: auto; width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+        /* Max width */
+		$this->add_responsive_control(
+            'help_image_max_width',
+            [
+                'label' => esc_html__( 'Image max width', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .help__icon img' => 'max-width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* Height */
+		$this->add_responsive_control(
+			'help_image_height',
+			[
+				'label' => esc_html__( 'Image height', 'elementor-lege' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em'],
+				'range' => [
+					'px' => [
+						'min' => 1,
+						'max' => 500,
+					],
+				],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 50,
+                ],
+				'selectors' => [
+					'{{WRAPPER}} .help__icon img' => 'height: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
+        $this->end_controls_section();
+
+        // Style tab end
+
+        }
+
+    /*--------------------------------------------------------------
+    # Content Controls
+    --------------------------------------------------------------*/
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
-        $btn_url = $settings['button_link']['url'] ?? '#';
+
+        $title_tag = \Elementor\Utils::validate_html_tag( $settings['title_tag'] ?? 'h3' );
     ?>
 
     <!-- Help -->
     <section class="help">
         <div class="wrapper">
             <div class="help__block">
-                <?php if ( ! empty( $settings['main_title_span'] ) || ! empty( $settings['main_title'] ) ) : ?>
-                    <h2 class="help__title secondary-title">
-                        <?php if ( ! empty( $settings['main_title_span'] ) ) : ?>
-                            <span><?php echo wp_kses_post( $settings['main_title_span'] ); ?></span>
+                <?php if ( ! empty( $settings['help_main_title_span'] ) || ! empty( $settings['help_main_title'] ) ) : ?>
+                    <<?php echo $title_tag; ?> class="help__title secondary-title">
+                        <?php if ( ! empty( $settings['help_main_title_span'] ) ) : ?>
+                            <span><?php echo wp_kses_post( $settings['help_main_title_span'] ); ?></span>
                         <?php endif; ?>
 
-                        <?php if ( ! empty( $settings['main_title'] ) ) : ?>
-                            <?php echo esc_html( $settings['main_title'] ); ?>
-                        <?php endif; ?>
-                    </h2>
+                        <?php echo esc_html( $settings['help_main_title'] ); ?>
+
+                    </<?php echo $title_tag; ?>>
                 <?php endif; ?>
 
-                <p class="help__descr">
-                    <?php if (!empty($settings['description'])) : ?>
-                        <p class="help__descr"><?php echo esc_html($settings['description']); ?></p>
-                    <?php endif; ?>
+                <?php if (!empty($settings['help_description'])) : ?>
+                    <p class="help__descr"><?php echo esc_html($settings['help_description']); ?></p>
+                <?php endif; ?>
 
-                <?php if ( ! empty( $settings['button_text'] ) ) : ?>
-                    <a href="<?php echo esc_url($btn_url); ?>" class="help__btn btn popup-link" data-content="<?php echo esc_attr( $settings['button_text'] ); ?>">
-                        <?php echo esc_html($settings['button_text']); ?>
+                <?php if ( ! empty( $settings['help_button_text'] ) ) :
+                    $this->add_link_attributes( 'button', $settings['help_button_link'] );
+                    $this->add_render_attribute( 'button', 'class', 'help__btn lege-btn btn--blue popup-link' );
+                    ?>
+                    <a <?php echo $this->get_render_attribute_string( 'button' ); ?>>
+                        <?php echo esc_html($settings['help_button_text']); ?>
                     </a>
                 <?php endif; ?>
 
             </div>
 
             <ul class="help__list">
-
-                <li class="help__item">
-                    <?php if ( ! empty( $settings['item1_icon_image']['url'] ) ) : ?>
+                <?php for ( $i = 1; $i <= 3; $i++ ) : 
+                    if ( empty( $settings["item{$i}_title"] ) ) continue;
+                    ?>
+                    <li class="help__item">
                         <div class="help__icon">
-                            <img src="<?php echo esc_url( $settings['item1_icon_image']['url'] ); ?>" alt="<?php echo esc_attr( $settings['item1_title'] ); ?>">
+                            <?php if ( 'icon' === $settings["item{$i}_icon_type"] ) : ?>
+                                <?php \Elementor\Icons_Manager::render_icon( $settings["item{$i}_icon"], [ 'aria-hidden' => 'true' ] ); ?>
+                            <?php else : ?>
+                                <img src="<?php echo esc_url( $settings["item{$i}_icon_image"]['url'] ); ?>" alt="">
+                            <?php endif; ?>
                         </div>
-                    <?php endif; ?>
-                    <h4 class="help__heading "><?php echo esc_html($settings['item1_title']); ?></h4>
-                    <p class="help__par"><?php echo esc_html($settings['item1_text']); ?></p>
-                </li>
-
-                <li class="help__item">
-                    <?php if ( ! empty( $settings['item2_icon_image']['url'] ) ) : ?>
-                        <div class="help__icon">
-                            <img src="<?php echo esc_url( $settings['item2_icon_image']['url'] ); ?>" alt="<?php echo esc_attr( $settings['item2_title'] ); ?>">
-                        </div>
-                    <?php endif; ?>
-                    <h4 class="help__heading"><?php echo esc_html($settings['item2_title']); ?></h4>
-                    <p class="help__par"><?php echo esc_html($settings['item2_text']); ?></p>
-                </li>
-
-                <li class="help__item">
-                    <?php if ( ! empty( $settings['item3_icon_image']['url'] ) ) : ?>
-                        <div class="help__icon">
-                            <img src="<?php echo esc_url( $settings['item3_icon_image']['url'] ); ?>" alt="<?php echo esc_attr( $settings['item3_title'] ); ?>">
-                        </div>
-                    <?php endif; ?>
-                    <h4 class="help__heading"><?php echo esc_html($settings['item3_title']); ?></h4>
-                    <p class="help__par"><?php echo esc_html($settings['item3_text']); ?></p>
-                </li>
+                        <h4 class="help__heading"><?php echo esc_html($settings["item{$i}_title"]); ?></h4>
+                        <p class="help__par"><?php echo esc_html($settings["item{$i}_text"]); ?></p>
+                    </li>
+                <?php endfor; ?>
             </ul>
         </div>
     </section><!-- End help -->
@@ -484,65 +728,53 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
 	}
 
 	protected function content_template(): void {
-		?>
-        
+		?>  
+        <#
+        // Define the tag and fallback to h3 if not set
+        var titleTag = elementor.helpers.validateHTMLTag( settings.title_tag ) || 'h3';
+        #>
+
         <!-- Help -->
 		<section class="help">
 			<div class="wrapper">
 				<div class="help__block">
+                    <# if ( settings.help_main_title_span || settings.help_main_title ) { #>
+                        <{{{ titleTag }}} class="help__title secondary-title">
+                            <span>{{{ settings.help_main_title_span }}}</span> {{{ settings.help_main_title }}}
+                        </{{{ titleTag }}}>
+                    <# } #>
 
-					<h2 class="help__title secondary-title">
-                        <span>{{ settings.main_title_span }}</span> 
-                        {{ settings.main_title }}
-                    </h2>
-
-					<p class="help__descr">
-                        {{ settings.description }}
-                    </p>
+                    <# if ( settings.help_description ) { #>
+                        <p class="help__descr">{{{ settings.help_description }}}</p>
+                    <# } #>
 					
-                    <a href="{{ settings.button_link.url  || '#' }}" class="help__btn btn popup-link">
-                        {{ settings.button_text}}
-                    </a>
-
+                    <# if ( settings.help_button_text ) { #>
+                        <a href="{{ settings.help_button_link.url }}" class="help__btn lege-btn btn--blue">
+                            {{{ settings.help_button_text }}}
+                        </a>
+                    <# } #>
 				</div>
 
 				<ul class="help__list">
-
-				<li class="help__item">
-                    <# if ( settings.item1_icon_image && settings.item1_icon_image.url ) { #>
-                        <div class="help__icon">
-                            <img src="{{ settings.item1_icon_image.url }}" alt="">
-                        </div>
-                    <# } else { #>
-                        <div class="help__icon help__icon_rocket"></div>
+                
+                <# for ( var i = 1; i <= 3; i++ ) { 
+                    var itemTitle = settings['item' + i + '_title'];
+                    if ( ! itemTitle ) continue;
+                    #>
+                        <li class="help__item">
+                            <div class="help__icon">
+                                <# if ( settings['item' + i + '_icon_type'] === 'icon' ) { 
+                                    var iconHTML = elementor.helpers.renderIcon( view, settings['item' + i + '_icon'], { 'aria-hidden': true }, 'i' , 'object' );
+                                #>
+                                    {{{ iconHTML.value }}}
+                                <# } else { #>
+                                    <img src="{{ settings['item' + i + '_icon_image'].url }}" alt="">
+                                <# } #>
+                            </div>
+                            <h4 class="help__heading">{{{ itemTitle }}}</h4>
+                            <p class="help__par">{{{ settings['item' + i + '_text'] }}}</p>
+                        </li>
                     <# } #>
-                    <h4 class="help__heading">{{ settings.item1_title }}</h4>
-                    <p class="help__par">{{ settings.item1_text }}</p>
-                </li>
-
-                <li class="help__item">
-                    <# if ( settings.item2_icon_image && settings.item2_icon_image.url ) { #>
-                        <div class="help__icon">
-                            <img src="{{ settings.item2_icon_image.url }}" alt="">
-                        </div>
-                    <# } else { #>
-                        <div class="help__icon help__icon_monitor"></div>
-                    <# } #>
-                    <h4 class="help__heading">{{ settings.item2_title }}</h4>
-                    <p class="help__par">{{ settings.item2_text }}</p>
-                </li>
-
-                <li class="help__item">
-                    <# if ( settings.item3_icon_image && settings.item3_icon_image.url ) { #>
-                        <div class="help__icon">
-                            <img src="{{ settings.item3_icon_image.url }}" alt="">
-                        </div>
-                    <# } else { #>
-                        <div class="help__icon help__icon_brain"></div>
-                    <# } #>
-                    <h4 class="help__heading">{{ settings.item3_title }}</h4>
-                    <p class="help__par">{{ settings.item3_text }}</p>
-                </li>
 
 				</ul>
 			</div>
