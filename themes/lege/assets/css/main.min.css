@@ -1435,7 +1435,8 @@ form.lege-sidebar-searchform .wp-block-search__button:hover {
 /* Section Choice */
 
 .is-home .choice {
-  background: url(../img/bg_choice.jpg) no-repeat center top;
+  background-repeat: no-repeat;
+  background-position: center top;
   min-height: 700px;
   margin: 150px 0 240px 0;
 }
@@ -8146,7 +8147,8 @@ a.remove.cart__del:hover {
 
 @media screen and (max-width: 1400px) {
   .is-home .choice {
-    background: url(../img/bg_choice.jpg) no-repeat 75% top;
+    background-repeat: no-repeat;
+    background-position: 75% top;
   }
 
   .is-home .choice__btn {
