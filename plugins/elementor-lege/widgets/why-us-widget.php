@@ -354,8 +354,13 @@ class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
                         ?>
                     </div>
 
-                    <?php if ( ! empty( $settings['why_us_button_text'] ) ) : ?>
-                        <a href="<?php echo esc_url( $settings['why_us_button_url']['url'] ); ?>" class="choice__btn noise">
+                    <?php 
+                    if ( ! empty( $settings['why_us_button_text'] ) ) : 
+                        $this->add_link_attributes( 'button_key', $settings['why_us_button_url'] );
+                        
+                        $this->add_render_attribute( 'button_key', 'class', 'choice__btn noise' );
+                    ?>
+                        <a <?php echo $this->get_render_attribute_string( 'button_key' ); ?>>
                             <?php echo esc_html( $settings['why_us_button_text'] ); ?>
                             <svg width="18" height="20"><use xlink:href="#nav-right"/></svg>
                         </a>
