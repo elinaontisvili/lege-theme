@@ -13,8 +13,16 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
         return 'team_widget';
     }
 
+    public function get_style_depends(): array {
+        return [ 'lege-team-widget' ];
+    }
+
+    public function get_script_depends(): array {
+        return [ 'lege-team-slide' ];
+    }
+
     public function get_title(): string {
-        return esc_html__( 'Team Widget', 'elementor-lege' );
+        return esc_html__( 'Lege Team Widget', 'elementor-lege' );
     }
 
     public function get_icon(): string {
@@ -29,71 +37,72 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
         return ['team', 'members'];
     }
 
+    /*--------------------------------------------------------------
+    # Controls
+    --------------------------------------------------------------*/
     protected function register_controls(): void {
 
-        // Content tab 
         $this->start_controls_section(
-            'section_content',
+            'tm_section_content',
             [
                 'label' => esc_html__( 'Content', 'elementor-lege' ),
             ]
         );
 
         $this->add_control(
-            'title_span',
+            'tm_title_span',
             [
-                'label' => __('Section Title', 'elementor-lege'),
+                'label' => esc_html__('Subheading', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Нашa', 'elementor-lege'),
+                'default' => esc_html__('Our', 'elementor-lege'),
             ]
         );
 
         $this->add_control(
-            'title',
+            'tm_title',
             [
-                'label' => __('Section Title', 'elementor-lege'),
+                'label' => esc_html__('Heading', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('команда', 'elementor-lege'),
+                'default' => esc_html__('team', 'elementor-lege'),
+            ]
+        );
+
+        $this->add_control(
+            'tm_title_tag',
+            [
+                'label' => esc_html__( 'HTML Tag', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'h1' => 'H1',
+                    'h2' => 'H2',
+                    'h3' => 'H3',
+                    'h4' => 'H4',
+                    'h5' => 'H5',
+                    'h6' => 'H6',
+                    'div' => 'div',
+                    'p'   => 'p',
+                ],
+                'default' => 'h2',
             ]
         );
 
         $this->end_controls_section();
 
-        // Style tab
+        /*--------------------------------------------------------------
+        # Style Controls
+        --------------------------------------------------------------*/
         $this->start_controls_section(
-            'section_style_titles',
+            'tm_section_style_titles',
             [
                 'label' => esc_html__( 'Titles', 'elementor-lege' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
-        // Style for the span part
         $this->add_control(
-            'title_span_color',
+            'tm_title_color',
             [
-                'label' => esc_html__( 'Span Title Color', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .team__title span' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'title_span_typography',
-                'label' => esc_html__( 'Span Title Typography', 'elementor-lege' ),
-                'selector' => '{{WRAPPER}} .team__title span',
-            ]
-        );
-
-        // Style for main title
-        $this->add_control(
-            'title_color',
-            [
-                'label' => esc_html__( 'Title Color', 'elementor-lege' ),
+                'label' => __( 'Heading Color', 'elementor-lege' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .team__title' => 'color: {{VALUE}};',
@@ -104,37 +113,274 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'title_typography',
-                'label' => esc_html__( 'Title Typography', 'elementor-lege' ),
+                'name' => 'tm_title_typography',
+                'label' => __( 'Heading Typography', 'elementor-lege' ),
                 'selector' => '{{WRAPPER}} .team__title',
             ]
         );
 
-        // Space between span and main title
         $this->add_responsive_control(
-            'title_spacing',
+            'tm_margin',
             [
-                'label' => esc_html__( 'Space Between Titles', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
+                'label' => esc_html__( 'Margin', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%' ],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
                 'selectors' => [
-                    '{{WRAPPER}} .team__title span' => 'display: block; margin-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .team__title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
 
         $this->end_controls_section();
 
+        /* =========================
+        * Arrows
+        * ========================= */
+        $this->start_controls_section(
+            'tm_arrow_style',
+            [
+                'label' => esc_html__( 'Arrows', 'elementor-lege' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        // Image upload
+        $this->add_control(
+            'tm_arrow_icon',
+            [
+                'label' => esc_html__( 'Arrow Icon (PNG)', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .common-arrow' => '--tm-arrow-icon-url: url("{{URL}}");',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tm_arrow_icon_hover',
+            [
+                'label' => esc_html__( 'Arrow Icon Hover (PNG)', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .common-arrow' => '--tm-arrow-icon-url-hover: url("{{URL}}");',
+                ],
+            ]
+        );
+
+        // Arrow bg color
+        $this->add_control(
+            'tm_arrow_bg_color',
+            [
+                'label' => esc_html__( 'Background color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .common-arrow' => '--common-arrow-bg-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Arrow gradient color 1
+        $this->add_control(
+            'tm_arrow_color_1',
+            [
+                'label' => esc_html__( 'Hover background color 1', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#0cf',
+                'selectors' => [
+                    '{{WRAPPER}} .common-arrow:hover' => '--common-arrow-img-color-1: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Arrow gradient color 2
+        $this->add_control(
+            'tm_arrow_color_2',
+            [
+                'label' => esc_html__( 'Hover background color 2', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#00a2ff',
+                'selectors' => [
+                    '{{WRAPPER}} .common-arrow:hover' => '--common-arrow-img-color-2: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Arrow box-shadow
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'tm_arrow_box_shadow',
+                'selector' => '{{WRAPPER}} .common-arrow',
+                'selectors' => [
+                    '{{WRAPPER}} .common-arrow' => '--common-arrow-shadow: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* =========================
+        * Card
+        * ========================= */
+        $this->start_controls_section(
+            'tm_card_style',
+            [
+                'label' => esc_html__( 'Card', 'elementor-lege' ),
+                'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'tm_heading_pears_content',
+            [
+                'label' => esc_html__( 'Pears Content', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // Team pears text color 
+        $this->add_control(
+            'tm_pears_text_color',
+            [
+                'label' => esc_html__( 'Team Pears Text Color', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .team' => '--team-pears-text: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tm_pears_text_color_hover',
+            [
+                'label' => esc_html__( 'Team Pears Text Color Hover', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}}  .team__item:hover .team__pers' => '--team-pears-text-hover: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Team position text color 
+        $this->add_control(
+            'tm_position_text_color',
+            [
+                'label' => esc_html__( 'Team Position Text Color', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .team' => '--team-position-text: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Position background 
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'tm_position_gradient',
+                'types' => [ 'gradient' ],
+                'selector' => '{{WRAPPER}} .team__position',
+            ]
+        );
+
+        // Overlay bg color 
+        $this->add_control(
+            'tm_overlay_bg',
+            [
+                'label' => esc_html__( 'Overlay Background', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .team' => '--team-overlay-bg: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Overlay text color
+        $this->add_control(
+            'tm_overlay_text',
+            [
+                'label' => esc_html__( 'Overlay Text Color', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .team' => '--team-overlay-text: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tm_social_heading',
+            [
+                'label' => esc_html__( 'Social Icons', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // Social icon colors 
+        $this->add_control(
+            'tm_social_icon_color',
+            [
+                'label' => esc_html__( 'Social Icon Color', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .team' => '--team-social-icon: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tm_social_icon_hover_color',
+            [
+                'label' => esc_html__( 'Social Icon Hover Color', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .team__item:hover' => '--team-social-hover-icon: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'tm_bg_heading',
+            [
+                'label' => esc_html__( 'Card Background', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        // Background color
+        $this->add_control(
+            'tm_card_bg',
+            [
+                'label' => esc_html__( 'Card Background', 'elementor-lege' ),
+                'type'  => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .team' => '--team-card-bg: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // Box shadow 
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'tm_card_box_shadow',
+                'selector' => '{{WRAPPER}} .team__item',
+            ]
+        );
     }
 
+    /*--------------------------------------------------------------
+    # Content Controls
+    --------------------------------------------------------------*/
     protected function render(): void {
         $settings = $this->get_settings_for_display();
+
+        $title_tag = \Elementor\Utils::validate_html_tag( $settings['tm_title_tag'] ?? 'h2' );
 
         // Fetch Team Members
         $team_query = new WP_Query([
@@ -148,15 +394,14 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
         <section class="team">
             <div class="wrapper">
 
-                <h2 class="team__title secondary-title">
-                    <?php if ( ! empty( $settings['title_span'] ) ) : ?>
-                        <span><?php echo $settings['title_span']; ?></span><br>
-                    <?php endif; ?>
-                        
-                    <?php if ( ! empty( $settings['title'] ) ) : ?> 
-                        <?php echo $settings['title']; ?>
-                    <?php endif; ?>
-                </h2>
+                <?php if ( ! empty( $settings['tm_title_span'] ) || ! empty( $settings['tm_title'] ) ) : ?>
+                    <<?php echo $title_tag; ?> class="team__title secondary-title">
+                        <?php if ( ! empty( $settings['tm_title_span'] ) ) : ?>
+                            <span><?php echo esc_html($settings['tm_title_span']); ?></span><br>
+                        <?php endif; ?>
+                            <?php echo esc_html($settings['tm_title']); ?>
+                    </<?php echo $title_tag; ?>>
+                <?php endif; ?>
 
             </div>
 
@@ -251,13 +496,24 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
     }
 
     protected function content_template(): void {
-
     ?> 
+    <#
+    var titleTag = elementor.helpers.validateHTMLTag( settings.tm_title_tag ) || 'h2';
+    #>
+    
     <!-- Team -->
-    <section class="team">
+    <section class="lege-tm-widget team">
+
         <div class="wrapper">
-            <h2 class="team__title secondary-title"><span>{{{ settings.title_span }}}</span><br>{{{ settings.title }}}</h2>
+            <# if ( settings.tm_title_span || settings.tm_title ) { #>
+                <{{ titleTag }} class="team__title secondary-title">
+                    <# if ( settings.tm_title_span ) { #>
+                        <span>{{ settings.tm_title_span }}</span><br>
+                    <# } #>
+                {{ settings.tm_title }}</{{ titleTag }}>
+            <# } #>
         </div>
+
         <div class="wrapper sl">
             <div class="team__slider">
                 <!-- One slide -->
@@ -270,7 +526,7 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
                             <p class="team__position">Старший партнер</p>
                         </div>
                         <div class="description">
-                            <p>Сергей помог бесчисленным компаниям справиться с юридическими и нормативными трудностями и стать процветающими источниками дохода и создания рабочих мест в Москве</p>
+                            <p>Description goes here...</p>
                             <ul class="social">
                                 <li class="social__item">
                                     <span>Vk</span>
