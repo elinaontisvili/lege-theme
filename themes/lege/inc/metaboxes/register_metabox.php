@@ -40,7 +40,7 @@ function lege_metaboxes($meta_boxes) {
                 'id'   => $prefix . 'testimonial_image',
                 'type' => 'file',
                 'options' => array(
-                    'url' => false, // don't show the URL field
+                    'url' => false,
                 ),
             ),
         )
@@ -61,18 +61,24 @@ function lege_metaboxes($meta_boxes) {
                 'id'   => $prefix . 'service_cost',
                 'type' => 'text',
             ),
+            // Base icon
             array(
-                'name' => esc_html__( 'Background Image', 'lege' ),
-                'desc' => esc_html__( 'Select a background', 'lege' ),
-                'id'   => $prefix . 'service_icon',
-                'type' => 'select',
+                'name' => esc_html__( 'Base Icon', 'lege' ),
+                'desc' => esc_html__( 'Upload base icon', 'lege' ),
+                'id'   => $prefix . 'service_icon_base',
+                'type' => 'file',
                 'options' => array(
-                    array('name' => esc_html__( 'Statistics Style', 'lege' ), 'value' => 'stat'),
-                    array('name' => esc_html__( 'Idea Style', 'lege' ), 'value' => 'idea'),
-                    array('name' => esc_html__( 'Internet Style', 'lege' ), 'value' => 'internet'),
-                    array('name' => esc_html__( 'Info Style', 'lege' ), 'value' => 'info'),
-                    array('name' => esc_html__( 'Business Style', 'lege' ), 'value' => 'busy'),
-                    array('name' => esc_html__( 'Target Style', 'lege' ), 'value' => 'target'),
+                    'url' => false,
+                ),
+            ),
+            // Hover icon
+            array(
+                'name' => esc_html__( 'Hover Icon (optional)', 'lege' ),
+                'desc' => esc_html__( 'Upload hover icon', 'lege' ),
+                'id'   => $prefix . 'service_icon_hover',
+                'type' => 'file',
+                'options' => array(
+                    'url' => false,
                 ),
             ),
         )
