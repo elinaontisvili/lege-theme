@@ -1,0 +1,20 @@
+.lege-services .services__order {
+  margin-top: 14px;
+  /* width: auto; */
+  max-width: 100%;
+
+  --btn-ring-color: #ffffff;
+  --btn-hover-text: rgba(255, 255, 255, 0.7);
+}
+
+.lege-services .services__order:before {
+  padding-top: 0;
+  /* min-width: 100%; */
+  max-width: 100%;
+
+  /* --btn-text: #26afff; */
+  --btn-text: #26afff;
+
+  border: 0;
+  border-color: var(--btn-ring-color, #fff);
+}
