@@ -204,6 +204,13 @@ class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        $this->start_controls_tabs( 'why_us_button_tabs' );
+
+        $this->start_controls_tab(
+            'why_us_button_normal',
+            [ 'label' => esc_html__( 'Normal', 'elementor-lege' ) ]
+        );
+
         $this->add_control(
             'why_us_button_text_color',
             [
@@ -234,41 +241,11 @@ class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        /* Padding */
-        $this->add_responsive_control(
-            'why_us_button_padding',
-            [
-                'label'      => esc_html__( 'Padding', 'elementor-lege' ),
-                'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'em' ],
-                'selectors'  => [
-                    '{{WRAPPER}} .choice__btn' => 
-                        'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
+        $this->end_controls_tab();
 
-        /* Border radius */
-        $this->add_responsive_control(
-            'why_us_button_radius',
-            [
-                'label'      => esc_html__( 'Border Radius', 'elementor-lege' ),
-                'type'       => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', '%' ],
-                'selectors'  => [
-                    '{{WRAPPER}} .choice__btn' => 'border-radius: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        /* Hover controls */
-        $this->add_control(
-            'why_us_button_hover_heading',
-            [
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'label' => esc_html__( 'Hover', 'elementor-lege' ),
-                'separator' => 'before',
-            ]
+        $this->start_controls_tab(
+            'why_us_button_hover',
+            [ 'label' => esc_html__( 'Hover', 'elementor-lege' ) ]
         );
 
         $this->add_control(
@@ -292,6 +269,10 @@ class Elementor_Why_Us_Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
 
