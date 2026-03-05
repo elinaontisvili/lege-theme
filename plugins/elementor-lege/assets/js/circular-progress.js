@@ -10,7 +10,7 @@
 			if ( 
 					$(window).scrollTop() > $(this).offset().top - ($(window).height() * 0.75) &&
 					$(window).scrollTop() < $(this).offset().top + $(this).height() - ($(window).height() * 0.25)
-			) {
+			) {	
 				
 				// Get radius of the svg's circle.complete
 				radius = $(this).find($('circle.complete')).attr('r');
