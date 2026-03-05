@@ -284,75 +284,12 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
         /* =========================
         * BUTTON SECTION
         * ========================= */
-        /*
-
-        /* Button Section */
+        
         $this->start_controls_section(
             'help_section_style_button',
             [
                 'label' => esc_html__( 'Button', 'elementor-lege' ),
                 'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        /* Base typography (normal text) */
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name'     => 'button_typography',
-                'selector' => '{{WRAPPER}} .lege-btn',
-            ]
-        );
-
-        /* Button width */
-        $this->add_responsive_control(
-            'help_button_width',
-            [
-                'label' => esc_html__( 'Width', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 100,
-                        'max' => 500,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => 'width: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        /* Button padding */
-        $this->add_responsive_control(
-            'help_btn_padding',
-            [
-                'label' => esc_html__( 'Padding', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        /* Button border radius */
-        $this->add_control(
-            'btn_border_radius',
-            [
-                'label' => __( 'Border Radius', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', '%', 'em', 'rem' ],
-                'default' => [
-                    'top'      => '30',
-                    'right'    => '30',
-                    'bottom'   => '30',
-                    'left'     => '30',
-                    'unit'     => 'px',
-                    'isLinked' => true,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
             ]
         );
 
@@ -367,6 +304,16 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
             [ 'label' => esc_html__( 'Normal', 'elementor-lege' ) ]
         );
 
+        /* Base typography (normal text) */
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name'     => 'button_typography',
+                'label' => esc_html__( 'Base typography', 'elementor-lege' ),
+                'selector' => '{{WRAPPER}} .lege-btn',
+            ]
+        );
+
         /* Text color */
         $this->add_control(
             'help_button_text_color',
@@ -376,6 +323,7 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .lege-btn' => '--btn-text: {{VALUE}};',
                 ],
+                'separator' => 'after',
             ]
         );
 
@@ -384,37 +332,17 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Background::get_type(),
             [
                 'name' => 'button_bg',
-                'types' => [ 'classic', 'gradient' ],
+                'types' => [ 'gradient' ],
                 'selector' => '{{WRAPPER}} .lege-btn',
             ]
         );
-        
-        /* Button shadow */
-        $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'button_shadow',
-                'selector' => '{{WRAPPER}} .lege-btn',
-            ]
-        );
+
         $this->end_controls_tab();
 
         /* HOVER */
         $this->start_controls_tab(
             'help_cta_button_hover',
             [ 'label' => esc_html__( 'Hover', 'elementor-lege' ) ]
-        );
-
-        /* Hover text color */
-        $this->add_control(
-            'button_hover_text_color',
-            [
-                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => '--btn-hover-text: {{VALUE}};',
-                ],
-            ]
         );
 
         /* Text font weight on hover */
@@ -470,13 +398,107 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        /* Hover text color */
+        $this->add_control(
+            'button_hover_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-hover-text: {{VALUE}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        /* Background hover */
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'button_bg_hover',
+                'types' => [ 'gradient' ],
+                'selector' => '{{WRAPPER}} .lege-btn:hover',
+            ]
+        );
+
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
 
+        /* Button width */
+        $this->add_responsive_control(
+            'help_button_width',
+            [
+                'label' => esc_html__( 'Width', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 100,
+                        'max' => 500,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
+        /* Button padding */
+        $this->add_responsive_control(
+            'help_btn_padding',
+            [
+                'label' => esc_html__( 'Padding', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* Button border radius */
+        $this->add_control(
+            'btn_border_radius',
+            [
+                'label' => __( 'Border Radius', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem' ],
+                'default' => [
+                    'top'      => '30',
+                    'right'    => '30',
+                    'bottom'   => '30',
+                    'left'     => '30',
+                    'unit'     => 'px',
+                    'isLinked' => true,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* Button shadow */
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'button_shadow',
+                'selector' => '{{WRAPPER}} .lege-btn',
+            ]
+        );
+
         /* -------------------------------------------------
         * Button Ring
         * ------------------------------------------------- */
+
+        $this->add_control(
+            'help_button_ring_heading',
+            [
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'label' => esc_html__( 'Hover Ring', 'elementor-lege' ),
+                'separator' => 'before',
+            ]
+        );
 
         $this->add_control(
             'help_button_ring_color',
@@ -660,6 +682,30 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
+        /* =========================
+        * BACKGROUND
+        * ========================= */
+        $this->start_controls_section(
+            'service_bg_style',
+            [
+                'label' => esc_html__('Backgound', 'elementor-lege'), 
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'service_bg_color',
+            [
+                'label'     => esc_html__( 'Background color', 'elementor-lege' ),
+                'type'      => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .help__list' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
         // Style tab end
 
         }
@@ -669,7 +715,6 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
     --------------------------------------------------------------*/
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
-
         $title_tag = \Elementor\Utils::validate_html_tag( $settings['title_tag'] ?? 'h3' );
     ?>
 
@@ -694,10 +739,11 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
 
                 <?php if ( ! empty( $settings['help_button_text'] ) ) :
                     $this->add_link_attributes( 'button', $settings['help_button_link'] );
-                    $this->add_render_attribute( 'button', 'class', 'help__btn lege-btn btn--blue popup-link' );
-                    ?>
+                    $this->add_render_attribute( 'button', 'class', 'help__btn lege-btn btn--blue btn--big popup-link' );
+                    $this->add_render_attribute( 'button', 'data-content', $settings['help_button_text'] );
+                ?>
                     <a <?php echo $this->get_render_attribute_string( 'button' ); ?>>
-                        <?php echo esc_html($settings['help_button_text']); ?>
+                        <?php echo esc_html( $settings['help_button_text'] ); ?>
                     </a>
                 <?php endif; ?>
 
@@ -749,14 +795,16 @@ class Elementor_Help_Widget extends \Elementor\Widget_Base {
                     <# } #>
 					
                     <# if ( settings.help_button_text ) { #>
-                        <a href="{{ settings.help_button_link.url }}" class="help__btn lege-btn btn--blue">
-                            {{{ settings.help_button_text }}}
+                        <a href="{{ settings.help_button_link.url }}" 
+                            class="help__btn lege-btn btn--blue btn--big popup-link" 
+                            data-content="{{ settings.help_button_text }}">
+                                {{{ settings.help_button_text }}}
                         </a>
                     <# } #>
 				</div>
 
 				<ul class="help__list">
-                
+
                 <# for ( var i = 1; i <= 3; i++ ) { 
                     var itemTitle = settings['item' + i + '_title'];
                     if ( ! itemTitle ) continue;
