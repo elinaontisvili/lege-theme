@@ -343,7 +343,10 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
-        /* Button Section */
+        /* =========================
+        * BUTTON SECTION
+        * ========================= */
+
         $this->start_controls_section(
             'section_style_button',
             [
@@ -352,14 +355,137 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        /* -------------------------------------------------
+        * Normal / Hover Tabs
+        * ------------------------------------------------- */
+        $this->start_controls_tabs( 'cta_button_tabs' );
+
+        /* NORMAL */
+        $this->start_controls_tab(
+            'button_tab_normal',
+            [ 'label' => esc_html__( 'Normal', 'elementor-lege' ) ]
+        );
+
         /* Base typography (normal text) */
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name'     => 'button_typography',
+                'label' => esc_html__( 'Base typography', 'elementor-lege' ),
                 'selector' => '{{WRAPPER}} .lege-btn',
             ]
         );
+
+        /* Text color */
+        $this->add_control(
+            'button_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-text: {{VALUE}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        /* Background */
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'button_bg',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .lege-btn',
+            ]
+        );
+        
+        $this->end_controls_tab();
+
+        /* HOVER */
+        $this->start_controls_tab(
+            'cta_button_hover',
+            [ 'label' => esc_html__( 'Hover', 'elementor-lege' ) ]
+        );
+
+        /* Text font weight, hover */
+        $this->add_control(
+            'button_hover_font_weight',
+            [
+                'label' => esc_html__( 'Font Weight', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '500',
+                'options' => [
+                    '400' => '400',
+                    '500' => '500',
+                    '600' => '600',
+                    '700' => '700',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-hover-weight: {{VALUE}};',
+                ],
+            ]
+        );
+
+        /* Letter spacing on hover */
+        $this->add_responsive_control(
+            'button_hover_letter_spacing',
+            [
+                'label' => esc_html__( 'Letter Spacing', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', 'rem', '%' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 20,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 1.0,
+                        'step' => 0.01,
+                    ],
+                    'rem' => [
+                        'min' => 0,
+                        'max' => 1.0,
+                        'step' => 0.01,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'em',
+                    'size' => 0.04,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-hover-spacing: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* Hover text color */
+        $this->add_control(
+            'button_hover_text_color',
+            [
+                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => '--btn-hover-text: {{VALUE}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        /* Background hover */
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'button_bg_hover',
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .lege-btn:hover',
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
 
         /* Button width */
         $this->add_responsive_control(
@@ -449,39 +575,6 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        /* -------------------------------------------------
-        * Normal / Hover Tabs
-        * ------------------------------------------------- */
-        $this->start_controls_tabs( 'cta_button_tabs' );
-
-        /* NORMAL */
-        $this->start_controls_tab(
-            'button_tab_normal',
-            [ 'label' => esc_html__( 'Normal', 'elementor-lege' ) ]
-        );
-
-        /* Text color */
-        $this->add_control(
-            'button_text_color',
-            [
-                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => '--btn-text: {{VALUE}};',
-                ],
-            ]
-        );
-
-        /* Background */
-        $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
-            [
-                'name' => 'button_bg',
-                'types' => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .lege-btn',
-            ]
-        );
-        
         /* Button shadow */
         $this->add_group_control(
             \Elementor\Group_Control_Box_Shadow::get_type(),
@@ -490,119 +583,19 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
                 'selector' => '{{WRAPPER}} .lege-btn',
             ]
         );
-        $this->end_controls_tab();
-
-        /* HOVER */
-        $this->start_controls_tab(
-            'cta_button_hover',
-            [ 'label' => esc_html__( 'Hover', 'elementor-lege' ) ]
-        );
-
-        /* Hover text color */
-        $this->add_control(
-            'button_hover_text_color',
-            [
-                'label' => esc_html__( 'Text Color', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => '--btn-hover-text: {{VALUE}};',
-                ],
-            ]
-        );
-
-        /* Text font weight, hover */
-        $this->add_control(
-            'button_hover_font_weight',
-            [
-                'label' => esc_html__( 'Font Weight', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => '500',
-                'options' => [
-                    '400' => '400',
-                    '500' => '500',
-                    '600' => '600',
-                    '700' => '700',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => '--btn-hover-weight: {{VALUE}};',
-                ],
-            ]
-        );
-
-        /* Letter spacing on hover */
-        $this->add_responsive_control(
-            'button_hover_letter_spacing',
-            [
-                'label' => esc_html__( 'Letter Spacing', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => [ 'px', 'em', 'rem', '%' ],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 20,
-                        'step' => 1,
-                    ],
-                    'em' => [
-                        'min' => 0,
-                        'max' => 1.0,
-                        'step' => 0.01,
-                    ],
-                    'rem' => [
-                        'min' => 0,
-                        'max' => 1.0,
-                        'step' => 0.01,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'em',
-                    'size' => 0.04,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => '--btn-hover-spacing: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->end_controls_tab();
-
-        $this->end_controls_tabs();
-
-        /* Padding / Margin */
-
-        /* CTA Margin - Primary */
-        $this->add_responsive_control(
-            'btn_outside_margin',
-            [
-                'label' => esc_html__( 'Margin', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
-                'default' => [
-                    'top' => '37',
-                    'unit' => 'px',
-                    'isLinked' => false,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .connect__btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        /* CTA Padding - Secondary */
-        $this->add_responsive_control(
-            'btn_outside_padding',
-            [
-                'label' => esc_html__( 'Padding', 'elementor-lege' ),
-                'type' => \Elementor\Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px', 'em', '%' ],
-                'selectors' => [
-                    '{{WRAPPER}} .lege-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
+        
         /* -------------------------------------------------
         * Button Ring
         * ------------------------------------------------- */
+
+        $this->add_control(
+            'button_ring_heading',
+            [
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'label' => esc_html__( 'Hover Ring', 'elementor-lege' ),
+                'separator' => 'before',
+            ]
+        );
 
         $this->add_control(
             'button_ring_color',
@@ -632,6 +625,49 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .lege-btn' => '--btn-ring-opacity: {{SIZE}};',
+                ],
+            ]
+        );
+        
+        
+        /* Padding / Margin */
+
+        /* CTA Margin - Primary */
+        $this->add_control(
+            'outside_padding_margin',
+            [
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'label' => esc_html__( 'Padding / Margin', 'elementor-lege' ),
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'btn_outside_margin',
+            [
+                'label' => esc_html__( 'Margin', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'default' => [
+                    'top' => '37',
+                    'unit' => 'px',
+                    'isLinked' => false,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .connect__btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        /* CTA Padding - Secondary */
+        $this->add_responsive_control(
+            'btn_outside_padding',
+            [
+                'label' => esc_html__( 'Padding', 'elementor-lege' ),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .lege-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -708,7 +744,7 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
                     <?php if ( ! empty( $settings['cta_button_text'] ) ) : ?>
                         <a
                             <?php echo $this->get_render_attribute_string( 'cta_button_url' ); ?>
-                            class="connect__btn lege-btn btn--default popup-link"
+                            class="connect__btn lege-btn btn--white popup-link"
                             data-content="<?php echo esc_attr( $settings['cta_button_text'] ); ?>"
                         >
                             <?php echo esc_html( $settings['cta_button_text'] ); ?>
@@ -773,7 +809,7 @@ class Elementor_CTA_Widget extends \Elementor\Widget_Base {
                     <# if ( settings.cta_button_text ) { #>
                         <a 
                             href="{{ settings.cta_button_url.url || '#' }}"
-                            class="connect__btn lege-btn btn--default popup-link"
+                            class="connect__btn lege-btn btn--white popup-link"
                             data-content="{{ settings.cta_button_text }}">
                             {{ settings.cta_button_text }}
                         </a>
