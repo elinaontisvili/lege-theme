@@ -82,10 +82,10 @@ $args = array(
 	'allow_sub_menu'            => true,
 
 	// The text to appear in the admin menu.
-	'menu_title'                => esc_html__( 'Sample Options', 'lege' ),
+	'menu_title'                => esc_html__( 'Lege Website Settings', 'lege' ),
 
 	// The text to appear on the page title.
-	'page_title'                => esc_html__( 'Sample Options', 'lege' ),
+	'page_title'                => esc_html__( 'Lege Website Settings', 'lege' ),
 
 	// Disable to create your own Google fonts loader.
 	'disable_google_fonts_link' => false,
@@ -699,6 +699,24 @@ Redux::set_section( $opt_name, array(
 	'customizer_width' => '400px',
 	'icon'             => 'el el-home'
 	) );
+
+Redux::set_section( $opt_name, array(
+	'title'            => __( 'Order Page', 'lege' ),
+	'id'               => 'orderpagesection',
+	'subsection'       => true,
+	'customizer_width' => '450px',
+	'desc'             => __( 'Select the Order Page', 'lege' ),
+	'fields'           => array(
+		array(
+			'id'       => 'order_page',
+			'type'     => 'select',
+			'title'    => __( 'Order Page', 'lege' ),
+			'desc'     => __( 'Select the page that contains the order form template', 'lege' ),
+			'data'     => 'pages',
+			'default'  => ''
+		)
+	)
+) );
 
 Redux::set_section( $opt_name, array(
 	'title'            => __( 'Blog', 'lege' ),
