@@ -22,7 +22,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
      * Widget title
      */
     public function get_title(): string {
-        return esc_html__('Circular Progress', 'elementor-lege');
+        return esc_html__('Lege Circular Progress', 'elementor-lege');
     }
 
     /**
@@ -53,12 +53,13 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
         return [ 'lege-circular-progress' ];
     }
 
-    // Controls
+    /*--------------------------------------------------------------
+    # Controls
+    --------------------------------------------------------------*/
     protected function register_controls(): void {
 
-    // Content Tab
     $this->start_controls_section(
-			'content_section',
+			'pr_content_section',
 			[
 				'label' => esc_html__( 'Content', 'elementor-lege' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -68,17 +69,17 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
     $repeater = new \Elementor\Repeater();
 
     $repeater->add_control(
-        'title',
+        'pr_title',
         [
             'label' => __( 'Title', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::TEXT,
-            'default' => __( 'Качество обслуживания', 'elementor-lege' ),
+            'default' => __( 'Service quality', 'elementor-lege' ),
             'label_block' => true,
         ]
     );
 
     $repeater->add_control(
-        'percent',
+        'pr_percent',
         [
             'label' => __( 'Percentage', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::NUMBER,
@@ -89,7 +90,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
     );
 
     $repeater->add_control(
-        'show_percentage',
+        'pr_show_percentage',
         [
             'label' => __( 'Show Percentage', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::SWITCHER,
@@ -98,19 +99,22 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
     );
 
     $this->add_control(
-        'progress_items',
+        'pr_progress_items',
         [
             'label' => __( 'Progress Items', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
-            'title_field' => '{{{ title }}}',
+            'title_field' => '{{{ pr_title }}}',
         ]
     );
 
     $this->end_controls_section(); 
 
+    /*--------------------------------------------------------------
+    # Style Controls
+    --------------------------------------------------------------*/
     $this->start_controls_section(
-    'style_title',
+    'pr_style_title',
     [
         'label' => __( 'Title', 'elementor-lege' ),
         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
@@ -118,7 +122,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
     );
 
     $this->add_control(
-        'title_color',
+        'pr_title_color',
         [
             'label' => __( 'Color', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::COLOR,
@@ -131,7 +135,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
     $this->add_group_control(
         \Elementor\Group_Control_Typography::get_type(),
         [
-            'name' => 'title_typography',
+            'name' => 'pr_title_typography',
             'selector' => '{{WRAPPER}} .numbers__text',
         ]
     );
@@ -140,7 +144,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
 
     // percentage text style 
     $this->start_controls_section(
-    'style_percentage',
+    'pr_style_percentage',
     [
         'label' => __( 'Percentage Text', 'elementor-lege' ),
         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
@@ -148,7 +152,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
     );
 
     $this->add_control(
-        'percentage_color',
+        'pr_percentage_color',
         [
             'label' => __( 'Color', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::COLOR,
@@ -161,7 +165,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
     $this->add_group_control(
         \Elementor\Group_Control_Typography::get_type(),
         [
-            'name' => 'percentage_typography',
+            'name' => 'pr_percentage_typography',
             'selector' => '{{WRAPPER}} text.percentage',
         ]
     );
@@ -170,16 +174,16 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
 
     // circle styling 
     $this->start_controls_section(
-    'style_circle',
+    'pr_style_circle',
     [
         'label' => __( 'Circle', 'elementor-lege' ),
         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
     ]
     );
 
-    // * Inactive circle color stays simple (solid only)
+    // Inactive circle color stays simple/solid only
     $this->add_control(
-        'inactive_color',
+        'pr_inactive_color',
         [
             'label' => __( 'Inactive Color', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::COLOR,
@@ -192,7 +196,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
 
     // Color Type switch
     $this->add_control(
-        'active_color_type',
+        'pr_active_color_type',
         [
             'label' => __( 'Active Color Type', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::SELECT,
@@ -206,7 +210,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
 
     // Solid color
     $this->add_control(
-    'active_color',
+    'pr_active_color',
         [
             'label' => __( 'Active Color', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::COLOR,
@@ -214,36 +218,36 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
                 'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
             ],
             'condition' => [
-                'active_color_type' => 'solid',
+                'pr_active_color_type' => 'solid',
             ],
         ]
     );
 
     // Gradient colors 
     $this->add_control(
-    'active_gradient_start',
+    'pr_active_gradient_start',
         [
             'label' => __( 'Gradient Start', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::COLOR,
             'condition' => [
-                'active_color_type' => 'gradient',
+                'pr_active_color_type' => 'gradient',
             ],
         ]
     );
 
     $this->add_control(
-        'active_gradient_end',
+        'pr_active_gradient_end',
         [
             'label' => __( 'Gradient End', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::COLOR,
             'condition' => [
-                'active_color_type' => 'gradient',
+                'pr_active_color_type' => 'gradient',
             ],
         ]
     );
 
     $this->add_control(
-        'stroke_width',
+        'pr_stroke_width',
         [
             'label' => __( 'Stroke Width', 'elementor-lege' ),
             'type' => \Elementor\Controls_Manager::SLIDER,
@@ -261,25 +265,24 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
        
     }
 
-    // Render
+    /*--------------------------------------------------------------
+    # Content Controls
+    --------------------------------------------------------------*/
     protected function render(): void {
 
     $settings = $this->get_settings_for_display();
-    $gradient_id = 'progress-gradient-' . $this->get_id();
+    $widget_id = $this->get_id();;
 
-
-    if ( empty( $settings['progress_items'] ) ) {
+    if ( empty( $settings['pr_progress_items'] ) ) {
         return;
     }
     ?>
 
-
     <?php
-    foreach ( $settings['progress_items'] as $index => $item ) :
+    foreach ( $settings['pr_progress_items'] as $index => $item ) :
 
-    $percent = (int) $item['percent'];
-    $uid = $this->get_id() . '-' . $index;
-
+        $percent = max( 0, min( 100, (int) $item['pr_percent'] ) );
+        $gradient_id = 'prog-grad-' . esc_attr( $widget_id );
     ?>
 
     <div class="numbers__item">
@@ -287,11 +290,15 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
             data-percentage="<?php echo esc_attr( $percent ); ?>"
             viewBox="0 0 80 80">
 
-            <?php if ( $settings['active_color_type'] === 'gradient' ) : ?>
+            <?php if ( 
+                    $settings['pr_active_color_type'] === 'gradient' &&
+                    ! empty( $settings['pr_active_gradient_start'] ) &&
+                    ! empty( $settings['pr_active_gradient_end'] )
+                ) : ?>
             <defs>
                 <linearGradient id="<?php echo esc_attr( $gradient_id ); ?>" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="<?php echo esc_attr( $settings['active_gradient_start'] ); ?>" />
-                    <stop offset="100%" stop-color="<?php echo esc_attr( $settings['active_gradient_end'] ); ?>" />
+                    <stop offset="0%" stop-color="<?php echo esc_attr( $settings['pr_active_gradient_start'] ); ?>" />
+                    <stop offset="100%" stop-color="<?php echo esc_attr( $settings['pr_active_gradient_end'] ); ?>" />
                 </linearGradient>
             </defs>
             <?php endif; ?>
@@ -304,14 +311,14 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
                 r="35"
                 style="
                     stroke: <?php
-                        echo ( $settings['active_color_type'] === 'gradient' )
+                        echo ( $settings['pr_active_color_type'] === 'gradient' )
                             ? 'url(#' . esc_attr( $gradient_id ) . ')'
-                            : esc_attr( $settings['active_color'] );
+                            : esc_attr( $settings['pr_active_color'] );
                     ?>;
                 "
             ></circle>
 
-            <?php if ( 'yes' === $item['show_percentage'] ) : ?>
+            <?php if ( 'yes' === $item['pr_show_percentage'] ) : ?>
                 <text class="percentage"
                     x="50%" y="57%"
                     transform="matrix(0, 1, -1, 0, 80, 0)"></text>
@@ -320,7 +327,7 @@ class Elementor_Progress_Widget extends \Elementor\Widget_Base {
         </svg>
 
         <span class="numbers__text">
-            <?php echo esc_html( $item['title'] ); ?>
+            <?php echo esc_html( $item['pr_title'] ); ?>
         </span>
     </div>
 
