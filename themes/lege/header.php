@@ -195,8 +195,8 @@ if(is_page_template('template-home.php')) {
 				<div class="offer__slide">
 					<p class="offer__text"><?php echo esc_html( $slide['title'] ); ?></p>
 					<?php echo wp_kses_post( $slide['description'] ); ?>
-					<a href="<?php echo esc_url( $slide['url'] ); ?>" class="offer__btn btn popup-link" data-content="<?php echo esc_attr( __( 'Free consultation' ) ); ?>">
-						<?php echo esc_html( __( 'Free consultation' ) ); ?>
+					<a href="<?php echo esc_url( $slide['url'] ); ?>" class="offer__btn btn popup-link" data-content="<?php echo esc_attr__( 'Free consultation', 'lege' ); ?>">
+						<?php echo esc_html__( 'Free consultation', 'lege' ); ?>
 					</a>
 				</div>
 			<?php } ?>
