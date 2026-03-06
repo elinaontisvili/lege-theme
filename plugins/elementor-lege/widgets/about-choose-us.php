@@ -53,7 +53,7 @@ class Elementor_About_Choose_Us_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Subheading', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'dynamic' => [ 'active' => true ],
-                'default' => 'Why we are –',
+                'default' => esc_html__( 'Why we are –', 'elementor-lege' ),
                 'label_block' => true,
             ]
         );
@@ -65,7 +65,7 @@ class Elementor_About_Choose_Us_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Heading', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'dynamic' => [ 'active' => true ],
-                'default' => 'the right choice for you',
+                'default' => esc_html__( 'the right choice for you', 'elementor-lege' ),
                 'label_block' => true,
             ]
         );
@@ -96,7 +96,7 @@ class Elementor_About_Choose_Us_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Description', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::WYSIWYG,
                 'dynamic' => [ 'active' => true ],
-                'default' => '<p>JC is a legal firm with a full range of services...</p>',
+                'default' => esc_html__( '<p>JC is a legal firm with a full range of services...</p>', 'elementor-lege' ),
             ]
         );
 
@@ -107,7 +107,7 @@ class Elementor_About_Choose_Us_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Director Name', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'dynamic' => [ 'active' => true ],
-                'default' => 'Dmitry Lvovich',
+                'default' => esc_html__( 'Dmitry Lvovich', 'elementor-lege' ),
             ]
         );
 
@@ -118,7 +118,7 @@ class Elementor_About_Choose_Us_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Director Position', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'dynamic' => [ 'active' => true ], 
-                'default' => 'Company Director',
+                'default' => esc_html__( 'Company Director', 'elementor-lege' ),
             ]
         );
 
@@ -129,7 +129,7 @@ class Elementor_About_Choose_Us_Widget extends \Elementor\Widget_Base {
                 'label' => esc_html__('Director Quote', 'elementor-lege'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'dynamic' => [ 'active' => true ],
-                'default' => 'We are here to help you build and support your dream.',
+                'default' => esc_html__( 'We are here to help you build and support your dream.', 'elementor-lege' ),
             ]
         );
 
