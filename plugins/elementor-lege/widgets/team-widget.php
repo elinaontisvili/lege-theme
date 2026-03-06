@@ -423,6 +423,9 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
                         
                         $image = get_the_post_thumbnail_url( $post_id, 'large' );
                         $image_alt = get_post_meta( get_post_thumbnail_id( $post_id ), '_wp_attachment_image_alt', true );
+
+                        // TranslatePress  - Fetch the raw post_title
+                        $title = get_post_field( 'post_title', get_the_ID() );
                         ?>
 
                         <div class="team__slide">
@@ -433,7 +436,9 @@ class Elementor_Team_Widget extends \Elementor\Widget_Base {
                                         src="<?php echo esc_url( $image ); ?>" 
                                         alt="<?php echo esc_attr( $image_alt ?: get_the_title() ); ?>"
                                     >
-                                    <p class="team__pers"><?php echo esc_html( get_the_title() ); ?></p>
+
+                                    <!-- TranslatePress - Display raw title -->
+                                    <p class="team__pers"><?php echo esc_html( $title ); ?></p>
 
                                     <?php if ( $job_position ) : ?>
                                         <p class="team__position"><?php echo esc_html( $job_position ); ?></p>

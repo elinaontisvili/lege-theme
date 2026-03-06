@@ -554,7 +554,10 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
                                 }
                             }
                         }
-                    
+
+                        // TranslatePress  - Fetch the raw post_title
+                        $title = get_post_field( 'post_title', get_the_ID() );
+
                         $link_url = !empty($social_link) ? esc_url($social_link) : '#';
 
                         $i++;
@@ -595,7 +598,9 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
                                 </div>
 
                                 <div class="clients__say">
-                                    <p class="clients__name"><?php echo esc_html(get_the_title()); ?></p>
+
+                                    <!-- TranslatePress - Display raw title -->
+                                    <p class="clients__name"><?php echo esc_html( $title ); ?></p>
 
                                     <div class="clients__text">
   
