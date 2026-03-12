@@ -1,5 +1,4 @@
 jQuery(function($) {
-
     /*------------------Range price slider (woocommerce price slider filter)-------------------*/
 
     function getPriceMin() {
@@ -60,6 +59,10 @@ jQuery(function($) {
     function lege_get_posts(paged) { 
         var ajax_url = lege_settings.ajax_url;
 
+        // Localize script texts with fallback values
+        const loadingText = lege_settings?.loading ?? 'Loading...';
+        const errorText   = lege_settings?.error ?? 'There was an error loading data.';
+
         $.ajax({
             type: 'GET', 
             url: ajax_url, 
@@ -73,15 +76,18 @@ jQuery(function($) {
                 paged: paged || 1
             }, 
             beforeSend: function() {
-                $('#main').html('<p>Загрузка...</p>');
+
+                $('#main').html('<p>' + loadingText + '</p>');
             },
             success: function(data) { 
                 $('#main').html(data);
                 $('html, body').animate({ scrollTop: $('#main').offset().top - 50 }, 300);
             },
            error: function(xhr, status, error) {
-            console.log("AJAX error:", status, error);
-            $('#main').html('<p>Произошла ошибка загрузки данных.</p>');
+                console.log("AJAX error:", status, error);
+
+                $('#main').html('<p>' + errorText + '</p>');
+                
            }
         });
     }
@@ -118,7 +124,6 @@ jQuery(function($) {
 
         $('.sort-menu li').removeClass('active');
         $(this).addClass('active');
-        //alert(lege_order());
         lege_get_posts(); 
     
         var order_text = 'по популярности'

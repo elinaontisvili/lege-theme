@@ -163,13 +163,33 @@ add_action( 'after_setup_theme', 'lege_content_width', 0 );
 * Deregister the default jQuery safely with a CDN version, to use a specific jQuery version
 */
 function lege_replace_jquery() {
-if (!is_admin()) {
-    wp_deregister_script('jquery');
-    wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', array(), '3.1.1', true);
-    wp_enqueue_script('jquery');
+
+    if ( ! is_admin() ) {
+
+        wp_deregister_script( 'jquery' );
+        wp_deregister_script( 'jquery-core' );
+        wp_deregister_script( 'jquery-migrate' );
+
+        wp_register_script(
+            'jquery-core',
+            'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js',
+            [],
+            '3.1.1',
+            true
+        );
+
+        wp_register_script(
+            'jquery',
+            false,
+            ['jquery-core'],
+            '3.1.1',
+            true
+        );
+
+        wp_enqueue_script( 'jquery' );
     }
 }
-add_action('wp_enqueue_scripts', 'lege_replace_jquery', 0);
+add_action( 'wp_enqueue_scripts', 'lege_replace_jquery', 1 );
 
 /**
  * Подключение скриптов и стилей.
@@ -183,7 +203,14 @@ function lege_scripts() {
     wp_enqueue_script( 'lege-common', get_template_directory_uri(). '/assets/js/common.min.js', array(), 1.0, true );
     wp_enqueue_script( 'lege-svg-sprite', get_template_directory_uri(). '/assets/img/svg-sprite/svg-sprite.js', array(), 1.0, false );
 
-
+    /* Localize script for JavaScript translations */
+    wp_localize_script('lege-common', 'site_vars', array(
+        'read_more' => __('Read more', 'lege'),
+        'collapse'  => __('Collapse', 'lege'),
+        'loading'   => __('Loading...', 'lege'),
+        'error'     => __('There was an error loading data.', 'lege'),
+    ));
+    
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
@@ -194,7 +221,7 @@ function lege_scripts() {
         'lege_woo_filter',
         get_template_directory_uri() . '/assets/js/woo_filter.js',
         array('jquery'),
-        '',
+        '1.0',
         true
         );
 
@@ -203,6 +230,8 @@ function lege_scripts() {
             'lege_settings',
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
+                'loading'  => __('Loading...', 'lege'),
+                'error'    => __('There was an error loading data.', 'lege'),
             )
         );
         wp_enqueue_script('lege_woo_filter');
@@ -241,21 +270,6 @@ function lege_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'lege_scripts' );
-
-/**
- * Подключение Elementor скриптов.
- */
-function lege_register_elementor_scripts() {
-    wp_register_script(
-        'lege-circular-progress',
-        get_stylesheet_directory_uri() . '/assets/js/circular-progress.js',
-        [ 'jquery' ],
-        '1.0',
-        true
-    );
-}
-add_action( 'wp_enqueue_scripts', 'lege_register_elementor_scripts' );
-add_action( 'elementor/frontend/after_register_scripts', 'lege_register_elementor_scripts' );
 
 /**
  * Подключение скриптов и стилей в админке (для метабоксов).
